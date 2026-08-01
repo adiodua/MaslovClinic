@@ -118,6 +118,26 @@
   .logo{font-family:'Fraunces',serif;font-size:22px;font-weight:600;}
   .navlinks{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
   .navlinks a:hover{color:var(--wood-deep);}
+  .nav-highlight{position:relative;color:var(--wood-deep) !important;font-weight:700;}
+  .nav-highlight::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--wood);}
+
+  .phone-dropdown{position:relative;}
+  .phone-btn{
+    width:38px;height:38px;border-radius:50%;border:1px solid rgba(var(--text-rgb),0.18);
+    background:none;color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .phone-btn:hover{border-color:var(--wood);color:var(--wood);}
+  .phone-panel{
+    position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);
+    border:1px solid rgba(var(--text-rgb),0.12);border-radius:var(--radius);
+    box-shadow:0 20px 50px rgba(var(--text-rgb),0.18);
+    padding:22px;min-width:240px;display:none;flex-direction:column;align-items:center;text-align:center;z-index:120;
+  }
+  .phone-panel.open{display:flex;}
+  .phone-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-top:12px;}
+  .phone-panel-num{font-size:18px;font-weight:700;color:var(--text);margin-top:2px;}
+  .phone-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid rgba(var(--text-rgb),0.1);width:100%;font-size:13px;font-weight:600;color:var(--wood);}
+  @media(max-width:860px){.phone-dropdown{display:none;}}
   .navcta{display:flex;align-items:center;gap:16px;}
   .langs{display:flex;gap:4px;font-size:11px;font-weight:600;}
 
@@ -297,6 +317,55 @@
   .doctor-teaser-body p{margin:0 0 10px;color:var(--text-muted);font-size:14px;}
   .doctor-teaser-body .svc-all{margin-top:0;}
 
+  /* cases carousel (Наши работы) */
+  #cases{padding:64px 0 56px;}
+  .cases-carousel{position:relative;}
+  .cases-track{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:0 32px 8px;scrollbar-width:none;
+  }
+  .cases-track::-webkit-scrollbar{display:none;}
+  .case-slide{
+    display:block;position:relative;flex:0 0 min(560px,86vw);aspect-ratio:4/5;border-radius:var(--radius);
+    overflow:hidden;scroll-snap-align:start;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
+    text-decoration:none;color:inherit;
+  }
+  .case-photo-main{
+    position:absolute;inset:0;background:var(--brand-navy);color:rgba(255,255,255,.55);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-size:14px;line-height:1.5;padding:20px;
+  }
+  .case-photo-main::after{
+    content:"";position:absolute;inset:auto 0 0 0;height:45%;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(18,40,63,0) 0%, rgba(18,40,63,.85) 100%);
+  }
+  .case-before-thumbs{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;z-index:2;}
+  .case-before-thumb{
+    width:58px;height:58px;border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.8);
+    background:var(--brand-navy2,#0e2036);color:rgba(255,255,255,.5);font-size:9px;
+    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;
+  }
+  .case-info{position:absolute;top:18px;left:18px;z-index:2;color:#fff;}
+  .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
+  .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);max-width:70%;}
+  .case-nav{
+    position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;
+    background:var(--bg);border:1px solid rgba(var(--text-rgb),0.15);box-shadow:0 8px 20px rgba(var(--text-rgb),0.15);
+    display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:3;color:var(--text);
+  }
+  .case-nav.prev{left:6px;} .case-nav.next{right:6px;}
+  @media(max-width:760px){.case-nav{display:none;}}
+
+  /* nashi-raboty catalog grid (used on this page too, shared class names) */
+  .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:40px;}
+  .case-card{
+    position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;cursor:pointer;
+    box-shadow:0 10px 26px rgba(var(--text-rgb),0.1);
+  }
+  .case-card .case-photo-main{font-size:12.5px;}
+  .case-card .case-info h3{font-size:16px;}
+  .case-card .case-info p{font-size:12px;}
+
   /* merged philosophy+comfort strip */
   .why-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 32px;text-align:center;}
   .why-item{font-size:14.5px;color:var(--text-muted);display:flex;align-items:center;gap:8px;white-space:nowrap;}
@@ -305,6 +374,7 @@
   @media(max-width:560px){
     .doctor-teaser{flex-direction:column;text-align:center;padding:24px 20px;}
   }
+
 
   /* gallery teaser + lightbox */
   .gallery-teaser{margin-top:56px;}
@@ -440,6 +510,7 @@
     </a>
     <div class="navlinks">
       <a href="/uslugi/">Услуги</a>
+      <a href="/nashi-raboty/index.html" class="nav-highlight">Наши работы</a>
       <a href="/vrachi/index.html">Врачи</a>
       <a href="#reviews">Отзывы</a>
       <a href="#faq">Вопросы</a>
@@ -450,6 +521,19 @@
         <button class="langbtn active">RU</button>
         <button class="langbtn">UA</button>
         <button class="langbtn">EN</button>
+      </div>
+      <div class="phone-dropdown" id="phoneDropdown">
+        <button class="phone-btn" id="phoneBtn" aria-label="Контакты и запись">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </button>
+        <div class="phone-panel" id="phonePanel">
+          <button type="button" class="btn js-open-booking" style="width:100%;justify-content:center;margin-bottom:16px;">Записаться сейчас</button>
+          <div class="phone-panel-label">Тел.</div>
+          <a href="tel:+380949405514" class="phone-panel-num">+380 94 940 55 14</a>
+          <div class="phone-panel-label">Email</div>
+          <a href="mailto:maslovclinic@gmail.com" class="phone-panel-num" style="font-size:15px;">maslovclinic@gmail.com</a>
+          <a href="#contacts" class="phone-panel-link">Наши контакты</a>
+        </div>
       </div>
       <div class="lang-dropdown" id="langDropdown">
         <button class="lang-current" id="langCurrentBtn">RU
@@ -473,6 +557,7 @@
   </nav>
   <div class="mobile-menu" id="mobileMenu">
     <a href="/uslugi/">Услуги</a>
+    <a href="/nashi-raboty/index.html" class="nav-highlight">Наши работы</a>
     <a href="/vrachi/index.html">Врачи</a>
     <a href="#reviews">Отзывы</a>
     <a href="#faq">Вопросы</a>
@@ -500,7 +585,54 @@
   </div>
 </section>
 
-
+<section id="cases">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Наши работы</span>
+      <h2>Результаты, которыми мы гордимся</h2>
+      <p>Реальные случаи пациентов клиники — с этапами «до» и «после».</p>
+    </div>
+    <a href="/raboty/index.html" class="svc-all reveal" style="margin-bottom:28px;">Смотреть все работы →</a>
+    <div class="cases-carousel reveal">
+      <div class="cases-track" id="casesTrack">
+        <a href="/raboty/patient-1.html" class="case-slide">
+          <div class="case-photo-main">Фото «после»<br>появится здесь</div>
+          <div class="case-before-thumbs">
+            <div class="case-before-thumb">до</div>
+            <div class="case-before-thumb">до</div>
+          </div>
+          <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
+        </a>
+        <a href="/raboty/patient-2.html" class="case-slide">
+          <div class="case-photo-main">Фото «после»<br>появится здесь</div>
+          <div class="case-before-thumbs">
+            <div class="case-before-thumb">до</div>
+            <div class="case-before-thumb">до</div>
+          </div>
+          <div class="case-info"><h3>Андрей</h3><p>Импланты + коронки</p></div>
+        </a>
+        <a href="/raboty/patient-3.html" class="case-slide">
+          <div class="case-photo-main">Фото «после»<br>появится здесь</div>
+          <div class="case-before-thumbs">
+            <div class="case-before-thumb">до</div>
+            <div class="case-before-thumb">до</div>
+          </div>
+          <div class="case-info"><h3>Владислав</h3><p>Ортодонтия + виниры</p></div>
+        </a>
+        <a href="/raboty/patient-4.html" class="case-slide">
+          <div class="case-photo-main">Фото «после»<br>появится здесь</div>
+          <div class="case-before-thumbs">
+            <div class="case-before-thumb">до</div>
+            <div class="case-before-thumb">до</div>
+          </div>
+          <div class="case-info"><h3>Наталья</h3><p>Отбеливание + реставрация</p></div>
+        </a>
+      </div>
+      <button class="case-nav prev" id="casesPrev" aria-label="Предыдущий случай">‹</button>
+      <button class="case-nav next" id="casesNext" aria-label="Следующий случай">›</button>
+    </div>
+  </div>
+</section>
 
 <section id="services" style="background:var(--bg-alt);">
   <div class="wrap">
@@ -784,11 +916,73 @@ const galleryData = [
   </div>
 </footer>
 
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-backdrop" id="bookingBackdrop"></div>
+  <div class="booking-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <button type="button" class="booking-close" id="bookingClose" aria-label="Закрыть">&#10005;</button>
+    <div id="bookingFormWrap">
+      <h3 id="bookingTitle">Оставьте заявку</h3>
+      <p class="booking-sub">Оставьте имя и номер — перезвоним и подберём удобное время</p>
+      <form id="bookingForm">
+        <label>Номер телефона *
+          <input type="tel" name="phone" required autocomplete="tel" placeholder="+380">
+        </label>
+        <label>Ваше имя
+          <input type="text" name="name" autocomplete="name">
+        </label>
+        <label>Процедура (не обязательно)
+          <input type="text" name="procedure" placeholder="Например, имплантация">
+        </label>
+        <label>Удобное время (не обязательно)
+          <input type="text" name="time" placeholder="Например, завтра после 15:00">
+        </label>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">Оставить заявку</button>
+        <p class="booking-error" id="bookingError" style="display:none;color:#c0392b;font-size:13px;margin:0;">Не получилось отправить. Позвоните нам напрямую: <a href="tel:+380949405514">+380 94 940 55 14</a></p>
+      </form>
+    </div>
+    <div id="bookingSuccess" style="display:none;text-align:center;">
+      <div class="booking-check">&#10003;</div>
+      <h3>Заявка отправлена!</h3>
+      <p class="booking-sub">Мы получили уведомление и скоро свяжемся с вами.</p>
+    </div>
+  </div>
+</div>
+
 <script>
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, {threshold:0.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Phone dropdown
+  (function(){
+    const wrap = document.getElementById('phoneDropdown');
+    const btn = document.getElementById('phoneBtn');
+    const panel = document.getElementById('phonePanel');
+    if(!wrap || !btn || !panel) return;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      panel.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)) panel.classList.remove('open');
+    });
+  })();
+
+  // Cases carousel arrows
+  (function(){
+    const track = document.getElementById('casesTrack');
+    const prev = document.getElementById('casesPrev');
+    const next = document.getElementById('casesNext');
+    if(!track || !prev || !next) return;
+    function step(dir){
+      const card = track.querySelector('.case-slide');
+      const width = card ? card.getBoundingClientRect().width + 16 : 300;
+      track.scrollBy({left: dir * width, behavior:'smooth'});
+    }
+    prev.addEventListener('click', function(){ step(-1); });
+    next.addEventListener('click', function(){ step(1); });
+  })();
 
   // FAQ show more
   (function(){
@@ -949,38 +1143,6 @@ const galleryData = [
     toggle.addEventListener('click', updateLogoForTheme);
   })();
 </script>
-
-<div class="booking-modal" id="bookingModal" aria-hidden="true">
-  <div class="booking-backdrop" id="bookingBackdrop"></div>
-  <div class="booking-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
-    <button type="button" class="booking-close" id="bookingClose" aria-label="Закрыть">&#10005;</button>
-    <div id="bookingFormWrap">
-      <h3 id="bookingTitle">Оставьте заявку</h3>
-      <p class="booking-sub">Оставьте имя и номер — перезвоним и подберём удобное время</p>
-      <form id="bookingForm">
-        <label>Номер телефона *
-          <input type="tel" name="phone" required autocomplete="tel" placeholder="+380">
-        </label>
-        <label>Ваше имя
-          <input type="text" name="name" autocomplete="name">
-        </label>
-        <label>Процедура (не обязательно)
-          <input type="text" name="procedure" placeholder="Например, имплантация">
-        </label>
-        <label>Удобное время (не обязательно)
-          <input type="text" name="time" placeholder="Например, завтра после 15:00">
-        </label>
-        <button type="submit" class="btn" style="width:100%;justify-content:center;">Оставить заявку</button>
-        <p class="booking-error" id="bookingError" style="display:none;color:#c0392b;font-size:13px;margin:0;">Не получилось отправить. Позвоните нам напрямую: <a href="tel:+380949405514">+380 94 940 55 14</a></p>
-      </form>
-    </div>
-    <div id="bookingSuccess" style="display:none;text-align:center;">
-      <div class="booking-check">&#10003;</div>
-      <h3>Заявка отправлена!</h3>
-      <p class="booking-sub">Мы получили уведомление и скоро свяжемся с вами.</p>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
