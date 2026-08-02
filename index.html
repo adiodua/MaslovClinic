@@ -157,11 +157,11 @@
   }
   .mobile-multi-btn button:hover{opacity:.8;}
   @media(prefers-reduced-motion:reduce){.mobile-multi-btn button{animation:none;}}
-  .mobile-multi-btn .phone-panel{right:0;left:auto;top:auto;bottom:calc(100% + 14px);}
+  .mobile-multi-btn .phone-panel{right:0;left:auto;top:auto;bottom:calc(100% + 14px);transform-origin:bottom right;}
+  .mobile-multi-btn{
+    display:block;position:fixed;right:18px;bottom:74px;z-index:150;
+  }
   @media(max-width:860px){
-    .mobile-multi-btn{
-      display:block;position:fixed;right:18px;bottom:74px;z-index:150;
-    }
     #navBookingBtn{display:none;}
   }
   header:has(.mobile-menu.open) + .mobile-multi-btn{display:none;}
@@ -176,9 +176,11 @@
     position:absolute;top:calc(100% + 12px);right:0;background:var(--bg);
     border:1px solid rgba(var(--text-rgb),0.12);border-radius:var(--radius);
     box-shadow:0 20px 50px rgba(var(--text-rgb),0.18);
-    padding:22px;min-width:240px;display:none;flex-direction:column;align-items:center;text-align:center;z-index:120;
+    padding:22px;min-width:240px;display:flex;flex-direction:column;align-items:center;text-align:center;z-index:120;
+    opacity:0;pointer-events:none;transform:translateY(10px) scale(0.94);transform-origin:top right;
+    transition:opacity .3s cubic-bezier(.34,1.56,.64,1), transform .3s cubic-bezier(.34,1.56,.64,1);
   }
-  .phone-panel.open{display:flex;}
+  .phone-panel.open{opacity:1;pointer-events:auto;transform:translateY(0) scale(1);}
   .phone-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-top:12px;}
   .phone-panel-num{font-size:18px;font-weight:700;color:var(--text);margin-top:2px;}
   .phone-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid rgba(var(--text-rgb),0.1);width:100%;font-size:13px;font-weight:600;color:var(--wood);}
@@ -1059,8 +1061,12 @@ const galleryData = [
       panel.classList.toggle('open');
     });
     document.addEventListener('click', function(e){
-      if(!wrap.contains(e.target)) panel.classList.remove('open');
-    });
+      if(!wrap.contains(e.target) && panel.classList.contains('open')){
+        e.preventDefault();
+        e.stopPropagation();
+        panel.classList.remove('open');
+      }
+    }, true);
   })();
 
   // Mobile multi-button
@@ -1077,11 +1083,13 @@ const galleryData = [
       openScrollY = willOpen ? window.scrollY : null;
     });
     document.addEventListener('click', function(e){
-      if(!wrap.contains(e.target)){
+      if(!wrap.contains(e.target) && panel.classList.contains('open')){
+        e.preventDefault();
+        e.stopPropagation();
         panel.classList.remove('open');
         openScrollY = null;
       }
-    });
+    }, true);
 
     let scrollTimer = null;
     let lastY = window.scrollY;
