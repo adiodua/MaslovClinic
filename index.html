@@ -122,7 +122,7 @@
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;}}
 
   header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(var(--bg-rgb),0.85);backdrop-filter:blur(8px);}
-  nav.wrap{height:88px;display:flex;align-items:center;justify-content:space-between;}
+  nav.wrap{height:88px;display:flex;align-items:center;gap:40px;}
   .logo{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;}
   .navlinks{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
   .navlinks a:hover{color:var(--wood-deep);}
@@ -183,7 +183,7 @@
   .phone-panel-num{font-size:18px;font-weight:700;color:var(--text);margin-top:2px;}
   .phone-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid rgba(var(--text-rgb),0.1);width:100%;font-size:13px;font-weight:600;color:var(--wood);}
   @media(max-width:860px){.phone-dropdown{display:none;}}
-  .navcta{display:flex;align-items:center;gap:16px;}
+  .navcta{display:flex;align-items:center;gap:16px;margin-left:auto;}
   .langs{display:flex;gap:4px;font-size:11px;font-weight:600;}
 
   /* language dropdown (replaces pills on narrow screens) */
@@ -1069,18 +1069,28 @@ const galleryData = [
     const btn = document.getElementById('mobileMultiTrigger');
     const panel = document.getElementById('mobileMultiPanel');
     if(!wrap || !btn || !panel) return;
+    let openScrollY = null;
     btn.addEventListener('click', function(e){
       e.stopPropagation();
+      const willOpen = !panel.classList.contains('open');
       panel.classList.toggle('open');
+      openScrollY = willOpen ? window.scrollY : null;
     });
     document.addEventListener('click', function(e){
-      if(!wrap.contains(e.target)) panel.classList.remove('open');
+      if(!wrap.contains(e.target)){
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
     });
 
     let scrollTimer = null;
     let lastY = window.scrollY;
     window.addEventListener('scroll', function(){
       const y = window.scrollY;
+      if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
       wrap.classList.add('scrolling');
       const delta = y - lastY;
       if(delta > 4){
