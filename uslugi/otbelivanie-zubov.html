@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script>
+(function(){
+  try{
+    var t = localStorage.getItem('mc-theme');
+    if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Отбеливание зубов Beyond Polus в Одессе — цена от 4000 грн | MaslovClinic</title>
@@ -73,8 +82,8 @@
     --text: #0F212F;
     --text-rgb: 15,33,47;
     --text-muted: #4C6579;
-    --wood: #1B4058;
-    --wood-deep: #112C3D;
+    --wood: #0e2540;
+    --wood-deep: #081420;
     --brand-navy: #12283F;
     --navy: #0e2540;
     --navy-2: #163457;
