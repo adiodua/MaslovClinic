@@ -103,7 +103,8 @@
     }
   }
   *{transition:background-color .3s ease, border-color .3s ease;}
-  *{margin:0;padding:0;box-sizing:border-box;}
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  a,button,input,textarea,select,.btn{-webkit-tap-highlight-color:transparent;outline:none;}
   html{scroll-behavior:smooth;}
   body{
     background:var(--bg);
@@ -535,6 +536,29 @@
     display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px;
   }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D3DMK6FB59');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('a,button');
+    if(!t || typeof gtag !== 'function') return;
+    var href = t.getAttribute('href') || '';
+    if(href.indexOf('tel:') === 0){
+      gtag('event', 'phone_click', {event_category:'contact', event_label: href});
+    } else if(href.indexOf('mailto:') === 0){
+      gtag('event', 'email_click', {event_category:'contact', event_label: href});
+    } else if(t.classList.contains('js-open-booking') || href === '/#booking' || href === '#booking'){
+      gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
+    } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
+      gtag('event', 'contact_panel_open', {event_category:'contact'});
+    } else if(t.classList.contains('phone-panel-link')){
+      gtag('event', 'contacts_click', {event_category:'contact'});
+    }
+  });
+</script>
 </head>
 <body>
 
@@ -1090,6 +1114,12 @@ const galleryData = [
       if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
 
+    function checkBookingHash(){
+      if(window.location.hash === '#booking') openModal();
+    }
+    checkBookingHash();
+    window.addEventListener('hashchange', checkBookingHash);
+
     form.addEventListener('submit', function(e){
       e.preventDefault();
       const phone = form.phone.value.trim();
@@ -1117,6 +1147,9 @@ const galleryData = [
         if(!res.ok) throw new Error('bad status');
         formWrap.style.display = 'none';
         success.style.display = 'block';
+        if(typeof gtag === 'function'){
+          gtag('event', 'booking_submitted', {event_category:'contact', event_label: payload.procedure || ''});
+        }
       }).catch(function(){
         submitBtn.disabled = false;
         submitBtn.textContent = 'Оставить заявку';
