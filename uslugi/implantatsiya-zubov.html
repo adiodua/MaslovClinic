@@ -94,7 +94,8 @@
     --accent: var(--gold);
     --divider: rgba(201,162,75,.3);
   }
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  a,button,input,textarea,select,.btn{-webkit-tap-highlight-color:transparent;}
   html{scroll-behavior:smooth;}
   body{
     margin:0;
@@ -306,6 +307,29 @@
   }
   .hero-photo-zoom:hover img,.hero-photo-zoom:hover .hero-photo-zoom-ph{transform:scale(1.05);}
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D3DMK6FB59');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('a,button');
+    if(!t || typeof gtag !== 'function') return;
+    var href = t.getAttribute('href') || '';
+    if(href.indexOf('tel:') === 0){
+      gtag('event', 'phone_click', {event_category:'contact', event_label: href});
+    } else if(href.indexOf('mailto:') === 0){
+      gtag('event', 'email_click', {event_category:'contact', event_label: href});
+    } else if(t.classList.contains('js-open-booking') || href === '/#booking' || href === '#booking'){
+      gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
+    } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
+      gtag('event', 'contact_panel_open', {event_category:'contact'});
+    } else if(t.classList.contains('phone-panel-link')){
+      gtag('event', 'contacts_click', {event_category:'contact'});
+    }
+  });
+</script>
 </head>
 <body data-theme="light">
 
@@ -332,7 +356,7 @@
         <span class="cur">грн · JDental</span>
       </div>
       <div class="cta-row">
-        <a href="#zapis" class="btn primary">Записаться на приём</a>
+        <a href="/#booking" class="btn primary">Записаться на визит</a>
         <a href="#vrach" class="btn ghost">Врач-специалист</a>
       </div>
     </div>
