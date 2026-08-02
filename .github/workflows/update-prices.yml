@@ -1,0 +1,37 @@
+name: Обновление даты действия цен
+
+# Запускается автоматически 1 января каждого года в 03:00 (по Киеву — 05:00),
+# а также вручную через вкладку Actions ("Run workflow") для проверки.
+on:
+  schedule:
+    - cron: "0 3 1 1 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-price-dates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Скачать репозиторий
+        uses: actions/checkout@v4
+
+      - name: Обновить priceValidUntil на все HTML-страницы
+        run: |
+          YEAR=$(date +%Y)
+          echo "Ставлю дату действия цен: 31 декабря $YEAR"
+          find . -name "*.html" -print0 | xargs -0 sed -i -E \
+            "s/(\"priceValidUntil\": \")[0-9]{4}(-12-31\")/\1${YEAR}\2/g"
+
+      - name: Закоммитить изменения (если есть)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "Изменений нет — цены уже актуальны."
+          else
+            git add -A
+            git commit -m "Автообновление даты действия цен на $(date +%Y) год"
+            git push
+          fi
