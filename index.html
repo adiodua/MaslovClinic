@@ -144,10 +144,11 @@
     width:56px;height:56px;border-radius:50%;background:var(--wood);border:none;cursor:pointer;
     display:flex;align-items:center;justify-content:center;color:#c9a24b;
     transition:opacity .2s ease;
+    animation:squish 1.6s ease-in-out infinite;
     animation-play-state:paused;
     box-shadow:0 10px 28px rgba(var(--text-rgb),0.25);
   }
-  .mobile-multi-btn.scrolling button{animation:squish 1.6s ease-in-out infinite;animation-play-state:running;}
+  .mobile-multi-btn.scrolling button{animation-play-state:running;}
   .mobile-multi-btn.dir-down button{transform-origin:top center;}
   .mobile-multi-btn.dir-up button{transform-origin:bottom center;}
   @keyframes squish{
