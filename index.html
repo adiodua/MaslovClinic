@@ -147,15 +147,12 @@
     animation-play-state:paused;
     box-shadow:0 10px 28px rgba(var(--text-rgb),0.25);
   }
-  .mobile-multi-btn.scrolling.dir-down button{animation:squishDown 1.1s ease-in-out infinite;animation-play-state:running;transform-origin:top center;}
-  .mobile-multi-btn.scrolling.dir-up button{animation:squishUp 1.1s ease-in-out infinite;animation-play-state:running;transform-origin:bottom center;}
-  @keyframes squishDown{
+  .mobile-multi-btn.scrolling button{animation:squish 1.6s ease-in-out infinite;animation-play-state:running;}
+  .mobile-multi-btn.dir-down button{transform-origin:top center;}
+  .mobile-multi-btn.dir-up button{transform-origin:bottom center;}
+  @keyframes squish{
     0%,100%{transform:scaleY(1) scaleX(1);}
-    50%{transform:scaleY(1.16) scaleX(0.9);}
-  }
-  @keyframes squishUp{
-    0%,100%{transform:scaleY(1) scaleX(1);}
-    50%{transform:scaleY(1.16) scaleX(0.9);}
+    50%{transform:scaleY(1.06) scaleX(0.94);}
   }
   .mobile-multi-btn button:hover{opacity:.8;}
   @media(prefers-reduced-motion:reduce){.mobile-multi-btn button{animation:none;}}
@@ -1084,14 +1081,16 @@ const galleryData = [
     window.addEventListener('scroll', function(){
       const y = window.scrollY;
       wrap.classList.add('scrolling');
-      if(y > lastY){
+      const delta = y - lastY;
+      if(delta > 4){
         wrap.classList.add('dir-down');
         wrap.classList.remove('dir-up');
-      } else if(y < lastY){
+        lastY = y;
+      } else if(delta < -4){
         wrap.classList.add('dir-up');
         wrap.classList.remove('dir-down');
+        lastY = y;
       }
-      lastY = y;
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function(){ wrap.classList.remove('scrolling'); }, 400);
     }, {passive:true});
