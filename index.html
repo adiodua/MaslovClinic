@@ -139,18 +139,22 @@
   }
   @media(max-width:860px){.nav-works-btn{display:none;}}
 
-  .mobile-multi-btn{display:none;position:relative;}
+  .mobile-multi-btn{display:none;}
   .mobile-multi-btn button{
-    width:57px;height:42px;border-radius:999px;background:var(--wood);border:none;cursor:pointer;
+    width:56px;height:56px;border-radius:50%;background:var(--wood);border:none;cursor:pointer;
     display:flex;align-items:center;justify-content:center;color:#fff;
+    box-shadow:0 10px 28px rgba(var(--text-rgb),0.25);
     transition:background .25s ease, transform .2s ease;
   }
-  .mobile-multi-btn button:hover{background:var(--wood-deep);}
-  .mobile-multi-btn .phone-panel{right:0;left:auto;}
+  .mobile-multi-btn button:hover{background:var(--wood-deep);transform:translateY(-2px);}
+  .mobile-multi-btn .phone-panel{right:0;left:auto;top:auto;bottom:calc(100% + 14px);}
   @media(max-width:860px){
-    .mobile-multi-btn{display:block;}
+    .mobile-multi-btn{
+      display:block;position:fixed;right:18px;bottom:18px;z-index:150;
+    }
     #navBookingBtn{display:none;}
   }
+  header:has(.mobile-menu.open) + .mobile-multi-btn{display:none;}
 
   .phone-dropdown{position:relative;}
   .phone-btn{
@@ -247,18 +251,17 @@
   @media(max-width:860px){.navlinks{display:none;}}
   .wrap{width:100%;}
   nav.wrap{gap:10px;}
-  @media(max-width:480px){
+  @media(max-width:860px){
     .wrap{padding:0 14px;}
-    .logo{font-size:16px;}
-    .logo img.brand-mark{display:none;}
-    .navcta{gap:6px;}
+    .logo{font-size:25px;}
+    .logo img.brand-mark{height:40px;}
+    .navcta{gap:12px;}
     .langs{gap:2px;}
     .langbtn{padding:2px 5px;font-size:9px;}
-    .btn{padding:8px 12px;font-size:11.5px;white-space:nowrap;}
-    .theme-toggle{width:26px;height:26px;}
-    .theme-toggle svg{width:14px;height:14px;}
-    .lang-current{padding:4px 7px;font-size:10.5px;}
-    .menu-toggle svg{width:19px;height:19px;}
+    .theme-toggle{width:42px;height:42px;}
+    .theme-toggle svg{width:21px;height:21px;}
+    .lang-current{padding:8px 13px;font-size:13.5px;}
+    .menu-toggle svg{width:27px;height:27px;}
   }
 
   .hero{position:relative;overflow:hidden;padding:150px 0 140px;color:#fff;display:flex;align-items:center;}
@@ -609,19 +612,6 @@
       </button>
       <a href="/raboty/index.html" class="nav-works-btn">Наши работы</a>
       <a href="#" class="btn js-open-booking" id="navBookingBtn">Записаться</a>
-      <div class="mobile-multi-btn" id="mobileMultiBtn">
-        <button type="button" id="mobileMultiTrigger" aria-label="Контакты и запись">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-        </button>
-        <div class="phone-panel" id="mobileMultiPanel">
-          <button type="button" class="btn js-open-booking" style="width:100%;justify-content:center;margin-bottom:16px;">Записаться сейчас</button>
-          <div class="phone-panel-label">Тел.</div>
-          <a href="tel:+380949405514" class="phone-panel-num">+380 94 940 55 14</a>
-          <div class="phone-panel-label">Email</div>
-          <a href="mailto:maslovclinic@gmail.com" class="phone-panel-num" style="font-size:15px;">maslovclinic@gmail.com</a>
-          <a href="#contacts" class="phone-panel-link">Наши контакты</a>
-        </div>
-      </div>
       <button class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
         <svg id="iconBurger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         <svg id="iconClose" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -642,6 +632,20 @@
     </div>
   </div>
 </header>
+
+<div class="mobile-multi-btn" id="mobileMultiBtn">
+  <button type="button" id="mobileMultiTrigger" aria-label="Контакты и запись">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+  </button>
+  <div class="phone-panel" id="mobileMultiPanel">
+    <button type="button" class="btn js-open-booking" style="width:100%;justify-content:center;margin-bottom:16px;">Записаться сейчас</button>
+    <div class="phone-panel-label">Тел.</div>
+    <a href="tel:+380949405514" class="phone-panel-num">+380 94 940 55 14</a>
+    <div class="phone-panel-label">Email</div>
+    <a href="mailto:maslovclinic@gmail.com" class="phone-panel-num" style="font-size:15px;">maslovclinic@gmail.com</a>
+    <a href="#contacts" class="phone-panel-link">Наши контакты</a>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap hero-grid">
