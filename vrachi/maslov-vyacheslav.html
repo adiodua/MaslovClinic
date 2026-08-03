@@ -809,18 +809,39 @@
     const burger = document.getElementById('iconBurger');
     const close = document.getElementById('iconClose');
     if(!btn || !menu) return;
-    btn.addEventListener('click', function(){
-      const isOpen = menu.classList.toggle('open');
+    function setOpen(isOpen){
+      menu.classList.toggle('open', isOpen);
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       burger.style.display = isOpen ? 'none' : 'block';
       close.style.display = isOpen ? 'block' : 'none';
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('open'));
     });
     menu.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', function(){
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-        burger.style.display='block'; close.style.display='none';
-      });
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // tap elsewhere closes the menu without activating whatever was tapped there
+    document.addEventListener('click', function(e){
+      if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(false);
+      }
+    }, true);
+    // swipe more than half the screen height closes the menu too
+    let touchStartY = null;
+    menu.addEventListener('touchstart', function(e){
+      touchStartY = e.touches[0].clientY;
+    }, {passive:true});
+    menu.addEventListener('touchend', function(e){
+      if(touchStartY === null) return;
+      const deltaY = e.changedTouches[0].clientY - touchStartY;
+      if(Math.abs(deltaY) > window.innerHeight/2){
+        setOpen(false);
+      }
+      touchStartY = null;
     });
   })();
 
