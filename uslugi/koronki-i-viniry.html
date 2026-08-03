@@ -338,7 +338,7 @@
 
   header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(var(--bg-rgb),0.85);backdrop-filter:blur(8px);}
   nav.wrap{height:88px;display:flex;align-items:center;gap:44px;}
-  .logo{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;}
+  .logo{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;flex-shrink:0;white-space:nowrap;}
   .navlinks{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
   .navlinks a:hover{color:var(--wood-deep);}
   .nav-highlight{position:relative;color:var(--wood-deep) !important;font-weight:700;}
@@ -455,7 +455,7 @@
     .lang-dropdown{display:block;}
     .menu-toggle{display:flex;}
   }
-  .langbtn{padding:4px 8px;border:1px solid rgba(var(--text-rgb),0.15);border-radius:20px;opacity:.55;background:none;cursor:pointer;}
+  .langbtn{padding:4px 8px;border:1px solid rgba(var(--text-rgb),0.35);border-radius:20px;opacity:.85;background:none;cursor:pointer;color:var(--text);}
   .langbtn.active{opacity:1;background:var(--text);color:var(--bg);border-color:var(--text);}
   .theme-toggle{
     display:flex;align-items:center;justify-content:center;
