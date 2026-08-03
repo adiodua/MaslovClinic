@@ -427,11 +427,13 @@
   .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
   .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);max-width:70%;}
   .case-nav{
-    position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;
-    background:var(--bg);border:1px solid rgba(var(--text-rgb),0.15);box-shadow:0 8px 20px rgba(var(--text-rgb),0.15);
-    display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:3;color:var(--text);
+    width:40px;height:40px;border-radius:50%;flex-shrink:0;
+    background:var(--bg);border:1px solid rgba(var(--text-rgb),0.15);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text);
   }
-  .case-nav.prev{left:6px;} .case-nav.next{right:6px;}
+  .case-nav:hover{border-color:var(--wood);color:var(--wood);}
+  .cases-row{display:flex;align-items:center;gap:14px;}
+  .cases-row .cases-carousel{flex:1;min-width:0;}
   @media(max-width:760px){.case-nav{display:none;}}
   .cases-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
   .cases-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
@@ -705,7 +707,11 @@
       <p>Реальные случаи пациентов клиники — с этапами «до» и «после».</p>
     </div>
     <a href="/raboty/index.html" class="svc-all reveal" style="margin-bottom:28px;">Смотреть все работы →</a>
-    <div class="cases-carousel reveal">
+    <div class="cases-row reveal">
+      <button class="case-nav" id="casesPrev" aria-label="Предыдущий случай">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 5l-7 7 7 7"/><path d="M11 5l-7 7 7 7"/></svg>
+      </button>
+      <div class="cases-carousel">
       <div class="cases-track" id="casesTrack">
         <a href="/raboty/patient-1.html" class="case-slide">
           <div class="case-photo-main">Фото «после»<br>появится здесь</div>
@@ -728,8 +734,10 @@
           <div class="case-info"><h3>Наталья</h3><p>Отбеливание + реставрация</p></div>
         </a>
       </div>
-      <button class="case-nav prev" id="casesPrev" aria-label="Предыдущий случай">‹</button>
-      <button class="case-nav next" id="casesNext" aria-label="Следующий случай">›</button>
+      </div>
+      <button class="case-nav" id="casesNext" aria-label="Следующий случай">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg>
+      </button>
     </div>
     <div class="cases-dots" id="casesDots"></div>
   </div>
