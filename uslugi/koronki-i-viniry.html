@@ -822,17 +822,21 @@
         setOpen(false);
       }
     }, true);
-    // swipe more than half the screen height closes the menu too
+    // swipe more than half the menu's own height closes it too
     let touchStartY = null;
     menu.addEventListener('touchstart', function(e){
       touchStartY = e.touches[0].clientY;
     }, {passive:true});
-    menu.addEventListener('touchend', function(e){
+    menu.addEventListener('touchmove', function(e){
       if(touchStartY === null) return;
-      const deltaY = e.changedTouches[0].clientY - touchStartY;
-      if(Math.abs(deltaY) > window.innerHeight/2){
+      const deltaY = e.touches[0].clientY - touchStartY;
+      const threshold = menu.getBoundingClientRect().height / 2;
+      if(Math.abs(deltaY) > threshold){
         setOpen(false);
+        touchStartY = null;
       }
+    }, {passive:true});
+    menu.addEventListener('touchend', function(){
       touchStartY = null;
     });
   })();
