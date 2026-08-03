@@ -417,11 +417,11 @@
     content:"";position:absolute;inset:auto 0 0 0;height:45%;z-index:1;pointer-events:none;
     background:linear-gradient(180deg, rgba(18,40,63,0) 0%, rgba(18,40,63,.85) 100%);
   }
-  .case-before-thumbs{position:absolute;left:16px;bottom:16px;display:flex;gap:8px;z-index:2;}
   .case-before-thumb{
-    width:58px;height:58px;border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.8);
-    background:var(--brand-navy2,#0e2036);color:rgba(255,255,255,.5);font-size:9px;
-    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;
+    position:absolute;right:16px;bottom:16px;width:28%;aspect-ratio:3/4;z-index:2;
+    border-radius:10px;overflow:hidden;border:3px solid rgba(255,255,255,.9);
+    background:var(--brand-navy2,#0e2036);color:rgba(255,255,255,.5);font-size:10px;
+    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;
   }
   .case-info{position:absolute;top:18px;left:18px;z-index:2;color:#fff;}
   .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
@@ -433,6 +433,9 @@
   }
   .case-nav.prev{left:6px;} .case-nav.next{right:6px;}
   @media(max-width:760px){.case-nav{display:none;}}
+  .cases-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
+  .cases-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
+  .cases-dot.active{background:var(--wood);}
 
   /* nashi-raboty catalog grid (used on this page too, shared class names) */
   .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:40px;}
@@ -706,40 +709,29 @@
       <div class="cases-track" id="casesTrack">
         <a href="/raboty/patient-1.html" class="case-slide">
           <div class="case-photo-main">Фото «после»<br>появится здесь</div>
-          <div class="case-before-thumbs">
-            <div class="case-before-thumb">до</div>
-            <div class="case-before-thumb">до</div>
-          </div>
+          <div class="case-before-thumb">до</div>
           <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
         </a>
         <a href="/raboty/patient-2.html" class="case-slide">
           <div class="case-photo-main">Фото «после»<br>появится здесь</div>
-          <div class="case-before-thumbs">
-            <div class="case-before-thumb">до</div>
-            <div class="case-before-thumb">до</div>
-          </div>
+          <div class="case-before-thumb">до</div>
           <div class="case-info"><h3>Андрей</h3><p>Импланты + коронки</p></div>
         </a>
         <a href="/raboty/patient-3.html" class="case-slide">
           <div class="case-photo-main">Фото «после»<br>появится здесь</div>
-          <div class="case-before-thumbs">
-            <div class="case-before-thumb">до</div>
-            <div class="case-before-thumb">до</div>
-          </div>
+          <div class="case-before-thumb">до</div>
           <div class="case-info"><h3>Владислав</h3><p>Ортодонтия + виниры</p></div>
         </a>
         <a href="/raboty/patient-4.html" class="case-slide">
           <div class="case-photo-main">Фото «после»<br>появится здесь</div>
-          <div class="case-before-thumbs">
-            <div class="case-before-thumb">до</div>
-            <div class="case-before-thumb">до</div>
-          </div>
+          <div class="case-before-thumb">до</div>
           <div class="case-info"><h3>Наталья</h3><p>Отбеливание + реставрация</p></div>
         </a>
       </div>
       <button class="case-nav prev" id="casesPrev" aria-label="Предыдущий случай">‹</button>
       <button class="case-nav next" id="casesNext" aria-label="Следующий случай">›</button>
     </div>
+    <div class="cases-dots" id="casesDots"></div>
   </div>
 </section>
 
@@ -1109,19 +1101,45 @@ const galleryData = [
     }, {passive:true});
   })();
 
-  // Cases carousel arrows
+  // Cases carousel arrows + dots
   (function(){
     const track = document.getElementById('casesTrack');
     const prev = document.getElementById('casesPrev');
     const next = document.getElementById('casesNext');
+    const dotsWrap = document.getElementById('casesDots');
     if(!track || !prev || !next) return;
-    function step(dir){
+    const slides = Array.from(track.querySelectorAll('.case-slide'));
+    function slideWidth(){
       const card = track.querySelector('.case-slide');
-      const width = card ? card.getBoundingClientRect().width + 16 : 300;
-      track.scrollBy({left: dir * width, behavior:'smooth'});
+      return card ? card.getBoundingClientRect().width + 16 : 300;
+    }
+    function step(dir){
+      track.scrollBy({left: dir * slideWidth(), behavior:'smooth'});
     }
     prev.addEventListener('click', function(){ step(-1); });
     next.addEventListener('click', function(){ step(1); });
+
+    if(dotsWrap && slides.length){
+      slides.forEach((s,i)=>{
+        const d = document.createElement('button');
+        d.type='button';
+        d.className = 'cases-dot' + (i===0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Случай ' + (i+1));
+        d.addEventListener('click', function(){
+          track.scrollTo({left: i * slideWidth(), behavior:'smooth'});
+        });
+        dotsWrap.appendChild(d);
+      });
+      const dots = Array.from(dotsWrap.children);
+      let scrollTimer2 = null;
+      track.addEventListener('scroll', function(){
+        if(scrollTimer2) clearTimeout(scrollTimer2);
+        scrollTimer2 = setTimeout(function(){
+          const idx = Math.round(track.scrollLeft / slideWidth());
+          dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+        }, 80);
+      }, {passive:true});
+    }
   })();
 
   // FAQ show more
