@@ -148,15 +148,15 @@
 
   /* HERO */
   .hero{
-    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+    background:linear-gradient(180deg,rgba(15,33,47,.35) 0%,rgba(15,33,47,.92) 100%),var(--navy-2);
     color:#f2f0e8;
-    padding:150px 0 96px;
+    padding:140px 0 64px;
     position:relative;
     overflow:hidden;
   }
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+  .hero .wrap{display:block;max-width:720px;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;}
-  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:46ch;margin-top:24px;}
+  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:60ch;margin-top:20px;}
   .price-tag{
     display:inline-flex;align-items:baseline;gap:8px;
     margin:26px 0 30px;padding:14px 20px;
@@ -614,17 +614,13 @@
 
 <section class="hero">
   <div class="wrap">
-    <div>
-      <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Услуги</span></div>
-      <h1>Стоматология<br>по вашему случаю</h1>
-      <p class="lead">От отбеливания до полной имплантационной реабилитации — выбирайте услугу, чтобы увидеть цену, этапы приёма и врача-специалиста.</p>
-      <div class="cta-row">
-        <a href="/#booking" class="btn">Записаться на визит</a>
-      </div>
+    <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Услуги</span></div>
+    <span class="eyebrow">Каталог услуг</span>
+    <h1>Стоматология<br>по вашему случаю</h1>
+    <p class="lead">От отбеливания до полной имплантационной реабилитации — выбирайте услугу, чтобы увидеть цену, этапы приёма и врача-специалиста. Одесса, Аркадиевское плато.</p>
+    <div class="cta-row">
+      <a href="/#booking" class="btn primary">Записаться на визит</a>
     </div>
-    <a href="#zapis" class="hero-photo-zoom" aria-hidden="true">
-      <div class="hero-photo-zoom-ph">Фото появится здесь</div>
-    </a>
   </div>
 </section>
 
@@ -703,7 +699,7 @@
 <section>
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">О каталоге</span>
+      <span class="eyebrow">О наших услугах</span>
       <h2>Стоматология полного цикла в одном месте</h2>
     </div>
     <p style="max-width:720px;color:var(--muted);font-size:16px;line-height:1.7;">MaslovClinic на Аркадиевском плато в Одессе — это диагностика, гигиена, терапевтическое и эндодонтическое лечение, ортодонтия (брекеты и элайнеры), ортопедия (коронки и виниры), хирургия, имплантация и седация для тревожных пациентов. Каждое направление ведёт врач нужной специализации, а сложные случаи — тотальную реабилитацию, All-on-4/6 — планируем по единому протоколу от диагностики до итоговой реставрации. Цены на этой странице актуальны на момент публикации; точную стоимость называем после осмотра.</p>
