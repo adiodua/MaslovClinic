@@ -31,6 +31,26 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://maslovclinic.com/uslugi/diagnostika.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/uslugi/gigiena-polosti-rta.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/uslugi/terapevticheskoe-lechenie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/uslugi/endodonticheskoe-lechenie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://maslovclinic.com/vrachi/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
