@@ -181,15 +181,15 @@
 
   /* HERO — full-bleed term page style */
   .hero{
-    background:linear-gradient(180deg,rgba(15,33,47,.35) 0%,rgba(15,33,47,.92) 100%),var(--navy-2);
+    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
     color:#f2f0e8;
-    padding:140px 0 64px;
+    padding:150px 0 96px;
     position:relative;
     overflow:hidden;
   }
-  .hero .wrap{display:block;max-width:720px;}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;}
-  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:60ch;margin-top:20px;}
+  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:46ch;margin-top:24px;}
   .price-tag{
     display:inline-flex;align-items:baseline;gap:8px;
     margin:26px 0 30px;padding:14px 20px;
@@ -635,14 +635,18 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/uslugi/">Услуги</a> / <span class="crumb-active">Ортодонтия</span></div>
-    <span class="eyebrow">Ортодонтическое лечение</span>
-    <h1>Ровные зубы<br>без компромиссов</h1>
-    <p class="lead">Брекет-системы и элайнеры исправляют прикус и положение зубов у детей и взрослых. Металлические брекеты — доступное и надёжное решение, керамические — менее заметны на зубах, элайнеры — прозрачные и снимаются на время еды. Одесса, Аркадиевское плато.</p>
-    <div class="cta-row">
-      <a href="/#booking" class="btn primary">Записаться на визит</a>
-      <a href="#vrach" class="btn ghost">Врач-специалист</a>
+    <div>
+      <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/uslugi/">Услуги</a> / <span class="crumb-active">Ортодонтия</span></div>
+      <h1>Ровные зубы<br>без компромиссов</h1>
+      <p class="lead">Брекет-системы и элайнеры исправляют прикус и положение зубов у детей и взрослых. Металлические брекеты — доступное и надёжное решение, керамические — менее заметны на зубах, элайнеры — прозрачные и снимаются на время еды.</p>
+      <div class="cta-row">
+        <a href="/#booking" class="btn">Записаться на визит</a>
+        <a href="#vrach" class="btn ghost">Врач-специалист</a>
+      </div>
     </div>
+    <a href="#zapis" class="hero-photo-zoom" aria-hidden="true">
+      <div class="hero-photo-zoom-ph">Фото появится здесь</div>
+    </a>
   </div>
 </section>
 
