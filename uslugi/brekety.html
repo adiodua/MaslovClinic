@@ -181,15 +181,15 @@
 
   /* HERO — full-bleed term page style */
   .hero{
-    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+    background:linear-gradient(180deg,rgba(15,33,47,.35) 0%,rgba(15,33,47,.92) 100%),var(--navy-2);
     color:#f2f0e8;
-    padding:150px 0 96px;
+    padding:140px 0 64px;
     position:relative;
     overflow:hidden;
   }
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+  .hero .wrap{display:block;max-width:720px;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;}
-  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:46ch;margin-top:24px;}
+  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:60ch;margin-top:20px;}
   .price-tag{
     display:inline-flex;align-items:baseline;gap:8px;
     margin:26px 0 30px;padding:14px 20px;
@@ -635,18 +635,13 @@
 
 <section class="hero">
   <div class="wrap">
-    <div>
-      <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/uslugi/">Услуги</a> / <span class="crumb-active">Ортодонтия</span></div>
-      <h1>Ровные зубы<br>без компромиссов</h1>
-      <p class="lead">Брекет-системы и элайнеры исправляют прикус и положение зубов у детей и взрослых. Металлические брекеты — доступное и надёжное решение, керамические — менее заметны на зубах, элайнеры — прозрачные и снимаются на время еды.</p>
-      <div class="cta-row">
-        <a href="/#booking" class="btn">Записаться на визит</a>
-        <a href="#vrach" class="btn ghost">Врач-специалист</a>
-      </div>
+    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/uslugi/">Услуги</a> / <span class="crumb-active">Ортодонтия</span></div>
+    <h1>Ровные зубы<br>без компромиссов</h1>
+    <p class="lead">Брекет-системы и элайнеры исправляют прикус и положение зубов у детей и взрослых. Металлические брекеты — доступное и надёжное решение, керамические — менее заметны на зубах, элайнеры — прозрачные и снимаются на время еды.</p>
+    <div class="cta-row">
+      <a href="/#booking" class="btn">Записаться на визит</a>
+      <a href="#vrach" class="btn ghost">Врачи клиники</a>
     </div>
-    <a href="#zapis" class="hero-photo-zoom" aria-hidden="true">
-      <div class="hero-photo-zoom-ph">Фото появится здесь</div>
-    </a>
   </div>
 </section>
 
@@ -713,22 +708,11 @@
 <section class="alt" id="vrach">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Врач</span>
-      <h2>Кто проводит процедуру</h2>
+      <span class="eyebrow">Врачи</span>
+      <h2>Кто проводит лечение</h2>
+      <p>Услугу выполняют врачи клиники в соответствии со специализацией и опытом. Познакомьтесь со всей командой на странице врачей.</p>
     </div>
-    <div class="doctor">
-      <div class="photo">Фото врача<br>(будет добавлено)</div>
-      <div>
-        <h3><a href="/vrachi/maslov-vyacheslav.html" style="color:inherit;text-decoration:underline;text-decoration-color:rgba(201,162,75,.5);">Маслов Вячеслав Алексеевич</a></h3>
-        <div class="role">Стоматолог, руководитель клиники</div>
-        <p>Проводит ортодонтическое лечение брекет-системами у детей и взрослых, ведёт пациента на всех этапах коррекции прикуса.</p>
-        <div class="tags">
-          <span>Ортодонтия</span>
-          <span>Брекет-системы</span>
-          <span>Коррекция прикуса</span>
-        </div>
-      </div>
-    </div>
+    <a href="/vrachi/" class="btn ghost">Смотреть врачей клиники →</a>
   </div>
 </section>
 
