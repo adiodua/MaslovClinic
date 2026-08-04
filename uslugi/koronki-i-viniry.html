@@ -200,16 +200,11 @@
   .btn.primary{background:var(--gold);color:var(--navy);}
   .btn.primary:hover{background:#d9b662;}
   .btn.ghost{border:1px solid rgba(255,255,255,.35);color:#f2f0e8;}
-  .price-panel-wrap{position:relative;z-index:2;margin-top:-56px;margin-bottom:24px;}
-  .price-panel{
-    background:var(--bg);border:1px solid rgba(var(--text-rgb),.1);border-radius:var(--radius);
-    padding:28px 32px;max-width:520px;box-shadow:0 24px 48px rgba(15,33,47,.18);
-  }
-  .price-panel h3{margin:0 0 6px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);font-weight:600;}
-  .price-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:1px solid rgba(var(--text-rgb),.08);font-size:16px;}
-  .price-row:first-of-type{border-top:none;}
+  .price-native{padding:48px 0 8px;max-width:560px;}
+  .price-native h3{margin:0 0 20px;font-size:22px;}
+  .price-row{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(var(--text-rgb),.1);font-size:16px;}
+  .price-row span:first-child{color:var(--muted);}
   .price-row span:last-child{font-weight:600;color:var(--text);white-space:nowrap;}
-  @media(max-width:600px){.price-panel{padding:22px 20px;}.price-row{font-size:14.5px;}}
   .btn.ghost:hover{border-color:var(--gold);color:var(--gold);}
 
   /* Signature: starry sparkle field behind tooth glyph */
@@ -647,13 +642,11 @@
   </div>
 </section>
 
-<div class="price-panel-wrap">
-  <div class="wrap">
-    <div class="price-panel">
-      <h3>Прайс</h3>
-      <div class="price-row"><span>Керамическая коронка</span><span>от 13 000 грн</span></div>
-      <div class="price-row"><span>Керамический винир</span><span>от 13 000 грн</span></div>
-    </div>
+<div class="wrap">
+  <div class="price-native">
+    <h3>Стоимость</h3>
+    <div class="price-row"><span>Керамическая коронка</span><span>от 13 000 грн</span></div>
+    <div class="price-row"><span>Керамический винир</span><span>от 13 000 грн</span></div>
   </div>
 </div>
 
