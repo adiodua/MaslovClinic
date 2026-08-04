@@ -359,26 +359,31 @@
   @media(max-width:860px){.comfort{padding:40px 28px;} .comfort-list{grid-template-columns:1fr 1fr;}}
   @media(max-width:560px){.comfort-list{grid-template-columns:1fr;}}
 
-  /* services grid */
-  .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:56px;}
-  .svc-card{
-    background:var(--bg);border:1px solid rgba(var(--text-rgb),0.1);border-radius:var(--radius);
-    padding:26px;display:flex;flex-direction:column;gap:10px;text-decoration:none;color:inherit;
-    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
-  }
-  .svc-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(var(--text-rgb),0.12);border-color:rgba(var(--text-rgb),0.22);}
-  .svc-card h4{font-size:18px;margin:0;color:var(--text);}
-  .svc-card p{font-size:14px;color:var(--text-muted);margin:0;flex-grow:1;line-height:1.5;}
-  .svc-row{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
-  .svc-price{font-weight:700;color:var(--wood);font-size:14px;}
-  .svc-arrow{font-size:13px;color:var(--wood);font-weight:600;white-space:nowrap;}
-  .svc-card:hover .svc-arrow{text-decoration:underline;}
+  /* services accordion list */
+  .svc-acc{border:0.5px solid rgba(var(--text-rgb),0.12);border-radius:var(--radius);overflow:hidden;margin-top:56px;}
+  .svc-acc-item{border-bottom:0.5px solid rgba(var(--text-rgb),0.12);}
+  .svc-acc-item:last-child{border-bottom:none;}
+  .svc-acc-head{display:flex;align-items:center;gap:14px;padding:16px 18px;}
+  .svc-acc-icon{width:22px;height:22px;flex-shrink:0;color:var(--wood);}
+  .svc-acc-link{font-size:15.5px;font-weight:600;color:var(--text);text-decoration:none;flex:1;}
+  .svc-acc-link:hover{color:var(--wood);}
+  .svc-acc-price{font-size:13px;color:var(--text-muted);white-space:nowrap;}
+  .svc-acc-toggle{width:30px;height:30px;border-radius:50%;border:none;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);flex-shrink:0;}
+  .svc-acc-toggle:hover{background:rgba(var(--text-rgb),0.06);}
+  .svc-acc-toggle svg{transition:transform .2s ease;display:block;}
+  .svc-acc-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .svc-acc-body-inner{padding:0 18px 16px 18px;}
+  .svc-acc-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13.5px;border-top:0.5px solid rgba(var(--text-rgb),0.06);}
+  .svc-acc-row:first-child{border-top:none;}
+  .svc-acc-row span:first-child{color:var(--text-muted);}
+  .svc-acc-more{display:inline-block;margin-top:10px;font-size:13.5px;color:var(--wood);font-weight:600;text-decoration:none;}
+  .svc-acc-more:hover{text-decoration:underline;}
   .svc-all{
     display:inline-flex;align-items:center;gap:8px;margin-top:40px;
     font-size:15px;font-weight:600;color:var(--text);text-decoration:none;
     border-bottom:2px solid var(--wood);padding-bottom:2px;
   }
-  @media(max-width:500px){.svc-grid{grid-template-columns:1fr;}}
+  @media(max-width:560px){.svc-acc-price{display:none;}}
 
   /* doctor teaser */
   #doctors .wrap{padding-top:0;}
@@ -748,31 +753,159 @@
     <div class="section-head reveal">
       <span class="eyebrow">Услуги и цены</span>
       <h2>Один визит или полная трансформация — решать вам</h2>
-      <p>Четыре основных направления — остальное в полном каталоге.</p>
+      <p>Все направления лечения — с ценами, без похода к кассе за уточнением.</p>
     </div>
-    <div class="svc-grid reveal">
-      <a class="svc-card" href="/uslugi/otbelivanie-zubov.html">
-        <h4>Отбеливание Beyond Polus</h4>
-        <p>Осветление эмали на несколько тонов за один визит, без домашних капп.</p>
-        <div class="svc-row"><span class="svc-price">от 4 000 грн</span><span class="svc-arrow">Подробнее →</span></div>
-      </a>
-      <a class="svc-card" href="/uslugi/implantatsiya-zubov.html">
-        <h4>Имплантация</h4>
-        <p>Nobel Biocare, Straumann, JDental — три системы под разный бюджет и задачу.</p>
-        <div class="svc-row"><span class="svc-price">от 20 000 грн</span><span class="svc-arrow">Подробнее →</span></div>
-      </a>
-      <a class="svc-card" href="/uslugi/koronki-i-viniry.html">
-        <h4>Коронки и виниры</h4>
-        <p>Керамические реставрации по индивидуальным слепкам — форма и цвет под ваш случай.</p>
-        <div class="svc-row"><span class="svc-price">от 13 000 грн</span><span class="svc-arrow">Подробнее →</span></div>
-      </a>
-      <a class="svc-card" href="/uslugi/brekety.html">
-        <h4>Брекеты</h4>
-        <p>Металлические и керамические системы для коррекции прикуса у детей и взрослых.</p>
-        <div class="svc-row"><span class="svc-price">от 29 400 грн</span><span class="svc-arrow">Подробнее →</span></div>
-      </a>
+    <div class="svc-acc reveal">
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Диагностика</a>
+          <span class="svc-acc-price">от 400 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Первичная консультация</span><span>500 грн</span></div>
+          <div class="svc-acc-row"><span>Прицельный снимок</span><span>400 грн</span></div>
+          <div class="svc-acc-row"><span>Панорамный снимок</span><span>500 грн</span></div>
+          <div class="svc-acc-row"><span>КТ двух челюстей</span><span>1 200 грн</span></div>
+          <div class="svc-acc-row"><span>Сканирование двух челюстей</span><span>2 500 грн</span></div>
+          <div class="svc-acc-row"><span>Фотопротокол</span><span>800 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Гигиена полости рта</a>
+          <span class="svc-acc-price">от 2 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Профессиональная гигиена</span><span>от 2 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c.6 3.4 2 5 5.4 5.6C14 8.2 12.6 9.8 12 13.2 11.4 9.8 10 8.2 6.6 7.6 10 7 11.4 5.4 12 2z"/><path d="M19 15c.3 1.7 1 2.4 2.7 2.7C20 18 19.3 18.7 19 20.4c-.3-1.7-1-2.4-2.7-2.7 1.7-.3 2.4-1 2.7-2.7z"/></svg>
+          <a class="svc-acc-link" href="/uslugi/otbelivanie-zubov.html">Отбеливание</a>
+          <span class="svc-acc-price">4 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Beyond Polus, 1 этап</span><span>4 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/otbelivanie-zubov.html">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="4" width="6" height="16" rx="2"/><rect x="4" y="9" width="16" height="6" rx="2"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Терапевтическое лечение</a>
+          <span class="svc-acc-price">от 2 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Реставрация зуба</span><span>от 2 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 0-5 2-5 5 0 3 1 4 1 7 0 2 1 3 2 3s1.5-2 2-2 1.5 2 2 2 2-1 2-3c0-3 1-4 1-7 0-3-2-5-5-5z"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Эндодонтическое лечение</a>
+          <span class="svc-acc-price">от 5 500 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Лечение корневых каналов</span><span>от 5 500 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M8 8v8M12 8v8M16 8v8"/></svg>
+          <a class="svc-acc-link" href="/uslugi/brekety.html">Ортодонтическое лечение</a>
+          <span class="svc-acc-price">от 29 400 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Металлические брекеты (1 челюсть)</span><span>29 400 грн</span></div>
+          <div class="svc-acc-row"><span>Керамические брекеты (1 челюсть)</span><span>42 000 грн</span></div>
+          <div class="svc-acc-row"><span>Несъёмные аппараты</span><span>7 500–12 500 грн</span></div>
+          <div class="svc-acc-row"><span>Съёмные аппараты</span><span>8 500–13 500 грн</span></div>
+          <div class="svc-acc-row"><span>Элайнеры (Украина)</span><span>от 45 000 грн</span></div>
+          <div class="svc-acc-row"><span>Элайнеры (Invisalign)</span><span>от 175 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/brekety.html">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18h16l-1-8-4 3-3-6-3 6-4-3-1 8z"/></svg>
+          <a class="svc-acc-link" href="/uslugi/koronki-i-viniry.html">Ортопедическое лечение</a>
+          <span class="svc-acc-price">от 13 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Керамическая коронка</span><span>от 13 000 грн</span></div>
+          <div class="svc-acc-row"><span>Керамический винир</span><span>от 13 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/koronki-i-viniry.html">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><path d="M8 8l12 12M8 16L20 4"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Хирургическое лечение</a>
+          <span class="svc-acc-price">от 1 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Удаление молочного зуба</span><span>от 1 000 грн</span></div>
+          <div class="svc-acc-row"><span>Удаление зуба (простое)</span><span>от 1 000 грн</span></div>
+          <div class="svc-acc-row"><span>Удаление зуба (сложное)</span><span>от 4 000 грн</span></div>
+          <div class="svc-acc-row"><span>Удаление атипично ретинированного зуба</span><span>от 8 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8l-1 6H9L8 4z"/><path d="M9 10v3M12 10v4M15 10v3"/><path d="M10 17h4M10 20h4"/></svg>
+          <a class="svc-acc-link" href="/uslugi/implantatsiya-zubov.html">Имплантация</a>
+          <span class="svc-acc-price">от 20 000 грн</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Nobel Biocare</span><span>50 000 грн</span></div>
+          <div class="svc-acc-row"><span>Straumann</span><span>32 000 грн</span></div>
+          <div class="svc-acc-row"><span>JDental</span><span>20 000 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/implantatsiya-zubov.html">Узнать больше →</a>
+        </div></div>
+      </div>
+
+      <div class="svc-acc-item">
+        <div class="svc-acc-head">
+          <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+          <a class="svc-acc-link" href="/uslugi/">Седация</a>
+          <span class="svc-acc-price">от 4 600 грн/ч</span>
+          <button class="svc-acc-toggle" aria-label="Развернуть цены" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+        <div class="svc-acc-body"><div class="svc-acc-body-inner">
+          <div class="svc-acc-row"><span>Первый час</span><span>6 900 грн</span></div>
+          <div class="svc-acc-row"><span>Следующий час</span><span>4 600 грн</span></div>
+          <a class="svc-acc-more" href="/uslugi/">Узнать больше →</a>
+        </div></div>
+      </div>
+
     </div>
-    <a class="svc-all" href="/uslugi/">Все услуги и цены (10) →</a>
+    <a class="svc-all" href="/uslugi/">Все услуги и цены →</a>
   </div>
 </section>
 
@@ -1107,6 +1240,29 @@ const galleryData = [
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function(){ wrap.classList.remove('scrolling'); }, 400);
     }, {passive:true});
+  })();
+
+  // Services accordion (homepage)
+  (function(){
+    const items = document.querySelectorAll('.svc-acc-item');
+    items.forEach(function(item){
+      const toggle = item.querySelector('.svc-acc-toggle');
+      const body = item.querySelector('.svc-acc-body');
+      if(!toggle || !body) return;
+      toggle.addEventListener('click', function(){
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        items.forEach(function(other){
+          other.querySelector('.svc-acc-toggle').setAttribute('aria-expanded','false');
+          other.querySelector('.svc-acc-toggle').style.transform = '';
+          other.querySelector('.svc-acc-body').style.maxHeight = '0px';
+        });
+        if(!isOpen){
+          toggle.setAttribute('aria-expanded','true');
+          toggle.style.transform = 'rotate(180deg)';
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
   })();
 
   // Cases carousel arrows + dots
