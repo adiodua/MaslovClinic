@@ -504,9 +504,9 @@
     display:flex;align-items:center;justify-content:center;text-align:center;
     font-size:12.5px;line-height:1.5;padding:16px;
   }
-  .case-before-thumbs{position:absolute;left:12px;bottom:12px;display:flex;gap:6px;z-index:2;}
+  .case-before-thumbs{position:absolute;left:14px;bottom:14px;width:34%;display:flex;gap:6px;z-index:2;}
   .case-before-thumb{
-    width:38px;height:38px;border-radius:6px;overflow:hidden;border:2px solid rgba(242,240,232,.85);
+    width:100%;aspect-ratio:3/2;border-radius:8px;overflow:hidden;border:3px solid rgba(242,240,232,.9);
     background:var(--navy);color:rgba(242,240,232,.5);font-size:8px;
     display:flex;align-items:center;justify-content:center;
   }
@@ -521,20 +521,28 @@
     display:none;align-items:center;justify-content:center;padding:24px;
   }
   .patient-modal-overlay.open{display:flex;}
-  .patient-modal{position:relative;max-width:640px;width:100%;background:var(--bg);border-radius:14px;overflow:hidden;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .patient-modal-photo{position:relative;aspect-ratio:16/11;background:var(--navy-2);flex-shrink:0;}
+  .patient-modal{position:relative;max-width:640px;width:100%;height:80vh;max-height:700px;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);}
   .patient-modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .patient-modal-photo::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
+  }
+  .patient-modal-photo::after{
+    content:"";position:absolute;bottom:0;left:0;right:0;height:52%;z-index:1;pointer-events:none;
+    background:linear-gradient(0deg, rgba(0,0,0,.82), transparent);
+  }
   .patient-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:4;}
   .patient-modal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:4;}
   .patient-modal-nav.prev{left:12px;}
   .patient-modal-nav.next{right:12px;}
-  .patient-modal-counter{position:absolute;bottom:12px;right:14px;color:#fff;font-size:12px;z-index:2;}
-  .patient-modal-info{padding:22px 24px;overflow-y:auto;}
+  .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
+  .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;}
   .patient-modal-info .eyebrow{color:var(--accent);}
-  .patient-modal-info h3{margin:6px 0 6px;font-size:20px;}
-  .patient-modal-info p{margin:0 0 14px;color:var(--muted);font-size:13.5px;}
+  .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
+  .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
   .patient-modal-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
-  .pm-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;flex-shrink:0;background:none;}
+  .pm-thumb{width:52px;height:52px;border-radius:8px;overflow:hidden;border:2px solid rgba(255,255,255,.5);padding:0;cursor:pointer;flex-shrink:0;background:none;}
   .pm-thumb.active{border-color:var(--wood);}
   .pm-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   .pm-progress{position:absolute;top:0;left:0;right:0;display:none;gap:4px;padding:10px 12px;z-index:4;}
@@ -546,29 +554,15 @@
   @media(max-width:860px){
     .patient-modal-overlay{padding:0;}
     .patient-modal{max-width:none;width:100vw;height:100vh;max-height:100vh;border-radius:0;box-shadow:none;}
-    .patient-modal-photo{aspect-ratio:auto;flex:1;min-height:0;}
     .pm-progress{display:flex;}
-    .patient-modal-photo::before{
-      content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
-      background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
-    }
-    .patient-modal-photo::after{
-      content:"";position:absolute;bottom:0;left:0;right:0;height:45%;z-index:1;pointer-events:none;
-      background:linear-gradient(0deg, rgba(0,0,0,.8), transparent);
-    }
     .patient-modal-close{top:20px;}
+    .patient-modal-counter{display:none;}
     .patient-modal-nav{
       top:0;bottom:0;transform:none;width:32%;height:auto;
       background:none;border-radius:0;color:transparent;font-size:0;
     }
     .patient-modal-nav.prev{left:0;}
     .patient-modal-nav.next{right:0;}
-    .patient-modal-counter{display:none;}
-    .patient-modal-info{
-      position:absolute;bottom:0;left:0;right:0;z-index:2;padding:18px 20px 24px;overflow-y:visible;
-    }
-    .patient-modal-info h3{color:#fff;}
-    .patient-modal-info p{color:rgba(255,255,255,.85);margin-bottom:12px;}
     .patient-modal-thumbs{display:none;}
   }
 </style>
