@@ -122,17 +122,17 @@
   }
   .hero .eyebrow{color:var(--gold);}
 
-  /* HERO */
+  /* HERO — full-bleed photo style, matching homepage */
   .hero{
-    background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);
+    background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/hero-reception.jpg') center/cover no-repeat,var(--navy-2);
     color:#f2f0e8;
-    padding:150px 0 96px;
+    padding:140px 0 64px;
     position:relative;
     overflow:hidden;
   }
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+  .hero .wrap{display:block;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;}
-  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:46ch;margin-top:24px;}
+  .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:60ch;margin-top:20px;}
   .price-tag{
     display:inline-flex;align-items:baseline;gap:8px;
     margin:26px 0 30px;padding:14px 20px;
@@ -627,19 +627,14 @@
 </div>
 
 
-<section class="hero">
+<section class="hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/uriy-portrait.jpg') center/cover no-repeat,var(--navy-2);">
   <div class="wrap">
-    <div>
-      <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Юрий</span></div>
-      <h1>Юрий</h1>
-      <div class="cta-row">
-        <a href="/#booking" class="btn">Записаться на визит</a>
-      <a href="/raboty/index.html" class="btn" style="margin-left:12px;">← Все работы</a>
-      </div>
+    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Юрий</span></div>
+    <h1>Юрий</h1>
+    <div class="cta-row">
+      <a href="/#booking" class="btn">Записаться на визит</a>
+      <a href="/raboty/index.html" class="btn ghost" style="margin-left:12px;">← Все работы</a>
     </div>
-    <a href="#zapis" class="hero-photo-zoom" aria-hidden="true">
-      <img src="/img/patients/uriy-portrait.jpg" alt="Юрий, пациент MaslovClinic">
-    </a>
   </div>
 </section>
 
