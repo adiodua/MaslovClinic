@@ -45,15 +45,6 @@
   ]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Дарья — керамические виниры", "url": "https://maslovclinic.com/raboty/patient-1.html"}
-  ]
-}
-</script>
 <style>
   :root{
     --bg: #F5F8FA;
@@ -496,10 +487,11 @@
   .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:8px;}
   .case-card{
     position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
-    display:block;text-decoration:none;color:inherit;
+    display:block;text-decoration:none;color:inherit;cursor:pointer;
     border:1px solid var(--divider);background:var(--paper);
+    padding:0;font:inherit;width:100%;text-align:left;
   }
-  .case-card.soon{opacity:.55;border-style:dashed;pointer-events:none;}
+  .case-card.soon{opacity:.55;border-style:dashed;pointer-events:none;cursor:default;}
   .case-photo-main{
     position:absolute;inset:0;background:var(--navy-2);color:rgba(242,240,232,.5);
     display:flex;align-items:center;justify-content:center;text-align:center;
@@ -515,6 +507,31 @@
   .case-info h3{margin:0 0 2px;font-size:16px;color:#f2f0e8;}
   .case-info p{margin:0;font-size:12px;color:rgba(242,240,232,.85);max-width:80%;}
   .case-card .badge{position:absolute;top:14px;right:14px;z-index:2;}
+
+  /* Patient modal (lightbox, no separate pages) */
+  .patient-modal-overlay{
+    position:fixed;inset:0;background:rgba(10,20,30,.94);z-index:300;
+    display:none;align-items:center;justify-content:center;padding:24px;
+  }
+  .patient-modal-overlay.open{display:flex;}
+  .patient-modal{position:relative;max-width:480px;width:100%;background:var(--bg);border-radius:var(--radius);overflow:hidden;max-height:88vh;display:flex;flex-direction:column;}
+  .patient-modal-photo{position:relative;aspect-ratio:4/5;background:var(--navy-2);flex-shrink:0;}
+  .patient-modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .patient-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:3;}
+  .patient-modal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:3;}
+  .patient-modal-nav.prev{left:12px;}
+  .patient-modal-nav.next{right:12px;}
+  .patient-modal-counter{position:absolute;bottom:12px;right:14px;color:#fff;font-size:12px;z-index:2;}
+  .patient-modal-info{padding:20px 22px;overflow-y:auto;}
+  .patient-modal-info .eyebrow{color:var(--accent);}
+  .patient-modal-info h3{margin:6px 0 6px;font-size:20px;}
+  .patient-modal-info p{margin:0 0 14px;color:var(--muted);font-size:13.5px;}
+  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:wrap;}
+  .patient-modal-thumbs button{
+    font-size:11.5px;padding:6px 10px;border-radius:20px;border:1px solid var(--divider);
+    background:var(--bg);color:var(--muted);cursor:pointer;
+  }
+  .patient-modal-thumbs button.active{background:var(--wood);color:#fff;border-color:var(--wood);}
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -640,21 +657,21 @@
       <p>Здесь будут собраны фото- и видеоотчёты по завершённым случаям. Раздел пополняется по мере съёмки новых работ.</p>
     </div>
     <div class="cases-grid">
-      <a href="/raboty/patient-1.html" class="case-card">
+      <button class="case-card" onclick="openPatientModal('darya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/darya-after.jpg" alt="Дарья — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/darya-before.jpg" alt="Дарья — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
-      </a>
-      <a href="/raboty/patient-2.html" class="case-card">
+      </button>
+      <button class="case-card" onclick="openPatientModal('uriy')">
         <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/uriy-after.jpg" alt="Юрий — результат имплантации" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/uriy-before.jpg" alt="Юрий — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юрий</h3><p>Имплантационное лечение</p></div>
-      </a>
-      <a href="/raboty/patient-3.html" class="case-card">
+      </button>
+      <button class="case-card" onclick="openPatientModal('yuliya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/yuliya-after.jpg" alt="Юлия — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/yuliya-before.jpg" alt="Юлия — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юлия</h3><p>Керамические виниры</p></div>
-      </a>
+      </button>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
@@ -667,6 +684,85 @@
     </div>
   </div>
 </section>
+
+<div class="patient-modal-overlay" id="patientModalOverlay" onclick="if(event.target===this) closePatientModal()">
+  <div class="patient-modal">
+    <div class="patient-modal-photo">
+      <img id="pmMain" src="" alt="">
+      <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Закрыть">×</button>
+      <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Предыдущее фото">‹</button>
+      <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Следующее фото">›</button>
+      <div class="patient-modal-counter" id="pmCounter"></div>
+    </div>
+    <div class="patient-modal-info">
+      <span class="eyebrow" id="pmTag"></span>
+      <h3 id="pmName"></h3>
+      <p id="pmDesc"></p>
+      <div class="patient-modal-thumbs" id="pmThumbs"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const PATIENTS = {
+    darya: {
+      name: 'Дарья', tag: 'Керамические виниры',
+      desc: '8 виниров, подготовка эмали и фиксация по индивидуальным слепкам.',
+      photos: ['/img/patients/darya-before.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg'],
+      labels: ['До','После','После, ракурс 2','После, ракурс 3']
+    },
+    uriy: {
+      name: 'Юрий', tag: 'Имплантационное лечение',
+      desc: 'Диагностика, установка имплантов, протезирование.',
+      photos: ['/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'],
+      labels: ['До','После']
+    },
+    yuliya: {
+      name: 'Юлия', tag: 'Керамические виниры',
+      desc: 'Подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация.',
+      photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'],
+      labels: ['До','После','После, ракурс 2','После, ракурс 3']
+    }
+  };
+  let pmSlug = null, pmIndex = 0;
+  function openPatientModal(slug){
+    pmSlug = slug; pmIndex = 0;
+    document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
+    document.getElementById('pmName').textContent = PATIENTS[slug].name;
+    document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
+    const thumbs = document.getElementById('pmThumbs');
+    thumbs.innerHTML = '';
+    PATIENTS[slug].labels.forEach((label, i) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+      b.onclick = () => { pmIndex = i; pmRender(); };
+      thumbs.appendChild(b);
+    });
+    pmRender();
+    document.getElementById('patientModalOverlay').classList.add('open');
+  }
+  function closePatientModal(){
+    document.getElementById('patientModalOverlay').classList.remove('open');
+  }
+  function pmStep(dir){
+    const len = PATIENTS[pmSlug].photos.length;
+    pmIndex = (pmIndex + dir + len) % len;
+    pmRender();
+  }
+  function pmRender(){
+    const p = PATIENTS[pmSlug];
+    document.getElementById('pmMain').src = p.photos[pmIndex];
+    document.getElementById('pmMain').alt = p.name + ' — ' + p.labels[pmIndex];
+    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + p.photos.length;
+    Array.from(document.getElementById('pmThumbs').children).forEach((b,i)=>b.classList.toggle('active', i===pmIndex));
+  }
+  document.addEventListener('keydown', (e) => {
+    if(!document.getElementById('patientModalOverlay').classList.contains('open')) return;
+    if(e.key === 'Escape') closePatientModal();
+    if(e.key === 'ArrowLeft') pmStep(-1);
+    if(e.key === 'ArrowRight') pmStep(1);
+  });
+</script>
 
 <div class="locality">
   <div class="wrap">

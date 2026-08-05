@@ -76,21 +76,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://maslovclinic.com/raboty/patient-1.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://maslovclinic.com/raboty/patient-2.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://maslovclinic.com/raboty/patient-3.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://maslovclinic.com/blog/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
