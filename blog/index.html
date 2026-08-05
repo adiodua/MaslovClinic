@@ -12,25 +12,25 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Наши работы — примеры лечения MaslovClinic, Одесса</title>
-<meta name="description" content="Реальные случаи пациентов MaslovClinic на Аркадиевском плато, Одесса: фото «до» и «после», процедуры лечения.">
-<link rel="canonical" href="https://maslovclinic.com/raboty/">
+<title>Блог о стоматологии — MaslovClinic, Одесса</title>
+<meta name="description" content="Статьи о лечении, уходе и профилактике зубов от стоматологии MaslovClinic на Аркадиевском плато в Одессе.">
+<link rel="canonical" href="https://maslovclinic.com/blog/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:site_name" content="MaslovClinic">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Наши работы — примеры лечения MaslovClinic, Одесса">
-<meta property="og:description" content="Реальные случаи пациентов MaslovClinic на Аркадиевском плато, Одесса: фото «до» и «после», процедуры лечения.">
-<meta property="og:url" content="https://maslovclinic.com/raboty/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Блог о стоматологии — MaslovClinic, Одесса">
+<meta property="og:description" content="Статьи о лечении, уходе и профилактике зубов от стоматологии MaslovClinic на Аркадиевском плато в Одессе.">
+<meta property="og:url" content="https://maslovclinic.com/blog/">
 <meta property="og:image" content="https://maslovclinic.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Наши работы — примеры лечения MaslovClinic, Одесса">
-<meta name="twitter:description" content="Реальные случаи пациентов MaslovClinic на Аркадиевском плато, Одесса: фото «до» и «после», процедуры лечения.">
+<meta name="twitter:title" content="Блог о стоматологии — MaslovClinic, Одесса">
+<meta name="twitter:description" content="Статьи о лечении, уходе и профилактике зубов от стоматологии MaslovClinic на Аркадиевском плато в Одессе.">
 <meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,16 +41,7 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://maslovclinic.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Наши работы", "item": "https://maslovclinic.com/raboty/"}
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Дарья — керамические виниры", "url": "https://maslovclinic.com/raboty/patient-1.html"}
+    {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://maslovclinic.com/blog/"}
   ]
 }
 </script>
@@ -174,6 +165,23 @@
   .section-head p{color:var(--muted);line-height:1.6;}
 
   .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+
+  /* Blog */
+  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .blog-card{
+    display:block;background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
+    overflow:hidden;text-decoration:none;color:inherit;transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .blog-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(15,33,47,.12);}
+  .blog-card-photo{
+    aspect-ratio:16/10;background:var(--navy-2);color:rgba(242,240,232,.5);
+    display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;padding:16px;
+  }
+  .blog-card-body{padding:22px;}
+  .blog-card-tag{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);font-weight:700;}
+  .blog-card h3{font-size:18px;margin:10px 0 8px;line-height:1.35;}
+  .blog-card p{color:var(--muted);font-size:14px;line-height:1.55;margin:0;}
+  @media(max-width:860px){.blog-grid{grid-template-columns:1fr;}}
   .card{
     background:var(--paper);border:1px solid var(--divider);
     border-radius:var(--radius);padding:26px;
@@ -515,6 +523,22 @@
   .case-info h3{margin:0 0 2px;font-size:16px;color:#f2f0e8;}
   .case-info p{margin:0;font-size:12px;color:rgba(242,240,232,.85);max-width:80%;}
   .case-card .badge{position:absolute;top:14px;right:14px;z-index:2;}
+
+  .patient-viewer{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;max-width:640px;margin:0 auto;background:var(--navy-2);}
+  .patient-slide{width:100%;height:100%;object-fit:cover;display:block;}
+  .case-nav{
+    position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+    background:var(--paper);border:1px solid var(--divider);cursor:pointer;font-size:20px;color:var(--ink);
+    display:flex;align-items:center;justify-content:center;z-index:3;
+  }
+  .case-nav.prev{left:12px;} .case-nav.next{right:12px;}
+  .patient-counter{position:absolute;bottom:12px;right:14px;color:#f2f0e8;font-size:12.5px;z-index:2;}
+  .patient-thumbs{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .patient-thumb{
+    padding:8px 16px;border-radius:var(--radius);border:1px solid var(--divider);background:var(--paper);
+    color:var(--muted);font-size:13px;cursor:pointer;
+  }
+  .patient-thumb.active{border-color:var(--accent);color:var(--accent);}
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -623,9 +647,9 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Наши работы</span></div>
-    <h1>Результаты<br>наших пациентов</h1>
-    <p class="lead">Реальные случаи из практики клиники — с фото «до» и «после», процедурой и примерной ценовой категорией.</p>
+    <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Блог</span></div>
+    <h1>Блог о здоровье<br>зубов и полости рта</h1>
+    <p class="lead">Разбираем частые вопросы о лечении, уходе и профилактике — простым языком, без лишних терминов.</p>
     <div class="cta-row">
       <a href="/#booking" class="btn">Записаться на визит</a>
     </div>
@@ -635,35 +659,34 @@
 <section class="alt">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Все работы</span>
-      <h2>Каталог случаев</h2>
-      <p>Здесь будут собраны фото- и видеоотчёты по завершённым случаям. Раздел пополняется по мере съёмки новых работ.</p>
+      <span class="eyebrow">Статьи</span>
+      <h2>Последние публикации</h2>
     </div>
-    <div class="cases-grid">
-      <a href="/raboty/patient-1.html" class="case-card">
-        <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/darya-after.jpg" alt="Дарья — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/darya-before.jpg" alt="Дарья — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
-        <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
+    <div class="blog-grid">
+      <a href="/blog/implanty-nobel-straumann-jdental.html" class="blog-card">
+        <div class="blog-card-photo">Фото появится здесь</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Имплантация</span>
+          <h3>Импланты Nobel Biocare, Straumann и JDental: в чём разница</h3>
+          <p>Страна производства, цена, приживаемость — как на практике выбирают систему импланта.</p>
+        </div>
       </a>
-      <a href="/raboty/patient-2.html" class="case-card">
-        <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/uriy-after.jpg" alt="Юрий — результат имплантации" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/uriy-before.jpg" alt="Юрий — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
-        <div class="case-info"><h3>Юрий</h3><p>Имплантационное лечение</p></div>
+      <a href="/blog/keramicheskie-viniry-uhod.html" class="blog-card">
+        <div class="blog-card-photo">Фото появится здесь</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Виниры</span>
+          <h3>Сколько служат керамические виниры и как за ними ухаживать</h3>
+          <p>Срок службы, уход в первые дни после установки и ежедневные правила, которые продлевают их жизнь.</p>
+        </div>
       </a>
-      <a href="/raboty/patient-3.html" class="case-card">
-        <div class="case-photo-main" style="background:none;padding:0;"><img src="/img/patients/yuliya-after.jpg" alt="Юлия — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img src="/img/patients/yuliya-before.jpg" alt="Юлия — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
-        <div class="case-info"><h3>Юлия</h3><p>Керамические виниры</p></div>
+      <a href="/blog/gigiena-kak-chasto.html" class="blog-card">
+        <div class="blog-card-photo">Фото появится здесь</div>
+        <div class="blog-card-body">
+          <span class="blog-card-tag">Гигиена</span>
+          <h3>Зачем нужна профессиональная гигиена полости рта и как часто её делать</h3>
+          <p>Чем профессиональная гигиена отличается от обычной чистки зубной щёткой.</p>
+        </div>
       </a>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
     </div>
   </div>
 </section>
