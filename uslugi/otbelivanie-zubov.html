@@ -102,6 +102,21 @@
 }
 </script>
 <link rel="stylesheet" href="/assets/uslugi.css">
+<style>
+  /* TEST: новый десктопный hero (вариант 1) — только эта страница, мобильная версия не тронута */
+  @media(min-width:861px){
+    .hero{
+      background:linear-gradient(90deg,
+        rgba(14,37,64,.94) 0%,
+        rgba(14,37,64,.86) 28%,
+        rgba(14,37,64,.30) 44%,
+        rgba(14,37,64,0) 58%
+      ), url('/img/hero-reception.jpg') center/cover no-repeat, var(--navy-2);
+    }
+    .hero h1{max-width:400px;}
+    .hero p.lead{max-width:360px;}
+  }
+</style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
