@@ -474,8 +474,22 @@
   }
   .patient-modal-overlay.open{display:flex;}
   .patient-modal{position:relative;max-width:640px;width:100%;height:80vh;max-height:700px;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);}
-  .patient-modal-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);overflow:hidden;}
+  .patient-modal-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+  }
+  .patient-modal-photo.zoomed img{cursor:grab;}
+  .patient-modal-photo.zoomed img:active{cursor:grabbing;}
+  .patient-modal-photo.dragging img{transition:none !important;}
+  .patient-modal-photo img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
+  .pm-zoom-hint{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:3;
+    background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;padding:5px 12px;border-radius:20px;
+    pointer-events:none;opacity:0;transition:opacity .3s ease;white-space:nowrap;
+  }
+  .patient-modal-photo:not(.zoomed):hover .pm-zoom-hint{opacity:1;}
+  @media(hover:none){.pm-zoom-hint{display:none;}}
   .patient-modal-photo::before{
     content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
     background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
@@ -503,19 +517,9 @@
   .pm-progress span.done::after{width:100%;}
   .pm-progress span.active::after{width:100%;}
 
-  @media(max-width:860px){
-    .patient-modal-overlay{padding:0;}
-    .patient-modal{max-width:none;width:100vw;height:100vh;max-height:100vh;border-radius:0;box-shadow:none;}
-    .pm-progress{display:flex;}
-    .patient-modal-close{top:20px;}
-    .patient-modal-counter{display:none;}
-    .patient-modal-nav{
-      top:0;bottom:0;transform:none;width:32%;height:auto;
-      background:none;border-radius:0;color:transparent;font-size:0;
-    }
-    .patient-modal-nav.prev{left:0;}
-    .patient-modal-nav.next{right:0;}
-    .patient-modal-thumbs{display:none;}
+  @media(max-width:600px){
+    .patient-modal-overlay{padding:12px;}
+    .patient-modal{height:88vh;}
   }
 
   /* nashi-raboty catalog grid (used on this page too, shared class names) */
@@ -629,7 +633,7 @@
   .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
 
   footer{padding:80px 0 40px;}
-  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(var(--text-rgb),0.12);}
+  .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(var(--text-rgb),0.12);}
   .foot-map{margin-top:32px;border-radius:var(--radius);overflow:hidden;height:220px;border:1px solid rgba(var(--text-rgb),0.12);}
   .foot-map iframe{width:100%;height:100%;border:0;display:block;}
   .foot-grid h5{font-size:12px;letter-spacing:.06em;color:var(--wood-deep);margin-bottom:18px;text-transform:uppercase;}
@@ -1000,22 +1004,18 @@
   </div>
 </section>
 
-<section id="why" style="padding:64px 0;">
-  <div class="wrap">
-    <div class="why-strip reveal">
-      <div class="why-item"><span class="why-ic">✓</span>Седация по показаниям</div>
-      <div class="why-item"><span class="why-ic">✓</span>Прозрачный план лечения</div>
-      <div class="why-item"><span class="why-ic">✓</span>Спокойные кабинеты, панорамные окна</div>
-      <div class="why-item"><span class="why-ic">✓</span>Современное оборудование</div>
-    </div>
-  </div>
-</section>
-
 <section>
   <div class="wrap">
     <div class="section-head reveal">
       <span class="eyebrow">Пространство</span>
       <h2>Кабинеты, в которых легко расслабиться</h2>
+      <p>Спокойные кабинеты с панорамными окнами, современное оборудование и прозрачный план лечения — с седацией по показаниям, если пациенту так комфортнее.</p>
+    </div>
+    <div class="why-strip reveal" style="margin-bottom:40px;">
+      <div class="why-item"><span class="why-ic">✓</span>Спокойные кабинеты, панорамные окна</div>
+      <div class="why-item"><span class="why-ic">✓</span>Современное оборудование</div>
+      <div class="why-item"><span class="why-ic">✓</span>Прозрачный план лечения</div>
+      <div class="why-item"><span class="why-ic">✓</span>Седация по показаниям</div>
     </div>
     <div class="gallery-teaser reveal">
       <div class="gallery-strip" id="galleryStrip"></div>
@@ -1039,7 +1039,8 @@
   <div class="patient-modal">
     <div class="patient-modal-photo">
       <div class="pm-progress" id="pmProgress"></div>
-      <img id="pmMain" src="" alt="">
+      <img id="pmMain" src="" alt="" draggable="false">
+      <span class="pm-zoom-hint" id="pmZoomHint">Нажмите, чтобы приблизить</span>
       <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Закрыть">×</button>
       <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Предыдущее фото">‹</button>
       <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Следующее фото">›</button>
@@ -1128,6 +1129,142 @@
     if(e.key === 'ArrowLeft') pmStep(-1);
     if(e.key === 'ArrowRight') pmStep(1);
   });
+
+  /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom */
+  (function(){
+    const stage = document.querySelector('.patient-modal-photo');
+    const img = document.getElementById('pmMain');
+    if(!stage || !img) return;
+    const hint = document.getElementById('pmZoomHint');
+    const MAX_SCALE = 4, TAP_ZOOM = 2.2;
+    let scale = 1, tx = 0, ty = 0;
+    const pointers = new Map();
+    let pinchStartDist = 0, pinchStartScale = 1;
+    let dragging = false, dragMoved = false, dragStart = {x:0,y:0}, dragOrigin = {x:0,y:0};
+    let lastTapTime = 0, lastTapX = 0, lastTapY = 0;
+
+    function setTransition(on){ img.style.transition = on ? 'transform .25s ease' : 'none'; }
+
+    function apply(){
+      img.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+      stage.classList.toggle('zoomed', scale > 1.01);
+    }
+
+    function clampPan(){
+      const rect = stage.getBoundingClientRect();
+      const maxX = Math.max(0, (rect.width * (scale - 1)) / 2);
+      const maxY = Math.max(0, (rect.height * (scale - 1)) / 2);
+      tx = Math.max(-maxX, Math.min(maxX, tx));
+      ty = Math.max(-maxY, Math.min(maxY, ty));
+    }
+
+    function resetZoom(instant){
+      setTransition(!instant);
+      scale = 1; tx = 0; ty = 0;
+      apply();
+    }
+    window.pmResetZoom = resetZoom;
+
+    function zoomToward(clientX, clientY, newScale){
+      const rect = stage.getBoundingClientRect();
+      const offsetX = clientX - rect.left - rect.width / 2;
+      const offsetY = clientY - rect.top - rect.height / 2;
+      const ratio = newScale / scale;
+      tx = offsetX - (offsetX - tx) * ratio;
+      ty = offsetY - (offsetY - ty) * ratio;
+      scale = newScale;
+      clampPan();
+      apply();
+    }
+
+    stage.addEventListener('pointerdown', function(e){
+      if(e.target.closest('.patient-modal-nav, .patient-modal-close')) return;
+      e.preventDefault();
+      pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
+      dragMoved = false;
+      if(pointers.size === 1 && scale > 1.01){
+        dragging = true;
+        setTransition(false);
+        stage.classList.add('dragging');
+        dragStart = {x:e.clientX, y:e.clientY};
+        dragOrigin = {x:tx, y:ty};
+      }
+      if(pointers.size === 2){
+        dragging = false;
+        const pts = Array.from(pointers.values());
+        pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+        pinchStartScale = scale;
+        setTransition(false);
+      }
+    });
+
+    stage.addEventListener('pointermove', function(e){
+      if(!pointers.has(e.pointerId)) return;
+      pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
+      if(pointers.size === 2){
+        const pts = Array.from(pointers.values());
+        const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+        const midX = (pts[0].x + pts[1].x) / 2, midY = (pts[0].y + pts[1].y) / 2;
+        const newScale = Math.min(MAX_SCALE, Math.max(1, pinchStartScale * (dist / pinchStartDist)));
+        zoomToward(midX, midY, newScale);
+        dragMoved = true;
+      } else if(dragging && pointers.size === 1){
+        const p = pointers.get(e.pointerId);
+        if(Math.abs(p.x - dragStart.x) > 3 || Math.abs(p.y - dragStart.y) > 3) dragMoved = true;
+        tx = dragOrigin.x + (p.x - dragStart.x);
+        ty = dragOrigin.y + (p.y - dragStart.y);
+        clampPan();
+        apply();
+      }
+    });
+
+    function endPointer(e){
+      const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
+      pointers.delete(e.pointerId);
+      stage.classList.remove('dragging');
+      if(pointers.size < 2) pinchStartDist = 0;
+      if(pointers.size === 0){
+        const wasDragging = dragging;
+        dragging = false;
+        setTransition(true);
+        if(scale > 1.01){ clampPan(); apply(); }
+        if(wasDragging && dragMoved) return;
+        if(dragMoved) return;
+
+        if(wasTouch){
+          const now = Date.now();
+          const dt = now - lastTapTime;
+          const dist = Math.hypot(e.clientX - lastTapX, e.clientY - lastTapY);
+          if(dt < 320 && dist < 40){
+            if(scale > 1.01){ resetZoom(); } else { zoomToward(e.clientX, e.clientY, TAP_ZOOM); }
+            lastTapTime = 0;
+          } else {
+            lastTapTime = now; lastTapX = e.clientX; lastTapY = e.clientY;
+          }
+        } else {
+          if(scale > 1.01){ resetZoom(); } else { zoomToward(e.clientX, e.clientY, TAP_ZOOM); }
+        }
+      }
+    }
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
+
+    stage.addEventListener('wheel', function(e){
+      e.preventDefault();
+      const newScale = Math.min(MAX_SCALE, Math.max(1, scale - e.deltaY * 0.0015 * scale));
+      setTransition(false);
+      zoomToward(e.clientX, e.clientY, newScale);
+    }, {passive:false});
+
+    if(hint){
+      stage.addEventListener('pointerdown', function(){ hint.style.opacity = '0'; }, {once:false});
+    }
+
+    const _origPmRender = window.pmRender;
+    if(typeof _origPmRender === 'function'){
+      window.pmRender = function(){ resetZoom(true); return _origPmRender.apply(this, arguments); };
+    }
+  })();
 </script>
 
 <script>
@@ -1343,7 +1480,7 @@ const galleryData = [
 
 <footer id="contacts">
   <div class="wrap">
-    <div class="foot-grid" style="grid-template-columns:1.3fr 1fr 1fr 1fr;">
+    <div class="foot-grid">
       <div>
         <div class="foot-logo" style="display:flex;align-items:center;gap:10px;">
           <img class="brand-mark" src="/assets/logo.png" width="44" height="60" alt="" style="height:30px;width:auto;display:block;">

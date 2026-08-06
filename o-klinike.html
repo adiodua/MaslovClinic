@@ -54,6 +54,26 @@
   .partner-logo{display:flex;align-items:center;justify-content:center;height:64px;}
   .partner-logo img{max-height:100%;max-width:180px;object-fit:contain;filter:grayscale(100%);opacity:.65;transition:filter .25s ease, opacity .25s ease;}
   .partner-logo:hover img{filter:grayscale(0%);opacity:1;}
+
+  .cert-track{
+    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:4px 4px 12px;scrollbar-width:none;margin-top:56px;
+  }
+  .cert-track::-webkit-scrollbar{display:none;}
+  .cert-card{
+    flex:0 0 240px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--divider);
+    border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px;
+  }
+  .cert-card.soon{opacity:.6;border-style:dashed;}
+  .cert-card .photo-slot{
+    width:100%;aspect-ratio:3/4;border-radius:4px;background:var(--navy-2);
+    border:1px solid rgba(201,162,75,.3);display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#9fb0c6;font-size:12.5px;line-height:1.5;padding:12px;
+  }
+  .cert-card h3{margin:0;font-size:16px;}
+  .cert-dots{display:flex;justify-content:center;gap:6px;margin-top:8px;}
+  .cert-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb,18,32,58),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
+  .cert-dot.active{background:var(--accent);}
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -180,24 +200,25 @@
       <h2>Документы клиники</h2>
       <p>Официальная лицензия на медицинскую деятельность и сертификаты используемого оборудования и материалов — открыто, без запроса по требованию.</p>
     </div>
-    <div class="doc-grid">
-      <div class="doc-card soon">
+    <div class="cert-track" id="certTrack">
+      <div class="cert-card soon">
         <div class="photo-slot">Лицензия МОЗ<br>на мед. деятельность</div>
         <h3>Лицензия МОЗ Украины</h3>
       </div>
-      <div class="doc-card soon">
+      <div class="cert-card soon">
         <div class="photo-slot">Сертификат<br>стерилизации<br>Tecno-Gaz</div>
         <h3>Сертификат оборудования</h3>
       </div>
-      <div class="doc-card soon">
+      <div class="cert-card soon">
         <div class="photo-slot">Сертификат<br>имплантов<br>Nobel Biocare</div>
         <h3>Сертификат материалов</h3>
       </div>
-      <div class="doc-card soon">
+      <div class="cert-card soon">
         <div class="photo-slot">Сертификат<br>3D КЛКТ-диагностики</div>
         <h3>Сертификат оборудования</h3>
       </div>
     </div>
+    <div class="cert-dots" id="certDots"></div>
   </div>
 </section>
 
@@ -390,6 +411,39 @@
       }
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(function(){ wrap.classList.remove('scrolling'); }, 400);
+    }, {passive:true});
+  })();
+
+  (function(){
+    const track = document.getElementById('certTrack');
+    const dotsWrap = document.getElementById('certDots');
+    if(!track || !dotsWrap) return;
+    const cards = Array.from(track.children);
+    cards.forEach(function(_, i){
+      const dot = document.createElement('button');
+      dot.className = 'cert-dot' + (i === 0 ? ' active' : '');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Сертификат ' + (i+1));
+      dot.addEventListener('click', function(){
+        cards[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+    let ticking = false;
+    track.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        const trackLeft = track.getBoundingClientRect().left;
+        let closest = 0, minDist = Infinity;
+        cards.forEach(function(card, i){
+          const dist = Math.abs(card.getBoundingClientRect().left - trackLeft);
+          if(dist < minDist){ minDist = dist; closest = i; }
+        });
+        dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+        ticking = false;
+      });
     }, {passive:true});
   })();
 </script>
