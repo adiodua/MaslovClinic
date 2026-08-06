@@ -506,3 +506,11 @@
     color:var(--muted);font-size:13px;cursor:pointer;
   }
   .patient-thumb.active{border-color:var(--accent);color:var(--accent);}
+
+  /* Inline supplementary video (e.g. procedure clips) */
+  .inline-video{max-width:320px;margin:32px auto 0;}
+  .inline-video video{
+    width:100%;aspect-ratio:9/16;object-fit:cover;display:block;
+    border-radius:var(--radius);background:#000;box-shadow:0 10px 26px rgba(var(--ink-rgb),0.1);
+  }
+  .inline-video p{margin:12px 0 0;font-size:13px;color:var(--muted);text-align:center;}

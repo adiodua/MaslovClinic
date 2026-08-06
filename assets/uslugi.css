@@ -443,3 +443,10 @@
     .lang-current{padding:8px 13px;font-size:13.5px;}
     .menu-toggle svg{width:27px;height:27px;}
   }
+
+  .inline-video{max-width:320px;margin:36px auto 0;}
+  .inline-video video{
+    width:100%;aspect-ratio:9/16;object-fit:cover;display:block;
+    border-radius:var(--radius);background:#000;box-shadow:0 10px 26px rgba(var(--text-rgb),0.1);
+  }
+  .inline-video p{margin:12px 0 0;font-size:13px;color:var(--muted);text-align:center;}
