@@ -305,7 +305,6 @@
     <div class="cert-dots" id="certDots"></div>
     <div class="inline-video">
       <video controls playsinline preload="none" poster="/video/tomograf-poster.jpg">
-        <source src="/video/tomograf.webm" type="video/webm">
         <source src="/video/tomograf.mp4" type="video/mp4">
       </video>
       <p>3D-томография челюсти и зубов — видео из практики клиники</p>
@@ -583,11 +582,7 @@
   var prevZone = document.getElementById('vtourPrevZone');
   var nextZone = document.getElementById('vtourNextZone');
 
-  var vtourExt = (function(){
-    var p = document.createElement('video');
-    return p.canPlayType('video/webm; codecs="vp9,opus"') ? 'webm' : 'mp4';
-  })();
-  var SOURCES = [1,2,3].map(function(n){ return '/video/tour-' + n + '.' + vtourExt; });
+  var SOURCES = ['/video/tour-1.mp4','/video/tour-2.mp4','/video/tour-3.mp4'];
   var POSTERS = ['/video/tour-1-poster.jpg','/video/tour-2-poster.jpg','/video/tour-3-poster.jpg'];
   var STORAGE_KEY = 'mc-vtour-state';
   var STALE_MS = 45 * 60 * 1000;
