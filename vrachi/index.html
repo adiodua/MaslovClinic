@@ -146,11 +146,27 @@
   }
   .price-tag .num{font-family:'Inter',sans-serif;font-size:30px;color:var(--gold);}
   .price-tag .cur{font-size:14px;color:#cdd8e6;}
-  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .cta-row{
+    position:absolute;left:32px;right:32px;bottom:52px;z-index:4;
+    display:flex;align-items:center;gap:14px;flex-wrap:nowrap;
+  }
+  .cta-row .seg{flex:1 1 auto;height:1px;background:rgba(255,255,255,.35);}
+  .cta-row .btn{
+    background:rgba(255,255,255,.14);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff;flex-shrink:0;
+    transition:background .25s ease, color .25s ease, transform .2s ease;
+  }
+  .cta-row .btn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px);}
   .btn.primary{background:var(--gold);color:var(--navy);}
   .btn.primary:hover{background:#d9b662;}
   .btn.ghost{border:1px solid rgba(255,255,255,.35);color:#f2f0e8;}
-  .btn.ghost:hover{border-color:var(--gold);color:var(--gold);}
+  .btn.ghost:hover{background:#fff;color:#0e2540;border-color:#fff;transform:translateY(-1px);}
+  @media(max-width:860px){
+    .cta-row{position:static;left:auto;right:auto;bottom:auto;flex-wrap:wrap;margin-top:28px;}
+    .cta-row .seg{display:none;}
+  }
 
   /* Signature: starry sparkle field behind tooth glyph */
   .signature{
@@ -604,7 +620,9 @@
     <h1>Врачи, которым<br>доверяют улыбку</h1>
     <p class="lead">Образование, специализация и курсы каждого врача — чтобы вы знали, кто именно будет вас лечить.</p>
     <div class="cta-row">
+      <span class="seg"></span>
       <a href="/#booking" class="btn">Записаться на визит</a>
+      <span class="seg"></span>
     </div>
   </div>
 </section>
