@@ -533,10 +533,7 @@
   .case-card .case-info p{font-size:12px;}
 
   /* merged philosophy+comfort strip */
-  .why-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 32px;text-align:center;}
-  .why-item{font-size:14.5px;color:var(--text-muted);display:flex;align-items:center;gap:8px;white-space:nowrap;}
-  .why-ic{color:var(--wood);font-weight:700;}
-  @media(max-width:600px){.why-strip{gap:10px 0;flex-direction:column;}}
+
   @media(max-width:560px){
     .doctor-teaser{flex-direction:column;text-align:center;padding:24px 20px;}
   }
@@ -544,7 +541,7 @@
 
   /* gallery teaser + lightbox */
   .gallery-teaser{margin-top:56px;}
-  .gallery-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .gallery-strip{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
   .g-thumb{aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;box-shadow:0 10px 24px rgba(var(--text-rgb),0.12);}
   .g-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
   .g-thumb:hover img{transform:scale(1.06);}
@@ -1009,13 +1006,7 @@
     <div class="section-head reveal">
       <span class="eyebrow">Пространство</span>
       <h2>Кабинеты, в которых легко расслабиться</h2>
-      <p>Спокойные кабинеты с панорамными окнами, современное оборудование и прозрачный план лечения — с седацией по показаниям, если пациенту так комфортнее.</p>
-    </div>
-    <div class="why-strip reveal" style="margin-bottom:40px;">
-      <div class="why-item"><span class="why-ic">✓</span>Спокойные кабинеты, панорамные окна</div>
-      <div class="why-item"><span class="why-ic">✓</span>Современное оборудование</div>
-      <div class="why-item"><span class="why-ic">✓</span>Прозрачный план лечения</div>
-      <div class="why-item"><span class="why-ic">✓</span>Седация по показаниям</div>
+      <p>Спокойные кабинеты с панорамными окнами, современное оборудование и прозрачный план лечения — с седацией по показаниям, если пациенту так комфортнее. Подробнее — на странице <a href="/o-klinike.html">«О клинике»</a>.</p>
     </div>
     <div class="gallery-teaser reveal">
       <div class="gallery-strip" id="galleryStrip"></div>
@@ -1288,7 +1279,7 @@ const galleryData = [
   const nextBtn = document.getElementById('lightboxNext');
   let current = 0;
 
-  galleryData.slice(0,3).forEach(function(item, i){
+  galleryData.slice(0,2).forEach(function(item, i){
     const div = document.createElement('div');
     div.className = 'g-thumb';
     const img = document.createElement('img');
