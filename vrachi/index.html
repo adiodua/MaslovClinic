@@ -71,7 +71,7 @@
     .hero-vrachi h1{font-size:32px;max-width:100%;margin-top:56px;}
     .hero-vrachi p.lead{font-size:15px;max-width:100%;}
   }
-  .hero-vrachi .cta-row{position:static;margin-top:32px;}
+  .hero-vrachi .cta-row{position:static;margin-top:32px;max-width:560px;}
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -182,8 +182,6 @@
 <section class="hero hero-vrachi">
   <div class="hero-slideshow" id="heroSlideshow">
     <img class="hero-slide active" src="/img/vrachi/maslov-aleksey-work.jpg" alt="Маслов Алексей Вячеславович — главный врач MaslovClinic" style="object-position:50% 42%;">
-    <img class="hero-slide" src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Елена Сергеевна — врач-пародонтолог MaslovClinic" style="object-position:50% 28%;">
-    <img class="hero-slide" src="/img/vrachi/gavrishchuk-anastasiya-work.jpg" alt="Гаврищук Анастасия Владимировна — врач-терапевт MaslovClinic" style="object-position:50% 28%;">
   </div>
   <div class="hero-fade"></div>
   <div class="wrap">
@@ -197,19 +195,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (function(){
-    var slides = document.querySelectorAll('#heroSlideshow .hero-slide');
-    if(slides.length < 2) return;
-    var i = 0;
-    setInterval(function(){
-      slides[i].classList.remove('active');
-      i = (i + 1) % slides.length;
-      slides[i].classList.add('active');
-    }, 4500);
-  })();
-</script>
 
 <section class="alt">
   <div class="wrap">
