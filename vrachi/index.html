@@ -46,6 +46,31 @@
 }
 </script>
 <link rel="stylesheet" href="/assets/base.css">
+<style>
+  .hero-vrachi{background:var(--navy-2);color:#f2f0e8;padding:150px 0 140px;min-height:736px;position:relative;overflow:hidden;}
+  .hero-vrachi .wrap{display:block;position:relative;z-index:2;}
+  .hero-vrachi h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;max-width:560px;}
+  .hero-vrachi p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:460px;margin-top:20px;}
+  .hero-slideshow{position:absolute;inset:0;z-index:0;}
+  .hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease;}
+  .hero-slide.active{opacity:1;}
+  .hero-fade{
+    position:absolute;inset:0;z-index:1;
+    background:linear-gradient(100deg,
+      var(--navy-2) 0%, var(--navy-2) 28%,
+      rgba(14,37,64,.82) 42%, rgba(14,37,64,.4) 58%,
+      rgba(14,37,64,.05) 74%, rgba(14,37,64,0) 88%
+    );
+  }
+  @media(max-width:760px){
+    .hero-fade{background:linear-gradient(180deg, var(--navy-2) 0%, var(--navy-2) 38%, rgba(14,37,64,.85) 55%, rgba(14,37,64,.3) 75%, rgba(14,37,64,0) 92%);}
+  }
+  .hero-vrachi .cta-row{position:static;margin-top:32px;}
+  /* Mobile keeps the original plain navy hero — no split photo layout */
+  @media(max-width:760px){
+    .hero-slideshow,.hero-fade{display:none;}
+  }
+</style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
@@ -82,6 +107,7 @@
     <div class="navlinks">
       <a href="/uslugi/">Услуги</a>
       <a href="/vrachi/">Врачи</a>
+      <a href="/o-klinike.html">О нас</a>
       <a href="/blog/">Блог</a>
       <a href="/#reviews">Отзывы</a>
       <a href="/#faq">Вопросы</a>
@@ -152,7 +178,13 @@
 </div>
 
 
-<section class="hero">
+<section class="hero hero-vrachi">
+  <div class="hero-slideshow" id="heroSlideshow">
+    <img class="hero-slide active" src="/img/vrachi/maslov-aleksey-work.jpg" alt="Маслов Алексей Вячеславович — главный врач MaslovClinic">
+    <img class="hero-slide" src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Елена Сергеевна — врач-пародонтолог MaslovClinic">
+    <img class="hero-slide" src="/img/vrachi/gavrishchuk-anastasiya-work.jpg" alt="Гаврищук Анастасия Владимировна — врач-терапевт MaslovClinic">
+  </div>
+  <div class="hero-fade"></div>
   <div class="wrap">
     <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Врачи</span></div>
     <h1>Врачи, которым<br>доверяют улыбку</h1>
@@ -164,6 +196,19 @@
     </div>
   </div>
 </section>
+
+<script>
+  (function(){
+    var slides = document.querySelectorAll('#heroSlideshow .hero-slide');
+    if(slides.length < 2) return;
+    var i = 0;
+    setInterval(function(){
+      slides[i].classList.remove('active');
+      i = (i + 1) % slides.length;
+      slides[i].classList.add('active');
+    }, 4500);
+  })();
+</script>
 
 <section class="alt">
   <div class="wrap">

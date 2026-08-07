@@ -71,6 +71,21 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://maslovclinic.com/vrachi/maslov-aleksey.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/vrachi/voloshina-elena.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/vrachi/gavrishchuk-anastasiya.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://maslovclinic.com/raboty/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
