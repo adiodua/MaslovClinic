@@ -103,8 +103,30 @@
   .course-item h4{margin:0 0 4px;font-size:15.5px;}
   .course-item p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
 
+  .mobile-lead-below{display:none;}
   @media(max-width:760px){
     .doc-hero-grid{grid-template-columns:1fr;}
+    .doc-hero-grid > img{display:none !important;}
+    .hero{
+      background:linear-gradient(180deg,
+        rgba(14,37,64,.35) 0%,
+        rgba(14,37,64,.55) 55%,
+        rgba(14,37,64,.85) 100%
+      ), url('/img/vrachi/voloshina-elena-portrait.jpg') left 5%/160% auto no-repeat, var(--navy-2);
+    }
+    .doc-hero-grid .eyebrow,
+    .doc-hero-grid .lead{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+    .doc-hero-grid h1{margin-top:0 !important;font-size:22px !important;}
+    .mobile-lead-below{
+      display:block;margin:16px 20px 4px;padding:16px 18px;
+      background:var(--paper);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;
+      font-family:'Fraunces',serif;font-style:italic;
+      color:var(--muted);font-size:15.5px;line-height:1.7;
+    }
+    .mobile-lead-below + section{padding-top:32px;}
     .doc-photo-slot{max-width:220px;margin:0 auto;}
     .proc-grid{grid-template-columns:1fr;}
     .timeline li{grid-template-columns:80px 1fr;}
@@ -238,6 +260,8 @@
   </div>
 </section>
 
+<p class="mobile-lead-below">Лечение заболеваний дёсен и профессиональная гигиена полости рта.</p>
+
 <section id="protsedury">
   <div class="wrap">
     <div class="section-head">
@@ -256,6 +280,20 @@
         <p>Осмотр и оценка состояния дёсен и пародонта перед составлением плана лечения.</p>
         <span class="go">Подробнее о диагностике →</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Галерея</span>
+      <h2>Фото врача</h2>
+    </div>
+    <div class="doc-gallery-strip">
+      <div class="doc-g-thumb">
+        <img src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Елена Сергеевна">
+      </div>
     </div>
   </div>
 </section>
@@ -411,5 +449,61 @@
     }, {passive:true});
   })();
 </script>
+
+<div class="lightbox" id="docLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="docLightboxClose" aria-label="Закрыть">&#10005;</button>
+  <button class="lightbox-nav prev" id="docLightboxPrev" aria-label="Предыдущее фото">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="docLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="docLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="docLightboxNext" aria-label="Следующее фото">&#8250;</button>
+</div>
+<script>
+(function(){
+  const thumbs = Array.from(document.querySelectorAll('.doc-g-thumb img'));
+  if(!thumbs.length) return;
+  const lightbox = document.getElementById('docLightbox');
+  const lbImg = document.getElementById('docLightboxImg');
+  const lbCounter = document.getElementById('docLightboxCounter');
+  const closeBtn = document.getElementById('docLightboxClose');
+  const prevBtn = document.getElementById('docLightboxPrev');
+  const nextBtn = document.getElementById('docLightboxNext');
+  let current = 0;
+
+  thumbs.forEach(function(img, i){
+    img.closest('.doc-g-thumb').addEventListener('click', function(){ openLightbox(i); });
+  });
+
+  function openLightbox(index){
+    current = index; render();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function render(){
+    const img = thumbs[current];
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+  }
+  function next(){ current = (current+1) % thumbs.length; render(); }
+  function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+
 </body>
 </html>

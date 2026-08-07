@@ -277,6 +277,48 @@
   .mm-panel-num{font-size:18px;font-weight:700;color:var(--ink);margin-top:2px;}
   .mm-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid var(--divider);width:100%;font-size:13px;font-weight:600;color:var(--accent);}
 
+  /* Lightbox — shared by doctor photo carousels */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(10,20,30,.94);z-index:300;
+    display:none;align-items:center;justify-content:center;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox-stage{position:relative;max-width:min(900px,92vw);max-height:82vh;display:flex;flex-direction:column;align-items:center;}
+  .lightbox-stage img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:8px;}
+  .lightbox-counter{color:rgba(255,255,255,.6);font-size:13px;margin-top:10px;}
+  .lightbox-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;z-index:2;}
+  .lightbox-nav{
+    position:fixed;top:50%;transform:translateY(-50%);z-index:2;
+    width:52px;height:52px;border-radius:50%;flex-shrink:0;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
+    color:#fff;font-size:26px;line-height:1;cursor:pointer;user-select:none;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .lightbox-nav:hover{background:rgba(255,255,255,.2);}
+  .lightbox-nav.prev{left:24px;}
+  .lightbox-nav.next{right:24px;}
+  @media(max-width:600px){
+    .lightbox-nav{width:40px;height:40px;font-size:20px;}
+    .lightbox-nav.prev{left:8px;}
+    .lightbox-nav.next{right:8px;}
+    .lightbox-close{top:14px;right:14px;font-size:22px;}
+  }
+  .doc-g-thumb{cursor:pointer;}
+  .doc-gallery-strip{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:4px 4px 8px;scrollbar-width:none;
+  }
+  .doc-gallery-strip::-webkit-scrollbar{display:none;}
+  .doc-g-thumb{
+    flex:0 0 auto;height:320px;scroll-snap-align:start;border-radius:var(--radius);
+    overflow:hidden;position:relative;box-shadow:0 10px 24px rgba(var(--text-rgb),0.12);
+  }
+  .doc-g-thumb img{height:100%;width:auto;object-fit:cover;display:block;}
+  @media(max-width:600px){
+    .doc-gallery-strip{gap:10px;}
+    .doc-g-thumb{height:220px;}
+  }
+
 
   .crumbs-inline{font-size:13px;color:var(--muted);margin-bottom:24px;}
   .crumb-active{color:#c9a24b;}
