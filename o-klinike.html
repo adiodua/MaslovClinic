@@ -92,10 +92,7 @@
       transform .38s cubic-bezier(.4,0,.2,1),box-shadow .38s ease;
   }
   .vtour-frame:hover{box-shadow:0 10px 28px rgba(0,0,0,.4),0 0 0 3px #fff;}
-  .vtour-frame video, .vtour-gif{width:100%;height:100%;object-fit:cover;display:block;}
-  .vtour-frame .vtour-video{display:none;}
-  .vtour[data-state="expanded"] .vtour-video{display:block;}
-  .vtour[data-state="expanded"] .vtour-gif{display:none;}
+  .vtour-frame video{width:100%;height:100%;object-fit:cover;display:block;}
   .vtour-ring{
     position:absolute;inset:-3px;border-radius:50%;pointer-events:none;
     background:conic-gradient(var(--wood,#0e2540) calc(var(--vtour-pct,0) * 1%), rgba(255,255,255,.35) 0);
@@ -544,9 +541,8 @@
 <div class="vtour" id="vtour" data-state="bubble">
   <div class="vtour-backdrop" id="vtourBackdrop"></div>
   <div class="vtour-frame" id="vtourFrame">
-    <img id="vtourGif" class="vtour-gif" src="/video/fireplace-loop.gif" alt="MaslovClinic">
-    <video id="vtourVideo" class="vtour-video" muted playsinline poster="/video/tour-1-poster.jpg">
-      <source id="vtourSource" src="/video/tour-1.mp4">
+    <video id="vtourVideo" class="vtour-video" autoplay muted loop playsinline poster="/video/tour-1-poster.jpg">
+      <source id="vtourSource" src="/video/tour-1-preview.mp4">
     </video>
     <div class="vtour-progress" id="vtourProgress">
       <span class="seg" data-i="0"></span><span class="seg" data-i="1"></span><span class="seg" data-i="2"></span>
@@ -637,8 +633,13 @@
   function collapse(){
     expanded = false;
     vtour.setAttribute('data-state','bubble');
-    video.pause();
     document.body.style.overflow = '';
+    video.muted = true;
+    video.loop = true;
+    source.src = '/video/tour-1-preview.mp4';
+    video.load();
+    video.play().catch(function(){});
+    applySoundIcon();
   }
 
   frame.addEventListener('click', function(e){
