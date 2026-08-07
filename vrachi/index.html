@@ -65,7 +65,19 @@
   .hero-vrachi h1, .hero-vrachi p.lead, .hero-vrachi .crumbs-inline{text-shadow:0 2px 16px rgba(0,0,0,.45);}
   .hero-vrachi .crumbs-inline{color:#cdd8e6;}
   .hero-vrachi .crumbs-inline a{color:#cdd8e6;}
-  .hero-vrachi .cta-row{position:absolute;left:32px;right:auto;bottom:52px;margin-top:0;flex-wrap:nowrap;max-width:560px;}
+  .hero-vrachi .cta-row{
+    position:absolute;left:32px;right:32px;bottom:52px;z-index:4;
+    display:flex;align-items:center;gap:14px;flex-wrap:nowrap;margin:0;
+  }
+  .hero-vrachi .cta-row .seg{flex:1 1 auto;height:1px;background:rgba(255,255,255,.35);}
+  .hero-vrachi .cta-row .btn{
+    background:rgba(255,255,255,.14);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.35);
+    color:#fff;flex-shrink:0;
+    transition:background .25s ease, color .25s ease, transform .2s ease;
+  }
+  .hero-vrachi .cta-row .btn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px);}
   .hero-vrachi .hero-vrachi-cta-wrap{position:static;}
   @media(max-width:760px){
     .hero-fade{background:rgba(13,30,53,.5);}
