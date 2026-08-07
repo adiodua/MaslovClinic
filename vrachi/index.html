@@ -57,14 +57,18 @@
   .hero-fade{
     position:absolute;inset:0;z-index:1;
     background:linear-gradient(100deg,
-      var(--navy-2) 0%, var(--navy-2) 28%,
-      rgba(14,37,64,.82) 42%, rgba(14,37,64,.4) 58%,
-      rgba(14,37,64,.05) 74%, rgba(14,37,64,0) 88%
+      rgba(13,30,53,.55) 0%, rgba(13,30,53,.5) 30%,
+      rgba(13,30,53,.35) 50%, rgba(13,30,53,.18) 68%,
+      rgba(13,30,53,.06) 82%, rgba(13,30,53,0) 96%
     );
   }
+  .hero-vrachi h1, .hero-vrachi p.lead, .hero-vrachi .crumbs-inline{text-shadow:0 2px 16px rgba(0,0,0,.45);}
+  .hero-vrachi .crumbs-inline{color:#cdd8e6;}
+  .hero-vrachi .crumbs-inline a{color:#cdd8e6;}
   @media(max-width:760px){
     .hero-fade{background:rgba(13,30,53,.5);}
-    .hero-vrachi h1{font-size:32px;max-width:100%;}
+    .hero-vrachi{padding:90px 0 70px;}
+    .hero-vrachi h1{font-size:32px;max-width:100%;margin-top:56px;}
     .hero-vrachi p.lead{font-size:15px;max-width:100%;}
   }
   .hero-vrachi .cta-row{position:static;margin-top:32px;}
