@@ -340,8 +340,11 @@
     background:linear-gradient(100deg, rgba(18,40,63,.93) 0%, rgba(18,40,63,.76) 38%, rgba(18,40,63,.32) 68%, rgba(18,40,63,.1) 100%);
   }
   @media(max-width:860px){
-    .hero{padding:110px 0 90px;min-height:auto;}
+    .hero{padding:110px 0 40px;min-height:580px;display:flex;flex-direction:column;justify-content:flex-end;}
     .hero::before{background:linear-gradient(180deg, rgba(18,40,63,.45) 0%, rgba(18,40,63,.94) 72%);}
+    .hero h1{font-size:30px;max-width:78%;}
+    .hero p.lead{font-size:14px;max-width:84%;margin-top:16px;}
+    .hero .eyebrow{margin-bottom:12px;}
   }
 
   section{padding:120px 0;}
