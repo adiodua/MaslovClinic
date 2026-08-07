@@ -145,9 +145,9 @@
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;}}
 
   header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(var(--bg-rgb),0.85);backdrop-filter:blur(8px);}
-  nav.wrap{height:88px;display:flex;align-items:center;gap:44px;}
+  nav.wrap{height:88px;display:flex;align-items:center;gap:28px;}
   .logo{font-family:'Inter',sans-serif;font-size:22px;font-weight:600;flex-shrink:0;white-space:nowrap;}
-  .navlinks{display:flex;gap:32px;font-size:14px;color:var(--text-muted);}
+  .navlinks{display:flex;gap:24px;font-size:14px;color:var(--text-muted);}
   .navlinks a{white-space:nowrap;}
   .navlinks a:hover{color:var(--wood-deep);}
   .nav-highlight{position:relative;color:var(--wood-deep) !important;font-weight:700;}
@@ -209,7 +209,7 @@
   .phone-panel-num{font-size:18px;font-weight:700;color:var(--text);margin-top:2px;}
   .phone-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid rgba(var(--text-rgb),0.1);width:100%;font-size:13px;font-weight:600;color:var(--wood);}
   @media(max-width:860px){.phone-dropdown{display:none;}}
-  .navcta{display:flex;align-items:center;gap:36px;margin-left:16px;}
+  .navcta{display:flex;align-items:center;gap:20px;margin-left:auto;}
   .langs{display:flex;gap:4px;font-size:11px;font-weight:600;}
 
   /* language dropdown (replaces pills on narrow screens) */
@@ -405,20 +405,27 @@
   }
   @media(max-width:560px){.svc-acc-price{display:none;}}
 
-  /* doctor teaser */
+  /* doctors carousel */
   #doctors .wrap{padding-top:0;}
-  .doctor-teaser{
-    display:flex;align-items:center;gap:28px;background:var(--bg-alt);
-    border-radius:var(--radius);padding:24px 28px;
+  .doctors-track{
+    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:4px 4px 10px;scrollbar-width:none;
   }
-  .doctor-teaser-photo{
-    width:76px;height:76px;flex-shrink:0;border-radius:50%;
-    background:var(--brand-navy);color:rgba(255,255,255,.6);
-    display:flex;align-items:center;justify-content:center;font-size:11px;text-align:center;
+  .doctors-track::-webkit-scrollbar{display:none;}
+  .doctor-card{
+    flex:0 0 calc(33.333% - 14px);scroll-snap-align:start;background:var(--bg-alt);
+    border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;display:block;
   }
-  .doctor-teaser-body h3{margin:6px 0 6px;font-size:19px;}
-  .doctor-teaser-body p{margin:0 0 10px;color:var(--text-muted);font-size:14px;}
-  .doctor-teaser-body .svc-all{margin-top:0;}
+  .doctor-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
+  .doctor-card-body{padding:16px 18px 20px;}
+  .doctor-card-body h3{margin:0 0 6px;font-size:16px;line-height:1.3;}
+  .doctor-card-body .role{color:var(--accent);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;}
+  .doctors-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
+  .doctors-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.2);border:none;padding:0;cursor:pointer;transition:background .2s;}
+  .doctors-dot.active{background:var(--wood);}
+  @media(max-width:760px){
+    .doctor-card{flex:0 0 68%;}
+  }
 
   /* cases carousel (Наши работы) */
   #cases{padding:64px 0 56px;}
@@ -536,7 +543,6 @@
   /* merged philosophy+comfort strip */
 
   @media(max-width:560px){
-    .doctor-teaser{flex-direction:column;text-align:center;padding:24px 20px;}
   }
 
 
@@ -788,7 +794,6 @@
     <div class="navlinks">
       <a href="/uslugi/">Услуги</a>
       <a href="/vrachi/">Врачи</a>
-      <a href="/o-klinike.html">О нас</a>
       <a href="/blog/">Блог</a>
       <a href="#reviews">Отзывы</a>
       <a href="#faq">Вопросы</a>
@@ -1078,17 +1083,73 @@
 
 <section id="doctors">
   <div class="wrap">
-    <div class="doctor-teaser reveal">
-      <div class="doctor-teaser-photo">Фото скоро</div>
-      <div class="doctor-teaser-body">
-        <span class="eyebrow">Наша команда</span>
-        <h3>Маслов Вячеслав Алексеевич</h3>
-        <p>Хирург-ортопед. Тотальные реабилитации, протезирование, хирургия. ОНМедУ, 2022.</p>
-        <a class="svc-all" href="/vrachi/">Все врачи →</a>
-      </div>
+    <div class="section-head reveal">
+      <span class="eyebrow">Наша команда</span>
+      <h2>Врачи, которым доверяют улыбку</h2>
+      <p>Образование, специализация и курсы каждого врача — на странице каждого специалиста.</p>
     </div>
+    <div class="doctors-track reveal" id="doctorsTrack">
+      <a class="doctor-card" href="/vrachi/maslov-aleksey.html">
+        <img src="/img/vrachi/maslov-aleksey-portrait.jpg" alt="Маслов Алексей Вячеславович">
+        <div class="doctor-card-body">
+          <h3>Маслов Алексей Вячеславович</h3>
+          <div class="role">Главный врач · хирург-ортопед</div>
+        </div>
+      </a>
+      <a class="doctor-card" href="/vrachi/voloshina-elena.html">
+        <img src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Елена Сергеевна">
+        <div class="doctor-card-body">
+          <h3>Волошина Елена Сергеевна</h3>
+          <div class="role">Врач-пародонтолог</div>
+        </div>
+      </a>
+      <a class="doctor-card" href="/vrachi/gavrishchuk-anastasiya.html">
+        <img src="/img/vrachi/gavrishchuk-anastasiya-portrait.jpg" alt="Гаврищук Анастасия Владимировна">
+        <div class="doctor-card-body">
+          <h3>Гаврищук Анастасия Владимировна</h3>
+          <div class="role">Врач-терапевт</div>
+        </div>
+      </a>
+    </div>
+    <div class="doctors-dots" id="doctorsDots"></div>
+    <a class="svc-all" href="/vrachi/" style="display:inline-block;margin-top:16px;">Все врачи →</a>
   </div>
 </section>
+
+<script>
+(function(){
+  var track = document.getElementById('doctorsTrack');
+  var dotsWrap = document.getElementById('doctorsDots');
+  if(!track || !dotsWrap) return;
+  var cards = Array.from(track.children);
+  cards.forEach(function(_, i){
+    var dot = document.createElement('button');
+    dot.className = 'doctors-dot' + (i === 0 ? ' active' : '');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', 'Врач ' + (i+1));
+    dot.addEventListener('click', function(){
+      cards[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+    });
+    dotsWrap.appendChild(dot);
+  });
+  var dots = Array.from(dotsWrap.children);
+  var ticking = false;
+  track.addEventListener('scroll', function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var trackLeft = track.getBoundingClientRect().left;
+      var closest = 0, minDist = Infinity;
+      cards.forEach(function(card, i){
+        var dist = Math.abs(card.getBoundingClientRect().left - trackLeft);
+        if(dist < minDist){ minDist = dist; closest = i; }
+      });
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+      ticking = false;
+    });
+  }, {passive:true});
+})();
+</script>
 
 <section>
   <div class="wrap">
