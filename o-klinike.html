@@ -544,11 +544,10 @@
 <div class="vtour" id="vtour" data-state="bubble">
   <div class="vtour-backdrop" id="vtourBackdrop"></div>
   <div class="vtour-frame" id="vtourFrame">
-    <img id="vtourGif" class="vtour-gif" src="/video/tour-1-loop.gif" alt="Видео-экскурсия по клинике">
+    <img id="vtourGif" class="vtour-gif" src="/video/fireplace-loop.gif" alt="MaslovClinic">
     <video id="vtourVideo" class="vtour-video" muted playsinline poster="/video/tour-1-poster.jpg">
       <source id="vtourSource" src="/video/tour-1.mp4">
     </video>
-    <div class="vtour-ring" id="vtourRing"></div>
     <div class="vtour-progress" id="vtourProgress">
       <span class="seg" data-i="0"></span><span class="seg" data-i="1"></span><span class="seg" data-i="2"></span>
     </div>
@@ -558,14 +557,6 @@
     <button class="vtour-close" id="vtourCloseBtn" type="button" aria-label="Свернуть видео">×</button>
     <button class="vtour-tapzone prev" id="vtourPrevZone" type="button" aria-label="Предыдущая часть"></button>
     <button class="vtour-tapzone next" id="vtourNextZone" type="button" aria-label="Следующая часть"></button>
-    <div class="vtour-bubble-ui" id="vtourBubbleUI">
-      <button class="vtour-mute" id="vtourMuteBtn" type="button" aria-label="Включить звук">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-      </button>
-      <button class="vtour-expand" id="vtourExpandBtn" type="button" aria-label="Развернуть видео">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
-      </button>
-    </div>
   </div>
 </div>
 
@@ -575,44 +566,19 @@
   if(!vtour) return;
   var frame = document.getElementById('vtourFrame');
   var backdrop = document.getElementById('vtourBackdrop');
-  var gif = document.getElementById('vtourGif');
   var video = document.getElementById('vtourVideo');
   var source = document.getElementById('vtourSource');
-  var ring = document.getElementById('vtourRing');
   var progress = document.getElementById('vtourProgress');
   var segEls = Array.prototype.slice.call(progress.querySelectorAll('.seg'));
   var closeBtn = document.getElementById('vtourCloseBtn');
   var soundBtn = document.getElementById('vtourSoundBtn');
-  var muteBtn = document.getElementById('vtourMuteBtn');
-  var expandBtn = document.getElementById('vtourExpandBtn');
   var prevZone = document.getElementById('vtourPrevZone');
   var nextZone = document.getElementById('vtourNextZone');
 
   var SOURCES = ['/video/tour-1.mp4','/video/tour-2.mp4','/video/tour-3.mp4'];
   var POSTERS = ['/video/tour-1-poster.jpg','/video/tour-2-poster.jpg','/video/tour-3-poster.jpg'];
-  var GIFS = ['/video/tour-1-loop.gif','/video/tour-2-loop.gif','/video/tour-3-loop.gif'];
-  var STORAGE_KEY = 'mc-vtour-state';
-  var STALE_MS = 45 * 60 * 1000;
-  var GIF_CYCLE_MS = 4000;
 
   var segment = 0, expanded = false;
-  var gifTimer = null;
-
-  function loadState(){
-    try{
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) return;
-      var s = JSON.parse(raw);
-      if(!s || typeof s.segment !== 'number') return;
-      if(Date.now() - (s.ts||0) > STALE_MS) return;
-      segment = Math.min(2, Math.max(0, s.segment));
-    }catch(e){}
-  }
-  function saveState(){
-    try{
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ segment: segment, ts: Date.now() }));
-    }catch(e){}
-  }
 
   function renderProgress(){
     segEls.forEach(function(el,i){
@@ -627,24 +593,18 @@
     });
   }
 
-  // --- Bubble state: lightweight looping GIF, cycling through segments on a timer ---
-  function showGifSegment(i){
-    segment = Math.min(2, Math.max(0, i));
-    gif.src = GIFS[segment];
-    renderProgress();
-  }
-  function startGifCycle(){
-    stopGifCycle();
-    gifTimer = setInterval(function(){
-      showGifSegment((segment + 1) % 3);
-    }, GIF_CYCLE_MS);
-  }
-  function stopGifCycle(){
-    if(gifTimer){ clearInterval(gifTimer); gifTimer = null; }
+  var expanded = false;
+
+  function applySoundIcon(){
+    var muted = video.muted;
+    var icon = muted
+      ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>'
+      : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+    soundBtn.querySelector('svg').innerHTML = icon;
+    soundBtn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
   }
 
-  // --- Expanded state: real video with sound, always starts from the beginning ---
-  function setSegment(i, autoAdvance){
+  function setSegment(i){
     segment = Math.min(2, Math.max(0, i));
     source.src = SOURCES[segment];
     video.poster = POSTERS[segment];
@@ -659,68 +619,41 @@
     renderProgress();
   }
 
-  function updateRing(){
-    var totalSegs = 3;
-    var frac = expanded && video.duration ? (video.currentTime/video.duration) : 0;
-    var pct = ((segment + frac) / totalSegs) * 100;
-    ring.style.setProperty('--vtour-pct', pct);
-  }
-
   video.addEventListener('timeupdate', function(){
     if(!expanded) return;
     renderProgress();
-    updateRing();
   });
-
   video.addEventListener('ended', function(){
     if(!expanded) return;
-    if(segment < 2){ setSegment(segment+1); }
-    else { setSegment(0); }
+    if(segment < 2){ setSegment(segment+1); } else { setSegment(0); }
   });
 
   function expand(){
     expanded = true;
     vtour.setAttribute('data-state','expanded');
-    stopGifCycle();
     document.body.style.overflow = 'hidden';
-    setSegment(segment);
+    setSegment(0);
   }
   function collapse(){
     expanded = false;
     vtour.setAttribute('data-state','bubble');
     video.pause();
     document.body.style.overflow = '';
-    showGifSegment(segment);
-    startGifCycle();
-    saveState();
   }
 
   frame.addEventListener('click', function(e){
-    if(e.target.closest('.vtour-mute, .vtour-expand, .vtour-close, .vtour-sound, .vtour-tapzone')) return;
+    if(e.target.closest('.vtour-sound, .vtour-close, .vtour-tapzone')) return;
     if(!expanded) expand();
   });
-  expandBtn.addEventListener('click', function(e){ e.stopPropagation(); expand(); });
   closeBtn.addEventListener('click', function(e){ e.stopPropagation(); collapse(); });
-
-  function toggleMute(){
+  soundBtn.addEventListener('click', function(e){
+    e.stopPropagation();
     video.muted = !video.muted;
-    var muted = video.muted;
-    [soundBtn, muteBtn].forEach(function(btn){
-      if(!btn) return;
-      btn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
-    });
-    var icon = muted
-      ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>'
-      : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
-    soundBtn.querySelector('svg').innerHTML = icon;
-    muteBtn.querySelector('svg').innerHTML = icon;
-  }
-  muteBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMute(); });
-  soundBtn.addEventListener('click', function(e){ e.stopPropagation(); toggleMute(); });
-
+    applySoundIcon();
+  });
   prevZone.addEventListener('click', function(e){
     e.stopPropagation();
-    if(segment > 0) setSegment(segment-1); else setSegment(0);
+    if(segment > 0) setSegment(segment-1);
   });
   nextZone.addEventListener('click', function(e){
     e.stopPropagation();
@@ -748,13 +681,6 @@
     if(dy > 90 && dx < 60) collapse();
     touchStartY = null; touchStartX = null;
   }, {passive:true});
-
-  window.addEventListener('pagehide', saveState);
-  window.addEventListener('beforeunload', saveState);
-
-  loadState();
-  showGifSegment(segment);
-  startGifCycle();
 })();
 </script>
 
