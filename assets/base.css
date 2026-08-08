@@ -588,9 +588,14 @@
   .patient-thumb.active{border-color:var(--accent);color:var(--accent);}
 
   /* Inline supplementary video (e.g. procedure clips) */
-  .inline-video{max-width:320px;margin:32px auto 0;}
+  .inline-video{
+    max-width:360px;margin:32px auto 0;padding:20px;
+    background:linear-gradient(160deg,#0e2540 0%,#122c4a 100%);
+    border-radius:calc(var(--radius) + 10px);
+    box-shadow:0 14px 34px rgba(14,37,64,0.28);
+  }
   .inline-video video{
     width:100%;aspect-ratio:9/16;object-fit:cover;display:block;
     border-radius:var(--radius);background:#000;box-shadow:0 10px 26px rgba(var(--ink-rgb),0.1);
   }
-  .inline-video p{margin:12px 0 0;font-size:13px;color:var(--muted);text-align:center;}
+  .inline-video p{margin:12px 0 0;font-size:13px;color:rgba(255,255,255,.7);text-align:center;}
