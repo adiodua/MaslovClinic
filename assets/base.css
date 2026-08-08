@@ -306,6 +306,8 @@
     .lightbox-close{top:14px;right:14px;font-size:22px;}
   }
   .doc-g-thumb{cursor:pointer;}
+  .case-tag{color:var(--gold);font-size:15px;font-weight:700;letter-spacing:.02em;margin:14px 0 0;list-style:none;padding:0;}
+  .case-tag li{padding:3px 0;}
 
   /* Booking modal — shared across all pages */
   .booking-modal{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:20px;}

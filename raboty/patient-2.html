@@ -47,6 +47,21 @@
 }
 </script>
 <link rel="stylesheet" href="/assets/base.css">
+<style>
+  .case-hero{background-size:140% auto !important;background-position:20% center !important;}
+  @media(max-width:760px){
+    .case-hero h1{font-size:22px !important;}
+    .case-hero p.lead{max-width:260px !important;}
+    .case-hero{
+      background:linear-gradient(180deg,
+        rgba(14,37,64,.35) 0%,
+        rgba(14,37,64,.55) 55%,
+        rgba(14,37,64,.85) 100%
+      ), url('/img/patients/uriy-portrait.jpg') left 30%/180% auto no-repeat, var(--navy-2) !important;
+      filter:brightness(1.3);
+    }
+  }
+</style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
@@ -154,10 +169,14 @@
 </div>
 
 
-<section class="hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/uriy-portrait.jpg') center/cover no-repeat,var(--navy-2);">
+<section class="hero case-hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/uriy-portrait.jpg') center/cover no-repeat,var(--navy-2);filter:brightness(1.3);">
   <div class="wrap">
     <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Юрий</span></div>
     <h1>Юрий</h1>
+    <ul class="case-tag">
+      <li>Имплантационное лечение</li>
+    </ul>
+    <p class="lead">Диагностика, установка имплантов и протезирование под ключ.</p>
     <div class="cta-row">
       <span class="seg"></span>
       <a href="#" class="btn js-open-booking">Записаться на визит</a>
@@ -181,20 +200,21 @@
       <div class="patient-counter" id="patientCounter">1 / 2</div>
     </div>
     <div class="patient-thumbs" id="patientThumbs">
-      <button class="patient-thumb active" data-i="0">До</button>
-      <button class="patient-thumb" data-i="1">После</button>
+      <button class="patient-thumb" data-i="0">Портрет</button>
+      <button class="patient-thumb active" data-i="1">До</button>
+      <button class="patient-thumb" data-i="2">После</button>
     </div>
   </div>
 </section>
 
 <script>
   (function(){
-    const photos = ['/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'];
-    const alts = ['Юрий — фото до','Юрий — результат имплантационного лечения'];
+    const photos = ['/img/patients/uriy-portrait.jpg','/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'];
+    const alts = ['Юрий — портрет','Юрий — фото до','Юрий — результат имплантационного лечения'];
     const main = document.getElementById('patientMain');
     const counter = document.getElementById('patientCounter');
     const thumbs = Array.from(document.querySelectorAll('.patient-thumb'));
-    let i = 0;
+    let i = 1;
     function render(){
       main.src = photos[i];
       main.alt = alts[i];

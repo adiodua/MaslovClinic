@@ -115,6 +115,8 @@
   .patient-modal-info .eyebrow{color:var(--accent);}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
+  .pm-case-link{display:inline-block;margin:0 0 16px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none;}
+  .pm-case-link:hover{text-decoration:underline;}
   .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
   .pm-progress{position:absolute;top:0;left:0;right:0;display:none;gap:4px;padding:10px 12px;z-index:4;}
   .pm-progress span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
@@ -296,6 +298,7 @@
       <span class="eyebrow" id="pmTag"></span>
       <h3 id="pmName"></h3>
       <p id="pmDesc"></p>
+      <a href="#" id="pmCaseLink" class="pm-case-link">Подробнее о кейсе →</a>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
     </div>
   </div>
@@ -306,18 +309,21 @@
     darya: {
       name: 'Дарья', tag: 'Керамические виниры',
       desc: '8 виниров, подготовка эмали и фиксация по индивидуальным слепкам.',
+      url: '/raboty/patient-1.html',
       photos: ['/img/patients/darya-portrait.jpg','/img/patients/darya-before.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg'],
       labels: ['Портрет','До','После','После, ракурс 2','После, ракурс 3']
     },
     uriy: {
       name: 'Юрий', tag: 'Имплантационное лечение',
       desc: 'Диагностика, установка имплантов, протезирование.',
+      url: '/raboty/patient-2.html',
       photos: ['/img/patients/uriy-portrait.jpg','/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'],
       labels: ['Портрет','До','После']
     },
     yuliya: {
       name: 'Юлия', tag: 'Керамические виниры',
       desc: 'Подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация.',
+      url: '/raboty/patient-3.html',
       photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'],
       labels: ['До','После','После, ракурс 2','После, ракурс 3']
     }
@@ -328,6 +334,7 @@
     document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
+    document.getElementById('pmCaseLink').href = PATIENTS[slug].url;
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
     PATIENTS[slug].photos.forEach((src, i) => {
