@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://maslovclinic.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tour-1-poster.jpg</video:thumbnail_loc>
+      <video:title>Виртуальный тур по клинике MaslovClinic</video:title>
+      <video:description>Видеотур по кабинетам и холлу стоматологии MaslovClinic в Одессе.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tour-1-preview.mp4</video:content_loc>
+    </video:video>
   </url>
   <url>
     <loc>https://maslovclinic.com/uslugi/</loc>
@@ -19,6 +26,12 @@
     <loc>https://maslovclinic.com/uslugi/koronki-i-viniry.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/viniry-work-poster.jpg</video:thumbnail_loc>
+      <video:title>Фиксация виниров — видео из практики клиники</video:title>
+      <video:description>Процесс фиксации керамических виниров на постоянный цемент в MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
+    </video:video>
   </url>
   <url>
     <loc>https://maslovclinic.com/uslugi/brekety.html</loc>
@@ -34,6 +47,12 @@
     <loc>https://maslovclinic.com/uslugi/diagnostika.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tomograf-poster.jpg</video:thumbnail_loc>
+      <video:title>Диагностика на компьютерном томографе</video:title>
+      <video:description>Как проходит 3D-диагностика на томографе в MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tomograf.mp4</video:content_loc>
+    </video:video>
   </url>
   <url>
     <loc>https://maslovclinic.com/uslugi/gigiena-polosti-rta.html</loc>
@@ -86,9 +105,53 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://maslovclinic.com/o-klinike.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tomograf-poster.jpg</video:thumbnail_loc>
+      <video:title>Диагностика на компьютерном томографе</video:title>
+      <video:description>Как проходит 3D-диагностика на томографе в MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tomograf.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tour-1-poster.jpg</video:thumbnail_loc>
+      <video:title>Виртуальный тур по клинике MaslovClinic</video:title>
+      <video:description>Видеотур по кабинетам и холлу стоматологии MaslovClinic в Одессе.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tour-1-preview.mp4</video:content_loc>
+    </video:video>
+  </url>
+  <url>
     <loc>https://maslovclinic.com/raboty/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-1.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/viniry-work-poster.jpg</video:thumbnail_loc>
+      <video:title>Фиксация виниров — видео из практики клиники</video:title>
+      <video:description>Процесс фиксации керамических виниров на постоянный цемент в MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-2.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-3.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/viniry-work-poster.jpg</video:thumbnail_loc>
+      <video:title>Фиксация виниров — видео из практики клиники</video:title>
+      <video:description>Процесс фиксации керамических виниров на постоянный цемент в MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
+    </video:video>
   </url>
   <url>
     <loc>https://maslovclinic.com/blog/</loc>
