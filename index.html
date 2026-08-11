@@ -318,19 +318,24 @@
     display:flex;align-items:center;gap:14px;flex-wrap:nowrap;
   }
   .hero-actions .seg{flex:1 1 auto;height:1px;background:rgba(255,255,255,.35);}
-  .hero-actions .btn.js-open-booking{
-    background:rgba(255,255,255,.14);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.35);
-    color:#fff;flex-shrink:0;transition:background .25s ease, color .25s ease, transform .2s ease;
-  }
-  .hero-actions .btn.js-open-booking:hover{background:rgba(255,255,255,.22);transform:translateY(-1px);}
-  .hero-actions .btn-outline{flex-shrink:0;transition:background .25s ease, color .25s ease, transform .2s ease;}
-  .hero-actions .btn-outline:hover{transform:translateY(-1px);}
+  .hero-actions .btn{border-radius:14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);gap:8px;transition:background .25s ease, border-color .25s ease, box-shadow .3s ease;}
+  .hero-actions .btn.js-open-booking{background:rgba(88,140,180,.35);border:1px solid rgba(88,140,180,.7);color:#fff;flex-shrink:0;}
+  .hero-actions .btn-outline{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);color:#fff;flex-shrink:0;}
+  .hero-actions .btn.js-open-booking:hover{background:rgba(88,140,180,.45);border-color:rgba(88,140,180,1);box-shadow:0 0 0 6px rgba(88,140,180,.28);}
+  .hero-actions .btn.js-open-booking:active{background:rgba(88,140,180,.6);box-shadow:0 0 0 2px rgba(88,140,180,.4);}
+  .hero-actions .btn-outline:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.65);box-shadow:0 0 0 6px rgba(255,255,255,.14);}
+  .hero-actions .btn-outline:active{background:rgba(255,255,255,.2);box-shadow:0 0 0 2px rgba(255,255,255,.22);}
+  .hero-actions .btn-outline:hover, .hero-actions .btn-outline:active{color:#fff;}
+  [data-theme="dark"] .hero-actions .btn.js-open-booking{background:rgba(127,180,218,.4);border-color:rgba(127,180,218,.8);}
+  [data-theme="dark"] .hero-actions .btn.js-open-booking:hover{background:rgba(127,180,218,.5);border-color:rgba(127,180,218,1);box-shadow:0 0 0 6px rgba(127,180,218,.32);}
+  [data-theme="dark"] .hero-actions .btn.js-open-booking:active{background:rgba(127,180,218,.65);box-shadow:0 0 0 2px rgba(127,180,218,.45);}
+  [data-theme="dark"] .hero-actions .btn-outline{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);}
+  [data-theme="dark"] .hero-actions .btn-outline:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.7);box-shadow:0 0 0 6px rgba(255,255,255,.16);}
+  [data-theme="dark"] .hero-actions .btn-outline:active{background:rgba(255,255,255,.22);box-shadow:0 0 0 2px rgba(255,255,255,.24);}
   @media(max-width:860px){
-    .hero-actions{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:nowrap;}
+    .hero-actions{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:nowrap;justify-content:center;}
     .hero-actions .seg{display:none;}
-    .hero-actions .btn{flex:1;justify-content:center;}
+    .hero-actions .btn{flex:0 0 auto;justify-content:center;}
   }
   .hero-photo{
     position:absolute;inset:0;aspect-ratio:auto;background:none;border:none;

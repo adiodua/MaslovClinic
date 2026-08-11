@@ -108,18 +108,18 @@
     display:flex;align-items:center;gap:14px;flex-wrap:nowrap;
   }
   .cta-row .seg{flex:1 1 auto;height:1px;background:rgba(255,255,255,.35);}
-  .cta-row .btn{
-    background:rgba(255,255,255,.14);
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.35);
-    color:#fff;flex-shrink:0;
-    transition:background .25s ease, color .25s ease, transform .2s ease;
-  }
-  .cta-row .btn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px);}
+  .cta-row .btn{border-radius:14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);gap:8px;transition:background .25s ease, border-color .25s ease, box-shadow .3s ease;}
+  .cta-row .btn.js-open-booking{background:rgba(20,90,118,.35);border:1px solid rgba(20,90,118,.7);color:#fff;flex-shrink:0;}
+  .cta-row .btn.js-open-booking:hover{background:rgba(20,90,118,.48);border-color:rgba(20,90,118,1);box-shadow:0 0 0 6px rgba(20,90,118,.28);}
+  .cta-row .btn.js-open-booking:active{background:rgba(20,90,118,.6);box-shadow:0 0 0 2px rgba(20,90,118,.4);}
   .btn.primary{background:var(--gold);color:var(--navy);}
   .btn.primary:hover{background:#d9b662;}
-  .btn.ghost{border:1px solid rgba(255,255,255,.35);color:#f2f0e8;}
-  .btn.ghost:hover{background:#fff;color:#0e2540;border-color:#fff;transform:translateY(-1px);}
+  .btn.ghost{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.35);color:#f2f0e8;flex-shrink:0;}
+  .btn.ghost:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.65);box-shadow:0 0 0 6px rgba(255,255,255,.14);color:#fff;}
+  .btn.ghost:active{background:rgba(255,255,255,.2);box-shadow:0 0 0 2px rgba(255,255,255,.22);color:#fff;}
+  [data-theme="dark"] .cta-row .btn.js-open-booking{background:rgba(201,162,75,.28);border-color:rgba(201,162,75,.75);}
+  [data-theme="dark"] .cta-row .btn.js-open-booking:hover{background:rgba(201,162,75,.4);border-color:rgba(201,162,75,1);box-shadow:0 0 0 6px rgba(201,162,75,.28);}
+  [data-theme="dark"] .cta-row .btn.js-open-booking:active{background:rgba(201,162,75,.52);box-shadow:0 0 0 2px rgba(201,162,75,.36);}
   @media(max-width:860px){
     .cta-row{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:nowrap;}
     .cta-row .seg{display:none;}
@@ -297,6 +297,21 @@
   .mm-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-top:12px;}
   .mm-panel-num{font-size:18px;font-weight:700;color:var(--ink);margin-top:2px;}
   .mm-panel-link{margin-top:16px;padding-top:14px;border-top:1px solid var(--divider);width:100%;font-size:13px;font-weight:600;color:var(--accent);}
+
+  /* Mobile floating quick-action panel — "Записаться на визит" glass button (light/dark aware via var(--accent)) */
+  .mm-panel .btn.js-open-booking{
+    border-radius:14px;
+    background:rgba(20,90,118,.12);
+    border:1px solid rgba(20,90,118,.4);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    color:var(--accent);
+    transition:background .25s ease, border-color .25s ease, box-shadow .3s ease;
+  }
+  .mm-panel .btn.js-open-booking:hover{background:rgba(20,90,118,.18);border-color:rgba(20,90,118,.65);box-shadow:0 0 0 6px rgba(20,90,118,.15);}
+  .mm-panel .btn.js-open-booking:active{background:rgba(20,90,118,.28);box-shadow:0 0 0 2px rgba(20,90,118,.22);}
+  [data-theme="dark"] .mm-panel .btn.js-open-booking{background:rgba(201,162,75,.14);border-color:rgba(201,162,75,.45);}
+  [data-theme="dark"] .mm-panel .btn.js-open-booking:hover{background:rgba(201,162,75,.22);border-color:rgba(201,162,75,.75);box-shadow:0 0 0 6px rgba(201,162,75,.18);}
+  [data-theme="dark"] .mm-panel .btn.js-open-booking:active{background:rgba(201,162,75,.32);box-shadow:0 0 0 2px rgba(201,162,75,.26);}
 
   /* Lightbox — shared by doctor photo carousels */
   .lightbox{
