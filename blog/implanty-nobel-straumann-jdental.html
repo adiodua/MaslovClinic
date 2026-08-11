@@ -328,6 +328,7 @@
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       burger.style.display = isOpen ? 'none' : 'block';
       close.style.display = isOpen ? 'block' : 'none';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
     btn.addEventListener('click', function(e){
       e.stopPropagation();
@@ -344,24 +345,6 @@
         setOpen(false);
       }
     }, true);
-    // swipe closes the menu too (works from a realistic swipe distance, not half the menu's height)
-    let touchStartY = null;
-    const SWIPE_CLOSE_PX = 60;
-    menu.addEventListener('touchstart', function(e){
-      touchStartY = e.touches[0].clientY;
-    }, {passive:true});
-    menu.addEventListener('touchmove', function(e){
-      if(touchStartY === null) return;
-      e.preventDefault();
-      const deltaY = e.touches[0].clientY - touchStartY;
-      if(Math.abs(deltaY) > SWIPE_CLOSE_PX){
-        setOpen(false);
-        touchStartY = null;
-      }
-    }, {passive:false});
-    menu.addEventListener('touchend', function(){
-      touchStartY = null;
-    });
   })();
 
   (function(){

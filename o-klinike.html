@@ -286,6 +286,10 @@
       <p>Официальная лицензия на медицинскую деятельность и сертификаты используемого оборудования и материалов — открыто, без запроса по требованию.</p>
     </div>
     <div class="cert-track" id="certTrack">
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;border-color:var(--gold);"><img src="/img/certificates/nobel-excellence-clinic-2026.jpg" alt="Nobel Excellence Clinic 2026 — статус InSPE от Nobel Biocare" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>Nobel Excellence Clinic 2026</h3>
+      </div>
       <div class="cert-card soon">
         <div class="photo-slot">Лицензия МОЗ<br>на мед. деятельность</div>
         <h3>Лицензия МОЗ Украины</h3>
@@ -491,6 +495,7 @@
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       burger.style.display = isOpen ? 'none' : 'block';
       close.style.display = isOpen ? 'block' : 'none';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
     btn.addEventListener('click', function(e){
       e.stopPropagation();
@@ -507,24 +512,6 @@
         setOpen(false);
       }
     }, true);
-    // swipe closes the menu too (works from a realistic swipe distance, not half the menu's height)
-    let touchStartY = null;
-    const SWIPE_CLOSE_PX = 60;
-    menu.addEventListener('touchstart', function(e){
-      touchStartY = e.touches[0].clientY;
-    }, {passive:true});
-    menu.addEventListener('touchmove', function(e){
-      if(touchStartY === null) return;
-      e.preventDefault();
-      const deltaY = e.touches[0].clientY - touchStartY;
-      if(Math.abs(deltaY) > SWIPE_CLOSE_PX){
-        setOpen(false);
-        touchStartY = null;
-      }
-    }, {passive:false});
-    menu.addEventListener('touchend', function(){
-      touchStartY = null;
-    });
   })();
 
   (function(){
