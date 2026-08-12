@@ -601,7 +601,6 @@
   @media(max-width:500px){.doc-grid{grid-template-columns:1fr;}}
 
   /* Patient case viewer (before/after slider) — used on /raboty/patient-*.html */
-  }
 
   .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:8px;}
   .case-card{
