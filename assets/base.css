@@ -381,7 +381,9 @@
   .doc-g-thumb img{height:100%;width:auto;object-fit:cover;display:block;}
   @media(max-width:600px){
     .doc-gallery-strip{gap:10px;}
-    .doc-g-thumb{height:220px;}
+    /* Unify with the homepage's photo-strip thumbnails (.g-thumb) — same
+       radius family as the other photo containers on mobile. */
+    .doc-g-thumb{height:220px;border-radius:18px;}
   }
 
 

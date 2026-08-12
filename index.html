@@ -599,9 +599,52 @@
   .pm-progress span.done::after{width:100%;}
   .pm-progress span.active::after{width:100%;}
 
+  /* Mobile-only patient-modal redesign — "before" badge, zoom button, dots.
+     Hidden here (desktop default); shown inside the max-width:600px block
+     below. Desktop keeps the original full-bleed photo + thumbnail strip. */
+  .pm-zoom-btn{display:none;}
+  .pm-before-badge{display:none;}
+  .pm-dots{display:none;}
+
   @media(max-width:600px){
-    .patient-modal-overlay{padding:12px;}
-    .patient-modal{height:88vh;}
+    .patient-modal-overlay{padding:20px 16px;}
+    .patient-modal{
+      height:auto;max-height:none;width:100%;max-width:420px;margin:0 auto;
+      background:#0a1729;border-radius:20px;
+    }
+    /* Contained card instead of a near-full-screen "story" — photo keeps a
+       fixed ratio instead of stretching to fill the modal height, so it
+       isn't zoomed/cropped as aggressively as before. */
+    .patient-modal-photo{flex:none;aspect-ratio:4/5;}
+    .patient-modal-photo::before,.patient-modal-photo::after{display:none;}
+    /* Info moves from a gradient overlay on the photo to a plain block below
+       it (the card's own dark background already gives the white text
+       enough contrast — no gradient needed). */
+    .patient-modal-info{position:static;background:none;padding:18px 20px 4px;}
+    .patient-modal-info .eyebrow{color:#c9a24b;}
+    .patient-modal-counter{background:rgba(0,0,0,.5);padding:5px 10px;border-radius:20px;font-size:11px;}
+    .patient-modal-thumbs{display:none;}
+
+    .pm-zoom-btn{
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;bottom:12px;left:12px;width:38px;height:38px;border-radius:50%;
+      background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
+      color:#0e2540;z-index:4;
+    }
+    .pm-before-badge{
+      /* was 83x83 — +25% */
+      display:none;position:absolute;bottom:12px;right:12px;width:104px;height:104px;border-radius:16px;
+      overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+    }
+    .pm-before-badge.show{display:block;}
+    .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
+    .pm-before-badge span{
+      position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
+      font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+    }
+    .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
+    .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
+    .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
   }
 
   /* nashi-raboty catalog grid (used on this page too, shared class names) */
@@ -1307,6 +1350,19 @@
       <div class="pm-progress" id="pmProgress"></div>
       <img id="pmMain" src="" alt="" draggable="false">
       <span class="pm-zoom-hint" id="pmZoomHint">Нажмите, чтобы приблизить</span>
+      <!-- Mobile-only: visible zoom affordance. Pinch/double-tap zoom already
+           works (see the "Photo zoom" script below) but the text hint above
+           is hidden on touch devices — this button is the discoverable entry
+           point on phones, not a replacement for the gesture. -->
+      <button class="pm-zoom-btn" id="pmZoomBtn" onclick="pmToggleZoom()" aria-label="Приблизить фото">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
+      </button>
+      <!-- Mobile-only: "before" photo shown as a corner badge on the current
+           "after" photo instead of its own slide in the swipe sequence. -->
+      <div class="pm-before-badge" id="pmBeforeBadge">
+        <img id="pmBeforeImg" src="" alt="До">
+        <span>До</span>
+      </div>
       <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Закрыть">×</button>
       <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Предыдущее фото">‹</button>
       <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Следующее фото">›</button>
@@ -1317,6 +1373,8 @@
       <h3 id="pmName"></h3>
       <p id="pmDesc"></p>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
+      <!-- Mobile-only: replaces the thumbnail strip with simple dots. -->
+      <div class="pm-dots" id="pmDots"></div>
     </div>
   </div>
 </div>
@@ -1343,6 +1401,38 @@
     }
   };
   let pmSlug = null, pmIndex = 0;
+
+  function isMobileModal(){ return window.matchMedia('(max-width:600px)').matches; }
+
+  // Mobile-only slide list: portraits stay standalone (no badge), "before"
+  // photos are pulled out of the swipeable sequence entirely and attached as
+  // a corner badge to "after" photos instead — cycling through the available
+  // "before" photos if there's more than one, so each gets used.
+  function buildMobileSlides(p){
+    const portraits = [], befores = [], afters = [];
+    p.photos.forEach((src, i) => {
+      const label = p.labels[i];
+      if(/портрет/i.test(label)) portraits.push({src, label});
+      else if(/^до$/i.test(label)) befores.push({src, label});
+      else afters.push({src, label});
+    });
+    const slides = portraits.map(ph => ({src: ph.src, label: ph.label, beforeSrc: null}));
+    afters.forEach((ph, i) => {
+      const beforeSrc = befores.length ? befores[i % befores.length].src : null;
+      slides.push({src: ph.src, label: ph.label, beforeSrc});
+    });
+    return slides;
+  }
+
+  function pmSlides(){
+    const p = PATIENTS[pmSlug];
+    if(isMobileModal()){
+      if(!p._mobileSlides) p._mobileSlides = buildMobileSlides(p);
+      return p._mobileSlides;
+    }
+    return p.photos.map((src, i) => ({src, label: p.labels[i], beforeSrc: null}));
+  }
+
   function openPatientModal(slug){
     pmSlug = slug; pmIndex = 0;
     document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
@@ -1374,19 +1464,41 @@
     document.getElementById('patientModalOverlay').classList.remove('open');
   }
   function pmStep(dir){
-    const len = PATIENTS[pmSlug].photos.length;
+    const len = pmSlides().length;
     pmIndex = (pmIndex + dir + len) % len;
     pmRender();
   }
   function pmRender(){
     const p = PATIENTS[pmSlug];
-    document.getElementById('pmMain').src = p.photos[pmIndex];
-    document.getElementById('pmMain').alt = p.name + ' — ' + p.labels[pmIndex];
-    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + p.photos.length;
+    const slides = pmSlides();
+    if(pmIndex >= slides.length) pmIndex = 0;
+    const cur = slides[pmIndex];
+    document.getElementById('pmMain').src = cur.src;
+    document.getElementById('pmMain').alt = p.name + ' — ' + cur.label;
+    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + slides.length;
     Array.from(document.getElementById('pmThumbs').children).forEach((b,i)=>b.classList.toggle('active', i===pmIndex));
     Array.from(document.getElementById('pmProgress').children).forEach((s,i)=>{
       s.classList.toggle('done', i < pmIndex);
       s.classList.toggle('active', i === pmIndex);
+    });
+    // Mobile "before" badge — shown only when the current slide has one.
+    const badge = document.getElementById('pmBeforeBadge');
+    const badgeImg = document.getElementById('pmBeforeImg');
+    if(cur.beforeSrc){
+      badgeImg.src = cur.beforeSrc;
+      badge.classList.add('show');
+    } else {
+      badge.classList.remove('show');
+    }
+    // Mobile dots — replaces the thumbnail strip, rebuilt per slide list.
+    const dotsWrap = document.getElementById('pmDots');
+    dotsWrap.innerHTML = '';
+    slides.forEach((s, i) => {
+      const d = document.createElement('button');
+      d.className = 'pm-dot' + (i === pmIndex ? ' active' : '');
+      d.setAttribute('aria-label', s.label);
+      d.onclick = () => { pmIndex = i; pmRender(); };
+      dotsWrap.appendChild(d);
     });
   }
   document.addEventListener('keydown', (e) => {
@@ -1394,6 +1506,11 @@
     if(e.key === 'Escape') closePatientModal();
     if(e.key === 'ArrowLeft') pmStep(-1);
     if(e.key === 'ArrowRight') pmStep(1);
+  });
+  // Recompute if the viewport crosses the mobile breakpoint while the modal
+  // is open (e.g. orientation change) — pmRender() clamps pmIndex safely.
+  window.addEventListener('resize', () => {
+    if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
   });
 
   /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom */
@@ -1443,8 +1560,16 @@
       apply();
     }
 
+    // Mobile zoom button — same in/out behavior as tap-to-zoom, just reachable
+    // without knowing the gesture exists.
+    window.pmToggleZoom = function(){
+      const rect = stage.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+      if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
+    };
+
     stage.addEventListener('pointerdown', function(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close')) return;
+      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
       e.preventDefault();
       pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
       dragMoved = false;
@@ -1485,6 +1610,7 @@
     });
 
     function endPointer(e){
+      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
       const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
       pointers.delete(e.pointerId);
       stage.classList.remove('dragging');
