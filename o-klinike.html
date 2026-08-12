@@ -47,6 +47,12 @@
 </script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
+  /* This page's hero summary is longer than average and wraps to 5 lines at
+     the standard 460px width, pushing the hero taller than the rest of the
+     site. Widen it to match h1's 560px so it wraps to 4 lines like everywhere
+     else, keeping hero height consistent (736px) across all pages. */
+  .hero p.lead{max-width:560px;}
+
   .seo-text{max-width:820px;font-size:14.5px;line-height:1.75;color:var(--muted);margin-top:32px;}
   .seo-text p{margin-bottom:16px;}
   .seo-text h3{font-size:16px;color:var(--ink);margin:24px 0 10px;}

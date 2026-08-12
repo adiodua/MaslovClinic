@@ -241,15 +241,19 @@
     height:34px;padding:0 12px;
     font-size:12px;font-weight:600;color:var(--text);cursor:pointer;
     position:relative;z-index:2;
-    transition:border-color .2s ease, background .2s ease, width .42s cubic-bezier(.34,1.15,.4,1);
+    transition:border-color .2s ease, background .2s ease, color .15s ease, width .42s cubic-bezier(.34,1.15,.4,1);
   }
   .lang-current:hover{background:rgba(88,140,180,.1);box-shadow:0 0 0 4px rgba(88,140,180,.14);}
   [data-theme="dark"] .lang-current{
     border-color:#588cb4;
   }
   [data-theme="dark"] .lang-current:hover{background:rgba(88,140,180,.14);}
-  .lang-dropdown.open .lang-current{border-color:#3f7ba3;background:rgba(88,140,180,.12);}
-  [data-theme="dark"] .lang-dropdown.open .lang-current{border-color:#79aed1;background:rgba(88,140,180,.16);}
+  /* Fade the closed pill's own "RU" label + arrow (both use currentColor) while
+     open — the panel's background is transparent by design, so without this the
+     menu's first ("RU") row shows straight through and doubles up with the pill's
+     own label sitting on top of it at the same 34px slot. */
+  .lang-dropdown.open .lang-current{border-color:#3f7ba3;background:rgba(88,140,180,.12);color:transparent;}
+  [data-theme="dark"] .lang-dropdown.open .lang-current{border-color:#79aed1;background:rgba(88,140,180,.16);color:transparent;}
   .lang-current-label{display:flex;align-items:center;transition:opacity .15s ease;}
   .lang-current svg{width:8px;height:8px;transition:transform .3s ease;flex-shrink:0;}
   .lang-dropdown.open .lang-current svg{transform:rotate(180deg);}

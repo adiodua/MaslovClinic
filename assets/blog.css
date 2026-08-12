@@ -1,3 +1,8 @@
+  /* Hero lead — widened to match h1's max-width (560px) so longer article
+     summaries wrap the same number of lines as the homepage hero, keeping
+     hero height consistent (736px) across all blog pages. */
+  .hero p.lead{max-width:560px;}
+
   /* Blog article typography */
   .article-body{max-width:72ch;margin:0 auto;}
   .article-body h2{font-size:26px;margin:44px 0 16px;}
