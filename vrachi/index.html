@@ -128,6 +128,7 @@
       <a href="/#reviews">Отзывы</a>
       <a href="/#faq">Вопросы</a>
       <a href="/#contacts">Контакты</a>
+      <a href="/o-klinike.html">О нас</a>
     </div>
     <div class="navcta">
       <div class="langs">
@@ -136,10 +137,12 @@
         <button class="langbtn">EN</button>
       </div>
       <div class="lang-dropdown" id="langDropdown">
-        <button class="lang-current" id="langCurrentBtn">RU
+        <button class="lang-current" id="langCurrentBtn">
+          <span class="lang-current-label" id="langCurrentLabel">RU</span>
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="lang-menu" id="langMenu">
+          <button data-lang="RU" class="current">RU</button>
           <button data-lang="UA">UA</button>
           <button data-lang="EN">EN</button>
         </div>
@@ -298,13 +301,22 @@
     const dropdown = document.getElementById('langDropdown');
     const btn = document.getElementById('langCurrentBtn');
     const menu = document.getElementById('langMenu');
-    if(!dropdown || !btn || !menu) return;
+    const label = document.getElementById('langCurrentLabel');
+    if(!dropdown || !btn || !menu || !label) return;
     btn.addEventListener('click', function(e){
       e.stopPropagation();
-      menu.classList.toggle('open');
+      dropdown.classList.toggle('open');
+    });
+    menu.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        label.textContent = b.dataset.lang;
+        menu.querySelectorAll('button').forEach(x => x.classList.remove('current'));
+        b.classList.add('current');
+        dropdown.classList.remove('open');
+      });
     });
     document.addEventListener('click', function(e){
-      if(!dropdown.contains(e.target)) menu.classList.remove('open');
+      if(!dropdown.contains(e.target)) dropdown.classList.remove('open');
     });
   })();
 
