@@ -126,8 +126,18 @@
     var el = document.getElementById('langAutoBanner');
     if(!el) return;
     var stored = localStorage.getItem('mc-lang');
+    if(stored) return;
     var seen = sessionStorage.getItem('mc-lang-banner-seen');
-    if(stored || seen) return;
+    if(seen) return;
+    var path = location.pathname;
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+    // Only worth mentioning when the page you're already on actually
+    // matches what your device reports — a French or English browser
+    // landing on the RU default isn't "shown in Russian because of your
+    // device", it's just the site's fallback, so no banner there.
+    var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
+    if(!relevant) return;
     sessionStorage.setItem('mc-lang-banner-seen', '1');
     el.classList.add('show');
     var hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 8000);
@@ -135,6 +145,11 @@
     if(closeBtn) closeBtn.addEventListener('click', function(){
       clearTimeout(hideTimer);
       el.classList.remove('show');
+    });
+    var switchBtn = document.getElementById('langAutoBannerSwitch');
+    if(switchBtn) switchBtn.addEventListener('click', function(){
+      try{ localStorage.setItem('mc-lang', 'UA'); }catch(e){}
+      location.href = '/ua' + (path === '/' ? '/' : path);
     });
   }catch(e){}
 })();

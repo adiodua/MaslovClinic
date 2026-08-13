@@ -561,12 +561,6 @@
     content:"";position:absolute;inset:auto 0 0 0;height:45%;z-index:1;pointer-events:none;
     background:linear-gradient(180deg, rgba(18,40,63,0) 0%, rgba(18,40,63,.85) 100%);
   }
-  .case-before-thumb{
-    position:absolute;right:16px;bottom:16px;width:30%;aspect-ratio:3/2;z-index:2;
-    border-radius:10px;overflow:hidden;border:3px solid rgba(255,255,255,.9);
-    background:var(--brand-navy2,#0e2036);color:rgba(255,255,255,.5);font-size:10px;
-    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;
-  }
   .case-info{position:absolute;top:18px;left:18px;z-index:2;color:#fff;}
   .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
   .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);max-width:70%;}
@@ -633,12 +627,25 @@
   .pm-progress span.done::after{width:100%;}
   .pm-progress span.active::after{width:100%;}
 
-  /* Mobile-only patient-modal redesign — "before" badge, zoom button, dots.
-     Hidden here (desktop default); shown inside the max-width:600px block
-     below. Desktop keeps the original full-bleed photo + thumbnail strip. */
+  /* The "before" badge works the same way at every width — the "before"
+     photo is never shown on its own, only as a corner overlay on its
+     paired "after" photo once you've opened the modal (see buildSlides in
+     the script below, which merges before/after into one slide regardless
+     of viewport). Zoom button and dots stay mobile-only — desktop keeps the
+     original full-bleed photo, hover zoom hint and thumbnail strip for
+     navigation. */
   .pm-zoom-btn{display:none;}
-  .pm-before-badge{display:none;}
   .pm-dots{display:none;}
+  .pm-before-badge{
+    display:none;position:absolute;bottom:14px;right:14px;width:150px;height:150px;border-radius:16px;
+    overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+  }
+  .pm-before-badge.show{display:block;}
+  .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pm-before-badge span{
+    position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
+    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+  }
 
   @media(max-width:600px){
     .patient-modal-overlay{padding:20px 16px;}
@@ -665,17 +672,10 @@
       background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
       color:#0e2540;z-index:4;
     }
-    .pm-before-badge{
-      /* was 83x83 — +25% */
-      display:none;position:absolute;bottom:12px;right:12px;width:104px;height:104px;border-radius:16px;
-      overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
-    }
-    .pm-before-badge.show{display:block;}
-    .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
-    .pm-before-badge span{
-      position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
-      font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
-    }
+    /* Smaller than the base (desktop) size to fit the narrower contained
+       card — was 83x83, then +25% to 104x104; kept as-is here. */
+    .pm-before-badge{width:104px;height:104px;bottom:12px;right:12px;}
+    .pm-before-badge span{font-size:9px;}
     .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
     .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
     .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
@@ -934,6 +934,37 @@
     }
   }
 
+  /* Auto-language banner — shown once per browser session when the page
+     language was picked automatically (by device/browser language, not by
+     an explicit click on the RU/UA/EN pill). On this RU page it offers a
+     one-click way to view the Ukrainian version, for visitors whose device
+     language is Ukrainian-adjacent; see the shared script for the exact
+     condition. Never shown once a real language choice is stored. */
+  .lang-auto-banner{
+    display:none;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+    background:#0e2540;color:#fff;
+    padding:10px 40px;font-size:13px;line-height:1.4;text-align:center;
+    position:relative;z-index:200;
+    animation:langBannerIn .3s ease;
+  }
+  .lang-auto-banner.show{display:flex;}
+  .lang-auto-banner-switch{
+    background:none;border:1px solid rgba(255,255,255,.5);color:#fff;
+    border-radius:999px;padding:4px 12px;font-size:12px;font-weight:600;cursor:pointer;
+    transition:background .15s ease,border-color .15s ease;flex-shrink:0;
+  }
+  .lang-auto-banner-switch:hover{background:rgba(255,255,255,.12);border-color:#fff;}
+  .lang-auto-banner-close{
+    background:none;border:none;color:rgba(255,255,255,.6);font-size:15px;cursor:pointer;
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .lang-auto-banner-close:hover{color:#fff;}
+  @keyframes langBannerIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+  @media(max-width:600px){
+    .lang-auto-banner{font-size:12px;padding:10px 40px 10px 14px;}
+  }
+
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
@@ -961,6 +992,45 @@
 </head>
 <body>
 
+<div class="lang-auto-banner" id="langAutoBanner" role="status" aria-live="polite">
+  <span>Сайт показан на русском языке — по языку вашего устройства.</span>
+  <button type="button" class="lang-auto-banner-switch" id="langAutoBannerSwitch">Показать українською</button>
+  <button type="button" class="lang-auto-banner-close" id="langAutoBannerClose" aria-label="Закрыть">&#10005;</button>
+</div>
+<script>
+(function(){
+  try{
+    var el = document.getElementById('langAutoBanner');
+    if(!el) return;
+    var stored = localStorage.getItem('mc-lang');
+    if(stored) return;
+    var seen = sessionStorage.getItem('mc-lang-banner-seen');
+    if(seen) return;
+    var path = location.pathname;
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+    // Only worth mentioning when the page you're already on actually
+    // matches what your device reports — a French or English browser
+    // landing on the RU default isn't "shown in Russian because of your
+    // device", it's just the site's fallback, so no banner there.
+    var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
+    if(!relevant) return;
+    sessionStorage.setItem('mc-lang-banner-seen', '1');
+    el.classList.add('show');
+    var hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 8000);
+    var closeBtn = document.getElementById('langAutoBannerClose');
+    if(closeBtn) closeBtn.addEventListener('click', function(){
+      clearTimeout(hideTimer);
+      el.classList.remove('show');
+    });
+    var switchBtn = document.getElementById('langAutoBannerSwitch');
+    if(switchBtn) switchBtn.addEventListener('click', function(){
+      try{ localStorage.setItem('mc-lang', 'UA'); }catch(e){}
+      location.href = '/ua' + (path === '/' ? '/' : path);
+    });
+  }catch(e){}
+})();
+</script>
 <header>
   <nav class="wrap">
     <a href="/" class="logo" style="display:flex;align-items:center;gap:8px;">
@@ -1075,17 +1145,14 @@
       <div class="cases-track" id="casesTrack">
         <button class="case-slide" onclick="openPatientModal('yuliya')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлия — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/yuliya-before.jpg" alt="Юлия — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Юлия</h3><p>Керамические виниры</p></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('darya')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Дарья — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/darya-before.jpg" alt="Дарья — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('uriy')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Юрий — результат имплантации" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/uriy-before.jpg" alt="Юрий — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Юрий</h3><p>Имплантационное лечение</p></div>
         </button>
       </div>
@@ -1436,13 +1503,14 @@
   };
   let pmSlug = null, pmIndex = 0;
 
-  function isMobileModal(){ return window.matchMedia('(max-width:600px)').matches; }
-
-  // Mobile-only slide list: portraits stay standalone (no badge), "before"
-  // photos are pulled out of the swipeable sequence entirely and attached as
-  // a corner badge to "after" photos instead — cycling through the available
-  // "before" photos if there's more than one, so each gets used.
-  function buildMobileSlides(p){
+  // Slide list used at every viewport: portraits stay standalone (no badge),
+  // "before" photos are pulled out of the swipeable sequence entirely and
+  // attached as a corner badge to "after" photos instead — cycling through
+  // the available "before" photos if there's more than one, so each gets
+  // used. This keeps "before" from ever being shown on its own (in the
+  // teaser card or as a separate thumbnail) — it only ever appears as an
+  // overlay on its paired "after" photo, once the modal is open.
+  function buildSlides(p){
     const portraits = [], befores = [], afters = [];
     p.photos.forEach((src, i) => {
       const label = p.labels[i];
@@ -1460,11 +1528,8 @@
 
   function pmSlides(){
     const p = PATIENTS[pmSlug];
-    if(isMobileModal()){
-      if(!p._mobileSlides) p._mobileSlides = buildMobileSlides(p);
-      return p._mobileSlides;
-    }
-    return p.photos.map((src, i) => ({src, label: p.labels[i], beforeSrc: null}));
+    if(!p._slides) p._slides = buildSlides(p);
+    return p._slides;
   }
 
   function openPatientModal(slug){
@@ -1472,22 +1537,23 @@
     document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
+    const slides = pmSlides();
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
-    PATIENTS[slug].photos.forEach((src, i) => {
+    slides.forEach((s, i) => {
       const b = document.createElement('button');
       b.className = 'pm-thumb';
-      b.setAttribute('aria-label', PATIENTS[slug].labels[i]);
+      b.setAttribute('aria-label', s.label);
       const img = document.createElement('img');
-      img.src = src;
-      img.alt = PATIENTS[slug].labels[i];
+      img.src = s.src;
+      img.alt = s.label;
       b.appendChild(img);
       b.onclick = () => { pmIndex = i; pmRender(); };
       thumbs.appendChild(b);
     });
     const progress = document.getElementById('pmProgress');
     progress.innerHTML = '';
-    PATIENTS[slug].photos.forEach(() => {
+    slides.forEach(() => {
       const s = document.createElement('span');
       progress.appendChild(s);
     });
@@ -1515,7 +1581,8 @@
       s.classList.toggle('done', i < pmIndex);
       s.classList.toggle('active', i === pmIndex);
     });
-    // Mobile "before" badge — shown only when the current slide has one.
+    // "Before" badge — shown (at any viewport) only once the modal is open
+    // and only when the current slide actually has a paired "before" photo.
     const badge = document.getElementById('pmBeforeBadge');
     const badgeImg = document.getElementById('pmBeforeImg');
     if(cur.beforeSrc){
@@ -1541,8 +1608,9 @@
     if(e.key === 'ArrowLeft') pmStep(-1);
     if(e.key === 'ArrowRight') pmStep(1);
   });
-  // Recompute if the viewport crosses the mobile breakpoint while the modal
-  // is open (e.g. orientation change) — pmRender() clamps pmIndex safely.
+  // Re-render on resize (e.g. orientation change) so the layout that swaps
+  // at the mobile breakpoint (contained card vs. full-bleed + thumb strip)
+  // stays in sync while the modal is open — pmRender() clamps pmIndex safely.
   window.addEventListener('resize', () => {
     if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
   });
