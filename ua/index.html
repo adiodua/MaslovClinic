@@ -5,6 +5,33 @@
 <script>
 (function(){
   try{
+    var path = location.pathname;
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var stored = localStorage.getItem('mc-lang');
+    var wantUA;
+    if(stored === 'UA'){ wantUA = true; }
+    else if(stored === 'RU' || stored === 'EN'){ wantUA = false; }
+    else {
+      // No explicit choice saved yet — follow the device/browser language.
+      // EN has no separate pages yet, so anything other than Ukrainian falls
+      // back to the Russian default (matches the language-pill's own logic).
+      var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+      wantUA = browserLang.indexOf('uk') === 0;
+    }
+    if(wantUA !== onUA){
+      var newPath = wantUA
+        ? (onUA ? path : '/ua' + (path === '/' ? '/' : path))
+        : (onUA ? (path.slice(3) || '/') : path);
+      if(newPath !== path){
+        location.replace(newPath + location.search + location.hash);
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
     var t = localStorage.getItem('mc-theme');
     if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
     document.documentElement.setAttribute('data-theme', t);
@@ -907,6 +934,30 @@
     }
   }
 
+  /* Auto-language banner — shown once per browser session on the /ua/
+     mirror when the language was picked automatically (by device/browser
+     language, not by an explicit click on the RU/UA/EN pill). Lets a
+     visitor who was switched to Ukrainian without asking see why, and undo
+     it in one click. Never shown once a real language choice is stored. */
+  .lang-auto-banner{
+    display:none;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+    background:#0e2540;color:#fff;
+    padding:10px 40px;font-size:13px;line-height:1.4;text-align:center;
+    position:relative;z-index:200;
+    animation:langBannerIn .3s ease;
+  }
+  .lang-auto-banner.show{display:flex;}
+  .lang-auto-banner-close{
+    background:none;border:none;color:rgba(255,255,255,.6);font-size:15px;cursor:pointer;
+    position:absolute;right:12px;top:50%;transform:translateY(-50%);
+    width:24px;height:24px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .lang-auto-banner-close:hover{color:#fff;}
+  @keyframes langBannerIn{from{opacity:0;transform:translateY(-6px);}to{opacity:1;transform:translateY(0);}}
+  @media(max-width:600px){
+    .lang-auto-banner{font-size:12px;padding:10px 40px 10px 14px;}
+  }
+
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
@@ -934,6 +985,29 @@
 </head>
 <body>
 
+<div class="lang-auto-banner" id="langAutoBanner" role="status" aria-live="polite">
+  <span>Сайт показано українською мовою — за мовою вашого пристрою.</span>
+  <button type="button" class="lang-auto-banner-close" id="langAutoBannerClose" aria-label="Закрити">&#10005;</button>
+</div>
+<script>
+(function(){
+  try{
+    var el = document.getElementById('langAutoBanner');
+    if(!el) return;
+    var stored = localStorage.getItem('mc-lang');
+    var seen = sessionStorage.getItem('mc-lang-banner-seen');
+    if(stored || seen) return;
+    sessionStorage.setItem('mc-lang-banner-seen', '1');
+    el.classList.add('show');
+    var hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 8000);
+    var closeBtn = document.getElementById('langAutoBannerClose');
+    if(closeBtn) closeBtn.addEventListener('click', function(){
+      clearTimeout(hideTimer);
+      el.classList.remove('show');
+    });
+  }catch(e){}
+})();
+</script>
 <header>
   <nav class="wrap">
     <a href="/ua/" class="logo" style="display:flex;align-items:center;gap:8px;">
@@ -2215,6 +2289,10 @@ const galleryData = [
       btn.addEventListener('click', function(){
         const target = btn.dataset.lang;
         const path = location.pathname;
+        // Remember the visitor's explicit choice so the auto-detect script
+        // (which otherwise follows navigator.language on every fresh visit)
+        // never fights a manual pick on a later page load.
+        try{ localStorage.setItem('mc-lang', target); }catch(e){}
         // UA has a live translated mirror under /ua/ — the folder structure
         // mirrors the root 1:1, so switching is pure path manipulation, no
         // per-page URL map needed. EN has no separate pages yet, so it just

@@ -5,6 +5,33 @@
 <script>
 (function(){
   try{
+    var path = location.pathname;
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var stored = localStorage.getItem('mc-lang');
+    var wantUA;
+    if(stored === 'UA'){ wantUA = true; }
+    else if(stored === 'RU' || stored === 'EN'){ wantUA = false; }
+    else {
+      // No explicit choice saved yet — follow the device/browser language.
+      // EN has no separate pages yet, so anything other than Ukrainian falls
+      // back to the Russian default (matches the language-pill's own logic).
+      var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+      wantUA = browserLang.indexOf('uk') === 0;
+    }
+    if(wantUA !== onUA){
+      var newPath = wantUA
+        ? (onUA ? path : '/ua' + (path === '/' ? '/' : path))
+        : (onUA ? (path.slice(3) || '/') : path);
+      if(newPath !== path){
+        location.replace(newPath + location.search + location.hash);
+      }
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
     var t = localStorage.getItem('mc-theme');
     if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
     document.documentElement.setAttribute('data-theme', t);
@@ -383,6 +410,24 @@
     });
     menu.querySelectorAll('button').forEach(btn=>{
       btn.addEventListener('click', function(){
+        const target = btn.dataset.lang;
+        const path = location.pathname;
+        // Remember the visitor's explicit choice so the auto-detect script
+        // (which otherwise follows navigator.language on every fresh visit)
+        // never fights a manual pick on a later page load.
+        try{ localStorage.setItem('mc-lang', target); }catch(e){}
+        // UA has a live translated mirror under /ua/ — the folder structure
+        // mirrors the root 1:1, so switching is pure path manipulation, no
+        // per-page URL map needed. EN has no separate pages yet, so it just
+        // relabels the pill for now (falls through below).
+        if(target === 'UA' && !path.startsWith('/ua/')){
+          location.href = '/ua' + path;
+          return;
+        }
+        if(target === 'RU' && path.startsWith('/ua/')){
+          location.href = path.slice(3) || '/';
+          return;
+        }
         label.textContent = btn.dataset.lang;
         menu.querySelectorAll('button').forEach(b => b.classList.remove('current'));
         btn.classList.add('current');
@@ -397,7 +442,11 @@
   // Active-page nav highlight — marks the current section's nav link instead of
   // ever hiding/removing it, on both the desktop menu and the mobile menu.
   (function(){
-    const path = location.pathname;
+    // Strip a leading /ua so section detection works the same on the
+    // Ukrainian mirror (paths there are /ua/uslugi/..., etc.) without a
+    // separate ruleset.
+    const rawPath = location.pathname;
+    const path = rawPath.startsWith('/ua/') ? rawPath.slice(3) : rawPath;
     const sections = [
       {key: 'uslugi',    test: p => p.indexOf('/uslugi/') === 0},
       {key: 'vrachi',    test: p => p.indexOf('/vrachi/') === 0},
