@@ -270,11 +270,15 @@
     position:relative;z-index:2;
     transition:border-color .2s ease, background .2s ease, color .15s ease, border-radius .2s ease, width .42s cubic-bezier(.34,1.15,.4,1);
   }
-  .lang-current:hover{background:rgba(var(--text-rgb),0.08);}
+  .lang-current:hover{
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(18px) saturate(180%);
+    -webkit-backdrop-filter:blur(18px) saturate(180%);
+  }
   [data-theme="dark"] .lang-current{
     border-color:#588cb4;
   }
-  [data-theme="dark"] .lang-current:hover{background:rgba(var(--text-rgb),0.08);}
+  [data-theme="dark"] .lang-current:hover{background:rgba(20,31,46,.5);}
   /* Fade the closed pill's own "RU" label + arrow (both use currentColor) while
      open — the panel's background is transparent by design, so without this the
      menu's first ("RU") row shows straight through and doubles up with the pill's
