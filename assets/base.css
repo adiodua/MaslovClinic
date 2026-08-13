@@ -520,7 +520,14 @@
   [data-theme="dark"] .lang-menu button{color:rgba(255,255,255,.55);}
   .lang-menu button:hover{background:rgba(201,162,75,.14);color:var(--text);}
   [data-theme="dark"] .lang-menu button:hover{background:rgba(255,255,255,.08);color:#fff;}
-  .lang-menu button.current{color:var(--gold);}
+  /* The pill sits at z-index:2 directly on top of the menu's first 34px row
+     (its own resting position), so whichever button lands in that row is
+     unreachable by click/tap — the pill physically blocks it. Forcing the
+     "current" button to the top of the stack with order:-1 puts the one
+     genuinely no-op button (you're already on this language) under the pill
+     instead of whatever happens to be first in RU/UA/EN markup order — so
+     every real destination stays clickable, on every language page. */
+  .lang-menu button.current{color:var(--gold);order:-1;}
 
   /* hamburger */
   .menu-toggle{
