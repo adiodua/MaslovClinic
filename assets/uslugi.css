@@ -374,7 +374,7 @@
   .langs{display:none;gap:4px;font-size:11px;font-weight:600;}
 
   /* language dropdown — outlined, transparent */
-  .lang-dropdown{position:relative;display:block;flex-shrink:0;}
+  .lang-dropdown{position:relative;display:block;flex-shrink:0;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
   .lang-current{
     display:flex;align-items:center;justify-content:center;
     background:transparent;
@@ -384,28 +384,46 @@
     position:relative;z-index:2;
     transition:border-color .2s ease, background .2s ease, color .15s ease, border-radius .2s ease, width .42s cubic-bezier(.34,1.15,.4,1);
   }
-  .lang-current:hover{
-    background:rgba(255,255,255,.55);
-    backdrop-filter:blur(18px) saturate(180%);
-    -webkit-backdrop-filter:blur(18px) saturate(180%);
+  /* Hover glass only for real pointer devices — on touch, :hover can get
+     "stuck" after a tap (no mouse to move away), which fought with the open
+     state below on some Android browsers. */
+  @media (hover:hover) and (pointer:fine){
+    .lang-current:hover{
+      background:rgba(255,255,255,.55);
+      backdrop-filter:blur(18px) saturate(180%);
+      -webkit-backdrop-filter:blur(18px) saturate(180%);
+    }
   }
   [data-theme="dark"] .lang-current{
     border-color:#588cb4;
   }
-  [data-theme="dark"] .lang-current:hover{background:rgba(20,31,46,.5);}
+  @media (hover:hover) and (pointer:fine){
+    [data-theme="dark"] .lang-current:hover{background:rgba(20,31,46,.5);}
+  }
   /* Fade the closed pill's own "RU" label + arrow (both use currentColor) while
      open — the panel's background is transparent by design, so without this the
      menu's first ("RU") row shows straight through and doubles up with the pill's
      own label sitting on top of it at the same 34px slot. */
   /* Drop the pill's own bottom edge while open — flat, square bottom corners
      with no border-bottom color — so it merges straight into the menu panel
-     below instead of showing a seam line where pill meets panel. */
+     below instead of showing a seam line where pill meets panel. Some mobile
+     browsers (e.g. Samsung Internet) don't composite a backdrop-filter panel
+     correctly underneath another positioned element stacked above it — even
+     a transparent one — and render that overlapped strip as a flat, unblurred
+     tint instead of matching the rest of the panel. Dropping the pill behind
+     the menu in stacking order (z-index below the menu's, pointer-events off)
+     removes it from that compositing stack entirely, so the menu's own glass
+     panel renders as one uniform surface top to bottom with nothing layered
+     above it to interfere. Taps on this now-inert top slot simply fall
+     through to the menu's own "current" button underneath, which is already
+     a no-op (you're already on this language). */
   .lang-dropdown.open .lang-current{
     border-color:#3f7ba3;border-bottom-color:transparent;
     border-bottom-left-radius:0;border-bottom-right-radius:0;
-    background:transparent;color:transparent;
+    background:transparent !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+    color:transparent;z-index:0;pointer-events:none;
   }
-  [data-theme="dark"] .lang-dropdown.open .lang-current{border-color:#79aed1;border-bottom-color:transparent;background:transparent;color:transparent;}
+  [data-theme="dark"] .lang-dropdown.open .lang-current{border-color:#79aed1;border-bottom-color:transparent;background:transparent !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;color:transparent;}
   .lang-current-label{display:flex;align-items:center;transition:opacity .15s ease;}
 
   /* Same border-radius (17px) and border color/width as .lang-current so the
