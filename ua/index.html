@@ -604,12 +604,6 @@
     content:"";position:absolute;inset:auto 0 0 0;height:45%;z-index:1;pointer-events:none;
     background:linear-gradient(180deg, rgba(18,40,63,0) 0%, rgba(18,40,63,.85) 100%);
   }
-  .case-before-thumb{
-    position:absolute;right:16px;bottom:16px;width:30%;aspect-ratio:3/2;z-index:2;
-    border-radius:10px;overflow:hidden;border:3px solid rgba(255,255,255,.9);
-    background:var(--brand-navy2,#0e2036);color:rgba(255,255,255,.5);font-size:10px;
-    display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.3;
-  }
   .case-info{position:absolute;top:18px;left:18px;z-index:2;color:#fff;}
   .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
   .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);max-width:70%;}
@@ -1180,17 +1174,14 @@
       <div class="cases-track" id="casesTrack">
         <button class="case-slide" onclick="openPatientModal('yuliya')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлія — результат після вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/yuliya-before.jpg" alt="Юлія — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Юлія</h3><p>Керамічні вініри</p></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('darya')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Дар'я — результат після вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/darya-before.jpg" alt="Дар'я — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Дар'я</h3><p>Керамічні вініри</p></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('uriy')">
           <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Юрій — результат імплантації" style="width:100%;height:100%;object-fit:cover;"></div>
-          <div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/uriy-before.jpg" alt="Юрій — до" style="width:100%;height:100%;object-fit:cover;"></div>
           <div class="case-info"><h3>Юрій</h3><p>Імплантаційне лікування</p></div>
         </button>
       </div>
@@ -1541,13 +1532,14 @@
   };
   let pmSlug = null, pmIndex = 0;
 
-  function isMobileModal(){ return window.matchMedia('(max-width:600px)').matches; }
-
-  // Mobile-only slide list: portraits stay standalone (no badge), "before"
-  // photos are pulled out of the swipeable sequence entirely and attached as
-  // a corner badge to "after" photos instead — cycling through the available
-  // "before" photos if there's more than one, so each gets used.
-  function buildMobileSlides(p){
+  // Slide list used at every viewport: portraits stay standalone (no badge),
+  // "before" photos are pulled out of the swipeable sequence entirely and
+  // attached as a corner badge to "after" photos instead — cycling through
+  // the available "before" photos if there's more than one, so each gets
+  // used. This keeps "before" from ever being shown on its own (in the
+  // teaser card or as a separate thumbnail) — it only ever appears as an
+  // overlay on its paired "after" photo, once the modal is open.
+  function buildSlides(p){
     const portraits = [], befores = [], afters = [];
     p.photos.forEach((src, i) => {
       const label = p.labels[i];
@@ -1565,11 +1557,8 @@
 
   function pmSlides(){
     const p = PATIENTS[pmSlug];
-    if(isMobileModal()){
-      if(!p._mobileSlides) p._mobileSlides = buildMobileSlides(p);
-      return p._mobileSlides;
-    }
-    return p.photos.map((src, i) => ({src, label: p.labels[i], beforeSrc: null}));
+    if(!p._slides) p._slides = buildSlides(p);
+    return p._slides;
   }
 
   function openPatientModal(slug){
@@ -1577,22 +1566,23 @@
     document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
+    const slides = pmSlides();
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
-    PATIENTS[slug].photos.forEach((src, i) => {
+    slides.forEach((s, i) => {
       const b = document.createElement('button');
       b.className = 'pm-thumb';
-      b.setAttribute('aria-label', PATIENTS[slug].labels[i]);
+      b.setAttribute('aria-label', s.label);
       const img = document.createElement('img');
-      img.src = src;
-      img.alt = PATIENTS[slug].labels[i];
+      img.src = s.src;
+      img.alt = s.label;
       b.appendChild(img);
       b.onclick = () => { pmIndex = i; pmRender(); };
       thumbs.appendChild(b);
     });
     const progress = document.getElementById('pmProgress');
     progress.innerHTML = '';
-    PATIENTS[slug].photos.forEach(() => {
+    slides.forEach(() => {
       const s = document.createElement('span');
       progress.appendChild(s);
     });
@@ -1620,7 +1610,8 @@
       s.classList.toggle('done', i < pmIndex);
       s.classList.toggle('active', i === pmIndex);
     });
-    // Mobile "before" badge — shown only when the current slide has one.
+    // "Before" badge — shown (at any viewport) only once the modal is open
+    // and only when the current slide actually has a paired "before" photo.
     const badge = document.getElementById('pmBeforeBadge');
     const badgeImg = document.getElementById('pmBeforeImg');
     if(cur.beforeSrc){
@@ -1646,8 +1637,9 @@
     if(e.key === 'ArrowLeft') pmStep(-1);
     if(e.key === 'ArrowRight') pmStep(1);
   });
-  // Recompute if the viewport crosses the mobile breakpoint while the modal
-  // is open (e.g. orientation change) — pmRender() clamps pmIndex safely.
+  // Re-render on resize (e.g. orientation change) so the layout that swaps
+  // at the mobile breakpoint (contained card vs. full-bleed + thumb strip)
+  // stays in sync while the modal is open — pmRender() clamps pmIndex safely.
   window.addEventListener('resize', () => {
     if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
   });
