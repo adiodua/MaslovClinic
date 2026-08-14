@@ -734,13 +734,6 @@
     stage.addEventListener('pointerup', endPointer);
     stage.addEventListener('pointercancel', endPointer);
 
-    stage.addEventListener('wheel', function(e){
-      e.preventDefault();
-      const newScale = Math.min(MAX_SCALE, Math.max(1, scale - e.deltaY * 0.0015 * scale));
-      setTransition(false);
-      zoomToward(e.clientX, e.clientY, newScale);
-    }, {passive:false});
-
     if(hint){
       stage.addEventListener('pointerdown', function(){ hint.style.opacity = '0'; }, {once:false});
     }

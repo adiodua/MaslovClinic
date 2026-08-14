@@ -150,6 +150,15 @@
   .vtour-close{right:14px;font-size:18px;}
   .vtour-sound{left:14px;}
   .vtour-sound svg{width:16px;height:16px;}
+  /* Draws attention to the sound button right after the story opens — the
+     only real way to turn sound on (there's no way for a webpage to react
+     to the phone's hardware volume keys), so it needs to be easy to spot. */
+  @keyframes vtourSoundPulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.65);}
+    70%{box-shadow:0 0 0 14px rgba(255,255,255,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
+  }
+  .vtour-sound.pulse{animation:vtourSoundPulse 1.6s ease-out infinite;}
   .vtour[data-state="expanded"] .vtour-close,.vtour[data-state="expanded"] .vtour-sound{display:flex;}
 
   .vtour-progress{position:absolute;top:14px;left:58px;right:58px;display:none;gap:4px;z-index:4;}
@@ -789,11 +798,23 @@
     if(segment < 2){ setSegment(segment+1); } else { setSegment(0); }
   });
 
+  var soundPulseTimer = null;
+  function startSoundPulse(){
+    soundBtn.classList.add('pulse');
+    clearTimeout(soundPulseTimer);
+    soundPulseTimer = setTimeout(function(){ soundBtn.classList.remove('pulse'); }, 5000);
+  }
+  function stopSoundPulse(){
+    soundBtn.classList.remove('pulse');
+    clearTimeout(soundPulseTimer);
+  }
+
   function expand(){
     expanded = true;
     vtour.setAttribute('data-state','expanded');
     document.body.style.overflow = 'hidden';
     setSegment(0);
+    startSoundPulse();
   }
   function collapse(){
     expanded = false;
@@ -805,6 +826,7 @@
     video.load();
     video.play().catch(function(){});
     applySoundIcon();
+    stopSoundPulse();
   }
 
   frame.addEventListener('click', function(e){
@@ -816,6 +838,7 @@
     e.stopPropagation();
     video.muted = !video.muted;
     applySoundIcon();
+    stopSoundPulse();
   });
   prevZone.addEventListener('click', function(e){
     e.stopPropagation();

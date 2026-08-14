@@ -505,13 +505,6 @@
   photo.addEventListener('pointerup', endPointer);
   photo.addEventListener('pointercancel', endPointer);
 
-  photo.addEventListener('wheel', function(e){
-    e.preventDefault();
-    const newScale = Math.min(MAX_SCALE, Math.max(1, scale - e.deltaY * 0.0015 * scale));
-    setTransition(false);
-    zoomToward(e.clientX, e.clientY, newScale);
-  }, {passive:false});
-
   if(zoomHint){
     photo.addEventListener('pointerdown', function(){ zoomHint.style.opacity = '0'; }, {once:false});
   }
