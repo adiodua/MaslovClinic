@@ -141,7 +141,7 @@
       gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
     } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
       gtag('event', 'contact_panel_open', {event_category:'contact'});
-    } else if(t.classList.contains('phone-panel-link')){
+    } else if(t.classList.contains('mm-panel-link')){
       gtag('event', 'contacts_click', {event_category:'contact'});
     }
   });
