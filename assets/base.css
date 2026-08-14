@@ -64,6 +64,20 @@
     letter-spacing:.01em;
   }
   a{color:inherit;text-decoration:none;}
+  /* Inline cross-reference links inside body copy (e.g. "подробнее — на
+     странице «О клинике»") inherit plain text color from the reset above
+     and give no visual cue they're clickable. Scoped to <section> so it
+     only reaches body-copy links — nav and footer links live outside any
+     <section> and already have their own explicit styling, untouched here.
+     var(--accent) already flips per light/dark theme, so this needs no
+     separate dark-mode rule. */
+  section p a{
+    color:var(--accent);
+    transition:text-shadow .25s ease;
+  }
+  section p a:hover,section p a:focus-visible{
+    text-shadow:0.3px 0 currentColor,-0.3px 0 currentColor;
+  }
   img{max-width:100%;display:block;filter:brightness(var(--img-dim));transition:filter .3s ease;}
   .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
   .eyebrow{
