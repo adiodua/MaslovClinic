@@ -670,12 +670,25 @@
   .pm-progress span.done::after{width:100%;}
   .pm-progress span.active::after{width:100%;}
 
-  /* Mobile-only patient-modal redesign — "before" badge, zoom button, dots.
-     Hidden here (desktop default); shown inside the max-width:600px block
-     below. Desktop keeps the original full-bleed photo + thumbnail strip. */
+  /* The "before" badge works the same way at every width — the "before"
+     photo is never shown on its own, only as a corner overlay on its
+     paired "after" photo once you've opened the modal (see buildSlides in
+     the script above, which merges before/after into one slide regardless
+     of viewport). Zoom button and dots stay mobile-only — desktop keeps the
+     original full-bleed photo, hover zoom hint and thumbnail strip for
+     navigation. */
   .pm-zoom-btn{display:none;}
-  .pm-before-badge{display:none;}
   .pm-dots{display:none;}
+  .pm-before-badge{
+    display:none;position:absolute;bottom:14px;right:14px;width:150px;height:150px;border-radius:16px;
+    overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+  }
+  .pm-before-badge.show{display:block;}
+  .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pm-before-badge span{
+    position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
+    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+  }
 
   @media(max-width:600px){
     .patient-modal-overlay{padding:20px 16px;}
@@ -702,17 +715,10 @@
       background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
       color:#0e2540;z-index:4;
     }
-    .pm-before-badge{
-      /* was 83x83 — +25% */
-      display:none;position:absolute;bottom:12px;right:12px;width:104px;height:104px;border-radius:16px;
-      overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
-    }
-    .pm-before-badge.show{display:block;}
-    .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
-    .pm-before-badge span{
-      position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
-      font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
-    }
+    /* Smaller than the base (desktop) size to fit the narrower contained
+       card — was 83x83, then +25% to 104x104; kept as-is here. */
+    .pm-before-badge{width:104px;height:104px;bottom:12px;right:12px;}
+    .pm-before-badge span{font-size:9px;}
     .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
     .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
     .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
