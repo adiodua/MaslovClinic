@@ -680,21 +680,90 @@
   .case-info p{margin:0;font-size:12px;color:rgba(242,240,232,.85);max-width:80%;}
   .case-card .badge{position:absolute;top:14px;right:14px;z-index:2;}
 
-  .patient-viewer{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;max-width:640px;margin:0 auto;background:var(--navy-2);}
-  .patient-slide{width:100%;height:100%;object-fit:cover;display:block;}
   .case-nav{
     position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
     background:var(--paper);border:1px solid var(--divider);cursor:pointer;font-size:20px;color:var(--ink);
     display:flex;align-items:center;justify-content:center;z-index:3;
   }
   .case-nav.prev{left:12px;} .case-nav.next{right:12px;}
-  .patient-counter{position:absolute;bottom:12px;right:14px;color:#f2f0e8;font-size:12.5px;z-index:2;}
-  .patient-thumbs{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
-  .patient-thumb{
-    padding:8px 16px;border-radius:var(--radius);border:1px solid var(--divider);background:var(--paper);
-    color:var(--muted);font-size:13px;cursor:pointer;
+
+  /* Case-page photo gallery — the same modal-carousel component used for the
+     patient popups on the homepage / "Наши работы" (real thumbnails, pinch
+     zoom, swipe-to-navigate, "before" photo shown as a corner badge on its
+     paired "after" photo instead of its own slide), just embedded directly
+     in the page instead of opening as an overlay — this page IS the case
+     view, so there's nothing to pop over. See buildSlides()/pmRender() in
+     index.html for the overlay version this mirrors. */
+  .case-gallery{max-width:640px;margin:0 auto;}
+  .case-gallery-photo{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;background:var(--navy-2);}
+  .case-gallery-photo #cgMain{
+    width:100%;height:100%;object-fit:cover;display:block;
+    touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+    -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
   }
-  .patient-thumb.active{border-color:var(--accent);color:var(--accent);}
+  .case-gallery-photo.zoomed #cgMain{cursor:grab;}
+  .case-gallery-photo.zoomed #cgMain:active{cursor:grabbing;}
+  .case-gallery-photo.dragging #cgMain{transition:none !important;}
+  .cg-zoom-hint{
+    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:3;
+    background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;padding:5px 12px;border-radius:20px;
+    pointer-events:none;opacity:0;transition:opacity .3s ease;white-space:nowrap;
+  }
+  .case-gallery-photo:not(.zoomed):hover .cg-zoom-hint{opacity:1;}
+  @media(hover:none){.cg-zoom-hint{display:none;}}
+  .case-gallery-photo::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:70px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.35), transparent);
+  }
+  .cg-progress{position:absolute;top:0;left:0;right:0;display:flex;gap:4px;padding:10px 12px;z-index:4;}
+  .cg-progress span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
+  .cg-progress span::after{content:"";display:block;height:100%;width:0;background:#fff;}
+  .cg-progress span.done::after{width:100%;}
+  .cg-progress span.active::after{width:100%;}
+  .case-gallery-nav{
+    position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;
+    width:36px;height:36px;border-radius:50%;font-size:19px;cursor:pointer;z-index:4;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .case-gallery-nav.prev{left:12px;}
+  .case-gallery-nav.next{right:12px;}
+  .case-gallery-counter{
+    position:absolute;top:14px;right:14px;color:#fff;font-size:12px;z-index:4;
+    background:rgba(0,0,0,.45);padding:4px 10px;border-radius:20px;
+  }
+  /* Mobile-only: visible zoom affordance (pinch/double-tap zoom already
+     works everywhere via the script below; this is the discoverable entry
+     point on phones, where there's no hover to reveal the text hint). */
+  .cg-zoom-btn{display:none;}
+  .cg-before-badge{
+    display:none;position:absolute;bottom:14px;right:14px;width:130px;height:130px;border-radius:14px;
+    overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+  }
+  .cg-before-badge.show{display:block;}
+  .cg-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
+  .cg-before-badge span{
+    position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
+    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+  }
+  .case-gallery-thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:16px;}
+  .cg-thumb{width:52px;height:52px;border-radius:9px;overflow:hidden;border:2px solid var(--divider);padding:0;cursor:pointer;flex-shrink:0;background:none;}
+  .cg-thumb.active{border-color:var(--accent);}
+  .cg-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .cg-dots{display:none;justify-content:center;gap:6px;margin-top:16px;}
+  .cg-dot{width:6px;height:6px;border-radius:50%;background:var(--divider);border:none;padding:0;cursor:pointer;}
+  .cg-dot.active{background:var(--accent);width:16px;border-radius:3px;}
+  @media(max-width:600px){
+    .cg-zoom-btn{
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;bottom:12px;left:12px;width:38px;height:38px;border-radius:50%;
+      background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
+      color:#0e2540;z-index:4;
+    }
+    .cg-before-badge{width:96px;height:96px;bottom:10px;right:10px;}
+    .cg-before-badge span{font-size:9px;}
+    .case-gallery-thumbs{display:none;}
+    .cg-dots{display:flex;}
+  }
 
   /* Inline supplementary video (e.g. procedure clips) */
   .inline-video{

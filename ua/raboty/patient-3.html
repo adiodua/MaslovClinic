@@ -251,18 +251,268 @@
       <h2>Керамічні вініри</h2>
       <p>Процедура: підготовка емалі, виготовлення вінірів за індивідуальними зліпками, фіксація. Нижче — етапи «до» та результат. Детальніше про процедуру і ціни — на сторінці <a href="/ua/uslugi/koronki-i-viniry.html">«Коронки і вініри»</a>.</p>
     </div>
-    <div class="patient-viewer">
-      <img width="1000" height="667" loading="lazy" class="patient-slide" id="patientMain" src="/img/patients/yuliya-before.jpg" alt="Юлія — фото до">
-      <button class="case-nav prev" id="patientPrev" aria-label="Попереднє фото">‹</button>
-      <button class="case-nav next" id="patientNext" aria-label="Наступне фото">›</button>
-      <div class="patient-counter" id="patientCounter">1 / 4</div>
+    <div class="case-gallery">
+      <div class="case-gallery-photo" id="cgPhoto">
+        <div class="cg-progress" id="cgProgress"></div>
+        <img id="cgMain" src="" alt="" draggable="false">
+        <span class="cg-zoom-hint" id="cgZoomHint">Натисніть, щоб наблизити</span>
+        <button class="cg-zoom-btn" id="cgZoomBtn" type="button" aria-label="Наблизити фото">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
+        </button>
+        <div class="cg-before-badge" id="cgBeforeBadge">
+          <img id="cgBeforeImg" src="" alt="До">
+          <span>До</span>
+        </div>
+        <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Попереднє фото">‹</button>
+        <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Наступне фото">›</button>
+        <div class="case-gallery-counter" id="cgCounter"></div>
+      </div>
+      <div class="case-gallery-thumbs" id="cgThumbs"></div>
+      <div class="cg-dots" id="cgDots"></div>
     </div>
-    <div class="patient-thumbs" id="patientThumbs">
-      <button class="patient-thumb active" data-i="0">До</button>
-      <button class="patient-thumb" data-i="1">Після</button>
-      <button class="patient-thumb" data-i="2">Після, ракурс 2</button>
-      <button class="patient-thumb" data-i="3">Після, ракурс 3</button>
-    </div>
+<script>
+(function(){
+  const photos = ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'];
+  const labels = ['До','Після','Після, ракурс 2','Після, ракурс 3'];
+  const alts = ['Юлія — фото до','Юлія — результат після вінірів','Юлія — результат, ракурс 2','Юлія — результат, ракурс 3'];
+
+  // Slide list: portraits stay standalone (no badge); "before" photos are
+  // pulled out of the swipeable sequence and attached as a corner badge to
+  // their paired "after" photo instead — same logic as the homepage / "Наши
+  // работы" carousel, so the "before" photo never appears as its own slide.
+  function buildSlides(){
+    const portraits = [], befores = [], afters = [];
+    photos.forEach((src, i) => {
+      const label = labels[i];
+      const entry = {src, alt: alts[i]};
+      if(/портрет/i.test(label)) portraits.push(entry);
+      else if(/^до$/i.test(label)) befores.push(entry);
+      else afters.push(entry);
+    });
+    const slides = portraits.map(ph => ({src: ph.src, alt: ph.alt, beforeSrc: null}));
+    afters.forEach((ph, i) => {
+      const beforeSrc = befores.length ? befores[i % befores.length].src : null;
+      slides.push({src: ph.src, alt: ph.alt, beforeSrc});
+    });
+    return slides;
+  }
+  const slides = buildSlides();
+  let index = 0;
+
+  const photo = document.getElementById('cgPhoto');
+  const main = document.getElementById('cgMain');
+  const counter = document.getElementById('cgCounter');
+  const progress = document.getElementById('cgProgress');
+  const thumbsWrap = document.getElementById('cgThumbs');
+  const dotsWrap = document.getElementById('cgDots');
+  const badge = document.getElementById('cgBeforeBadge');
+  const badgeImg = document.getElementById('cgBeforeImg');
+  const zoomHint = document.getElementById('cgZoomHint');
+  const zoomBtn = document.getElementById('cgZoomBtn');
+
+  slides.forEach(() => {
+    const s = document.createElement('span');
+    progress.appendChild(s);
+  });
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cg-thumb';
+    b.setAttribute('aria-label', s.alt);
+    const img = document.createElement('img');
+    img.src = s.src; img.alt = s.alt; img.loading = 'lazy';
+    b.appendChild(img);
+    b.addEventListener('click', () => { index = i; render(); });
+    thumbsWrap.appendChild(b);
+  });
+
+  function render(){
+    const cur = slides[index];
+    main.src = cur.src;
+    main.alt = cur.alt;
+    counter.textContent = (index+1) + ' / ' + slides.length;
+    Array.from(thumbsWrap.children).forEach((b,i)=>b.classList.toggle('active', i===index));
+    Array.from(progress.children).forEach((s,i)=>{
+      s.classList.toggle('done', i < index);
+      s.classList.toggle('active', i === index);
+    });
+    if(cur.beforeSrc){
+      badgeImg.src = cur.beforeSrc;
+      badge.classList.add('show');
+    } else {
+      badge.classList.remove('show');
+    }
+    dotsWrap.innerHTML = '';
+    slides.forEach((s, i) => {
+      const d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'cg-dot' + (i === index ? ' active' : '');
+      d.setAttribute('aria-label', s.alt);
+      d.addEventListener('click', () => { index = i; render(); });
+      dotsWrap.appendChild(d);
+    });
+  }
+  function step(dir){
+    index = (index + dir + slides.length) % slides.length;
+    render();
+  }
+  document.getElementById('cgPrev').addEventListener('click', () => step(-1));
+  document.getElementById('cgNext').addEventListener('click', () => step(1));
+  render();
+
+  /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom, swipe to
+     navigate; background scroll stays locked to this element only (there's
+     no overlay to lock behind here, the gallery is embedded in the page). */
+  const MAX_SCALE = 4, TAP_ZOOM = 2.2;
+  let scale = 1, tx = 0, ty = 0;
+  const pointers = new Map();
+  let pinchStartDist = 0, pinchStartScale = 1;
+  let dragging = false, dragMoved = false, dragStart = {x:0,y:0}, dragOrigin = {x:0,y:0};
+  let lastTapTime = 0, lastTapX = 0, lastTapY = 0;
+  let swiping = false, swipeStartX = 0, swipeStartY = 0;
+
+  function setTransition(on){ main.style.transition = on ? 'transform .25s ease' : 'none'; }
+  function apply(){
+    main.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + scale + ')';
+    photo.classList.toggle('zoomed', scale > 1.01);
+  }
+  function clampPan(){
+    const rect = photo.getBoundingClientRect();
+    const maxX = Math.max(0, (rect.width * (scale - 1)) / 2);
+    const maxY = Math.max(0, (rect.height * (scale - 1)) / 2);
+    tx = Math.max(-maxX, Math.min(maxX, tx));
+    ty = Math.max(-maxY, Math.min(maxY, ty));
+  }
+  function resetZoom(instant){
+    setTransition(!instant);
+    scale = 1; tx = 0; ty = 0;
+    apply();
+  }
+  function zoomToward(clientX, clientY, newScale){
+    const rect = photo.getBoundingClientRect();
+    const offsetX = clientX - rect.left - rect.width / 2;
+    const offsetY = clientY - rect.top - rect.height / 2;
+    const ratio = newScale / scale;
+    tx = offsetX - (offsetX - tx) * ratio;
+    ty = offsetY - (offsetY - ty) * ratio;
+    scale = newScale;
+    clampPan();
+    apply();
+  }
+  zoomBtn.addEventListener('click', function(){
+    const rect = photo.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
+  });
+
+  photo.addEventListener('pointerdown', function(e){
+    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
+    e.preventDefault();
+    pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
+    dragMoved = false;
+    if(pointers.size === 1 && scale > 1.01){
+      dragging = true;
+      setTransition(false);
+      photo.classList.add('dragging');
+      dragStart = {x:e.clientX, y:e.clientY};
+      dragOrigin = {x:tx, y:ty};
+    }
+    if(pointers.size === 1 && scale <= 1.01){
+      swiping = true;
+      swipeStartX = e.clientX; swipeStartY = e.clientY;
+    }
+    if(pointers.size === 2){
+      dragging = false;
+      swiping = false;
+      const pts = Array.from(pointers.values());
+      pinchStartDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+      pinchStartScale = scale;
+      setTransition(false);
+    }
+  });
+
+  photo.addEventListener('pointermove', function(e){
+    if(!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
+    if(pointers.size === 2){
+      const pts = Array.from(pointers.values());
+      const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
+      const midX = (pts[0].x + pts[1].x) / 2, midY = (pts[0].y + pts[1].y) / 2;
+      const newScale = Math.min(MAX_SCALE, Math.max(1, pinchStartScale * (dist / pinchStartDist)));
+      zoomToward(midX, midY, newScale);
+      dragMoved = true;
+    } else if(dragging && pointers.size === 1){
+      const p = pointers.get(e.pointerId);
+      if(Math.abs(p.x - dragStart.x) > 3 || Math.abs(p.y - dragStart.y) > 3) dragMoved = true;
+      tx = dragOrigin.x + (p.x - dragStart.x);
+      ty = dragOrigin.y + (p.y - dragStart.y);
+      clampPan();
+      apply();
+    } else if(swiping && pointers.size === 1){
+      const p = pointers.get(e.pointerId);
+      if(Math.abs(p.x - swipeStartX) > 3 || Math.abs(p.y - swipeStartY) > 3) dragMoved = true;
+    }
+  });
+
+  function endPointer(e){
+    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
+    const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
+    pointers.delete(e.pointerId);
+    photo.classList.remove('dragging');
+    if(pointers.size < 2) pinchStartDist = 0;
+    if(pointers.size === 0){
+      if(swiping){
+        swiping = false;
+        const dx = e.clientX - swipeStartX, dy = e.clientY - swipeStartY;
+        if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3){
+          setTransition(true);
+          step(dx < 0 ? 1 : -1);
+          return;
+        }
+      }
+      const wasDragging = dragging;
+      dragging = false;
+      setTransition(true);
+      if(scale > 1.01){ clampPan(); apply(); }
+      if(wasDragging && dragMoved) return;
+      if(dragMoved) return;
+
+      if(wasTouch){
+        const now = Date.now();
+        const dt = now - lastTapTime;
+        const dist = Math.hypot(e.clientX - lastTapX, e.clientY - lastTapY);
+        if(dt < 320 && dist < 40){
+          if(scale > 1.01){ resetZoom(); } else { zoomToward(e.clientX, e.clientY, TAP_ZOOM); }
+          lastTapTime = 0;
+        } else {
+          lastTapTime = now; lastTapX = e.clientX; lastTapY = e.clientY;
+        }
+      } else {
+        if(scale > 1.01){ resetZoom(); } else { zoomToward(e.clientX, e.clientY, TAP_ZOOM); }
+      }
+    }
+  }
+  photo.addEventListener('pointerup', endPointer);
+  photo.addEventListener('pointercancel', endPointer);
+
+  photo.addEventListener('wheel', function(e){
+    e.preventDefault();
+    const newScale = Math.min(MAX_SCALE, Math.max(1, scale - e.deltaY * 0.0015 * scale));
+    setTransition(false);
+    zoomToward(e.clientX, e.clientY, newScale);
+  }, {passive:false});
+
+  if(zoomHint){
+    photo.addEventListener('pointerdown', function(){ zoomHint.style.opacity = '0'; }, {once:false});
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft') step(-1);
+    if(e.key === 'ArrowRight') step(1);
+  });
+})();
+</script>
+
     <div class="inline-video">
       <video controls playsinline preload="none" poster="/video/viniry-work-poster.jpg">
         <source src="/video/viniry-work.mp4" type="video/mp4">
@@ -271,27 +521,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (function(){
-    const photos = ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'];
-    const alts = ['Юлія — фото до','Юлія — результат після вінірів','Юлія — результат, ракурс 2','Юлія — результат, ракурс 3'];
-    const main = document.getElementById('patientMain');
-    const counter = document.getElementById('patientCounter');
-    const thumbs = Array.from(document.querySelectorAll('.patient-thumb'));
-    let i = 0;
-    function render(){
-      main.src = photos[i];
-      main.alt = alts[i];
-      counter.textContent = (i+1) + ' / ' + photos.length;
-      thumbs.forEach((t,idx)=>t.classList.toggle('active', idx===i));
-    }
-    document.getElementById('patientPrev').addEventListener('click', ()=>{ i=(i-1+photos.length)%photos.length; render(); });
-    document.getElementById('patientNext').addEventListener('click', ()=>{ i=(i+1)%photos.length; render(); });
-    thumbs.forEach(t=>t.addEventListener('click', ()=>{ i=parseInt(t.dataset.i,10); render(); }));
-    render();
-  })();
-</script>
 
 <div class="locality">
   <div class="wrap">
