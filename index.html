@@ -564,7 +564,7 @@
   }
   .doctors-track::-webkit-scrollbar{display:none;}
   .doctor-card{
-    flex:0 0 calc(33.333% - 14px);scroll-snap-align:start;background:var(--bg-alt);
+    flex:0 0 calc(33.333% - 14px);scroll-snap-align:start;scroll-snap-stop:always;background:var(--bg-alt);
     border-radius:var(--radius);overflow:hidden;text-decoration:none;color:inherit;display:block;
   }
   .doctor-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
@@ -588,7 +588,7 @@
   .cases-track::-webkit-scrollbar{display:none;}
   .case-slide{
     display:block;position:relative;flex:0 0 min(1120px,92vw);aspect-ratio:16/10;border-radius:var(--radius);
-    overflow:hidden;scroll-snap-align:start;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
+    overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
     text-decoration:none;color:inherit;cursor:pointer;border:none;padding:0;font:inherit;text-align:left;
   }
   .case-photo-main{
@@ -762,7 +762,7 @@
   }
   .gallery-strip::-webkit-scrollbar{display:none;}
   .g-thumb{
-    flex:0 0 auto;height:280px;scroll-snap-align:start;border-radius:var(--radius);
+    flex:0 0 auto;height:280px;scroll-snap-align:start;scroll-snap-stop:always;border-radius:var(--radius);
     overflow:hidden;cursor:pointer;position:relative;box-shadow:0 10px 24px rgba(var(--text-rgb),0.12);
   }
   .g-thumb img{height:100%;width:auto;object-fit:cover;display:block;transition:transform .5s ease;}

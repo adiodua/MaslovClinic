@@ -657,27 +657,16 @@
         openScrollY = null;
       }
     }, true);
-    let scrollTimer = null;
-    let lastY = window.scrollY;
+    // Close the panel if the visitor scrolls far away from where they
+    // opened it — the scroll-driven "floating drop" squish animation that
+    // used to live here has been removed (the button no longer reacts to
+    // scrolling at all, just sits still until hovered or clicked).
     window.addEventListener('scroll', function(){
       const y = window.scrollY;
       if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){
         panel.classList.remove('open');
         openScrollY = null;
       }
-      wrap.classList.add('scrolling');
-      const delta = y - lastY;
-      if(delta > 4){
-        wrap.classList.add('dir-down');
-        wrap.classList.remove('dir-up');
-        lastY = y;
-      } else if(delta < -4){
-        wrap.classList.add('dir-up');
-        wrap.classList.remove('dir-down');
-        lastY = y;
-      }
-      clearTimeout(scrollTimer);
-      scrollTimer = setTimeout(function(){ wrap.classList.remove('scrolling'); }, 400);
     }, {passive:true});
   })();
 

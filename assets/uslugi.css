@@ -254,24 +254,44 @@
   .hero-photo-zoom:hover img,.hero-photo-zoom:hover .hero-photo-zoom-ph{transform:scale(1.05);}
 
   
-  .mobile-multi-btn{position:fixed;right:18px;bottom:74px;z-index:150;}
+  /* Glass button — rose-gold ring, blue icon (currentColor via the SVG's own
+     stroke/fill), frosted translucent backdrop. Blue reuses the same
+     tooth-blue family as the language pill (#3f7ba3 / #79aed1) for
+     consistency across the site's floating UI. */
   .mobile-multi-btn button{
-    width:56px;height:56px;border-radius:50%;background:#1B4058;border:none;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;color:#c9a24b;
-    transition:opacity .2s ease;
-    animation:mmSquish 1.6s ease-in-out infinite;
-    animation-play-state:paused;
-    box-shadow:0 10px 28px rgba(var(--ink-rgb),0.25);
+    width:56px;height:56px;border-radius:50%;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.55);
+    border:1.5px solid #c9a08a;
+    backdrop-filter:blur(14px) saturate(180%);
+    -webkit-backdrop-filter:blur(14px) saturate(180%);
+    color:#3f7ba3;
+    box-shadow:0 10px 28px rgba(var(--text-rgb),0.2), inset 0 1px 0 rgba(255,255,255,.5);
+    transition:background .25s ease, border-color .25s ease, box-shadow .3s ease, transform .25s ease, color .25s ease;
   }
-  .mobile-multi-btn.scrolling button{animation-play-state:running;}
-  .mobile-multi-btn.dir-down button{transform-origin:top center;}
-  .mobile-multi-btn.dir-up button{transform-origin:bottom center;}
-  @keyframes mmSquish{
-    0%,100%{transform:scaleY(1) scaleX(1);}
-    50%{transform:scaleY(1.06) scaleX(0.94);}
+  [data-theme="dark"] .mobile-multi-btn button{
+    background:rgba(20,31,46,.55);
+    border-color:#d9a79b;
+    color:#79aed1;
+    box-shadow:0 10px 28px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.08);
   }
-  .mobile-multi-btn button:hover{opacity:.8;}
-  @media(prefers-reduced-motion:reduce){.mobile-multi-btn button{animation:none;}}
+  /* Hover — same language as the header's "Записаться" button
+     (.btn:hover further down: darken/intensify + a small lift), adapted to
+     this button's glass/rose-gold palette. */
+  .mobile-multi-btn button:hover{
+    background:rgba(255,255,255,.75);
+    border-color:#dba996;
+    color:#2c5f80;
+    box-shadow:0 0 0 6px rgba(201,160,138,.22), 0 14px 32px rgba(var(--text-rgb),0.26);
+    transform:translateY(-2px);
+  }
+  [data-theme="dark"] .mobile-multi-btn button:hover{
+    background:rgba(20,31,46,.72);
+    border-color:#e6bdae;
+    color:#9cc4e0;
+    box-shadow:0 0 0 6px rgba(217,167,150,.24), 0 14px 32px rgba(0,0,0,.5);
+  }
+  @media(prefers-reduced-motion:reduce){.mobile-multi-btn button{transition:none;}}
   .mobile-multi-btn .mm-panel{
     position:absolute;right:0;bottom:calc(100% + 14px);background:var(--paper);
     border:1px solid var(--divider);border-radius:var(--radius);
@@ -324,25 +344,6 @@
   }
   @media(max-width:860px){.nav-works-btn{display:none;}}
 
-  .mobile-multi-btn{display:none;}
-  .mobile-multi-btn button{
-    width:56px;height:56px;border-radius:50%;background:#1B4058;border:none;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;color:#c9a24b;
-    transition:opacity .2s ease;
-    animation:squish 1.6s ease-in-out infinite;
-    animation-play-state:paused;
-    box-shadow:0 10px 28px rgba(var(--text-rgb),0.25);
-  }
-  .mobile-multi-btn.scrolling button{animation-play-state:running;}
-  .mobile-multi-btn.dir-down button{transform-origin:top center;}
-  .mobile-multi-btn.dir-up button{transform-origin:bottom center;}
-  @keyframes squish{
-    0%,100%{transform:scaleY(1) scaleX(1);}
-    50%{transform:scaleY(1.06) scaleX(0.94);}
-  }
-  .mobile-multi-btn button:hover{opacity:.8;}
-  @media(prefers-reduced-motion:reduce){.mobile-multi-btn button{animation:none;}}
-  .mobile-multi-btn .phone-panel{right:0;left:auto;top:auto;bottom:calc(100% + 14px);transform-origin:bottom right;}
   .mobile-multi-btn{
     display:block;position:fixed;right:18px;bottom:74px;z-index:150;
   }
