@@ -5,6 +5,13 @@
 <script>
 (function(){
   try{
+    // Skip the auto-redirect entirely for search engine crawlers and other
+    // bots — they have no real "device language", so this would otherwise
+    // make every /ua/ page look like it permanently redirects to the RU
+    // version (and vice versa) to a bot with no stored preference, which
+    // stops search engines from indexing each language version at its own
+    // URL. Real visitors still get the convenience redirect below.
+    if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
     var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
     var stored = localStorage.getItem('mc-lang');
@@ -42,6 +49,9 @@
 <title>Профессиональная гигиена полости рта в Одессе — от 2000 грн | MaslovClinic</title>
 <meta name="description" content="Профессиональная гигиена полости рта в MaslovClinic на Аркадиевском плато. Снятие налёта и камня, полировка. Врач Маслов Вячеслав Алексеевич. Цена от 2000 грн.">
 <link rel="canonical" href="https://maslovclinic.com/uslugi/gigiena-polosti-rta.html">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/uslugi/gigiena-polosti-rta.html">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/uslugi/gigiena-polosti-rta.html">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/uslugi/gigiena-polosti-rta.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">

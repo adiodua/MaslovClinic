@@ -5,6 +5,13 @@
 <script>
 (function(){
   try{
+    // Skip the auto-redirect entirely for search engine crawlers and other
+    // bots — they have no real "device language", so this would otherwise
+    // make every /ua/ page look like it permanently redirects to the RU
+    // version (and vice versa) to a bot with no stored preference, which
+    // stops search engines from indexing each language version at its own
+    // URL. Real visitors still get the convenience redirect below.
+    if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
     var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
     var stored = localStorage.getItem('mc-lang');
@@ -42,6 +49,9 @@
 <title>MaslovClinic — спокойная стоматология полного цикла, Одесса</title>
 <meta name="description" content="MaslovClinic — тотальная реабилитация, имплантация и протезирование в спокойной обстановке. Одесса.">
 <link rel="canonical" href="https://maslovclinic.com/">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
@@ -2474,29 +2484,6 @@ const galleryData = [
     toggle.addEventListener('click', updateLogoForTheme);
   })();
 
-  // Google reviews: try to load live data from our own backend; if it fails, keep the static cards above
-  (function(){
-    function escapeHtml(s){
-      const d = document.createElement('div');
-      d.textContent = s || '';
-      return d.innerHTML;
-    }
-    fetch('/api/reviews')
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => {
-        if(!Array.isArray(data) || !data.length) return;
-        const wall = document.getElementById('reviewsWall');
-        wall.innerHTML = data.map(r => `
-          <div class="review-card">
-            <div class="stars">${'★'.repeat(Math.round(r.rating || 5))}</div>
-            <div class="name">${escapeHtml(r.author)}</div>
-            <div class="date">${escapeHtml(r.relativeTime || '')}</div>
-            <p>${escapeHtml(r.text)}</p>
-          </div>
-        `).join('');
-      })
-      .catch(() => { /* backend not ready yet — static reviews stay as-is */ });
-  })();
 </script>
 
 <div class="vtour" id="vtour" data-state="bubble">
