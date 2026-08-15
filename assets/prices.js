@@ -1,13 +1,14 @@
-// Live price injection. Every page ships with the current prices baked
-// into the HTML as a fallback (so it looks correct even if this script is
-// blocked, slow, or the visitor has JS disabled). On load, this fetches the
-// single shared assets/prices.json and overwrites any element carrying a
-// data-price / data-price-range attribute with the live value — so changing
-// a price once in the admin panel updates every mention of it across every
-// page, in both languages, including inline prose, without editing HTML.
+// Живая подстановка цен. На каждой странице актуальные на момент публикации
+// цены уже вписаны прямо в HTML как запасной вариант (fallback) — так страница
+// выглядит корректно, даже если этот скрипт заблокирован, грузится медленно
+// или у посетителя отключён JS. При загрузке скрипт подтягивает общий файл
+// assets/prices.json и переписывает текст в любом элементе с атрибутом
+// data-price / data-price-range на актуальное значение — так изменение цены
+// один раз в админке обновляет все её упоминания сразу на всех страницах, в
+// обоих языках, включая цены внутри обычного текста, без правки HTML.
 (function () {
   function fmt(n) {
-    // 29400 -> "29 400" (matches the site's existing thousands-separator style)
+    // 29400 -> "29 400" (тот же формат разделителя тысяч, что уже на сайте)
     return String(Math.round(Number(n))).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   }
 
@@ -15,10 +16,10 @@
     document.querySelectorAll('[data-price]').forEach(function (el) {
       var key = el.getAttribute('data-price');
       var val = data[key];
-      if (val === undefined || val === null) return; // unknown key: keep baked-in fallback text
+      if (val === undefined || val === null) return; // ключ неизвестен: оставляем вписанный в HTML текст
       if (el.hasAttribute('data-price-bare')) {
-        // Just the number — used when "грн" or other wording already
-        // lives as static text next to the span (e.g. "от X до Y грн").
+        // Только число — используется, когда «грн» или другое слово уже
+        // есть рядом как статичный текст (например «от X до Y грн»).
         el.textContent = fmt(val);
         return;
       }
@@ -40,5 +41,5 @@
   fetch('/assets/prices.json', { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (data) { if (data) applyPrices(data); })
-    .catch(function () { /* offline or blocked — baked-in prices stay as-is */ });
+    .catch(function () { /* нет сети или заблокировано — вписанные в HTML цены остаются как есть */ });
 })();

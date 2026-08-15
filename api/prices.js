@@ -1,17 +1,17 @@
-// Vercel serverless function: GET returns current prices, PUT updates them
-// by committing assets/prices.json straight to the GitHub Pages repo (so
-// GitHub Pages republishes the site automatically, same as any other commit).
+// Serverless-функция для Vercel: GET отдаёт текущие цены, PUT обновляет их,
+// коммитя assets/prices.json прямо в репозиторий GitHub Pages (после чего
+// GitHub Pages сам republish-ит сайт, как при любом другом коммите).
 //
-// Required environment variables (set in the Vercel project settings):
-//   ADMIN_PASSWORD   - shared password the admin page must send
-//   GITHUB_TOKEN     - a GitHub personal access token with "repo" scope
-//                      (Contents: Read and write) on the site repo
-//   GITHUB_REPO      - "owner/repo", e.g. "yourname/MaslovClinic"
-//   GITHUB_BRANCH    - branch GitHub Pages deploys from, e.g. "main"
+// Нужные переменные окружения (задаются в настройках проекта на Vercel):
+//   ADMIN_PASSWORD   - общий пароль, который должна присылать админка
+//   GITHUB_TOKEN     - персональный токен GitHub с правом
+//                      Contents: Read and write на репозиторий сайта
+//   GITHUB_REPO      - "владелец/репозиторий", например "yourname/MaslovClinic"
+//   GITHUB_BRANCH    - ветка, из которой публикует GitHub Pages, например "main"
 //
-// No database: the repo's assets/prices.json IS the database. This keeps
-// the whole system to "one file, one function" instead of adding a new
-// storage service.
+// Без базы данных: сам assets/prices.json в репозитории И ЕСТЬ база. Так
+// вся система остаётся в формате «один файл, одна функция» вместо того,
+// чтобы заводить отдельное хранилище.
 
 const GITHUB_API = "https://api.github.com";
 const FILE_PATH = "assets/prices.json";
@@ -38,7 +38,7 @@ async function githubRequest(path, opts = {}) {
 }
 
 module.exports = async function handler(req, res) {
-  // Allow the admin page (hosted on maslovclinic.com) to call this API.
+  // Разрешаем странице админки (на maslovclinic.com) вызывать этот API.
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Admin-Password");
@@ -73,14 +73,14 @@ module.exports = async function handler(req, res) {
         }
       }
 
-      // Need the current file SHA to commit an update (GitHub requires it).
+      // Для коммита обновления нужен SHA текущего файла (это требование GitHub).
       const current = await githubRequest(getPath);
       const newContent = JSON.stringify(prices, null, 2) + "\n";
 
       await githubRequest(`/repos/${repo}/contents/${FILE_PATH}`, {
         method: "PUT",
         body: JSON.stringify({
-          message: "Update prices via admin panel",
+          message: "Обновление цен через админку",
           content: Buffer.from(newContent, "utf-8").toString("base64"),
           sha: current.sha,
           branch,

@@ -2,5 +2,5 @@
   "name": "maslovclinic-prices-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Serverless API backing the MaslovClinic price admin panel. Reads/writes assets/prices.json in the site's GitHub repo."
+  "description": "Serverless API для админки цен MaslovClinic. Читает и пишет assets/prices.json в GitHub-репозитории сайта."
 }
