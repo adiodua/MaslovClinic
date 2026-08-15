@@ -303,12 +303,12 @@
 <div class="wrap">
   <div class="price-native">
     <h3>Вартість</h3>
-    <div class="price-row"><span>Металеві брекети (1 щелепа)</span><span>29 400 грн</span></div>
-    <div class="price-row"><span>Керамічні брекети (1 щелепа)</span><span>42 000 грн</span></div>
-    <div class="price-row"><span>Незнімні ортодонтичні апарати</span><span>7 500–12 500 грн</span></div>
-    <div class="price-row"><span>Знімні ортодонтичні апарати</span><span>8 500–13 500 грн</span></div>
-    <div class="price-row"><span>Елайнери (Україна)</span><span>45 000–155 000 грн</span></div>
-    <div class="price-row"><span>Елайнери (Invisalign)</span><span>175 000–270 000 грн</span></div>
+    <div class="price-row"><span>Металеві брекети (1 щелепа)</span><span data-price="brekety-metal">29 400 грн</span></div>
+    <div class="price-row"><span>Керамічні брекети (1 щелепа)</span><span data-price="brekety-ceramic">42 000 грн</span></div>
+    <div class="price-row"><span>Незнімні ортодонтичні апарати</span><span data-price-range="brekety-fixed-min,brekety-fixed-max">7 500–12 500 грн</span></div>
+    <div class="price-row"><span>Знімні ортодонтичні апарати</span><span data-price-range="brekety-removable-min,brekety-removable-max">8 500–13 500 грн</span></div>
+    <div class="price-row"><span>Елайнери (Україна)</span><span data-price-range="aligners-ua-min,aligners-ua-max">45 000–155 000 грн</span></div>
+    <div class="price-row"><span>Елайнери (Invisalign)</span><span data-price-range="aligners-invisalign-min,aligners-invisalign-max">175 000–270 000 грн</span></div>
   </div>
 </div>
 
@@ -322,23 +322,23 @@
     <div class="grid-3">
       <div class="card">
         <h3>Металеві брекети</h3>
-        <p>Від 29 400 грн за одну щелепу — надійна класика з найшвидшою і передбачуваною корекцією прикусу.</p>
+        <p>Від <span data-price="brekety-metal">29 400 грн</span> за одну щелепу — надійна класика з найшвидшою і передбачуваною корекцією прикусу.</p>
       </div>
       <div class="card">
         <h3>Керамічні брекети</h3>
-        <p>Від 42 000 грн за одну щелепу — збігаються за кольором з емаллю, менш помітні на фото та при спілкуванні.</p>
+        <p>Від <span data-price="brekety-ceramic">42 000 грн</span> за одну щелепу — збігаються за кольором з емаллю, менш помітні на фото та при спілкуванні.</p>
       </div>
       <div class="card">
         <h3>Знімні та незнімні апарати</h3>
-        <p>Від 7 500 грн — для дітей і нескладних випадків корекції, альтернатива брекет-системі.</p>
+        <p>Від <span data-price="brekety-fixed-min">7 500 грн</span> — для дітей і нескладних випадків корекції, альтернатива брекет-системі.</p>
       </div>
       <div class="card">
         <h3>Елайнери (Україна)</h3>
-        <p>Від 45 000 грн за курс — прозорі капи українського виробництва, непомітні на зубах і знімаються на час їжі.</p>
+        <p>Від <span data-price="aligners-ua-min">45 000 грн</span> за курс — прозорі капи українського виробництва, непомітні на зубах і знімаються на час їжі.</p>
       </div>
       <div class="card">
         <h3>Елайнери Invisalign</h3>
-        <p>Від 175 000 грн за курс — преміум-система елайнерів з точним прогнозованим планом переміщення зубів.</p>
+        <p>Від <span data-price="aligners-invisalign-min">175 000 грн</span> за курс — преміум-система елайнерів з точним прогнозованим планом переміщення зубів.</p>
       </div>
     </div>
   </div>
@@ -421,7 +421,7 @@
       </details>
       <details>
         <summary>Скільки коштує курс елайнерів?</summary>
-        <p>Елайнери українського виробництва — від 45 000 до 155 000 грн за курс, Invisalign — від 175 000 до 270 000 грн. Точна вартість залежить від складності корекції та кількості кап у серії.</p>
+        <p>Елайнери українського виробництва — від <span data-price="aligners-ua-min" data-price-bare>45 000</span> до <span data-price="aligners-ua-max" data-price-bare>155 000</span> грн за курс, Invisalign — від <span data-price="aligners-invisalign-min" data-price-bare>175 000</span> до <span data-price="aligners-invisalign-max" data-price-bare>270 000</span> грн. Точна вартість залежить від складності корекції та кількості кап у серії.</p>
       </details>
     </div>
   </div>
@@ -695,5 +695,6 @@
 })();
 </script>
 
+<script src="/assets/prices.js" defer></script>
 </body>
 </html>

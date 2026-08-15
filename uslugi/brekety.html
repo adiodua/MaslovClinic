@@ -304,12 +304,12 @@
 <div class="wrap">
   <div class="price-native">
     <h3>Стоимость</h3>
-    <div class="price-row"><span>Металлические брекеты (1 челюсть)</span><span>29 400 грн</span></div>
-    <div class="price-row"><span>Керамические брекеты (1 челюсть)</span><span>42 000 грн</span></div>
-    <div class="price-row"><span>Несъёмные ортодонтические аппараты</span><span>7 500–12 500 грн</span></div>
-    <div class="price-row"><span>Съёмные ортодонтические аппараты</span><span>8 500–13 500 грн</span></div>
-    <div class="price-row"><span>Элайнеры (Украина)</span><span>45 000–155 000 грн</span></div>
-    <div class="price-row"><span>Элайнеры (Invisalign)</span><span>175 000–270 000 грн</span></div>
+    <div class="price-row"><span>Металлические брекеты (1 челюсть)</span><span data-price="brekety-metal">29 400 грн</span></div>
+    <div class="price-row"><span>Керамические брекеты (1 челюсть)</span><span data-price="brekety-ceramic">42 000 грн</span></div>
+    <div class="price-row"><span>Несъёмные ортодонтические аппараты</span><span data-price-range="brekety-fixed-min,brekety-fixed-max">7 500–12 500 грн</span></div>
+    <div class="price-row"><span>Съёмные ортодонтические аппараты</span><span data-price-range="brekety-removable-min,brekety-removable-max">8 500–13 500 грн</span></div>
+    <div class="price-row"><span>Элайнеры (Украина)</span><span data-price-range="aligners-ua-min,aligners-ua-max">45 000–155 000 грн</span></div>
+    <div class="price-row"><span>Элайнеры (Invisalign)</span><span data-price-range="aligners-invisalign-min,aligners-invisalign-max">175 000–270 000 грн</span></div>
   </div>
 </div>
 
@@ -323,23 +323,23 @@
     <div class="grid-3">
       <div class="card">
         <h3>Металлические брекеты</h3>
-        <p>От 29 400 грн за одну челюсть — надёжная классика с самой быстрой и предсказуемой коррекцией прикуса.</p>
+        <p>От <span data-price="brekety-metal">29 400 грн</span> за одну челюсть — надёжная классика с самой быстрой и предсказуемой коррекцией прикуса.</p>
       </div>
       <div class="card">
         <h3>Керамические брекеты</h3>
-        <p>От 42 000 грн за одну челюсть — совпадают по цвету с эмалью, менее заметны на фото и при общении.</p>
+        <p>От <span data-price="brekety-ceramic">42 000 грн</span> за одну челюсть — совпадают по цвету с эмалью, менее заметны на фото и при общении.</p>
       </div>
       <div class="card">
         <h3>Съёмные и несъёмные аппараты</h3>
-        <p>От 7 500 грн — для детей и несложных случаев коррекции, альтернатива брекет-системе.</p>
+        <p>От <span data-price="brekety-fixed-min">7 500 грн</span> — для детей и несложных случаев коррекции, альтернатива брекет-системе.</p>
       </div>
       <div class="card">
         <h3>Элайнеры (Украина)</h3>
-        <p>От 45 000 грн за курс — прозрачные капы украинского производства, незаметны на зубах и снимаются на время еды.</p>
+        <p>От <span data-price="aligners-ua-min">45 000 грн</span> за курс — прозрачные капы украинского производства, незаметны на зубах и снимаются на время еды.</p>
       </div>
       <div class="card">
         <h3>Элайнеры Invisalign</h3>
-        <p>От 175 000 грн за курс — премиум-система элайнеров с точным прогнозируемым планом перемещения зубов.</p>
+        <p>От <span data-price="aligners-invisalign-min">175 000 грн</span> за курс — премиум-система элайнеров с точным прогнозируемым планом перемещения зубов.</p>
       </div>
     </div>
   </div>
@@ -422,7 +422,7 @@
       </details>
       <details>
         <summary>Сколько стоит курс элайнеров?</summary>
-        <p>Элайнеры украинского производства — от 45 000 до 155 000 грн за курс, Invisalign — от 175 000 до 270 000 грн. Точная стоимость зависит от сложности коррекции и количества кап в серии.</p>
+        <p>Элайнеры украинского производства — от <span data-price="aligners-ua-min" data-price-bare>45 000</span> до <span data-price="aligners-ua-max" data-price-bare>155 000</span> грн за курс, Invisalign — от <span data-price="aligners-invisalign-min" data-price-bare>175 000</span> до <span data-price="aligners-invisalign-max" data-price-bare>270 000</span> грн. Точная стоимость зависит от сложности коррекции и количества кап в серии.</p>
       </details>
     </div>
   </div>
@@ -696,5 +696,6 @@
 })();
 </script>
 
+<script src="/assets/prices.js" defer></script>
 </body>
 </html>

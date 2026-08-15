@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>MaslovClinic — админка цен</title>
+<style>
+  :root{
+    --bg:#0f1418; --panel:#161c22; --border:#26303a; --text:#eef2f5; --text-muted:#9aa7b0;
+    --accent:#c9a24b; --accent-hover:#dcb662; --danger:#e0654f; --ok:#4caf7d;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
+  .wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px;}
+  h1{font-size:22px;margin:0 0 6px;}
+  .sub{color:var(--text-muted);font-size:14px;margin:0 0 28px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;}
+  .login-row{display:flex;gap:10px;flex-wrap:wrap;}
+  input[type=password], input[type=number], input[type=text]{
+    background:#0c1014;border:1px solid var(--border);color:var(--text);border-radius:8px;
+    padding:10px 12px;font-size:14px;width:100%;
+  }
+  button{
+    background:var(--accent);color:#1a1406;border:none;border-radius:8px;padding:10px 18px;
+    font-size:14px;font-weight:600;cursor:pointer;
+  }
+  button:hover{background:var(--accent-hover);}
+  button:disabled{opacity:.5;cursor:default;}
+  button.secondary{background:transparent;border:1px solid var(--border);color:var(--text);}
+  .group{margin-bottom:22px;}
+  .group h2{font-size:15px;color:var(--accent);margin:0 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px;}
+  .row{display:flex;align-items:center;gap:12px;padding:6px 0;}
+  .row label{flex:1;font-size:14px;color:var(--text);}
+  .row .field{width:150px;}
+  .row .suffix{color:var(--text-muted);font-size:13px;width:34px;}
+  #app{display:none;}
+  #status{font-size:13px;margin-top:14px;min-height:18px;}
+  #status.ok{color:var(--ok);}
+  #status.err{color:var(--danger);}
+  .actions{position:sticky;bottom:0;background:var(--bg);padding:16px 0;display:flex;gap:10px;
+    border-top:1px solid var(--border);margin-top:10px;}
+  .hint{color:var(--text-muted);font-size:12px;margin-top:4px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Цены MaslovClinic</h1>
+  <p class="sub">Изменения здесь применяются сразу на всех 52 страницах сайта, на обоих языках — и в прайс-таблицах, и в тексте.</p>
+
+  <div class="card" id="loginCard">
+    <div class="login-row">
+      <input type="password" id="pwd" placeholder="Пароль администратора" autocomplete="current-password">
+      <button id="loginBtn">Войти</button>
+    </div>
+    <div id="loginStatus" class="hint"></div>
+  </div>
+
+  <div id="app">
+    <div id="groups"></div>
+    <div class="actions">
+      <button id="saveBtn">Сохранить и опубликовать</button>
+      <button id="reloadBtn" class="secondary">Обновить с сайта</button>
+    </div>
+    <div id="status"></div>
+  </div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Configure this once after deploying the backend (see prices-api/README.md).
+// ---------------------------------------------------------------------------
+const API_BASE = "https://maslovclinic-prices-api.vercel.app"; // <-- set to your deployed API URL
+
+// Friendly labels + grouping for the admin form. Keys must match assets/prices.json.
+const GROUPS = [
+  { title: "Диагностика", keys: [
+    ["diagnostika-from", "Цена «от» (в карточке услуги)"],
+    ["diagnostika-consult", "Первичная консультация"],
+    ["diagnostika-photo-targeted", "Прицельный снимок"],
+    ["diagnostika-photo-panoramic", "Панорамный снимок"],
+    ["diagnostika-ct", "КТ двух челюстей"],
+    ["diagnostika-scan", "Сканирование двух челюстей"],
+    ["diagnostika-photo-protocol", "Фотопротокол"],
+  ]},
+  { title: "Гигиена полости рта", keys: [
+    ["gigiena-from", "Цена «от» (в карточке услуги)"],
+    ["gigiena-professional", "Профессиональная гигиена"],
+  ]},
+  { title: "Отбеливание", keys: [
+    ["otbelivanie-from", "Цена «от» (в карточке услуги)"],
+    ["otbelivanie-beyond-polus", "Beyond Polus, 1 этап"],
+  ]},
+  { title: "Терапевтическое лечение", keys: [
+    ["terapiya-from", "Цена «от» (в карточке услуги)"],
+    ["terapiya-restoration", "Реставрация зуба"],
+  ]},
+  { title: "Эндодонтическое лечение", keys: [
+    ["endodontiya-from", "Цена «от» (в карточке услуги)"],
+    ["endodontiya-treatment", "Лечение корневых каналов"],
+  ]},
+  { title: "Ортодонтия (брекеты, элайнеры)", keys: [
+    ["brekety-from", "Цена «от» (в карточке услуги)"],
+    ["brekety-metal", "Металлические брекеты (1 челюсть)"],
+    ["brekety-ceramic", "Керамические брекеты (1 челюсть)"],
+    ["brekety-fixed-min", "Несъёмные аппараты — от"],
+    ["brekety-fixed-max", "Несъёмные аппараты — до"],
+    ["brekety-removable-min", "Съёмные аппараты — от"],
+    ["brekety-removable-max", "Съёмные аппараты — до"],
+    ["aligners-ua-min", "Элайнеры (Украина) — от"],
+    ["aligners-ua-max", "Элайнеры (Украина) — до"],
+    ["aligners-invisalign-min", "Элайнеры (Invisalign) — от"],
+    ["aligners-invisalign-max", "Элайнеры (Invisalign) — до"],
+  ]},
+  { title: "Коронки и виниры", keys: [
+    ["koronki-from", "Цена «от» (в карточке услуги)"],
+    ["koronki-ceramic", "Керамическая коронка"],
+    ["viniry-ceramic", "Керамический винир"],
+  ]},
+  { title: "Хирургическое лечение", keys: [
+    ["hirurgiya-from", "Цена «от» (в карточке услуги)"],
+    ["extraction-baby", "Удаление молочного зуба"],
+    ["extraction-simple", "Удаление зуба (простое)"],
+    ["extraction-complex", "Удаление зуба (сложное)"],
+    ["extraction-impacted", "Удаление атипично ретинированного зуба"],
+  ]},
+  { title: "Имплантация", keys: [
+    ["implant-from", "Цена «от» (в карточке услуги)"],
+    ["implant-jdental", "Имплант JDental"],
+    ["implant-straumann", "Имплант Straumann"],
+    ["implant-nobel", "Имплант Nobel Biocare"],
+  ]},
+  { title: "Седация", keys: [
+    ["sedatsiya-from", "Цена «от» (в карточке услуги)"],
+    ["sedatsiya-first-hour", "Первый час"],
+    ["sedatsiya-next-hour", "Следующий час"],
+  ]},
+];
+
+let currentPassword = "";
+
+const loginCard = document.getElementById("loginCard");
+const app = document.getElementById("app");
+const groupsEl = document.getElementById("groups");
+const statusEl = document.getElementById("status");
+const loginStatusEl = document.getElementById("loginStatus");
+
+document.getElementById("loginBtn").addEventListener("click", login);
+document.getElementById("pwd").addEventListener("keydown", e => { if (e.key === "Enter") login(); });
+document.getElementById("saveBtn").addEventListener("click", save);
+document.getElementById("reloadBtn").addEventListener("click", () => loadPrices());
+
+async function login() {
+  const pwd = document.getElementById("pwd").value;
+  if (!pwd) return;
+  loginStatusEl.textContent = "Проверяю...";
+  try {
+    const res = await fetch(API_BASE + "/api/prices", { headers: { "X-Admin-Password": pwd } });
+    if (!res.ok) throw new Error(res.status === 401 ? "Неверный пароль" : "Ошибка сервера (" + res.status + ")");
+    const data = await res.json();
+    currentPassword = pwd;
+    loginCard.style.display = "none";
+    app.style.display = "block";
+    renderForm(data);
+  } catch (e) {
+    loginStatusEl.textContent = e.message;
+  }
+}
+
+async function loadPrices() {
+  statusEl.className = "";
+  statusEl.textContent = "Обновляю...";
+  try {
+    const res = await fetch(API_BASE + "/api/prices", { headers: { "X-Admin-Password": currentPassword } });
+    if (!res.ok) throw new Error("Ошибка загрузки (" + res.status + ")");
+    const data = await res.json();
+    renderForm(data);
+    statusEl.className = "ok";
+    statusEl.textContent = "Обновлено.";
+  } catch (e) {
+    statusEl.className = "err";
+    statusEl.textContent = e.message;
+  }
+}
+
+function renderForm(data) {
+  groupsEl.innerHTML = "";
+  GROUPS.forEach(group => {
+    const g = document.createElement("div");
+    g.className = "group";
+    const h = document.createElement("h2");
+    h.textContent = group.title;
+    g.appendChild(h);
+    group.keys.forEach(([key, label]) => {
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML =
+        '<label for="f-' + key + '">' + label + '</label>' +
+        '<div class="field"><input type="number" id="f-' + key + '" data-key="' + key + '" value="' + (data[key] ?? "") + '" min="0" step="1"></div>' +
+        '<div class="suffix">грн</div>';
+      g.appendChild(row);
+    });
+    groupsEl.appendChild(g);
+  });
+}
+
+async function save() {
+  const inputs = groupsEl.querySelectorAll("input[data-key]");
+  const prices = {};
+  for (const input of inputs) {
+    const v = Number(input.value);
+    if (!Number.isFinite(v) || v < 0) {
+      statusEl.className = "err";
+      statusEl.textContent = "Проверьте значение: " + input.id;
+      return;
+    }
+    prices[input.dataset.key] = v;
+  }
+  document.getElementById("saveBtn").disabled = true;
+  statusEl.className = "";
+  statusEl.textContent = "Публикую на сайте...";
+  try {
+    const res = await fetch(API_BASE + "/api/prices", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json", "X-Admin-Password": currentPassword },
+      body: JSON.stringify({ prices }),
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => "");
+      throw new Error("Не сохранилось (" + res.status + "). " + body);
+    }
+    statusEl.className = "ok";
+    statusEl.textContent = "Сохранено. Сайт обновится в течение 1–2 минут.";
+  } catch (e) {
+    statusEl.className = "err";
+    statusEl.textContent = e.message;
+  } finally {
+    document.getElementById("saveBtn").disabled = false;
+  }
+}
+</script>
+</body>
+</html>
