@@ -117,6 +117,73 @@
   .timeline h4{margin:0 0 4px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;}
   .timeline p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
 
+  /* Cert timeline — alternating zigzag with central line */
+  .cert-timeline-wrap{
+    position:relative;
+    max-width:820px;margin-left:auto;margin-right:auto;
+  }
+  .cert-timeline-wrap::before{
+    content:'';position:absolute;left:50%;top:6px;bottom:6px;width:2px;
+    background:var(--divider);
+    transform:translateX(-50%);
+  }
+  .cert-timeline{list-style:none;padding:0;margin:0;position:relative;}
+  .cert-timeline-progress{
+    position:absolute;left:50%;top:6px;width:2px;height:0;
+    background:linear-gradient(var(--gold), var(--accent));
+    transform:translateX(-50%);
+    transition:height .4s ease;
+    z-index:1;
+  }
+  .cert-timeline li{
+    position:relative;width:calc(50% - 30px);margin-bottom:22px;
+    border-bottom:none;padding:0;display:block;
+  }
+  .cert-timeline li:nth-child(odd){margin-left:0;text-align:right;}
+  .cert-timeline li:nth-child(even){margin-left:calc(50% + 30px);text-align:left;}
+  .cert-timeline li::after{
+    content:'';position:absolute;top:18px;width:10px;height:10px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--divider);box-shadow:0 0 0 0 rgba(201,162,75,0);
+    z-index:2;transition:background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+  }
+  .cert-timeline li.seen::after{
+    background:var(--gold);border-color:var(--gold);
+    box-shadow:0 0 0 4px rgba(201,162,75,.25);
+    transform:scale(1.2);
+  }
+  .cert-timeline li.seen .cert-card-inner{border-color:var(--gold);}
+  .cert-timeline li:nth-child(odd)::after{right:-35px;}
+  .cert-timeline li:nth-child(even)::after{left:-35px;}
+  .cert-timeline .cert-card-inner{
+    transition:border-color .35s ease;
+    display:inline-block;text-align:left;max-width:100%;
+    background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .cert-timeline .year{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.06em;color:var(--gold);text-transform:uppercase;}
+  .cert-timeline h4{margin:5px 0 3px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;line-height:1.3;}
+  .cert-timeline p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;}
+  .cert-timeline li.cert-hidden{display:none;}
+
+  .cert-thumb-btn{
+    display:inline-flex;align-items:center;gap:10px;margin-top:10px;padding:4px;
+    background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;
+    color:var(--accent);font-size:13px;font-weight:600;
+  }
+  .cert-thumb-btn img.cert-thumb{
+    width:40px;height:40px;object-fit:cover;border-radius:4px;
+    border:1px solid var(--divider);flex-shrink:0;
+  }
+  .cert-thumb-btn:hover span{text-decoration:underline;}
+  .timeline-more-wrap{text-align:center;margin-top:28px;}
+  .timeline-more-btn{
+    font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+    padding:12px 28px;border-radius:999px;border:1px solid var(--gold);
+    background:none;color:var(--ink);cursor:pointer;transition:background .2s ease,color .2s ease;
+  }
+  .timeline-more-btn:hover{background:var(--gold);color:var(--navy);}
+
   .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
   .proc-card{
     background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
@@ -143,7 +210,7 @@
   .mobile-lead-below{display:none;}
   @media(max-width:760px){
     .doc-hero-grid{grid-template-columns:1fr;}
-    .doc-hero-grid > img{display:none !important;}
+    .doc-hero-grid > picture{display:none !important;}
     .hero{
       background:linear-gradient(180deg,
         rgba(14,37,64,.35) 0%,
@@ -167,6 +234,12 @@
     .doc-photo-slot{max-width:220px;margin:0 auto;}
     .proc-grid{grid-template-columns:1fr;}
     .timeline li{grid-template-columns:80px 1fr;}
+    .cert-thumb-btn img.cert-thumb{width:36px;height:36px;}
+    .cert-timeline-wrap::before{left:9px;transform:none;}
+    .cert-timeline-progress{left:9px;transform:none;}
+    .cert-timeline li{width:auto;margin-left:26px !important;text-align:left !important;}
+    .cert-timeline li::after{left:-22px !important;right:auto !important;}
+    .cert-timeline .cert-card-inner{display:block;padding:14px 16px;}
   }
 </style>
 
@@ -321,7 +394,7 @@
     <div class="doc-hero-grid">
       <picture>
           <source srcset="/img/vrachi/voloshina-elena-portrait.webp" type="image/webp">
-          <img width="800" height="1200" loading="lazy" decoding="async" src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Олена Сергіївна — лікар-пародонтолог MaslovClinic" style="width:100%;border-radius:6px;display:block;object-fit:cover;aspect-ratio:3/4;">
+          <img width="800" height="1200" loading="lazy" decoding="async" src="/img/vrachi/voloshina-elena-portrait.jpg" alt="Волошина Олена Сергіївна — лікар-пародонтолог MaslovClinic" style="width:100%;height:auto;border-radius:6px;display:block;object-fit:cover;aspect-ratio:3/4;">
         </picture>
       <div>
         <span class="eyebrow">Лікар · MaslovClinic</span>
@@ -363,6 +436,48 @@
   </div>
 </section>
 
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Шлях лікаря</span>
+      <h2>Навчання та сертифікати</h2>
+      <p>Курси, конгреси та майстер-класи з пародонтології та гігієни порожнини рота з 2014 року.</p>
+    </div>
+    <div class="cert-timeline-wrap" id="certTimelineWrap">
+    <div class="cert-timeline-progress" id="certProgress"></div>
+    <ul class="timeline cert-timeline" id="certTimeline">
+      <li data-idx="0"><div class="cert-card-inner"><span class="year">2026</span><h4>Всеукраїнська спілка дистанційного навчання лікарів — «Біла та рожева естетика в стоматології», 22 години</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2026-bila-rozheva-estetika.jpg" alt="Сертифікат «Біла та рожева естетика», 2026"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="1"><div class="cert-card-inner"><span class="year">2026</span><h4>DENTORIA Study Center / Alpha Dent — «Double Gum», Модуль 3 — Рецесії</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2026-doublegum-modul-3.jpg" alt="Сертифікат Double Gum, Модуль 3, 2026"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="2"><div class="cert-card-inner"><span class="year">2026</span><h4>DENTORIA Study Center / Alpha Dent — «Double Gum», Модуль 2 — Об'єм м'яких тканин навколо імплантата</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2026-doublegum-modul-2.jpg" alt="Сертифікат Double Gum, Модуль 2, 2026"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="3"><div class="cert-card-inner"><span class="year">2026</span><h4>DENTORIA Study Center / Alpha Dent — «Double Gum», Модуль 1 — Вестибулопластика</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2026-doublegum-modul-1.jpg" alt="Сертифікат Double Gum, Модуль 1, 2026"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="4"><div class="cert-card-inner"><span class="year">2024</span><h4>perio education — «Основні методи закриття рецесій на зубах та імплантатах», 20 годин</h4><p>Львів</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2024-perio-education-recesii.jpg" alt="Сертифікат perio education, рецесії, 2024"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="5"><div class="cert-card-inner"><span class="year">2024</span><h4>UP&DO Academy — «Пластика ясен по техніці Джовані Зукеллі. Закриття одиночних та множинних рецесій» (М3–М4), 16 годин</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2024-updo-plastika-yasen.jpg" alt="Сертифікат UP&DO, пластика ясен, 2024"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="6"><div class="cert-card-inner"><span class="year">2024</span><h4>UP&DO Academy — «Тунельна техніка. Можливості відновлення м'яких тканин хірургічним шляхом», 8 годин</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2024-updo-tunelna-tehnika.jpg" alt="Сертифікат UP&DO, тунельна техніка, 2024"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="7"><div class="cert-card-inner"><span class="year">2024</span><h4>UP&DO Academy — «Старт в періохірургію. Методологія хірургічного етапу», 8 годин</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2024-updo-start-periohirurgiyu.jpg" alt="Сертифікат UP&DO, старт в періохірургію, 2024"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="8"><div class="cert-card-inner"><span class="year">2019</span><h4>AID Brothers — «BLS (Basic Life Support). Базова підтримка життя», 8 годин</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2019-aid-bls.jpg" alt="Сертифікат AID Brothers, BLS, 2019"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="9"><div class="cert-card-inner"><span class="year">2019</span><h4>TePe / IN·SPE / Hu-Friedy — «Гігієна на імплантатах»</h4><p>Львів</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2019-tepe-gigiena-implantaty.jpg" alt="Сертифікат TePe, гігієна на імплантатах, 2019"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="10"><div class="cert-card-inner"><span class="year">2019</span><h4>Amazing White — Certificate of Excellence, просунуте відбілювання зубів</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2019-amazing-white.jpg" alt="Сертифікат Amazing White, 2019"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="11"><div class="cert-card-inner"><span class="year">2018</span><h4>UAP (Українська академія пародонтології) — «Мікропародонтологічний протокол в практиці гігієніста»</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2018-uap-mikroparodontologichny-protokol.jpg" alt="Сертифікат UAP, мікропародонтологічний протокол, 2018"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="12"><div class="cert-card-inner"><span class="year">2018</span><h4>UAP — «Нехірургічна пародонтологія»</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2018-uap-nehirurgichna-parodontologiya.jpg" alt="Сертифікат UAP, нехірургічна пародонтологія, 2018"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="13"><div class="cert-card-inner"><span class="year">2018</span><h4>PeriSchool — «Нехірургічна пародонтологія. Основна концепція ведення гігієнічного прийому»</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2018-perischool-nehirurgichna-parodontologiya.jpg" alt="Сертифікат PeriSchool, нехірургічна пародонтологія, 2018"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="14"><div class="cert-card-inner"><span class="year">2017</span><h4>UAP Hygienist — «Методи діагностики в практиці гігієніста. Зондування, індекси та рентгенографія», 6 годин</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2017-uap-metodi-diagnostiki.jpg" alt="Сертифікат UAP Hygienist, методи діагностики, 2017"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="15"><div class="cert-card-inner"><span class="year">2017</span><h4>UAP Hygienist — Конгрес гігієністів</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2017-uap-kongres-gigienistiv.jpg" alt="Сертифікат UAP Hygienist, конгрес, 2017"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="16"><div class="cert-card-inner"><span class="year">2017</span><h4>«I-PRF методика в щоденній практиці стоматолога»</h4><p>Львів</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2017-i-prf-metodika.jpg" alt="Сертифікат I-PRF методика, 2017"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="17"><div class="cert-card-inner"><span class="year">2017</span><h4>MAXIMUS — «Призначення та використання засобів гігієни ротової порожнини в стоматологічних клініках та в домашніх умовах з урахуванням індивідуальних потреб пацієнтів» (лектор Олена Доценко)</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2017-maximus-zasoby-gigieny.jpg" alt="Сертифікат MAXIMUS, засоби гігієни, 2017"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="18"><div class="cert-card-inner"><span class="year">2016</span><h4>UAP — Конгрес «Пародонтологія кожному»</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2016-uap-kongres-parodontologiya-kozhnomu.jpg" alt="Сертифікат UAP, конгрес «Пародонтологія кожному», 2016"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="19"><div class="cert-card-inner"><span class="year">2016</span><h4>НМАПО ім. П.Л. Шупика — «Практичні аспекти клінічної пародонтології» (лектор Коритник О.В.)</h4><p>Київ</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2016-nmapo-klinichna-parodontologiya.jpg" alt="Сертифікат НМАПО, клінічна пародонтологія, 2016"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="20"><div class="cert-card-inner"><span class="year">2016</span><h4>PearlStom Training Centre — «Periodontal alphabet from A to Z» (Пародонтологічний алфавіт від А до Я)</h4><p>Одеса</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2016-pearlstom-periodontal-alphabet.jpg" alt="Сертифікат PearlStom, Periodontal alphabet, 2016"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="21"><div class="cert-card-inner"><span class="year">2016</span><h4>UAP — членський сертифікат (дійсний член Української Академії Пародонтології на 2016 рік)</h4><p>Україна</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2016-uap-chlensky-sertifikat.jpg" alt="Членський сертифікат UAP, 2016"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="22"><div class="cert-card-inner"><span class="year">2015</span><h4>PeriSchool — «Абетка ручного скейлінгу»</h4><p>Львів</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2015-perischool-abetka-skeylingu.jpg" alt="Сертифікат PeriSchool, абетка скейлінгу, 2015"><span>Переглянути сертифікат</span></button></div></li>
+      <li data-idx="23"><div class="cert-card-inner"><span class="year">2014</span><h4>MAXIMUS — «Гігієна, як невід'ємна складова сучасної стоматологічної практики» (лектор Оксана Утрен)</h4><p>Україна</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/voloshina-elena/2014-maximus-gigiena-skladova.jpg" alt="Сертифікат MAXIMUS, гігієна, 2014"><span>Переглянути сертифікат</span></button></div></li>
+    </ul>
+    </div>
+    <div class="timeline-more-wrap">
+      <button type="button" class="timeline-more-btn" id="certTimelineMore">Показати всю хронологію (24)</button>
+    </div>
+  </div>
+</section>
+
 <section class="alt">
   <div class="wrap">
     <div class="section-head">
@@ -393,6 +508,111 @@
     <p><a href="/ua/o-klinike.html">Про клініку</a></p>
   </div>
 </footer>
+
+<div class="lightbox" id="certLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="certLightboxClose" aria-label="Закрити">&#10005;</button>
+  <button class="lightbox-nav prev" id="certLightboxPrev" aria-label="Попередній сертифікат">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="certLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="certLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="certLightboxNext" aria-label="Наступний сертифікат">&#8250;</button>
+</div>
+<script>
+(function(){
+  const items = Array.from(document.querySelectorAll('#certTimeline li'));
+  if(!items.length) return;
+  const INITIAL = 6;
+  const moreBtn = document.getElementById('certTimelineMore');
+  let expanded = false;
+
+  items.forEach(function(li, i){
+    if(i >= INITIAL) li.classList.add('cert-hidden');
+  });
+
+  if(moreBtn){
+    moreBtn.addEventListener('click', function(){
+      expanded = !expanded;
+      items.forEach(function(li, i){
+        if(i >= INITIAL) li.classList.toggle('cert-hidden', !expanded);
+      });
+      moreBtn.textContent = expanded ? 'Згорнути' : 'Показати всю хронологію (' + items.length + ')';
+      setTimeout(updateProgress, 60);
+    });
+  }
+
+  // Scroll-linked highlight: dots light up + line fills as they pass into view
+  const wrap = document.getElementById('certTimelineWrap');
+  const progress = document.getElementById('certProgress');
+
+  function updateProgress(){
+    if(!wrap || !progress) return;
+    const seenItems = items.filter(function(li){
+      return li.classList.contains('seen') && !li.classList.contains('cert-hidden');
+    });
+    if(!seenItems.length){ progress.style.height = '0px'; return; }
+    const last = seenItems[seenItems.length - 1];
+    const wrapRect = wrap.getBoundingClientRect();
+    const dotRect = last.getBoundingClientRect();
+    const dotCenterY = (dotRect.top - wrapRect.top) + 23;
+    progress.style.height = Math.max(0, dotCenterY) + 'px';
+  }
+
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting) entry.target.classList.add('seen');
+      });
+      updateProgress();
+    }, { rootMargin: '0px 0px -45% 0px', threshold: 0 });
+    items.forEach(function(li){ observer.observe(li); });
+    window.addEventListener('resize', updateProgress);
+  } else {
+    items.forEach(function(li){ li.classList.add('seen'); });
+  }
+
+  const thumbs = Array.from(document.querySelectorAll('.cert-thumb-btn'));
+  const lightbox = document.getElementById('certLightbox');
+  const lbImg = document.getElementById('certLightboxImg');
+  const lbCounter = document.getElementById('certLightboxCounter');
+  const closeBtn = document.getElementById('certLightboxClose');
+  const prevBtn = document.getElementById('certLightboxPrev');
+  const nextBtn = document.getElementById('certLightboxNext');
+  let current = 0;
+
+  thumbs.forEach(function(btn, i){
+    btn.addEventListener('click', function(){ openLightbox(i); });
+  });
+
+  function openLightbox(index){
+    current = index; render();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function render(){
+    const img = thumbs[current].querySelector('img');
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+  }
+  function next(){ current = (current+1) % thumbs.length; render(); }
+  function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
 
 <script>
   (function(){
