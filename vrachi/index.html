@@ -124,6 +124,24 @@
     .hero-vrachi .cta-row .seg{display:none;}
     .hero-vrachi .cta-row .btn{width:100%;justify-content:center;}
   }
+
+  /* doctors carousel */
+  .doc-track{
+    display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:4px 4px 14px;scrollbar-width:none;
+    margin-top:56px;
+  }
+  .doc-track::-webkit-scrollbar{display:none;}
+  .doc-track .doc-card{flex:0 0 300px;scroll-snap-align:start;scroll-snap-stop:always;}
+  .doc-dots{display:flex;justify-content:center;gap:6px;margin-top:20px;}
+  .doc-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.2);border:none;padding:0;cursor:pointer;transition:background .2s;}
+  .doc-dot.active{background:var(--wood);}
+  @media(max-width:760px){
+    .doc-track .doc-card{flex:0 0 78%;}
+  }
+  @media(max-width:420px){
+    .doc-track .doc-card{flex:0 0 84%;}
+  }
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -300,7 +318,7 @@
       <h2>Врачи клиники</h2>
       <p>Список пополняется по мере получения данных от клиники.</p>
     </div>
-    <div class="doc-grid">
+    <div class="doc-track" id="docTrack">
       <a class="doc-card" href="/vrachi/maslov-aleksey.html">
         <picture>
           <source srcset="/img/vrachi/maslov-aleksey-portrait.webp" type="image/webp">
@@ -344,8 +362,46 @@
         <p>Брекет-системы, элайнеры, функциональная и миофункциональная терапия.</p>
       </a>
     </div>
+    <div class="doc-dots" id="docDots"></div>
   </div>
 </section>
+
+<script>
+(function(){
+  var track = document.getElementById('docTrack');
+  var dotsWrap = document.getElementById('docDots');
+  if(!track || !dotsWrap) return;
+  var cards = Array.from(track.children);
+  cards.forEach(function(_, i){
+    var dot = document.createElement('button');
+    dot.className = 'doc-dot' + (i === 0 ? ' active' : '');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', 'Врач ' + (i+1));
+    dot.addEventListener('click', function(){
+      cards[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+    });
+    dotsWrap.appendChild(dot);
+  });
+  var dots = Array.from(dotsWrap.children);
+  var ticking = false;
+  track.addEventListener('scroll', function(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      var trackRect = track.getBoundingClientRect();
+      var closest = 0;
+      var closestDist = Infinity;
+      cards.forEach(function(card, i){
+        var rect = card.getBoundingClientRect();
+        var dist = Math.abs(rect.left - trackRect.left);
+        if(dist < closestDist){ closestDist = dist; closest = i; }
+      });
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+      ticking = false;
+    });
+  }, {passive:true});
+})();
+</script>
 
 <div class="locality">
   <div class="wrap">
