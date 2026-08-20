@@ -565,9 +565,11 @@
   .svc-acc-link{font-size:15.5px;font-weight:600;color:var(--text);text-decoration:none;flex:1;}
   .svc-acc-link:hover{color:var(--wood);}
   .svc-acc-price{font-size:13px;color:var(--text-muted);white-space:nowrap;}
-  .svc-acc-toggle{width:30px;height:30px;border-radius:50%;border:none;background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);flex-shrink:0;}
-  .svc-acc-toggle:hover{background:rgba(var(--text-rgb),0.06);}
+  .svc-acc-toggle{width:30px;height:30px;border-radius:50%;border:1px solid rgba(20,90,118,.35);background:rgba(20,90,118,.1);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--accent);flex-shrink:0;transition:background .25s ease, border-color .25s ease, box-shadow .3s ease;}
+  .svc-acc-toggle:hover{background:rgba(20,90,118,.18);border-color:rgba(20,90,118,.6);box-shadow:0 0 0 5px rgba(20,90,118,.12);}
   .svc-acc-toggle svg{transition:transform .2s ease;display:block;}
+  [data-theme="dark"] .svc-acc-toggle{background:rgba(201,162,75,.14);border-color:rgba(201,162,75,.45);}
+  [data-theme="dark"] .svc-acc-toggle:hover{background:rgba(201,162,75,.22);border-color:rgba(201,162,75,.75);box-shadow:0 0 0 5px rgba(201,162,75,.16);}
   .svc-acc-body{max-height:0;overflow:hidden;transition:max-height .25s ease;}
   .svc-acc-body-inner{padding:0 18px 16px 18px;}
   .svc-acc-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13.5px;border-top:0.5px solid rgba(var(--text-rgb),0.06);}
@@ -888,6 +890,19 @@
   .cta-final h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:18px;}
   .cta-final p{color:var(--text-muted);max-width:480px;margin:0 auto 32px;}
   .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .cta-actions .btn{border-radius:14px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);gap:8px;transition:background .25s ease, border-color .25s ease, box-shadow .3s ease;}
+  .cta-actions .btn.js-open-booking{background:rgba(20,90,118,.35);border:1px solid rgba(20,90,118,.7);color:#fff;}
+  .cta-actions .btn.js-open-booking:hover{background:rgba(20,90,118,.48);border-color:rgba(20,90,118,1);box-shadow:0 0 0 6px rgba(20,90,118,.28);}
+  .cta-actions .btn.js-open-booking:active{background:rgba(20,90,118,.6);box-shadow:0 0 0 2px rgba(20,90,118,.4);}
+  .cta-actions .btn-outline{background:rgba(20,90,118,.1);border:1px solid rgba(20,90,118,.4);color:var(--accent);}
+  .cta-actions .btn-outline:hover{background:rgba(20,90,118,.18);border-color:rgba(20,90,118,.65);box-shadow:0 0 0 6px rgba(20,90,118,.15);color:var(--accent);}
+  .cta-actions .btn-outline:active{background:rgba(20,90,118,.28);box-shadow:0 0 0 2px rgba(20,90,118,.22);}
+  [data-theme="dark"] .cta-actions .btn.js-open-booking{background:rgba(201,162,75,.28);border-color:rgba(201,162,75,.75);}
+  [data-theme="dark"] .cta-actions .btn.js-open-booking:hover{background:rgba(201,162,75,.4);border-color:rgba(201,162,75,1);box-shadow:0 0 0 6px rgba(201,162,75,.28);}
+  [data-theme="dark"] .cta-actions .btn.js-open-booking:active{background:rgba(201,162,75,.52);box-shadow:0 0 0 2px rgba(201,162,75,.36);}
+  [data-theme="dark"] .cta-actions .btn-outline{background:rgba(201,162,75,.14);border-color:rgba(201,162,75,.45);}
+  [data-theme="dark"] .cta-actions .btn-outline:hover{background:rgba(201,162,75,.22);border-color:rgba(201,162,75,.75);box-shadow:0 0 0 6px rgba(201,162,75,.18);}
+  [data-theme="dark"] .cta-actions .btn-outline:active{background:rgba(201,162,75,.32);box-shadow:0 0 0 2px rgba(201,162,75,.26);}
 
   footer{padding:80px 0 40px;}
   .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(var(--text-rgb),0.12);}
@@ -2020,7 +2035,7 @@ const galleryData = [
       <span class="eyebrow">Про клініку</span>
       <h2>Стоматологія в Одесі на Аркадіївському плато</h2>
     </div>
-    <div class="reveal" style="max-width:760px;color:var(--text-muted);font-size:15.5px;line-height:1.75;">
+    <div class="reveal" style="max-width:760px;margin:0 auto;text-align:center;color:var(--text-muted);font-size:15.5px;line-height:1.75;">
       <p>MaslovClinic — стоматологія повного циклу в Приморському районі Одеси, за 100 метрів від моря. Ми поєднуємо терапевтичне, хірургічне та ортопедичне лікування, імплантацію та естетичну стоматологію в одній клініці — без потреби їздити до різних фахівців.</p>
       <h3 style="font-size:17px;color:var(--text);margin:20px 0 8px;">Імплантація зубів в Одесі</h3>
       <p>Працюємо із системами Nobel Biocare, Straumann та JDental — від одиничного імпланта до повної реабілітації All-on-4/6. Детальніше — на сторінці <a href="/ua/uslugi/implantatsiya-zubov.html">«Імплантація зубів»</a>.</p>
