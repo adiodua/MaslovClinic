@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){
+  try{
+    if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
+    var path = location.pathname;
+    var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
+    var stored = localStorage.getItem('mc-lang');
+    var target = null;
+    if(stored === 'UA'){ target = '/ua' + rest; }
+    else if(stored === 'RU'){ target = rest; }
+    else if(stored !== 'EN'){
+      var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+      if(browserLang.indexOf('uk') === 0){ target = '/ua' + rest; }
+    }
+    if(target && target !== path){
+      location.replace(target + location.search + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var t = localStorage.getItem('mc-theme');
+    if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anastasiya Gavrishchuk — General/Restorative Dentist | MaslovClinic Odesa</title>
+<meta name="description" content="Anastasiya Gavrishchuk — General/Restorative Dentist at MaslovClinic in Odesa. Cavity treatment, tooth restoration, root canal treatment.">
+<link rel="canonical" href="https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/vrachi/gavrishchuk-anastasiya.html">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/vrachi/gavrishchuk-anastasiya.html">
+<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/vrachi/gavrishchuk-anastasiya.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<meta property="og:site_name" content="MaslovClinic">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Anastasiya Gavrishchuk — General/Restorative Dentist | MaslovClinic Odesa">
+<meta property="og:description" content="Anastasiya Gavrishchuk — General/Restorative Dentist at MaslovClinic in Odesa. Cavity treatment, tooth restoration, root canal treatment.">
+<meta property="og:url" content="https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html">
+<meta property="og:image" content="https://maslovclinic.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anastasiya Gavrishchuk — General/Restorative Dentist | MaslovClinic Odesa">
+<meta name="twitter:description" content="Anastasiya Gavrishchuk — General/Restorative Dentist at MaslovClinic in Odesa. Cavity treatment, tooth restoration, root canal treatment.">
+<meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "Anastasiya Gavrishchuk",
+  "medicalSpecialty": ["General Dentistry", "Endodontics"],
+  "worksFor": {
+    "@type": "Dentist",
+    "name": "MaslovClinic",
+    "url": "https://maslovclinic.com/"
+  },
+  "url": "https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://maslovclinic.com/en/"},
+    {"@type": "ListItem", "position": 2, "name": "Doctors", "item": "https://maslovclinic.com/en/vrachi/"},
+    {"@type": "ListItem", "position": 3, "name": "Anastasiya Gavrishchuk", "item": "https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html"}
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/base.css">
+<style>
+  .doc-hero-grid{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:center;}
+  .doc-photo-slot{
+    width:100%;aspect-ratio:3/4;border-radius:6px;background:var(--navy-2);
+    border:1px solid rgba(201,162,75,.3);
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    color:#9fb0c6;font-size:13px;line-height:1.5;padding:16px;
+  }
+  .doc-role{color:var(--gold);font-size:14px;letter-spacing:.05em;text-transform:uppercase;margin-top:10px;}
+  .timeline{list-style:none;padding:0;margin:0;display:grid;gap:0;}
+  .timeline li{
+    display:grid;grid-template-columns:110px 1fr;gap:20px;
+    padding:20px 0;border-bottom:1px solid var(--divider);
+  }
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .year{font-family:'Inter',sans-serif;font-size:22px;color:var(--accent);}
+  .timeline h4{margin:0 0 4px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;}
+  .timeline p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
+
+  /* Cert timeline — alternating zigzag with central line */
+  .cert-timeline-wrap{
+    position:relative;
+    max-width:820px;margin-left:auto;margin-right:auto;
+  }
+  .cert-timeline-wrap::before{
+    content:'';position:absolute;left:50%;top:6px;bottom:6px;width:2px;
+    background:var(--divider);
+    transform:translateX(-50%);
+  }
+  .cert-timeline{list-style:none;padding:0;margin:0;position:relative;}
+  .cert-timeline-progress{
+    position:absolute;left:50%;top:6px;width:2px;height:0;
+    background:linear-gradient(var(--gold), var(--accent));
+    transform:translateX(-50%);
+    transition:height .4s ease;
+    z-index:1;
+  }
+  .cert-timeline li{
+    position:relative;width:calc(50% - 30px);margin-bottom:22px;
+    border-bottom:none;padding:0;display:block;
+  }
+  .cert-timeline li:nth-child(odd){margin-left:0;text-align:right;}
+  .cert-timeline li:nth-child(even){margin-left:calc(50% + 30px);text-align:left;}
+  .cert-timeline li::after{
+    content:'';position:absolute;top:18px;width:10px;height:10px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--divider);box-shadow:0 0 0 0 rgba(201,162,75,0);
+    z-index:2;transition:background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .35s ease;
+  }
+  .cert-timeline li.seen::after{
+    background:var(--gold);border-color:var(--gold);
+    box-shadow:0 0 0 4px rgba(201,162,75,.25);
+    transform:scale(1.2);
+  }
+  .cert-timeline li.seen .cert-card-inner{border-color:var(--gold);}
+  .cert-timeline li:nth-child(odd)::after{right:-35px;}
+  .cert-timeline li:nth-child(even)::after{left:-35px;}
+  .cert-timeline .cert-card-inner{
+    transition:border-color .35s ease;
+    display:inline-block;text-align:left;max-width:100%;
+    background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
+    padding:16px 18px;
+  }
+  .cert-timeline .year{font-family:'Inter',sans-serif;font-size:13px;font-weight:700;
+    letter-spacing:.06em;color:var(--gold);text-transform:uppercase;}
+  .cert-timeline h4{margin:5px 0 3px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;line-height:1.3;}
+  .cert-timeline p{margin:0;color:var(--muted);font-size:13px;line-height:1.5;}
+  .cert-timeline li.cert-hidden{display:none;}
+
+  .cert-thumb-btn{
+    display:inline-flex;align-items:center;gap:10px;margin-top:10px;padding:4px;
+    background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;
+    color:var(--accent);font-size:13px;font-weight:600;
+  }
+  .cert-thumb-btn img.cert-thumb{
+    width:40px;height:40px;object-fit:cover;border-radius:4px;
+    border:1px solid var(--divider);flex-shrink:0;
+  }
+  .cert-thumb-btn:hover span{text-decoration:underline;}
+  .timeline-more-wrap{text-align:center;margin-top:28px;}
+  .timeline-more-btn{
+    font-family:'Inter',sans-serif;font-size:14px;font-weight:600;
+    padding:12px 28px;border-radius:999px;border:1px solid var(--gold);
+    background:none;color:var(--ink);cursor:pointer;transition:background .2s ease,color .2s ease;
+  }
+  .timeline-more-btn:hover{background:var(--gold);color:var(--navy);}
+
+  .doc-files-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:32px;}
+  .doc-file-card{
+    display:flex;align-items:center;gap:12px;background:var(--paper);
+    border:1px solid var(--divider);border-radius:var(--radius);
+    padding:12px 16px;cursor:pointer;text-align:left;max-width:280px;
+  }
+  .doc-file-card:hover{border-color:var(--gold);}
+  .doc-file-card img{width:44px;height:44px;object-fit:cover;border-radius:4px;flex-shrink:0;}
+  .doc-file-card .dfc-title{font-size:13.5px;font-weight:700;color:var(--ink);margin:0 0 2px;}
+  .doc-file-card .dfc-sub{font-size:12px;color:var(--muted);margin:0;}
+
+  .proc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .proc-card{
+    background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
+    padding:24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .proc-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(14,37,64,.12);}
+  .proc-card h4{margin:0;font-size:17px;}
+  .proc-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;flex-grow:1;}
+  .proc-card .go{font-size:13px;color:var(--accent);font-weight:600;}
+
+  .courses{display:grid;gap:16px;}
+  .course-item{
+    display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--divider);
+  }
+  .course-item:last-child{border-bottom:none;}
+  .course-item .ico{
+    width:38px;height:38px;flex-shrink:0;border-radius:50%;border:1px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:16px;
+  }
+  .course-item h4{margin:0 0 4px;font-size:15.5px;}
+  .course-item p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
+
+  .mobile-lead-below{display:none;}
+  @media(max-width:760px){
+    .doc-hero-grid{grid-template-columns:1fr;}
+    .doc-hero-grid > picture{display:none !important;}
+    .hero{
+      background:linear-gradient(180deg,
+        rgba(14,37,64,.35) 0%,
+        rgba(14,37,64,.55) 55%,
+        rgba(14,37,64,.85) 100%
+      ), url('/img/vrachi/gavrishchuk-anastasiya-portrait.jpg') left 5%/160% auto no-repeat, var(--navy-2);
+    }
+    .doc-hero-grid .eyebrow,
+    .doc-hero-grid .lead{
+      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    }
+    .doc-hero-grid h1{margin-top:0 !important;font-size:22px !important;}
+    .mobile-lead-below{
+      display:block;margin:16px 20px 4px;padding:16px 18px;
+      background:var(--paper);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;
+      font-family:'Fraunces',serif;font-style:italic;
+      color:var(--muted);font-size:15.5px;line-height:1.7;
+    }
+    .mobile-lead-below + section{padding-top:32px;}
+    .doc-photo-slot{max-width:220px;margin:0 auto;}
+    .proc-grid{grid-template-columns:1fr;}
+    .timeline li{grid-template-columns:80px 1fr;}
+    .cert-thumb-btn img.cert-thumb{width:36px;height:36px;}
+    .cert-timeline-wrap::before{left:9px;transform:none;}
+    .cert-timeline-progress{left:9px;transform:none;}
+    .cert-timeline li{width:auto;margin-left:26px !important;text-align:left !important;}
+    .cert-timeline li::after{left:-22px !important;right:auto !important;}
+    .cert-timeline .cert-card-inner{display:block;padding:14px 16px;}
+  }
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D3DMK6FB59');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('a,button');
+    if(!t || typeof gtag !== 'function') return;
+    var href = t.getAttribute('href') || '';
+    if(href.indexOf('tel:') === 0){
+      gtag('event', 'phone_click', {event_category:'contact', event_label: href});
+    } else if(href.indexOf('mailto:') === 0){
+      gtag('event', 'email_click', {event_category:'contact', event_label: href});
+    } else if(t.classList.contains('js-open-booking') || href === '/#booking' || href === '#booking'){
+      gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
+    } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
+      gtag('event', 'contact_panel_open', {event_category:'contact'});
+    } else if(t.classList.contains('mm-panel-link')){
+      gtag('event', 'contacts_click', {event_category:'contact'});
+    }
+  });
+</script>
+</head>
+<body data-theme="light">
+
+<div class="lang-auto-banner" id="langAutoBanner" role="status" aria-live="polite">
+  <span>This page is shown in your device's language.</span>
+  <button type="button" class="lang-auto-banner-switch" id="langAutoBannerSwitch">Switch to Ukrainian</button>
+  <button type="button" class="lang-auto-banner-close" id="langAutoBannerClose" aria-label="Close">&#10005;</button>
+</div>
+<script>
+(function(){
+  try{
+    var el = document.getElementById('langAutoBanner');
+    if(!el) return;
+    var stored = localStorage.getItem('mc-lang');
+    if(stored) return;
+    var seen = sessionStorage.getItem('mc-lang-banner-seen');
+    if(seen) return;
+    var path = location.pathname;
+    var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+    // Only worth mentioning when the page you're already on actually
+    // matches what your device reports — a French or English browser
+    // landing on the RU default isn't "shown in Russian because of your
+    // device", it's just the site's fallback, so no banner there.
+    var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
+    if(!relevant) return;
+    sessionStorage.setItem('mc-lang-banner-seen', '1');
+    el.classList.add('show');
+    var hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 8000);
+    var closeBtn = document.getElementById('langAutoBannerClose');
+    if(closeBtn) closeBtn.addEventListener('click', function(){
+      clearTimeout(hideTimer);
+      el.classList.remove('show');
+    });
+    var switchBtn = document.getElementById('langAutoBannerSwitch');
+    if(switchBtn) switchBtn.addEventListener('click', function(){
+      try{ localStorage.setItem('mc-lang', 'UA'); }catch(e){}
+      location.href = '/ua' + rest;
+    });
+  }catch(e){}
+})();
+</script>
+<header>
+  <nav class="wrap">
+    <a href="/en/" class="logo" style="display:flex;align-items:center;gap:8px;">
+      <img class="brand-mark" src="/assets/logo.png" width="44" height="60" alt="" style="height:26px;width:auto;display:block;">
+      <span class="logo-text">MaslovClinic</span>
+    </a>
+    <div class="navlinks">
+      <a href="/en/uslugi/" data-nav="uslugi">Services</a>
+      <a href="/en/vrachi/" data-nav="vrachi">Doctors</a>
+      <a href="/blog/" data-nav="blog">Blog</a>
+      <a href="/en/#reviews">Reviews</a>
+      <a href="/en/#faq">FAQ</a>
+      <a href="/en/#contacts">Contacts</a>
+      <a href="/en/o-klinike.html" data-nav="o-klinike">About</a>
+    </div>
+    <div class="navcta">
+      <div class="langs">
+        <button class="langbtn active">RU</button>
+        <button class="langbtn">UA</button>
+        <button class="langbtn">EN</button>
+      </div>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-current" id="langCurrentBtn">
+          <span class="lang-current-label" id="langCurrentLabel">EN</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button data-lang="RU">RU</button>
+          <button data-lang="UA">UA</button>
+          <button data-lang="EN" class="current">EN</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Light/dark theme">
+        <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <a href="/raboty/index.html" class="nav-works-btn" data-nav="raboty">Our Cases</a>
+      <a href="#" class="btn js-open-booking" id="navBookingBtn">Book a Visit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <svg id="iconBurger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg id="iconClose" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/en/uslugi/" data-nav="uslugi">Services</a>
+    <a href="/en/vrachi/" data-nav="vrachi">Doctors</a>
+    <a href="/blog/" data-nav="blog">Blog</a>
+    <a href="/en/#reviews">Reviews</a>
+    <a href="/en/#faq">FAQ</a>
+    <a href="/en/#contacts">Contacts</a>
+    <a href="/en/o-klinike.html" data-nav="o-klinike">About</a>
+    <a href="/raboty/index.html" class="nav-works-dot" data-nav="raboty">Our Cases</a>
+    <div class="mobile-langs">
+      <button class="langbtn active">RU</button>
+      <button class="langbtn">UA</button>
+      <button class="langbtn">EN</button>
+    </div>
+  </div>
+</header>
+<div class="mobile-multi-btn" id="mobileMultiBtn">
+  <button type="button" id="mobileMultiTrigger" aria-label="Contacts and booking">
+    <svg width="39" height="39" viewBox="0 0 24 24" fill="none">
+      <path d="M2 13a10 10 0 0 1 20 0" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <rect x="1" y="12" width="3.6" height="5.4" rx="1.7" fill="currentColor"/>
+      <rect x="19.4" y="12" width="3.6" height="5.4" rx="1.7" fill="currentColor"/>
+      <path d="M21.2 17.4 Q17 20.6 13.6 19.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <circle cx="13.2" cy="19.6" r="1.2" fill="currentColor"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M6 11.5a4.5 4.5 0 0 1 4.5-4.5h3a4.5 4.5 0 0 1 4.5 4.5 4.5 4.5 0 0 1-4.5 4.5h-2l-3 3v-3A4.5 4.5 0 0 1 6 11.5z M9.2 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z M12 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z M14.8 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+    </svg>
+  </button>
+  <div class="mm-panel" id="mobileMultiPanel">
+    <a href="#" class="btn js-open-booking" style="width:100%;justify-content:center;margin-bottom:16px;">Book a Visit</a>
+    <div class="mm-panel-label">Phone</div>
+    <a href="tel:+380949405514" class="mm-panel-num">+380 94 940 55 14</a>
+    <div class="mm-panel-label">Telegram</div>
+    <a href="https://t.me/maslovclinic" target="_blank" rel="noopener" class="mm-panel-num" style="font-size:15px;color:#229ED9;">Message us</a>
+    <div class="mm-panel-label">Email</div>
+    <a href="mailto:maslovclinic@gmail.com" class="mm-panel-num" style="font-size:15px;">maslovclinic@gmail.com</a>
+    <a href="/en/#contacts" class="mm-panel-link">Our Contacts</a>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs-inline"><a href="/en/">Home</a> / <a href="/en/vrachi/">Doctors</a> / <span class="crumb-active">Anastasiya Gavrishchuk</span></div>
+    <div class="doc-hero-grid">
+      <picture>
+          <source srcset="/img/vrachi/gavrishchuk-anastasiya-portrait.webp" type="image/webp">
+          <img width="800" height="1200" loading="lazy" decoding="async" src="/img/vrachi/gavrishchuk-anastasiya-portrait.jpg" alt="Anastasiya Gavrishchuk — General/Restorative Dentist at MaslovClinic" style="width:100%;height:auto;border-radius:6px;display:block;object-fit:cover;aspect-ratio:3/4;">
+        </picture>
+      <div>
+        <span class="eyebrow">Doctor · MaslovClinic</span>
+        <h1 style="margin:12px 0 2px;">Anastasiya<br>Gavrishchuk</h1>
+        <div class="doc-role">General/Restorative Dentist</div>
+        <p class="lead" style="margin-top:18px;">Restorative and root canal treatment — from cavities to complex root canal cases. 25 years of experience.</p>
+        <div class="cta-row">
+          <span class="seg"></span>
+          <a href="#" class="btn js-open-booking">Book a Visit</a>
+          <a href="#protsedury" class="btn ghost">What the Doctor Treats</a>
+          <span class="seg"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<p class="mobile-lead-below">Restorative and root canal treatment — from cavities to complex root canal cases. 25 years of experience.</p>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Education</span>
+      <h2>Doctor's Journey</h2>
+      <p>Diploma, internship (2001–2002), a PhD dissertation, and ongoing professional development — courses and seminars since 2005.</p>
+    </div>
+    <div class="cert-timeline-wrap" id="certTimelineWrap">
+    <div class="cert-timeline-progress" id="certProgress"></div>
+    <ul class="timeline cert-timeline" id="certTimeline">
+      <li data-idx="0"><div class="cert-card-inner"><span class="year">2024</span><h4>ion Synergy — "Perfect Isolation" course (Mikhail Glinsky)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2024-ion-synergy.jpg" alt="ion Synergy certificate, 2024"><span>View certificate</span></button></div></li>
+      <li data-idx="1"><div class="cert-card-inner"><span class="year">2012</span><h4>NMAPO — "Hard Negotiations: How to Influence and Resist Influence"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-nmapo-peregovory.jpg" alt="NMAPO certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="2"><div class="cert-card-inner"><span class="year">2011</span><h4>NMAPO — "Optimal Action Algorithms for Medical Facility Staff" (Stage 3)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2011-nmapo-algoritmy.jpg" alt="NMAPO certificate, 2011"><span>View certificate</span></button></div></li>
+      <li data-idx="3"><div class="cert-card-inner"><span class="year">2010</span><h4>Stamil — "Patient Motivation in Dentistry" (Level 2)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2010-stamil-motivatsiya.jpg" alt="Stamil certificate, 2010"><span>View certificate</span></button></div></li>
+      <li data-idx="4"><div class="cert-card-inner"><span class="year">2005</span><h4>Fenestra — "Fundamentals of Modern Endodontics"</h4><p>&nbsp;</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2005-fenestra-endodontiya.jpg" alt="Fenestra certificate, 2005"><span>View certificate</span></button></div></li>
+      <li data-idx="5"><div class="cert-card-inner"><span class="year">2023</span><h4>MaslovClinic — "The artistry of digital and analog diagnostic philosophy in gnathological concepts" (Roman Nestor, PhD)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2023-maslovclinic-nestor.jpg" alt="MaslovClinic certificate, 2023"><span>View certificate</span></button></div></li>
+      <li data-idx="6"><div class="cert-card-inner"><span class="year">2018</span><h4>#VSEVOKRUGZNA — dental congress</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2018-vsevokrugzna.jpg" alt="#VSEVOKRUGZNA certificate, 2018"><span>View certificate</span></button></div></li>
+      <li data-idx="7"><div class="cert-card-inner"><span class="year">2018</span><h4>PearlStom — clinical, radiological, and biochemical aspects of TMJ dysfunction</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2018-pearlstom-tmj.jpg" alt="PearlStom certificate, 2018"><span>View certificate</span></button></div></li>
+      <li data-idx="8"><div class="cert-card-inner"><span class="year">2017</span><h4>LIVADENT — "Full-Mouth Prosthetics: 10 Years of Experience at Naturelle Clinic" (Maksym Lesnukhin)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2017-livadent.jpg" alt="LIVADENT certificate, 2017"><span>View certificate</span></button></div></li>
+      <li data-idx="9"><div class="cert-card-inner"><span class="year">2016</span><h4>Dental School — "Primary Endodontics"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2016-dental-school-pervichnaya.jpg" alt="Dental School certificate, 2016"><span>View certificate</span></button></div></li>
+      <li data-idx="10"><div class="cert-card-inner"><span class="year">2015</span><h4>Ukrainian Endodontic Association — "Endodontic Mastery"</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2015-uea-endo-masterstvo.jpg" alt="UEA certificate, 2015"><span>View certificate</span></button></div></li>
+      <li data-idx="11"><div class="cert-card-inner"><span class="year">2015</span><h4>Dentsply Academy — "Microendodontics. Success definition of endodontic retreatment"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2015-dentsply-microendo.jpg" alt="Dentsply Academy certificate, 2015"><span>View certificate</span></button></div></li>
+      <li data-idx="12"><div class="cert-card-inner"><span class="year">2015</span><h4>Endodontic Medical Center (Dr. Solomonov) — online endodontics course</h4><p>Tel Aviv, Israel</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2015b-solomonov-israel.jpg" alt="Endodontic Medical Center certificate, Israel"><span>View certificate</span></button></div></li>
+      <li data-idx="13"><div class="cert-card-inner"><span class="year">2015</span><h4>Pentron Clinical Technologies / DentAum — lecture course (A. D. Pigolev)</h4><p>&nbsp;</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2015a-pentron-dentaum.jpg" alt="Pentron Clinical Technologies certificate"><span>View certificate</span></button></div></li>
+      <li data-idx="14"><div class="cert-card-inner"><span class="year">2014</span><h4>Oral Design Center — "Minimally Invasive Preparation in Indirect Restoration" (Nazariy Mykhailiuk)</h4><p>Ivano-Frankivsk</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2014-oral-design-minimalno-invazivnoe.jpg" alt="Oral Design Center certificate, 2014"><span>View certificate</span></button></div></li>
+      <li data-idx="15"><div class="cert-card-inner"><span class="year">2014</span><h4>3M ESPE Espertise — "Local Anesthetics"</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2014-3mespe-mestnye-anestetiki.jpg" alt="3M ESPE Espertise certificate, 2014"><span>View certificate</span></button></div></li>
+      <li data-idx="16"><div class="cert-card-inner"><span class="year">2014</span><h4>Dentline — "The Philosophy of Prosthetics" (Masahiro Kuwata)</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2014-dentline-filosofiya.jpg" alt="Dentline certificate, 2014"><span>View certificate</span></button></div></li>
+      <li data-idx="17"><div class="cert-card-inner"><span class="year">2014</span><h4>Oral Design Center — "Indirect Restoration: From Macro to Micro" (Nazariy Mykhailiuk)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2014-oral-design-nepryamaya.jpg" alt="Oral Design Center certificate, 2014"><span>View certificate</span></button></div></li>
+      <li data-idx="18"><div class="cert-card-inner"><span class="year">2014</span><h4>Dental Club Weekend — "Simply Put: Retreatment"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2014-dcw-perelechivanie.jpg" alt="Dental Club Weekend certificate, 2014"><span>View certificate</span></button></div></li>
+      <li data-idx="19"><div class="cert-card-inner"><span class="year">2013</span><h4>Dental Club Weekend — "Instrumentation and Obturation of Root Canals"</h4><p>&nbsp;</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-dcw-instrumentalnaya.jpg" alt="Dental Club Weekend certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="20"><div class="cert-card-inner"><span class="year">2013</span><h4>Nobel Biocare World — current concepts in modern implantology</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-nobel-biocare-world.jpg" alt="Nobel Biocare World certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="21"><div class="cert-card-inner"><span class="year">2013</span><h4>Institute of Aesthetic Dentistry (ESCD) — "Functional Occlusion in Aesthetic Dentistry" (Dr. A. A. Pieshko)</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-escd-funkcionalnaya-okluziya.jpg" alt="ESCD certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="22"><div class="cert-card-inner"><span class="year">2013</span><h4>3M ESPE Espertise — "Functional Occlusion in Aesthetic Dentistry" (Andriy Pieshko)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-3mespe-funkcionalnaya-okluziya.jpg" alt="3M ESPE Espertise certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="23"><div class="cert-card-inner"><span class="year">2013</span><h4>Bely Grad — "Endodontic Retreatment: Conservative and Surgical Approaches"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-belyy-grad-povtornoe-endo.jpg" alt="Bely Grad certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="24"><div class="cert-card-inner"><span class="year">2013</span><h4>Dentsply Maillefer — "Technologies of Dentsply for qualitative initial endodontic treatment and re-treatment"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-dentsply-maillefer-technologies.jpg" alt="Dentsply Maillefer certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="25"><div class="cert-card-inner"><span class="year">2013</span><h4>Bely Grad — "The Formula of Endodontics"</h4><p>Kremenchuk</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2013-belograd-formula-endo.jpg" alt=""The Formula of Endodontics" certificate, 2013"><span>View certificate</span></button></div></li>
+      <li data-idx="26"><div class="cert-card-inner"><span class="year">2012</span><h4>Fenestra — a modern perspective on the clinical use of composites and glass ionomer cements</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-fenestra-obrabotka.jpg" alt="Fenestra certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="27"><div class="cert-card-inner"><span class="year">2012</span><h4>Dentsply Maillefer — "New technologies for high quality endodontic treatment"</h4><p>Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-dentsply-maillefer-new-tech.jpg" alt="Dentsply Maillefer certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="28"><div class="cert-card-inner"><span class="year">2012</span><h4>NMAPO — "Visualization and Functional Aesthetics in Dentistry" (Dr. D. A. Yermilov)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-nmapo-vizualizaciya.jpg" alt="NMAPO certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="29"><div class="cert-card-inner"><span class="year">2012</span><h4>NMAPO / Stamil — "Emergency Care for Somatic Conditions in Dental Practice"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-stamil-neotlozhnaya-pomoshch.jpg" alt="NMAPO/Stamil certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="30"><div class="cert-card-inner"><span class="year">2012</span><h4>ID Interdent — Symposium "Modern Technologies in Endodontic Treatment"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-interdent-simpozium.jpg" alt="ID Interdent certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="31"><div class="cert-card-inner"><span class="year">2012</span><h4>ID Interdent — Reciproc / BeeFill 2-in-1 certificate (VDW)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2012-interdent-reciproc.jpg" alt="ID Interdent Reciproc certificate, 2012"><span>View certificate</span></button></div></li>
+      <li data-idx="32"><div class="cert-card-inner"><span class="year">2011</span><h4>GC / Kristar — "A Modern Perspective on the Clinical Use of Composite Materials and Glass Ionomer Cements" (Dr. Matteo Basso)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2011-gc-kristall-basso.jpg" alt="GC/Kristar certificate, 2011"><span>View certificate</span></button></div></li>
+      <li data-idx="33"><div class="cert-card-inner"><span class="year">2010</span><h4>ICDE Ivoclar Vivadent — Zertifikat, e.max system</h4><p>Ellwangen, Germany</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2010-icde-ivoclar.jpg" alt="ICDE Ivoclar Vivadent certificate, 2010"><span>View certificate</span></button></div></li>
+      <li data-idx="34"><div class="cert-card-inner"><span class="year">2010</span><h4>A&V Consult — "Optimal Action Algorithms for Dental Clinic Staff" (trainer Anton Bichun)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2010-av-consult-algoritmy.jpg" alt="A&V Consult certificate, 2010"><span>View certificate</span></button></div></li>
+      <li data-idx="35"><div class="cert-card-inner"><span class="year">2010</span><h4>Septodont / Kristar — "Emergency Conditions in Dental Practice" (Stanley F. Malamed)</h4><p>Dnipropetrovsk</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2010-septodont-malamed.jpg" alt="Septodont/Kristar certificate, 2010"><span>View certificate</span></button></div></li>
+      <li data-idx="36"><div class="cert-card-inner"><span class="year">2007</span><h4>International Dental Forum "Days of Advanced Dentistry in Crimea. Foros 2007"</h4><p>Crimea, Foros</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2007-foros.jpg" alt=""Foros 2007" certificate"><span>View certificate</span></button></div></li>
+      <li data-idx="37"><div class="cert-card-inner"><span class="year">2004</span><h4>KRISTALL / DMG — "Composites: Foundations and Practical Application", "Cantilever Dental Prosthetics"</h4><p>Odesa–Kyiv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2004-kristall-dmg-kompozity.jpg" alt="KRISTALL/DMG certificate, 2004"><span>View certificate</span></button></div></li>
+      <li data-idx="38"><div class="cert-card-inner"><span class="year">2004</span><h4>Fenestra — "Restoration of Black Class I, II, and V Cavities"</h4><p>&nbsp;</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2004-fenestra-restavraciya-polostey.jpg" alt="Fenestra certificate, 2004"><span>View certificate</span></button></div></li>
+      <li data-idx="39"><div class="cert-card-inner"><span class="year">2003</span><h4>Dentsply International — restorative therapy course</h4><p>Poltava</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003-dentsply-poltava.jpg" alt="Dentsply International certificate, 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="40"><div class="cert-card-inner"><span class="year">2003</span><h4>American Dental Academy — "Advanced Technologies in Dentistry"</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003-american-dental-academy.jpg" alt="American Dental Academy certificate, 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="41"><div class="cert-card-inner"><span class="year">2003</span><h4>DentArt — training seminar</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003a-dentart-odessa.jpg" alt="DentArt certificate, Odesa 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="42"><div class="cert-card-inner"><span class="year">2003</span><h4>Association of Dentists of Ukraine — "Modern Treatment and Prevention Technologies in Practical Dentistry" (Certificate No. 624)</h4><p>Lviv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003d-asu-624.jpg" alt="Association of Dentists of Ukraine certificate No. 624, 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="43"><div class="cert-card-inner"><span class="year">2003</span><h4>Association of Dentists of Ukraine — "Modern Treatment and Prevention Technologies in Practical Dentistry" (Certificate No. 323)</h4><p>Lviv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003c-asu-323.jpg" alt="Association of Dentists of Ukraine certificate No. 323, 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="44"><div class="cert-card-inner"><span class="year">2003</span><h4>DentArt — training seminar</h4><p>Lviv</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003b-dentart-lvov.jpg" alt="DentArt certificate, Lviv 2003"><span>View certificate</span></button></div></li>
+      <li data-idx="45"><div class="cert-card-inner"><span class="year">2003</span><h4>Odesa National Medical University — "Hypersensitivity Reactions to Local Anesthetics in Dentistry" (Faculty of Postgraduate Education)</h4><p>Odesa</p><button type="button" class="cert-thumb-btn"><img loading="lazy" decoding="async" class="cert-thumb" src="/img/vrachi/certificates/anastasiya/2003e-onmedu-giperchuvstvitelnost.jpg" alt="Odesa National Medical University certificate"><span>View certificate</span></button></div></li>
+    </ul>
+    </div>
+    <div class="timeline-more-wrap">
+      <button type="button" class="timeline-more-btn" id="certTimelineMore">Show Full Timeline (46)</button>
+    </div>
+
+    <div class="doc-files-row">
+      <button type="button" class="doc-file-card" id="docFileAttestation">
+        <img loading="lazy" decoding="async" src="/img/vrachi/certificates/anastasiya/2021-attestation.jpg" alt="Attestation certificate — highest category">
+        <span><span class="dfc-title">Attestation — Highest Category</span><span class="dfc-sub">Restorative Dentistry, valid until 17.11.2026</span></span>
+      </button>
+      <button type="button" class="doc-file-card" id="docFilePhd">
+        <img loading="lazy" decoding="async" src="/img/vrachi/certificates/anastasiya/2015-phd-diploma.jpg" alt="Candidate of Sciences diploma — Anastasiya Gavrishchuk">
+        <span><span class="dfc-title">Candidate of Sciences Diploma</span><span class="dfc-sub">Dentistry, defended 15.12.2015</span></span>
+      </button>
+      <button type="button" class="doc-file-card" id="docFileDiploma">
+        <img loading="lazy" decoding="async" src="/img/vrachi/certificates/anastasiya/2001-diploma-otlichie.jpg" alt="Diploma with honors — Odesa State Medical University">
+        <span><span class="dfc-title">Diploma with Honors</span><span class="dfc-sub">OSMU, Dentistry, 2001</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section id="protsedury">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">What the Doctor Treats</span>
+      <h2>Areas of Practice</h2>
+      <p>From cavity treatment to complex cases using a dental microscope.</p>
+    </div>
+    <div class="proc-grid">
+      <a class="proc-card" href="/en/uslugi/terapevticheskoe-lechenie.html">
+        <h4>Restorative Treatment</h4>
+        <p>Aesthetic restorations — composite and ceramic, treatment of cavities and their complications — pulpitis and periodontitis.</p>
+        <span class="go">More about restorative treatment →</span>
+      </a>
+      <a class="proc-card" href="/en/uslugi/endodonticheskoe-lechenie.html">
+        <h4>Root Canal Treatment</h4>
+        <p>Root canal treatment, including under dental microscope guidance.</p>
+        <span class="go">More about root canal treatment →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Gallery</span>
+      <h2>Doctor's Photos</h2>
+    </div>
+    <div class="doc-gallery-strip">
+      <div class="doc-g-thumb">
+        <picture>
+          <source srcset="/img/vrachi/gavrishchuk-anastasiya-portrait.webp" type="image/webp">
+          <img width="800" height="1200" loading="lazy" decoding="async" src="/img/vrachi/gavrishchuk-anastasiya-portrait.jpg" alt="Anastasiya Gavrishchuk">
+        </picture>
+      </div>
+      <div class="doc-g-thumb">
+        <img loading="lazy" decoding="async" src="/img/vrachi/gavrishchuk-anastasiya-work.jpg" alt="Anastasiya Gavrishchuk during a consultation">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="locality">
+  <div class="wrap">
+    <strong>MaslovClinic</strong> is located on Gagarinske Plato (Prymorskyi district, Odesa), near Henuezka Street and Posmitnoho Street. Free parking is available for patients at the clinic.
+  </div>
+</div>
+
+<footer class="site" id="zapis">
+  <div class="wrap">
+    <p><strong>MaslovClinic</strong> — Odesa, Arkadiivske Plato · free parking</p>
+    <p>Phone: <a href="tel:+380949405514">+380 94 940 55 14</a> · <a href="mailto:maslovclinic@gmail.com">maslovclinic@gmail.com</a> · <a href="https://t.me/maslovclinic" target="_blank" rel="noopener" style="color:#229ED9;">Telegram</a></p>
+    <p><a href="/en/o-klinike.html">About the Clinic</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const sun = document.getElementById('iconSun');
+    const moon = document.getElementById('iconMoon');
+    const saved = localStorage.getItem('mc-theme');
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function applyTheme(theme){
+      if(theme === 'dark'){
+        root.setAttribute('data-theme','dark');
+        sun.style.display='none'; moon.style.display='block';
+      } else {
+        root.setAttribute('data-theme','light');
+        sun.style.display='block'; moon.style.display='none';
+      }
+      document.querySelectorAll('.brand-mark').forEach(img=>{
+        img.style.filter = (theme==='dark') ? 'brightness(0) invert(1)' : 'none';
+      });
+    }
+    applyTheme(saved ? saved : (systemPrefersDark() ? 'dark' : 'light'));
+    toggle.addEventListener('click', ()=>{
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('mc-theme', next);
+    });
+  })();
+
+    // Language dropdown
+  (function(){
+    const wrap = document.getElementById('langDropdown');
+    const current = document.getElementById('langCurrentBtn');
+    const menu = document.getElementById('langMenu');
+    const label = document.getElementById('langCurrentLabel');
+    if(!wrap || !current || !menu || !label) return;
+    current.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.classList.toggle('open');
+    });
+    menu.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', function(){
+        const target = btn.dataset.lang;
+        const path = location.pathname;
+        try{ localStorage.setItem('mc-lang', target); }catch(e){}
+        const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
+          : path.indexOf('/en/') === 0 ? path.slice(3)
+          : (path === '/ua' || path === '/en') ? '/'
+          : path;
+        const newPath = target === 'UA' ? '/ua' + rest : target === 'EN' ? '/en' + rest : (rest || '/');
+        if(newPath !== path){
+          location.href = newPath;
+          return;
+        }
+        label.textContent = btn.dataset.lang;
+        menu.querySelectorAll('button').forEach(b => b.classList.remove('current'));
+        btn.classList.add('current');
+        wrap.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)) wrap.classList.remove('open');
+    });
+  })();
+
+  // Active-page nav highlight — marks the current section's nav link instead of
+  // ever hiding/removing it, on both the desktop menu and the mobile menu.
+  (function(){
+    // Strip a leading /ua or /en so section detection works the same on
+    // the Ukrainian and English mirrors (paths there are /ua/uslugi/...,
+    // /en/uslugi/..., etc.) without a separate ruleset per language.
+    const rawPath = location.pathname;
+    const path = rawPath.startsWith('/ua/') ? rawPath.slice(3)
+      : rawPath.startsWith('/en/') ? rawPath.slice(3)
+      : rawPath;
+    const sections = [
+      {key: 'uslugi',    test: p => p.indexOf('/uslugi/') === 0},
+      {key: 'vrachi',    test: p => p.indexOf('/vrachi/') === 0},
+      {key: 'blog',      test: p => p.indexOf('/blog/') === 0},
+      {key: 'raboty',    test: p => p.indexOf('/raboty/') === 0},
+      {key: 'o-klinike', test: p => p === '/o-klinike.html'}
+    ];
+    const active = sections.find(s => s.test(path));
+    if(!active) return;
+    document.querySelectorAll('[data-nav="' + active.key + '"]').forEach(function(a){
+      a.classList.add('nav-highlight');
+    });
+  })();
+
+  // Mobile hamburger menu
+  (function(){
+    const btn = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('iconBurger');
+    const close = document.getElementById('iconClose');
+    if(!btn || !menu) return;
+    function setOpen(isOpen){
+      menu.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      burger.style.display = isOpen ? 'none' : 'block';
+      close.style.display = isOpen ? 'block' : 'none';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('open'));
+    });
+    menu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // tap elsewhere closes the menu without activating whatever was tapped there
+    document.addEventListener('click', function(e){
+      if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(false);
+      }
+    }, true);
+  })();
+
+  (function(){
+    const wrap = document.getElementById('mobileMultiBtn');
+    const btn = document.getElementById('mobileMultiTrigger');
+    const panel = document.getElementById('mobileMultiPanel');
+    if(!wrap || !btn || !panel) return;
+    let openScrollY = null;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      const willOpen = !panel.classList.contains('open');
+      panel.classList.toggle('open');
+      openScrollY = willOpen ? window.scrollY : null;
+    });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target) && panel.classList.contains('open')){
+        e.preventDefault();
+        e.stopPropagation();
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
+    }, true);
+    // Close the panel if the visitor scrolls far away from where they
+    // opened it — the scroll-driven "floating drop" squish animation that
+    // used to live here has been removed (the button no longer reacts to
+    // scrolling at all, just sits still until hovered or clicked).
+    window.addEventListener('scroll', function(){
+      const y = window.scrollY;
+      if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
+    }, {passive:true});
+  })();
+</script>
+
+<div class="lightbox" id="certLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="certLightboxClose" aria-label="Close">&#10005;</button>
+  <button class="lightbox-nav prev" id="certLightboxPrev" aria-label="Previous certificate">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="certLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="certLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="certLightboxNext" aria-label="Next certificate">&#8250;</button>
+</div>
+<script>
+(function(){
+  const items = Array.from(document.querySelectorAll('#certTimeline li'));
+  if(!items.length) return;
+  const INITIAL = 6;
+  const moreBtn = document.getElementById('certTimelineMore');
+  let expanded = false;
+
+  items.forEach(function(li, i){
+    if(i >= INITIAL) li.classList.add('cert-hidden');
+  });
+
+  if(moreBtn){
+    moreBtn.addEventListener('click', function(){
+      expanded = !expanded;
+      items.forEach(function(li, i){
+        if(i >= INITIAL) li.classList.toggle('cert-hidden', !expanded);
+      });
+      moreBtn.textContent = expanded ? 'Collapse' : 'Show Full Timeline (' + items.length + ')';
+      setTimeout(updateProgress, 60);
+    });
+  }
+
+  // Scroll-linked highlight: dots light up + line fills as they pass into view
+  const wrap = document.getElementById('certTimelineWrap');
+  const progress = document.getElementById('certProgress');
+
+  function updateProgress(){
+    if(!wrap || !progress) return;
+    const seenItems = items.filter(function(li){
+      return li.classList.contains('seen') && !li.classList.contains('cert-hidden');
+    });
+    if(!seenItems.length){ progress.style.height = '0px'; return; }
+    const last = seenItems[seenItems.length - 1];
+    const wrapRect = wrap.getBoundingClientRect();
+    const dotRect = last.getBoundingClientRect();
+    const dotCenterY = (dotRect.top - wrapRect.top) + 23;
+    progress.style.height = Math.max(0, dotCenterY) + 'px';
+  }
+
+  if('IntersectionObserver' in window){
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting) entry.target.classList.add('seen');
+      });
+      updateProgress();
+    }, { rootMargin: '0px 0px -45% 0px', threshold: 0 });
+    items.forEach(function(li){ observer.observe(li); });
+    window.addEventListener('resize', updateProgress);
+  } else {
+    items.forEach(function(li){ li.classList.add('seen'); });
+  }
+
+  const thumbs = Array.from(document.querySelectorAll('.cert-thumb-btn img, .doc-file-card img'));
+  const lightbox = document.getElementById('certLightbox');
+  const lbImg = document.getElementById('certLightboxImg');
+  const lbCounter = document.getElementById('certLightboxCounter');
+  const closeBtn = document.getElementById('certLightboxClose');
+  const prevBtn = document.getElementById('certLightboxPrev');
+  const nextBtn = document.getElementById('certLightboxNext');
+  let current = 0;
+
+  thumbs.forEach(function(img, i){
+    img.closest('button').addEventListener('click', function(){ openLightbox(i); });
+  });
+
+  function openLightbox(index){
+    current = index; render();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function render(){
+    const img = thumbs[current];
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+  }
+  function next(){ current = (current+1) % thumbs.length; render(); }
+  function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+
+<div class="lightbox" id="docLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="docLightboxClose" aria-label="Close">&#10005;</button>
+  <button class="lightbox-nav prev" id="docLightboxPrev" aria-label="Previous photo">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="docLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="docLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="docLightboxNext" aria-label="Next photo">&#8250;</button>
+</div>
+<script>
+(function(){
+  const thumbs = Array.from(document.querySelectorAll('.doc-g-thumb img'));
+  if(!thumbs.length) return;
+  const lightbox = document.getElementById('docLightbox');
+  const lbImg = document.getElementById('docLightboxImg');
+  const lbCounter = document.getElementById('docLightboxCounter');
+  const closeBtn = document.getElementById('docLightboxClose');
+  const prevBtn = document.getElementById('docLightboxPrev');
+  const nextBtn = document.getElementById('docLightboxNext');
+  let current = 0;
+
+  thumbs.forEach(function(img, i){
+    img.closest('.doc-g-thumb').addEventListener('click', function(){ openLightbox(i); });
+  });
+
+  function openLightbox(index){
+    current = index; render();
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox(){
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function render(){
+    const img = thumbs[current];
+    lbImg.src = img.src; lbImg.alt = img.alt || '';
+    lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+  }
+  function next(){ current = (current+1) % thumbs.length; render(); }
+  function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+  closeBtn.addEventListener('click', closeLightbox);
+  nextBtn.addEventListener('click', next);
+  prevBtn.addEventListener('click', prev);
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', function(e){
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLightbox();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+})();
+</script>
+
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-backdrop" id="bookingBackdrop"></div>
+  <div class="booking-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <button type="button" class="booking-close" id="bookingClose" aria-label="Close">&#10005;</button>
+    <div id="bookingFormWrap">
+      <h3 id="bookingTitle">Leave a Request</h3>
+      <p class="booking-sub">Leave your name and number — we'll call you back and find a convenient time</p>
+      <form id="bookingForm">
+        <label>Phone number *
+          <input type="tel" name="phone" required autocomplete="tel" placeholder="+380">
+        </label>
+        <label>Your name
+          <input type="text" name="name" autocomplete="name">
+        </label>
+        <label>Procedure (optional)
+          <input type="text" name="procedure" placeholder="e.g. implants">
+        </label>
+        <label>Convenient time (optional)
+          <input type="text" name="time" placeholder="e.g. tomorrow after 3 PM">
+        </label>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">Leave a Request</button>
+        <p class="booking-error" id="bookingError" style="display:none;color:#c0392b;font-size:13px;margin:0;">Couldn't send the request. Please call us directly: <a href="tel:+380949405514">+380 94 940 55 14</a></p>
+      </form>
+    </div>
+    <div id="bookingSuccess" style="display:none;text-align:center;">
+      <div class="booking-check">&#10003;</div>
+      <h3>Request sent!</h3>
+      <p class="booking-sub">We've received your request and will be in touch shortly.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('bookingModal');
+  const backdrop = document.getElementById('bookingBackdrop');
+  const closeBtn = document.getElementById('bookingClose');
+  const form = document.getElementById('bookingForm');
+  const formWrap = document.getElementById('bookingFormWrap');
+  const success = document.getElementById('bookingSuccess');
+  if(!modal) return;
+
+  function openModal(){
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    formWrap.style.display = 'block';
+    success.style.display = 'none';
+    form.reset();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.js-open-booking').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const phone = form.phone.value.trim();
+    if(!phone){ form.phone.focus(); return; }
+    const payload = {
+      name: form.name.value.trim(),
+      phone: phone,
+      procedure: form.procedure.value.trim(),
+      time: form.time.value.trim()
+    };
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const errorBox = document.getElementById('bookingError');
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const ENDPOINT = 'https://maslovclinic-booking-api.vercel.app/api/booking';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status');
+      formWrap.style.display = 'none';
+      success.style.display = 'block';
+      if(typeof gtag === 'function'){
+        gtag('event', 'booking_submitted', {event_category:'contact', event_label: payload.procedure || ''});
+      }
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Leave a Request';
+      errorBox.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+<script src="/assets/prices.js" defer></script>
+</body>
+</html>

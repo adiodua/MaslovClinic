@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script>
+(function(){
+  try{
+    if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
+    var path = location.pathname;
+    var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
+    var stored = localStorage.getItem('mc-lang');
+    var target = null;
+    if(stored === 'UA'){ target = '/ua' + rest; }
+    else if(stored === 'RU'){ target = rest; }
+    else if(stored !== 'EN'){
+      var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+      if(browserLang.indexOf('uk') === 0){ target = '/ua' + rest; }
+    }
+    if(target && target !== path){
+      location.replace(target + location.search + location.hash);
+    }
+  }catch(e){}
+})();
+</script>
+<script>
+(function(){
+  try{
+    var t = localStorage.getItem('mc-theme');
+    if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About MaslovClinic — Licenses, Certificates & Specialties</title>
+<meta name="description" content="About MaslovClinic in Odesa: licenses and certificates, treatment areas — dental implants, orthodontics, periodontics, cosmetic dentistry, and more.">
+<link rel="canonical" href="https://maslovclinic.com/en/o-klinike.html">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/o-klinike.html">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/o-klinike.html">
+<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/o-klinike.html">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/o-klinike.html">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" href="/favicon-180.png">
+<meta property="og:site_name" content="MaslovClinic">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About MaslovClinic — Licenses, Certificates & Specialties">
+<meta property="og:description" content="About MaslovClinic in Odesa: licenses and certificates, and the clinic's areas of care.">
+<meta property="og:url" content="https://maslovclinic.com/en/o-klinike.html">
+<meta property="og:image" content="https://maslovclinic.com/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About MaslovClinic — Licenses, Certificates & Specialties">
+<meta name="twitter:description" content="About MaslovClinic in Odesa: licenses and certificates, and the clinic's areas of care.">
+<meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://maslovclinic.com/en/"},
+    {"@type": "ListItem", "position": 2, "name": "About the Clinic", "item": "https://maslovclinic.com/en/o-klinike.html"}
+  ]
+}
+</script>
+<link rel="stylesheet" href="/assets/base.css">
+<style>
+  /* This page's hero summary is longer than average and wraps to 5 lines at
+     the standard 460px width, pushing the hero taller than the rest of the
+     site. Widen it to match h1's 560px so it wraps to 4 lines like everywhere
+     else, keeping hero height consistent (736px) across all pages. */
+  .hero p.lead{max-width:560px;}
+
+  .seo-text{max-width:820px;font-size:14.5px;line-height:1.75;color:var(--muted);margin-top:32px;}
+  .seo-text p{margin-bottom:16px;}
+  .seo-text h3{font-size:16px;color:var(--ink);margin:24px 0 10px;}
+  .partners-row{display:flex;align-items:center;justify-content:center;gap:56px;flex-wrap:wrap;}
+  .partner-logo{display:flex;align-items:center;justify-content:center;height:64px;}
+  .partner-logo img{max-height:100%;max-width:180px;object-fit:contain;filter:grayscale(100%);opacity:.65;transition:filter .25s ease, opacity .25s ease;}
+  .partner-logo:hover img{filter:grayscale(0%);opacity:1;}
+
+  .cert-track{
+    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;padding:4px 4px 12px;scrollbar-width:none;margin-top:56px;
+  }
+  .cert-track::-webkit-scrollbar{display:none;}
+  .cert-card{
+    flex:0 0 240px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--divider);
+    border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px;
+  }
+  .cert-card.soon{opacity:.6;border-style:dashed;}
+  .cert-card .photo-slot{
+    width:100%;aspect-ratio:3/4;border-radius:4px;background:var(--navy-2);
+    border:1px solid rgba(201,162,75,.3);display:flex;align-items:center;justify-content:center;
+    text-align:center;color:#9fb0c6;font-size:12.5px;line-height:1.5;padding:12px;
+  }
+  .cert-card h3{margin:0;font-size:16px;}
+  .cert-dots{display:flex;justify-content:center;gap:6px;margin-top:8px;}
+  .cert-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb,18,32,58),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
+  .cert-dot.active{background:var(--accent);}
+
+  /* Video tour bubble */
+  .vtour{position:fixed;left:18px;bottom:18px;z-index:150;}
+  .vtour-backdrop{
+    position:fixed;inset:0;background:rgba(8,16,24,0);z-index:349;
+    pointer-events:none;transition:background .35s ease;
+  }
+  .vtour[data-state="expanded"] .vtour-backdrop{background:rgba(8,16,24,.82);pointer-events:auto;}
+  .vtour-frame{
+    position:fixed;left:18px;bottom:18px;width:96px;height:96px;border-radius:50%;
+    overflow:hidden;cursor:pointer;z-index:350;background:#0e1a26;
+    box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 3px rgba(255,255,255,.85);
+    transition:width .38s cubic-bezier(.4,0,.2,1),height .38s cubic-bezier(.4,0,.2,1),
+      border-radius .38s cubic-bezier(.4,0,.2,1),left .38s cubic-bezier(.4,0,.2,1),
+      top .38s cubic-bezier(.4,0,.2,1),bottom .38s cubic-bezier(.4,0,.2,1),
+      transform .38s cubic-bezier(.4,0,.2,1),box-shadow .38s ease;
+  }
+  .vtour-frame:hover{box-shadow:0 10px 28px rgba(0,0,0,.4),0 0 0 3px #fff;}
+  .vtour-frame video{width:100%;height:100%;object-fit:cover;display:block;}
+  .vtour-ring{
+    position:absolute;inset:-3px;border-radius:50%;pointer-events:none;
+    background:conic-gradient(var(--wood,#0e2540) calc(var(--vtour-pct,0) * 1%), rgba(255,255,255,.35) 0);
+    -webkit-mask:radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+    mask:radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px));
+  }
+  .vtour-bubble-ui{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;
+    background:rgba(8,16,24,.4);opacity:0;transition:opacity .2s ease;pointer-events:none;
+  }
+  .vtour-frame:hover .vtour-bubble-ui,.vtour-frame.vtour-active .vtour-bubble-ui{opacity:1;pointer-events:auto;}
+  .vtour-mute,.vtour-expand{
+    width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.92);
+    color:#0e2540;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;
+  }
+  .vtour-mute svg,.vtour-expand svg{width:15px;height:15px;}
+
+  .vtour-close,.vtour-sound{
+    position:absolute;top:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);
+    border:none;color:#fff;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:4;
+  }
+  .vtour-close{right:14px;font-size:18px;}
+  .vtour-sound{left:14px;}
+  .vtour-sound svg{width:16px;height:16px;}
+  /* Draws attention to the sound button right after the story opens — the
+     only real way to turn sound on (there's no way for a webpage to react
+     to the phone's hardware volume keys), so it needs to be easy to spot. */
+  @keyframes vtourSoundPulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.65);}
+    70%{box-shadow:0 0 0 14px rgba(255,255,255,0);}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
+  }
+  .vtour-sound.pulse{animation:vtourSoundPulse 1.6s ease-out infinite;}
+  .vtour[data-state="expanded"] .vtour-close,.vtour[data-state="expanded"] .vtour-sound{display:flex;}
+
+  .vtour-progress{position:absolute;top:14px;left:58px;right:58px;display:none;gap:4px;z-index:4;}
+  .vtour[data-state="expanded"] .vtour-progress{display:flex;}
+  .vtour-progress .seg{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
+  .vtour-progress .seg::after{content:"";display:block;height:100%;width:0;background:#fff;}
+  .vtour-progress .seg.done::after{width:100%;}
+  .vtour-progress .seg.active::after{width:var(--vtour-seg-pct,0%);}
+
+  .vtour-tapzone{position:absolute;top:0;bottom:0;width:38%;border:none;background:none;padding:0;z-index:3;display:none;cursor:pointer;}
+  .vtour[data-state="expanded"] .vtour-tapzone{display:block;}
+  .vtour-tapzone.prev{left:0;}
+  .vtour-tapzone.next{right:0;}
+
+  /* Desktop expanded: card, black frame, centered */
+  .vtour[data-state="expanded"] .vtour-frame{
+    left:50%;bottom:50%;transform:translate(-50%,50%);
+    width:min(360px,88vw);height:min(640px,80vh);border-radius:18px;
+    box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 8px #000;
+  }
+  .vtour[data-state="expanded"] .vtour-bubble-ui{display:none;}
+  .vtour[data-state="expanded"] .vtour-ring{display:none;}
+
+  /* Mobile expanded: true fullscreen stories */
+  @media(max-width:640px){
+    .vtour[data-state="expanded"] .vtour-frame{
+      left:0;bottom:0;transform:none;width:100vw;height:100vh;border-radius:0;
+      box-shadow:none;
+    }
+    .vtour[data-state="expanded"] .vtour-progress{top:calc(env(safe-area-inset-top,0px) + 12px);left:50px;right:50px;}
+    .vtour[data-state="expanded"] .vtour-close,.vtour[data-state="expanded"] .vtour-sound{
+      top:calc(env(safe-area-inset-top,0px) + 10px);
+    }
+  }
+
+  .inline-video{max-width:320px;margin:28px auto 0;}
+  .inline-video video{
+    width:100%;aspect-ratio:9/16;object-fit:cover;display:block;
+    border-radius:var(--radius);background:#000;box-shadow:0 10px 26px rgba(var(--text-rgb,18,32,58),0.1);
+  }
+  .inline-video p{margin:12px 0 0;font-size:13px;color:var(--muted);text-align:center;}
+</style>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-D3DMK6FB59');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('a,button');
+    if(!t || typeof gtag !== 'function') return;
+    var href = t.getAttribute('href') || '';
+    if(href.indexOf('tel:') === 0){
+      gtag('event', 'phone_click', {event_category:'contact', event_label: href});
+    } else if(href.indexOf('mailto:') === 0){
+      gtag('event', 'email_click', {event_category:'contact', event_label: href});
+    } else if(t.classList.contains('js-open-booking') || href === '/#booking' || href === '#booking'){
+      gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
+    } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
+      gtag('event', 'contact_panel_open', {event_category:'contact'});
+    } else if(t.classList.contains('mm-panel-link')){
+      gtag('event', 'contacts_click', {event_category:'contact'});
+    }
+  });
+</script>
+</head>
+<body data-theme="light">
+
+<div class="lang-auto-banner" id="langAutoBanner" role="status" aria-live="polite">
+  <span>This page is shown in your device's language.</span>
+  <button type="button" class="lang-auto-banner-switch" id="langAutoBannerSwitch">Switch to Ukrainian</button>
+  <button type="button" class="lang-auto-banner-close" id="langAutoBannerClose" aria-label="Close">&#10005;</button>
+</div>
+<script>
+(function(){
+  try{
+    var el = document.getElementById('langAutoBanner');
+    if(!el) return;
+    var stored = localStorage.getItem('mc-lang');
+    if(stored) return;
+    var seen = sessionStorage.getItem('mc-lang-banner-seen');
+    if(seen) return;
+    var path = location.pathname;
+    var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
+    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
+    // Only worth mentioning when the page you're already on actually
+    // matches what your device reports — a French or English browser
+    // landing on the RU default isn't "shown in Russian because of your
+    // device", it's just the site's fallback, so no banner there.
+    var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
+    if(!relevant) return;
+    sessionStorage.setItem('mc-lang-banner-seen', '1');
+    el.classList.add('show');
+    var hideTimer = setTimeout(function(){ el.classList.remove('show'); }, 8000);
+    var closeBtn = document.getElementById('langAutoBannerClose');
+    if(closeBtn) closeBtn.addEventListener('click', function(){
+      clearTimeout(hideTimer);
+      el.classList.remove('show');
+    });
+    var switchBtn = document.getElementById('langAutoBannerSwitch');
+    if(switchBtn) switchBtn.addEventListener('click', function(){
+      try{ localStorage.setItem('mc-lang', 'UA'); }catch(e){}
+      location.href = '/ua' + rest;
+    });
+  }catch(e){}
+})();
+</script>
+<header>
+  <nav class="wrap">
+    <a href="/en/" class="logo" style="display:flex;align-items:center;gap:8px;">
+      <img class="brand-mark" src="/assets/logo.png" width="44" height="60" alt="" style="height:26px;width:auto;display:block;">
+      <span class="logo-text">MaslovClinic</span>
+    </a>
+    <div class="navlinks">
+      <a href="/en/uslugi/" data-nav="uslugi">Services</a>
+      <a href="/en/vrachi/" data-nav="vrachi">Doctors</a>
+      <a href="/blog/" data-nav="blog">Blog</a>
+      <a href="/en/#reviews">Reviews</a>
+      <a href="/en/#faq">FAQ</a>
+      <a href="/en/#contacts">Contacts</a>
+      <a href="/en/o-klinike.html" data-nav="o-klinike">About</a>
+    </div>
+    <div class="navcta">
+      <div class="langs">
+        <button class="langbtn">RU</button>
+        <button class="langbtn">UA</button>
+        <button class="langbtn active">EN</button>
+      </div>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-current" id="langCurrentBtn">
+          <span class="lang-current-label" id="langCurrentLabel">EN</span>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <button data-lang="RU">RU</button>
+          <button data-lang="UA">UA</button>
+          <button data-lang="EN" class="current">EN</button>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Light/dark theme">
+        <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <a href="/raboty/index.html" class="nav-works-btn" data-nav="raboty">Our Cases</a>
+      <a href="#" class="btn js-open-booking" id="navBookingBtn">Book a Visit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <svg id="iconBurger" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg id="iconClose" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none;"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/en/uslugi/" data-nav="uslugi">Services</a>
+    <a href="/en/vrachi/" data-nav="vrachi">Doctors</a>
+    <a href="/blog/" data-nav="blog">Blog</a>
+    <a href="/en/#reviews">Reviews</a>
+    <a href="/en/#faq">FAQ</a>
+    <a href="/en/#contacts">Contacts</a>
+    <a href="/en/o-klinike.html" data-nav="o-klinike">About</a>
+    <a href="/raboty/index.html" class="nav-works-dot" data-nav="raboty">Our Cases</a>
+    <div class="mobile-langs">
+      <button class="langbtn">RU</button>
+      <button class="langbtn">UA</button>
+      <button class="langbtn active">EN</button>
+    </div>
+  </div>
+</header>
+<div class="mobile-multi-btn" id="mobileMultiBtn">
+  <button type="button" id="mobileMultiTrigger" aria-label="Contacts and booking">
+    <svg width="39" height="39" viewBox="0 0 24 24" fill="none">
+      <path d="M2 13a10 10 0 0 1 20 0" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>
+      <rect x="1" y="12" width="3.6" height="5.4" rx="1.7" fill="currentColor"/>
+      <rect x="19.4" y="12" width="3.6" height="5.4" rx="1.7" fill="currentColor"/>
+      <path d="M21.2 17.4 Q17 20.6 13.6 19.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+      <circle cx="13.2" cy="19.6" r="1.2" fill="currentColor"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M6 11.5a4.5 4.5 0 0 1 4.5-4.5h3a4.5 4.5 0 0 1 4.5 4.5 4.5 4.5 0 0 1-4.5 4.5h-2l-3 3v-3A4.5 4.5 0 0 1 6 11.5z M9.2 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z M12 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z M14.8 11.3a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+    </svg>
+  </button>
+  <div class="mm-panel" id="mobileMultiPanel">
+    <a href="#" class="btn js-open-booking" style="width:100%;justify-content:center;margin-bottom:16px;">Book a Visit</a>
+    <div class="mm-panel-label">Phone</div>
+    <a href="tel:+380949405514" class="mm-panel-num">+380 94 940 55 14</a>
+    <div class="mm-panel-label">Telegram</div>
+    <a href="https://t.me/maslovclinic" target="_blank" rel="noopener" class="mm-panel-num" style="font-size:15px;color:#229ED9;">Message us</a>
+    <div class="mm-panel-label">Email</div>
+    <a href="mailto:maslovclinic@gmail.com" class="mm-panel-num" style="font-size:15px;">maslovclinic@gmail.com</a>
+    <a href="/en/#contacts" class="mm-panel-link">Our Contacts</a>
+  </div>
+</div>
+
+
+<section class="hero">
+  <div class="wrap">
+    <div class="crumbs-inline"><a href="/en/">Home</a> / <span class="crumb-active">About the Clinic</span></div>
+    <h1>MaslovClinic — full-cycle<br>dentistry in Odesa</h1>
+    <p class="lead">From your first visit to full-mouth rehabilitation — in calm rooms with panoramic windows. Modern equipment, licenses and certificates, transparent treatment protocols, and sedation when indicated — for those who find it more comfortable.</p>
+    <div class="cta-row">
+      <span class="seg"></span>
+      <a href="#" class="btn js-open-booking">Book a Visit</a>
+      <span class="seg"></span>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Licenses and Certificates</span>
+      <h2>Clinic Documents</h2>
+      <p>An official license for medical practice and certificates for the equipment and materials we use — shown openly, no request required.</p>
+    </div>
+    <div class="cert-track" id="certTrack">
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;border-color:var(--gold);"><img loading="lazy" decoding="async" src="/img/certificates/nobel-excellence-clinic-2026.jpg" alt="Nobel Excellence Clinic 2026 — InSPE status from Nobel Biocare" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>Nobel Excellence Clinic 2026</h3>
+      </div>
+      <div class="cert-card soon">
+        <div class="photo-slot">Ministry of Health<br>medical practice license</div>
+        <h3>Ukraine Ministry of Health License</h3>
+      </div>
+      <div class="cert-card soon">
+        <div class="photo-slot">Tecno-Gaz<br>sterilization<br>certificate</div>
+        <h3>Equipment Certificate</h3>
+      </div>
+      <div class="cert-card soon">
+        <div class="photo-slot">Nobel Biocare<br>implant<br>certificate</div>
+        <h3>Materials Certificate</h3>
+      </div>
+      <div class="cert-card soon">
+        <div class="photo-slot">3D CBCT<br>diagnostics certificate</div>
+        <h3>Equipment Certificate</h3>
+      </div>
+    </div>
+    <div class="cert-dots" id="certDots"></div>
+    <div class="inline-video">
+      <video controls playsinline preload="none" poster="/video/tomograf-poster.jpg">
+        <source src="/video/tomograf.mp4" type="video/mp4">
+      </video>
+      <p>3D imaging of the jaw and teeth — video from the clinic's practice</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">About the Clinic</span>
+      <h2>Full-Cycle Dentistry in Odesa</h2>
+    </div>
+    <div class="seo-text">
+      <p>MaslovClinic is a full-cycle dental clinic on Arkadiivske Plato in Odesa. We specialize in dental implants, full-mouth rehabilitation, ceramic veneers and crowns, as well as restorative and surgical treatment.</p>
+      <h3>Clinic Specialties</h3>
+      <p>Cosmetic dentistry, dental implants, periodontics, orthodontics, endodontic treatment (root canal therapy), teeth whitening, and professional oral hygiene — see the full list of specialties and prices on the <a href="/en/uslugi/">"Services"</a> page.</p>
+      <h3>Dentistry in Odesa Near the Sea</h3>
+      <p>The clinic is located in the Prymorskyi district of Odesa, on Arkadiivske Plato — just 100 meters from the sea, with easy access from the city center and Arkadia. Panoramic windows, a spacious lobby, and a well-planned layout of rooms create a calm setting for patients of any age.</p>
+      <h3>Dental Implants in Odesa</h3>
+      <p>We work with three implant systems — Nobel Biocare, Straumann and JDental — from single-tooth implants to full rehabilitation under All-on-4/6 protocols. For more on pricing and protocols, see the <a href="/en/uslugi/implantatsiya-zubov.html">"Dental Implants"</a> page.</p>
+      <h3>Family Dentistry in the Prymorskyi District</h3>
+      <p>We treat patients of all ages — from routine check-ups and hygiene to complex prosthetics. See our doctors and their specialties on the <a href="/en/vrachi/">"Our Doctors"</a> page, and real treatment results in the <a href="/raboty/index.html">"Our Cases"</a> section.</p>
+      <h3>Why Choose MaslovClinic</h3>
+      <p>Our own 3D diagnostic room (CBCT), a dedicated sterilization unit with Tecno-Gaz autoclaves, and work with premium implant systems from Nobel Biocare, Straumann and JDental — three protocols to fit different patient budgets.</p>
+      <p>Free parking, and a comfortable location in the Prymorskyi district of Odesa — 100 meters from the sea, with easy access from the city center and Arkadia.</p>
+      <h3>About the Clinic</h3>
+      <p>The clinic is located in Arkadia — an environmentally clean district of Odesa, 100 meters from the sea. Large panoramic windows, a spacious lobby, a wide corridor, and a well-planned layout of medical rooms create comfortable conditions for our patients. MaslovClinic was created specifically for patients who want comfortable, qualified medical care.</p>
+      <p>We look forward to welcoming you at MaslovClinic.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="komfort">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Comfort</span>
+      <h2>What Makes Treatment Comfortable</h2>
+      <p>The small details that add up to a calm visit — from the first phone call to recovery after treatment.</p>
+    </div>
+    <div class="komfort-groups">
+      <div class="komfort-group">
+        <h3>Service and Atmosphere</h3>
+        <ul>
+          <li>Friendly front-desk staff</li>
+          <li>Appointment reminders</li>
+          <li>A spacious waiting lobby</li>
+          <li>Refreshments: coffee, tea, water</li>
+          <li>Separate restrooms for women and men</li>
+          <li>The option to play music, a movie, or a show during your visit</li>
+          <li>A blanket on request</li>
+        </ul>
+      </div>
+      <div class="komfort-group">
+        <h3>Clinic Equipment</h3>
+        <ul>
+          <li>X-ray imaging on-site at the clinic</li>
+          <li>Spacious treatment rooms</li>
+          <li>Modern, up-to-date equipment</li>
+          <li>Comfortable dental chairs and units</li>
+          <li>Our own dental lab</li>
+        </ul>
+      </div>
+      <div class="komfort-group">
+        <h3>Individual Approach</h3>
+        <ul>
+          <li>An individual approach to every patient</li>
+          <li>Every doctor works with an assistant</li>
+          <li>Every doctor works with magnification</li>
+          <li>An oral care display stand</li>
+        </ul>
+      </div>
+      <div class="komfort-group">
+        <h3>Hygiene and Safety</h3>
+        <ul>
+          <li>All instruments sterilized fresh for each patient</li>
+          <li>Disposable materials for each patient</li>
+          <li>Protective glasses, a napkin, and a cap during your visit</li>
+        </ul>
+      </div>
+      <div class="komfort-group">
+        <h3>Treatment Comfort</h3>
+        <ul>
+          <li>Treatment under sedation available</li>
+          <li>Modern, high-quality anesthetics and thin needles for painless anesthesia</li>
+        </ul>
+      </div>
+      <div class="komfort-group">
+        <h3>Surgery and Recovery</h3>
+        <ul>
+          <li>A sterile gown for the duration of surgery</li>
+          <li>A post-op recovery room with a private restroom</li>
+          <li>All necessary medications for treatment</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why Choose MaslovClinic</span>
+      <h2>We Work With Trusted Brands</h2>
+      <p>Implants and materials from world-leading manufacturers — three protocols to fit different budgets and clinical needs.</p>
+    </div>
+    <div class="partners-row">
+      <div class="partner-logo"><img width="360" height="199" loading="lazy" src="/assets/partners/straumann.png" alt="Straumann — implants and materials"></div>
+      <div class="partner-logo"><img width="360" height="160" loading="lazy" src="/assets/partners/nobel-biocare.png" alt="Nobel Biocare — premium implant system"></div>
+      <div class="partner-logo"><img width="360" height="304" loading="lazy" src="/assets/partners/jdental.png" alt="J Dental Care — implant system"></div>
+    </div>
+  </div>
+</section>
+
+<div class="locality">
+  <div class="wrap">
+    <strong>MaslovClinic</strong> is located on Gagarinske Plato (Prymorskyi district, Odesa), near Henuezka Street and Posmitnoho Street. Free parking is available for patients at the clinic.
+  </div>
+</div>
+
+<footer class="site" id="zapis">
+  <div class="wrap">
+    <p><strong>MaslovClinic</strong> — Odesa, Arkadiivske Plato · free parking</p>
+    <p>Phone: <a href="tel:+380949405514">+380 94 940 55 14</a> · <a href="mailto:maslovclinic@gmail.com">maslovclinic@gmail.com</a> · <a href="https://t.me/maslovclinic" target="_blank" rel="noopener" style="color:#229ED9;">Telegram</a></p>
+    <p><a href="/en/o-klinike.html">About the Clinic</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const sun = document.getElementById('iconSun');
+    const moon = document.getElementById('iconMoon');
+    const saved = localStorage.getItem('mc-theme');
+    function systemPrefersDark(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function applyTheme(theme){
+      if(theme === 'dark'){
+        root.setAttribute('data-theme','dark');
+        sun.style.display='none'; moon.style.display='block';
+      } else {
+        root.setAttribute('data-theme','light');
+        sun.style.display='block'; moon.style.display='none';
+      }
+      document.querySelectorAll('.brand-mark').forEach(img=>{
+        img.style.filter = (theme==='dark') ? 'brightness(0) invert(1)' : 'none';
+      });
+    }
+    applyTheme(saved ? saved : (systemPrefersDark() ? 'dark' : 'light'));
+    toggle.addEventListener('click', ()=>{
+      const isDark = root.getAttribute('data-theme') === 'dark';
+      const next = isDark ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('mc-theme', next);
+    });
+  })();
+
+    // Language dropdown
+  (function(){
+    const wrap = document.getElementById('langDropdown');
+    const current = document.getElementById('langCurrentBtn');
+    const menu = document.getElementById('langMenu');
+    const label = document.getElementById('langCurrentLabel');
+    if(!wrap || !current || !menu || !label) return;
+    current.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.classList.toggle('open');
+    });
+    menu.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', function(){
+        const target = btn.dataset.lang;
+        const path = location.pathname;
+        // Remember the visitor's explicit choice so the auto-detect script
+        // (which otherwise follows navigator.language on every fresh visit)
+        // never fights a manual pick on a later page load.
+        try{ localStorage.setItem('mc-lang', target); }catch(e){}
+        // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
+        // same folder structure, so switching is pure path manipulation —
+        // strip whichever prefix is currently active, then add the new one.
+        const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
+          : path.indexOf('/en/') === 0 ? path.slice(3)
+          : (path === '/ua' || path === '/en') ? '/'
+          : path;
+        const newPath = target === 'UA' ? '/ua' + rest : target === 'EN' ? '/en' + rest : (rest || '/');
+        if(newPath !== path){
+          location.href = newPath;
+          return;
+        }
+        label.textContent = btn.dataset.lang;
+        menu.querySelectorAll('button').forEach(b => b.classList.remove('current'));
+        btn.classList.add('current');
+        wrap.classList.remove('open');
+      });
+    });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)) wrap.classList.remove('open');
+    });
+  })();
+
+  // Active-page nav highlight — marks the current section's nav link instead of
+  // ever hiding/removing it, on both the desktop menu and the mobile menu.
+  (function(){
+    // Strip a leading /ua or /en so section detection works the same on
+    // the Ukrainian and English mirrors (paths there are /ua/uslugi/...,
+    // /en/uslugi/..., etc.) without a separate ruleset per language.
+    const rawPath = location.pathname;
+    const path = rawPath.startsWith('/ua/') ? rawPath.slice(3)
+      : rawPath.startsWith('/en/') ? rawPath.slice(3)
+      : rawPath;
+    const sections = [
+      {key: 'uslugi',    test: p => p.indexOf('/uslugi/') === 0},
+      {key: 'vrachi',    test: p => p.indexOf('/vrachi/') === 0},
+      {key: 'blog',      test: p => p.indexOf('/blog/') === 0},
+      {key: 'raboty',    test: p => p.indexOf('/raboty/') === 0},
+      {key: 'o-klinike', test: p => p === '/o-klinike.html'}
+    ];
+    const active = sections.find(s => s.test(path));
+    if(!active) return;
+    document.querySelectorAll('[data-nav="' + active.key + '"]').forEach(function(a){
+      a.classList.add('nav-highlight');
+    });
+  })();
+
+  // Mobile hamburger menu
+  (function(){
+    const btn = document.getElementById('menuToggle');
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('iconBurger');
+    const close = document.getElementById('iconClose');
+    if(!btn || !menu) return;
+    function setOpen(isOpen){
+      menu.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      burger.style.display = isOpen ? 'none' : 'block';
+      close.style.display = isOpen ? 'block' : 'none';
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      setOpen(!menu.classList.contains('open'));
+    });
+    menu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    // tap elsewhere closes the menu without activating whatever was tapped there
+    document.addEventListener('click', function(e){
+      if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(false);
+      }
+    }, true);
+  })();
+
+  (function(){
+    const wrap = document.getElementById('mobileMultiBtn');
+    const btn = document.getElementById('mobileMultiTrigger');
+    const panel = document.getElementById('mobileMultiPanel');
+    if(!wrap || !btn || !panel) return;
+    let openScrollY = null;
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      const willOpen = !panel.classList.contains('open');
+      panel.classList.toggle('open');
+      openScrollY = willOpen ? window.scrollY : null;
+    });
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target) && panel.classList.contains('open')){
+        e.preventDefault();
+        e.stopPropagation();
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
+    }, true);
+    // Close the panel if the visitor scrolls far away from where they
+    // opened it — the scroll-driven "floating drop" squish animation that
+    // used to live here has been removed (the button no longer reacts to
+    // scrolling at all, just sits still until hovered or clicked).
+    window.addEventListener('scroll', function(){
+      const y = window.scrollY;
+      if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){
+        panel.classList.remove('open');
+        openScrollY = null;
+      }
+    }, {passive:true});
+  })();
+
+  (function(){
+    const track = document.getElementById('certTrack');
+    const dotsWrap = document.getElementById('certDots');
+    if(!track || !dotsWrap) return;
+    const cards = Array.from(track.children);
+    cards.forEach(function(_, i){
+      const dot = document.createElement('button');
+      dot.className = 'cert-dot' + (i === 0 ? ' active' : '');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', 'Certificate ' + (i+1));
+      dot.addEventListener('click', function(){
+        cards[i].scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+    let ticking = false;
+    track.addEventListener('scroll', function(){
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(function(){
+        const trackLeft = track.getBoundingClientRect().left;
+        let closest = 0, minDist = Infinity;
+        cards.forEach(function(card, i){
+          const dist = Math.abs(card.getBoundingClientRect().left - trackLeft);
+          if(dist < minDist){ minDist = dist; closest = i; }
+        });
+        dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+        ticking = false;
+      });
+    }, {passive:true});
+  })();
+</script>
+<div class="vtour" id="vtour" data-state="bubble">
+  <div class="vtour-backdrop" id="vtourBackdrop"></div>
+  <div class="vtour-frame" id="vtourFrame">
+    <video id="vtourVideo" class="vtour-video" autoplay muted loop playsinline poster="/video/tour-1-poster.jpg">
+      <source id="vtourSource" src="/video/tour-1-preview.mp4">
+    </video>
+    <div class="vtour-progress" id="vtourProgress">
+      <span class="seg" data-i="0"></span><span class="seg" data-i="1"></span><span class="seg" data-i="2"></span>
+    </div>
+    <button class="vtour-sound" id="vtourSoundBtn" type="button" aria-label="Turn on sound">
+      <svg id="vtourSoundIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+    </button>
+    <button class="vtour-close" id="vtourCloseBtn" type="button" aria-label="Collapse video">×</button>
+    <button class="vtour-tapzone prev" id="vtourPrevZone" type="button" aria-label="Previous part"></button>
+    <button class="vtour-tapzone next" id="vtourNextZone" type="button" aria-label="Next part"></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var vtour = document.getElementById('vtour');
+  if(!vtour) return;
+  var frame = document.getElementById('vtourFrame');
+  var backdrop = document.getElementById('vtourBackdrop');
+  var video = document.getElementById('vtourVideo');
+  var source = document.getElementById('vtourSource');
+  var progress = document.getElementById('vtourProgress');
+  var segEls = Array.prototype.slice.call(progress.querySelectorAll('.seg'));
+  var closeBtn = document.getElementById('vtourCloseBtn');
+  var soundBtn = document.getElementById('vtourSoundBtn');
+  var prevZone = document.getElementById('vtourPrevZone');
+  var nextZone = document.getElementById('vtourNextZone');
+
+  var SOURCES = ['/video/tour-1.mp4','/video/tour-2.mp4','/video/tour-3.mp4'];
+  var POSTERS = ['/video/tour-1-poster.jpg','/video/tour-2-poster.jpg','/video/tour-3-poster.jpg'];
+
+  var segment = 0, expanded = false;
+
+  function renderProgress(){
+    segEls.forEach(function(el,i){
+      el.classList.toggle('done', i < segment);
+      el.classList.toggle('active', i === segment);
+      if(i === segment){
+        var pct = expanded && video.duration ? (video.currentTime/video.duration*100) : 0;
+        el.style.setProperty('--vtour-seg-pct', pct + '%');
+      } else if(i > segment){
+        el.style.setProperty('--vtour-seg-pct', '0%');
+      }
+    });
+  }
+
+  var expanded = false;
+
+  function applySoundIcon(){
+    var muted = video.muted;
+    var icon = muted
+      ? '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>'
+      : '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>';
+    soundBtn.querySelector('svg').innerHTML = icon;
+    soundBtn.setAttribute('aria-label', muted ? 'Turn on sound' : 'Turn off sound');
+  }
+
+  function setSegment(i){
+    segment = Math.min(2, Math.max(0, i));
+    source.src = SOURCES[segment];
+    video.poster = POSTERS[segment];
+    video.loop = false;
+    video.load();
+    var onReady = function(){
+      video.currentTime = 0;
+      video.play().catch(function(){});
+      video.removeEventListener('loadedmetadata', onReady);
+    };
+    video.addEventListener('loadedmetadata', onReady);
+    renderProgress();
+  }
+
+  video.addEventListener('timeupdate', function(){
+    if(!expanded) return;
+    renderProgress();
+  });
+  video.addEventListener('ended', function(){
+    if(!expanded) return;
+    if(segment < 2){ setSegment(segment+1); } else { setSegment(0); }
+  });
+
+  var soundPulseTimer = null;
+  function startSoundPulse(){
+    soundBtn.classList.add('pulse');
+    clearTimeout(soundPulseTimer);
+    soundPulseTimer = setTimeout(function(){ soundBtn.classList.remove('pulse'); }, 5000);
+  }
+  function stopSoundPulse(){
+    soundBtn.classList.remove('pulse');
+    clearTimeout(soundPulseTimer);
+  }
+
+  function expand(){
+    expanded = true;
+    vtour.setAttribute('data-state','expanded');
+    document.body.style.overflow = 'hidden';
+    setSegment(0);
+    startSoundPulse();
+  }
+  function collapse(){
+    expanded = false;
+    vtour.setAttribute('data-state','bubble');
+    document.body.style.overflow = '';
+    video.muted = true;
+    video.loop = true;
+    source.src = '/video/tour-1-preview.mp4';
+    video.load();
+    video.play().catch(function(){});
+    applySoundIcon();
+    stopSoundPulse();
+  }
+
+  frame.addEventListener('click', function(e){
+    if(e.target.closest('.vtour-sound, .vtour-close, .vtour-tapzone')) return;
+    if(!expanded) expand();
+  });
+  closeBtn.addEventListener('click', function(e){ e.stopPropagation(); collapse(); });
+  soundBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    video.muted = !video.muted;
+    applySoundIcon();
+    stopSoundPulse();
+  });
+  prevZone.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(segment > 0) setSegment(segment-1);
+  });
+  nextZone.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(segment < 2) setSegment(segment+1); else collapse();
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!expanded) return;
+    if(e.key === 'Escape') collapse();
+    if(e.key === 'ArrowLeft') prevZone.click();
+    if(e.key === 'ArrowRight') nextZone.click();
+  });
+  backdrop.addEventListener('click', function(){ if(expanded) collapse(); });
+
+  var touchStartY = null, touchStartX = null;
+  frame.addEventListener('touchstart', function(e){
+    if(!expanded || e.touches.length !== 1) return;
+    touchStartY = e.touches[0].clientY;
+    touchStartX = e.touches[0].clientX;
+  }, {passive:true});
+  frame.addEventListener('touchend', function(e){
+    if(!expanded || touchStartY === null) return;
+    var dy = (e.changedTouches[0].clientY - touchStartY);
+    var dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+    if(dy > 90 && dx < 60) collapse();
+    touchStartY = null; touchStartX = null;
+  }, {passive:true});
+})();
+</script>
+
+
+
+<div class="booking-modal" id="bookingModal" aria-hidden="true">
+  <div class="booking-backdrop" id="bookingBackdrop"></div>
+  <div class="booking-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <button type="button" class="booking-close" id="bookingClose" aria-label="Close">&#10005;</button>
+    <div id="bookingFormWrap">
+      <h3 id="bookingTitle">Leave a Request</h3>
+      <p class="booking-sub">Leave your name and number — we'll call you back and find a convenient time</p>
+      <form id="bookingForm">
+        <label>Phone number *
+          <input type="tel" name="phone" required autocomplete="tel" placeholder="+380">
+        </label>
+        <label>Your name
+          <input type="text" name="name" autocomplete="name">
+        </label>
+        <label>Procedure (optional)
+          <input type="text" name="procedure" placeholder="e.g. implants">
+        </label>
+        <label>Convenient time (optional)
+          <input type="text" name="time" placeholder="e.g. tomorrow after 3 PM">
+        </label>
+        <button type="submit" class="btn" style="width:100%;justify-content:center;">Leave a Request</button>
+        <p class="booking-error" id="bookingError" style="display:none;color:#c0392b;font-size:13px;margin:0;">Couldn't send the request. Please call us directly: <a href="tel:+380949405514">+380 94 940 55 14</a></p>
+      </form>
+    </div>
+    <div id="bookingSuccess" style="display:none;text-align:center;">
+      <div class="booking-check">&#10003;</div>
+      <h3>Request sent!</h3>
+      <p class="booking-sub">We've received your request and will be in touch shortly.</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const modal = document.getElementById('bookingModal');
+  const backdrop = document.getElementById('bookingBackdrop');
+  const closeBtn = document.getElementById('bookingClose');
+  const form = document.getElementById('bookingForm');
+  const formWrap = document.getElementById('bookingFormWrap');
+  const success = document.getElementById('bookingSuccess');
+  if(!modal) return;
+
+  function openModal(){
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    formWrap.style.display = 'block';
+    success.style.display = 'none';
+    form.reset();
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.js-open-booking').forEach(function(el){
+    el.addEventListener('click', function(e){ e.preventDefault(); openModal(); });
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const phone = form.phone.value.trim();
+    if(!phone){ form.phone.focus(); return; }
+    const payload = {
+      name: form.name.value.trim(),
+      phone: phone,
+      procedure: form.procedure.value.trim(),
+      time: form.time.value.trim()
+    };
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const errorBox = document.getElementById('bookingError');
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const ENDPOINT = 'https://maslovclinic-booking-api.vercel.app/api/booking';
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('bad status');
+      formWrap.style.display = 'none';
+      success.style.display = 'block';
+      if(typeof gtag === 'function'){
+        gtag('event', 'booking_submitted', {event_category:'contact', event_label: payload.procedure || ''});
+      }
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Leave a Request';
+      errorBox.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+<script src="/assets/prices.js" defer></script>
+</body>
+</html>

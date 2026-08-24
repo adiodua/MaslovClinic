@@ -51,6 +51,7 @@
 <link rel="canonical" href="https://maslovclinic.com/ua/vrachi/gulyuk-irina.html">
 <link rel="alternate" hreflang="ru" href="https://maslovclinic.com/vrachi/gulyuk-irina.html">
 <link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/vrachi/gulyuk-irina.html">
+<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/vrachi/gulyuk-irina.html">
 <link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/vrachi/gulyuk-irina.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -529,13 +530,20 @@
       btn.addEventListener('click', function(){
         const target = btn.dataset.lang;
         const path = location.pathname;
+        // Remember the visitor's explicit choice so the auto-detect script
+        // (which otherwise follows navigator.language on every fresh visit)
+        // never fights a manual pick on a later page load.
         try{ localStorage.setItem('mc-lang', target); }catch(e){}
-        if(target === 'UA' && !path.startsWith('/ua/')){
-          location.href = '/ua' + path;
-          return;
-        }
-        if(target === 'RU' && path.startsWith('/ua/')){
-          location.href = path.slice(3) || '/';
+        // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
+        // same folder structure, so switching is pure path manipulation —
+        // strip whichever prefix is currently active, then add the new one.
+        const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
+          : path.indexOf('/en/') === 0 ? path.slice(3)
+          : (path === '/ua' || path === '/en') ? '/'
+          : path;
+        const newPath = target === 'UA' ? '/ua' + rest : target === 'EN' ? '/en' + rest : (rest || '/');
+        if(newPath !== path){
+          location.href = newPath;
           return;
         }
         label.textContent = btn.dataset.lang;
@@ -553,7 +561,9 @@
   // ever hiding/removing it, on both the desktop menu and the mobile menu.
   (function(){
     const rawPath = location.pathname;
-    const path = rawPath.startsWith('/ua/') ? rawPath.slice(3) : rawPath;
+    const path = rawPath.startsWith('/ua/') ? rawPath.slice(3)
+      : rawPath.startsWith('/en/') ? rawPath.slice(3)
+      : rawPath;
     const sections = [
       {key: 'uslugi',    test: p => p.indexOf('/uslugi/') === 0},
       {key: 'vrachi',    test: p => p.indexOf('/vrachi/') === 0},
