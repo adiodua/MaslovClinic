@@ -103,6 +103,13 @@
     display:flex;align-items:center;justify-content:center;text-align:center;
     font-size:12.5px;line-height:1.5;padding:16px;
   }
+  /* Dark corner wash behind the name/tag overlay — without it, light-toned
+     photos (bright teeth, pale background) can make the white text hard to
+     read; this guarantees contrast regardless of the underlying photo. */
+  .case-card:not(.soon)::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:46%;z-index:1;pointer-events:none;
+    background:linear-gradient(135deg, rgba(6,14,24,.62) 0%, rgba(6,14,24,.32) 40%, rgba(6,14,24,0) 75%);
+  }
   .case-before-thumbs{position:absolute;left:14px;bottom:14px;width:34%;display:flex;gap:6px;z-index:2;}
   .case-before-thumb{
     width:100%;aspect-ratio:3/2;border-radius:8px;overflow:hidden;border:3px solid rgba(242,240,232,.9);
@@ -149,7 +156,7 @@
   .patient-modal-nav.next{right:12px;}
   .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
   .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
-  .patient-modal-info .eyebrow{color:var(--accent);}
+  .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
   .pm-case-link{display:inline-block;margin:0 0 16px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none;}
@@ -391,12 +398,12 @@
     </div>
     <div class="cases-grid">
       <button class="case-card" onclick="openPatientModal('darya')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Дар’я — результат після вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/darya-portrait.jpg" alt="Дар’я — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/darya-before.jpg" alt="Дар’я — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Дар’я</h3><p>Керамічні вініри</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('uriy')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Юрій — результат імплантації" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Юрій — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/uriy-before.jpg" alt="Юрій — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юрій</h3><p>Імплантаційне лікування</p></div>
       </button>
@@ -410,16 +417,16 @@
         <div class="case-info"><h3>Крістіна</h3><p>Керамічні вініри</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('irina')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ірина — результат після вінірів і корон" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-portrait.jpg" alt="Ірина — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/irina-before.jpg" alt="Ірина — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ірина</h3><p>Керамічні вініри та корони</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('oksana')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-portrait.jpg" alt="Оксана — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Оксана</h3><p>Імплантаційне лікування</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-v')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамічних вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-v-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Керамічні вініри</p></div>
       </button>
@@ -429,7 +436,7 @@
         <div class="case-info"><h3>Наталія</h3><p>Імплантаційне лікування</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-i')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Ольга — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-i-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Імплантаційне лікування</p></div>
       </button>
