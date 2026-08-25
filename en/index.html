@@ -672,7 +672,7 @@
   .patient-modal-nav.next{right:12px;}
   .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
   .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
-  .patient-modal-info .eyebrow{color:var(--wood);}
+  .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
   .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
@@ -1253,6 +1253,48 @@
           </picture></div>
           <div class="case-info"><h3>Yuriy</h3><p>Implant treatment</p></div>
         </button>
+        <button class="case-slide" onclick="openPatientModal('kristina')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/kristina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Kristina — veneer results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Kristina</h3><p>Ceramic veneers</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('irina')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/irina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Irina — veneer and crown results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Irina</h3><p>Veneers and crowns</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('oksana')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Oksana — implant results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Oksana</h3><p>Implant treatment</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('olga-v')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Olga — veneer results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Olga</h3><p>Ceramic veneers</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('natalya')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/natalya-portrait.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Natalya — implant results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Natalya</h3><p>Implant treatment</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('olga-i')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/olga-i-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Olga — implant results" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Olga</h3><p>Implant treatment</p></div>
+        </button>
       </div>
       </div>
       <button class="case-nav" id="casesNext" aria-label="Next case">
@@ -1609,6 +1651,42 @@
       desc: 'Enamel preparation, veneer fabrication based on individual impressions, and bonding.',
       photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'],
       labels: ['Before','After','After, angle 2','After, angle 3']
+    },
+    kristina: {
+      name: 'Kristina', tag: 'Ceramic veneers',
+      desc: 'Enamel preparation, veneer fabrication based on individual impressions, and bonding.',
+      photos: ['/img/patients/kristina-after.jpg'],
+      labels: ['After']
+    },
+    irina: {
+      name: 'Irina', tag: 'Veneers and crowns',
+      desc: 'Tooth preparation, veneer and crown fabrication based on individual impressions, and bonding.',
+      photos: ['/img/patients/irina-portrait.jpg','/img/patients/irina-before.jpg','/img/patients/irina-after.jpg','/img/patients/irina-after2.jpg'],
+      labels: ['Portrait','Before','After','After, angle 2']
+    },
+    oksana: {
+      name: 'Oksana', tag: 'Implant treatment',
+      desc: 'Diagnostics, implant placement, and prosthetics.',
+      photos: ['/img/patients/oksana-portrait.jpg','/img/patients/oksana-after.jpg'],
+      labels: ['Portrait','After']
+    },
+    'olga-v': {
+      name: 'Olga', tag: 'Ceramic veneers',
+      desc: 'Enamel preparation, veneer fabrication based on individual impressions, and bonding.',
+      photos: ['/img/patients/olga-v-portrait.jpg','/img/patients/olga-v-before.jpg','/img/patients/olga-v-after.jpg'],
+      labels: ['Portrait','Before','After']
+    },
+    natalya: {
+      name: 'Natalya', tag: 'Implant treatment',
+      desc: 'CT/X-ray diagnostics, implant placement, and prosthetics.',
+      photos: ['/img/patients/natalya-before.jpg','/img/patients/natalya-portrait.jpg'],
+      labels: ['Before','After']
+    },
+    'olga-i': {
+      name: 'Olga', tag: 'Implant treatment',
+      desc: 'Diagnostics, implant placement, and prosthetics.',
+      photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-after.jpg'],
+      labels: ['Portrait','Before','After']
     }
   };
   let pmSlug = null, pmIndex = 0;

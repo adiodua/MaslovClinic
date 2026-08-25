@@ -406,12 +406,34 @@
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/yuliya-before.jpg" alt="Юлия — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юлия</h3><p>Керамические виниры</p></div>
       </button>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
+      <button class="case-card" onclick="openPatientModal('kristina')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Кристина — результат керамических виниров" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Кристина</h3><p>Керамические виниры</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('irina')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ирина — результат после виниров и коронок" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/irina-before.jpg" alt="Ирина — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
+        <div class="case-info"><h3>Ирина</h3><p>Керамические виниры и коронки</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('oksana')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат имплантационного лечения" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Оксана</h3><p>Имплантационное лечение</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('olga-v')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамических виниров" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-v-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
+        <div class="case-info"><h3>Ольга</h3><p>Керамические виниры</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('natalya')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталья — результат имплантационного лечения" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/natalya-before.jpg" alt="Наталья — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
+        <div class="case-info"><h3>Наталья</h3><p>Имплантационное лечение</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('olga-i')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Ольга — результат имплантационного лечения" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-i-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
+        <div class="case-info"><h3>Ольга</h3><p>Имплантационное лечение</p></div>
+      </button>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
@@ -477,6 +499,48 @@
       url: '/raboty/patient-3.html',
       photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'],
       labels: ['До','После','После, ракурс 2','После, ракурс 3']
+    },
+    kristina: {
+      name: 'Кристина', tag: 'Керамические виниры',
+      desc: 'Подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация.',
+      url: '/raboty/patient-4.html',
+      photos: ['/img/patients/kristina-after.jpg'],
+      labels: ['После']
+    },
+    irina: {
+      name: 'Ирина', tag: 'Керамические виниры и коронки',
+      desc: 'Подготовка зубов, изготовление виниров и коронок по индивидуальным слепкам, фиксация.',
+      url: '/raboty/patient-5.html',
+      photos: ['/img/patients/irina-portrait.jpg','/img/patients/irina-before.jpg','/img/patients/irina-after.jpg','/img/patients/irina-after2.jpg'],
+      labels: ['Портрет','До','После','После, ракурс 2']
+    },
+    oksana: {
+      name: 'Оксана', tag: 'Имплантационное лечение',
+      desc: 'Диагностика, установка имплантов, протезирование.',
+      url: '/raboty/patient-6.html',
+      photos: ['/img/patients/oksana-portrait.jpg','/img/patients/oksana-after.jpg'],
+      labels: ['Портрет','После']
+    },
+    'olga-v': {
+      name: 'Ольга', tag: 'Керамические виниры',
+      desc: 'Подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация.',
+      url: '/raboty/patient-7.html',
+      photos: ['/img/patients/olga-v-portrait.jpg','/img/patients/olga-v-before.jpg','/img/patients/olga-v-after.jpg'],
+      labels: ['Портрет','До','После']
+    },
+    natalya: {
+      name: 'Наталья', tag: 'Имплантационное лечение',
+      desc: 'Диагностика по КТ/рентгену, установка имплантов, протезирование.',
+      url: '/raboty/patient-8.html',
+      photos: ['/img/patients/natalya-before.jpg','/img/patients/natalya-portrait.jpg'],
+      labels: ['До','После']
+    },
+    'olga-i': {
+      name: 'Ольга', tag: 'Имплантационное лечение',
+      desc: 'Диагностика, установка имплантов, протезирование.',
+      url: '/raboty/patient-9.html',
+      photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-after.jpg'],
+      labels: ['Портрет','До','После']
     }
   };
   let pmSlug = null, pmIndex = 0;
