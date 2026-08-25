@@ -415,4 +415,117 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://maslovclinic.com/en/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tour-1-poster.jpg</video:thumbnail_loc>
+      <video:title>Virtual tour of MaslovClinic</video:title>
+      <video:description>A video tour of the treatment rooms and lobby at MaslovClinic in Odesa.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tour-1-preview.mp4</video:content_loc>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/implantatsiya-zubov.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/koronki-i-viniry.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/brekety.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/otbelivanie-zubov.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/diagnostika.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/gigiena-polosti-rta.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/terapevticheskoe-lechenie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/endodonticheskoe-lechenie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/hirurgicheskoe-lechenie.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/uslugi/sedatsiya.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/maslov-vyacheslav.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/maslov-aleksey.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/voloshina-elena.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/gavrishchuk-anastasiya.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/vrachi/gulyuk-irina.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/o-klinike.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tomograf-poster.jpg</video:thumbnail_loc>
+      <video:title>3D diagnostics on a CT scanner</video:title>
+      <video:description>How 3D diagnostics on a CT scanner works at MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tomograf.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/tour-1-poster.jpg</video:thumbnail_loc>
+      <video:title>Virtual tour of MaslovClinic</video:title>
+      <video:description>A video tour of the treatment rooms and lobby at MaslovClinic in Odesa.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/tour-1-preview.mp4</video:content_loc>
+    </video:video>
+  </url>
 </urlset>
