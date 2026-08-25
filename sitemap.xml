@@ -105,6 +105,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://maslovclinic.com/vrachi/gulyuk-irina.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://maslovclinic.com/o-klinike.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -152,6 +157,36 @@
       <video:description>Процесс фиксации керамических виниров на постоянный цемент в MaslovClinic.</video:description>
       <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
     </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-4.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-5.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-6.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-7.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-8.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/raboty/patient-9.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://maslovclinic.com/blog/</loc>
@@ -277,6 +312,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://maslovclinic.com/ua/vrachi/gulyuk-irina.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://maslovclinic.com/ua/o-klinike.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -324,6 +364,36 @@
       <video:description>Процес фіксації керамічних вінірів на постійний цемент в MaslovClinic.</video:description>
       <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
     </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-4.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-5.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-6.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-7.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-8.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/ua/raboty/patient-9.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://maslovclinic.com/ua/blog/</loc>
