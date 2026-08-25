@@ -686,9 +686,11 @@
   .patient-modal-nav.next{right:12px;}
   .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
   .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
-  .patient-modal-info .eyebrow{color:var(--wood);}
+  .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
+  .pm-case-link{display:inline-block;margin:0 0 14px;color:#c9a24b;font-size:13.5px;font-weight:600;text-decoration:none;}
+  .pm-case-link:hover{text-decoration:underline;}
   .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
   .pm-thumb{width:42px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.5);padding:0;cursor:pointer;flex-shrink:0;background:none;}
   .pm-thumb.active{border-color:var(--wood-deep, #fff);}
@@ -1258,6 +1260,48 @@
           </picture></div>
           <div class="case-info"><h3>Юрій</h3><p>Імплантаційне лікування</p></div>
         </button>
+        <button class="case-slide" onclick="openPatientModal('kristina')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/kristina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Крістіна — результат керамічних вінірів" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Крістіна</h3><p>Керамічні вініри</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('irina')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/irina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ірина — результат після вінірів і корон" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Ірина</h3><p>Керамічні вініри та корони</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('oksana')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Оксана</h3><p>Імплантаційне лікування</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('olga-v')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамічних вінірів" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Ольга</h3><p>Керамічні вініри</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('natalya')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/natalya-portrait.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталія — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Наталія</h3><p>Імплантаційне лікування</p></div>
+        </button>
+        <button class="case-slide" onclick="openPatientModal('olga-i')">
+          <div class="case-photo-main" style="background:none;padding:0;"><picture>
+            <source srcset="/img/patients/olga-i-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Ольга — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
+          </picture></div>
+          <div class="case-info"><h3>Ольга</h3><p>Імплантаційне лікування</p></div>
+        </button>
       </div>
       </div>
       <button class="case-nav" id="casesNext" aria-label="Наступний випадок">
@@ -1588,6 +1632,7 @@
       <span class="eyebrow" id="pmTag"></span>
       <h3 id="pmName"></h3>
       <p id="pmDesc"></p>
+      <a href="#" id="pmCaseLink" class="pm-case-link">Детальніше про кейс →</a>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
       <!-- Mobile-only: replaces the thumbnail strip with simple dots. -->
       <div class="pm-dots" id="pmDots"></div>
@@ -1600,20 +1645,65 @@
     darya: {
       name: 'Дар\'я', tag: 'Керамічні вініри',
       desc: '8 вінірів, підготовка емалі та фіксація за індивідуальними зліпками.',
+      url: '/ua/raboty/patient-1.html',
       photos: ['/img/patients/darya-portrait.jpg','/img/patients/darya-before.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg'],
       labels: ['Портрет','До','Після','Після, ракурс 2','Після, ракурс 3']
     },
     uriy: {
       name: 'Юрій', tag: 'Імплантаційне лікування',
       desc: 'Діагностика, встановлення імплантів, протезування.',
+      url: '/ua/raboty/patient-2.html',
       photos: ['/img/patients/uriy-portrait.jpg','/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'],
       labels: ['Портрет','До','Після']
     },
     yuliya: {
       name: 'Юлія', tag: 'Керамічні вініри',
       desc: 'Підготовка емалі, виготовлення вінірів за індивідуальними зліпками, фіксація.',
+      url: '/ua/raboty/patient-3.html',
       photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg'],
       labels: ['До','Після','Після, ракурс 2','Після, ракурс 3']
+    },
+    kristina: {
+      name: 'Крістіна', tag: 'Керамічні вініри',
+      desc: 'Підготовка емалі, виготовлення вінірів за індивідуальними зліпками, фіксація.',
+      url: '/ua/raboty/patient-4.html',
+      photos: ['/img/patients/kristina-after.jpg'],
+      labels: ['Після']
+    },
+    irina: {
+      name: 'Ірина', tag: 'Керамічні вініри та корони',
+      desc: 'Підготовка зубів, виготовлення вінірів і корон за індивідуальними зліпками, фіксація.',
+      url: '/ua/raboty/patient-5.html',
+      photos: ['/img/patients/irina-portrait.jpg','/img/patients/irina-before.jpg','/img/patients/irina-after.jpg','/img/patients/irina-after2.jpg'],
+      labels: ['Портрет','До','Після','Після, ракурс 2']
+    },
+    oksana: {
+      name: 'Оксана', tag: 'Імплантаційне лікування',
+      desc: 'Діагностика, встановлення імплантів, протезування.',
+      url: '/ua/raboty/patient-6.html',
+      photos: ['/img/patients/oksana-portrait.jpg','/img/patients/oksana-after.jpg'],
+      labels: ['Портрет','Після']
+    },
+    'olga-v': {
+      name: 'Ольга', tag: 'Керамічні вініри',
+      desc: 'Підготовка емалі, виготовлення вінірів за індивідуальними зліпками, фіксація.',
+      url: '/ua/raboty/patient-7.html',
+      photos: ['/img/patients/olga-v-portrait.jpg','/img/patients/olga-v-before.jpg','/img/patients/olga-v-after.jpg'],
+      labels: ['Портрет','До','Після']
+    },
+    natalya: {
+      name: 'Наталія', tag: 'Імплантаційне лікування',
+      desc: 'Діагностика за КТ/рентгеном, встановлення імплантів, протезування.',
+      url: '/ua/raboty/patient-8.html',
+      photos: ['/img/patients/natalya-before.jpg','/img/patients/natalya-portrait.jpg'],
+      labels: ['До','Після']
+    },
+    'olga-i': {
+      name: 'Ольга', tag: 'Імплантаційне лікування',
+      desc: 'Діагностика, встановлення імплантів, протезування.',
+      url: '/ua/raboty/patient-9.html',
+      photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-after.jpg'],
+      labels: ['Портрет','До','Після']
     }
   };
   let pmSlug = null, pmIndex = 0;
@@ -1652,6 +1742,7 @@
     document.getElementById('pmTag').textContent = PATIENTS[slug].tag;
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
+    document.getElementById('pmCaseLink').href = PATIENTS[slug].url;
     const slides = pmSlides();
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
