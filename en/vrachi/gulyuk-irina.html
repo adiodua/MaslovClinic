@@ -66,6 +66,10 @@
   "name": "Irina Gulyuk",
   "jobTitle": "Orthodontist",
   "medicalSpecialty": ["Orthodontics"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Odesa National Medical University"
+  },
   "worksFor": {
     "@type": "Dentist",
     "name": "MaslovClinic",
@@ -105,6 +109,15 @@
   .doc-role{color:var(--gold);font-size:14px;letter-spacing:.05em;text-transform:uppercase;margin-top:10px;list-style:none;padding:0;}
   .doc-role li{display:inline;}
   .doc-role li:not(:last-child)::after{content:" · ";}
+  .timeline{list-style:none;padding:0;margin:0;display:grid;gap:0;}
+  .timeline li{
+    display:grid;grid-template-columns:110px 1fr;gap:20px;
+    padding:20px 0;border-bottom:1px solid var(--divider);
+  }
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .year{font-family:'Inter',sans-serif;font-size:22px;color:var(--accent);}
+  .timeline h4{margin:0 0 4px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;}
+  .timeline p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
 
   /* Cert timeline — alternating zigzag with central line */
   .cert-timeline-wrap{
@@ -188,6 +201,7 @@
     .doc-hero-grid{grid-template-columns:1fr;}
     .doc-photo-slot{max-width:220px;margin:0 auto;}
     .proc-grid{grid-template-columns:1fr;}
+    .timeline li{grid-template-columns:80px 1fr;}
     .cert-thumb-btn img.cert-thumb{width:36px;height:36px;}
     .cert-timeline-wrap::before{left:9px;transform:none;}
     .cert-timeline-progress{left:9px;transform:none;}
@@ -368,7 +382,7 @@
         <ul class="doc-role">
           <li>Orthodontist</li>
         </ul>
-        <p class="lead" style="margin-top:18px;">Orthodontic treatment with brace systems and aligners, functional and myofunctional therapy. Regularly furthers her expertise at specialized courses and congresses since 2014.</p>
+        <p class="lead" style="margin-top:18px;">Orthodontic treatment with brace systems and aligners, functional and myofunctional therapy. Regularly furthers her expertise at specialized courses and congresses since 2014. 25 years of clinical experience.</p>
         <div class="cta-row">
           <span class="seg"></span>
           <a href="#" class="btn js-open-booking">Book a Visit</a>
@@ -380,7 +394,7 @@
   </div>
 </section>
 
-<p class="mobile-lead-below">Orthodontic treatment with brace systems and aligners, functional and myofunctional therapy. Regularly furthers her expertise at specialized courses and congresses since 2014.</p>
+<p class="mobile-lead-below">Orthodontic treatment with brace systems and aligners, functional and myofunctional therapy. Regularly furthers her expertise at specialized courses and congresses since 2014. 25 years of clinical experience.</p>
 
 <section id="protsedury">
   <div class="wrap">
@@ -399,6 +413,23 @@
         <p>Working with jaw posture, breathing and facial muscle balance — combined with orthodontic treatment.</p>
       </a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Qualifications</span>
+      <h2>Education and Work Experience</h2>
+      <p>Over 25 years of practice in orthodontics — from internship to her own clinical path.</p>
+    </div>
+    <ul class="timeline">
+      <li><span class="year">2001</span><div><h4>Graduated from Odesa National Medical University</h4><p>Degree in Dentistry.</p></div></li>
+      <li><span class="year">2001–2002</span><div><h4>Internship</h4><p>At City Clinical Hospital No. 6.</p></div></li>
+      <li><span class="year">2002–2008</span><div><h4>Worked at City Dental Clinic No. 2</h4></div></li>
+      <li><span class="year">Since 2008</span><div><h4>Orthodontist at GALSY dental clinic</h4></div></li>
+      <li><span class="year">Since 2025</span><div><h4>Orthodontist at MaslovClinic</h4></div></li>
+    </ul>
   </div>
 </section>
 

@@ -80,6 +80,10 @@
   "name": "Гулюк Ирина Гарьевна",
   "jobTitle": "Врач-ортодонт",
   "medicalSpecialty": ["Orthodontics"],
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Одесский национальный медицинский университет"
+  },
   "worksFor": {
     "@type": "Dentist",
     "name": "MaslovClinic",
@@ -119,6 +123,15 @@
   .doc-role{color:var(--gold);font-size:14px;letter-spacing:.05em;text-transform:uppercase;margin-top:10px;list-style:none;padding:0;}
   .doc-role li{display:inline;}
   .doc-role li:not(:last-child)::after{content:" · ";}
+  .timeline{list-style:none;padding:0;margin:0;display:grid;gap:0;}
+  .timeline li{
+    display:grid;grid-template-columns:110px 1fr;gap:20px;
+    padding:20px 0;border-bottom:1px solid var(--divider);
+  }
+  .timeline li:last-child{border-bottom:none;}
+  .timeline .year{font-family:'Inter',sans-serif;font-size:22px;color:var(--accent);}
+  .timeline h4{margin:0 0 4px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;}
+  .timeline p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.55;}
 
   /* Cert timeline — alternating zigzag with central line */
   .cert-timeline-wrap{
@@ -202,6 +215,7 @@
     .doc-hero-grid{grid-template-columns:1fr;}
     .doc-photo-slot{max-width:220px;margin:0 auto;}
     .proc-grid{grid-template-columns:1fr;}
+    .timeline li{grid-template-columns:80px 1fr;}
     .cert-thumb-btn img.cert-thumb{width:36px;height:36px;}
     .cert-timeline-wrap::before{left:9px;transform:none;}
     .cert-timeline-progress{left:9px;transform:none;}
@@ -381,7 +395,7 @@
         <ul class="doc-role">
           <li>Врач-ортодонт</li>
         </ul>
-        <p class="lead" style="margin-top:18px;">Ортодонтическое лечение брекет-системами и элайнерами, функциональная и миофункциональная терапия. Регулярно повышает квалификацию на профильных курсах и конгрессах с 2014 года.</p>
+        <p class="lead" style="margin-top:18px;">Ортодонтическое лечение брекет-системами и элайнерами, функциональная и миофункциональная терапия. Регулярно повышает квалификацию на профильных курсах и конгрессах с 2014 года. Стаж работы — 25 лет.</p>
         <div class="cta-row">
           <span class="seg"></span>
           <a href="#" class="btn js-open-booking">Записаться на визит</a>
@@ -393,7 +407,7 @@
   </div>
 </section>
 
-<p class="mobile-lead-below">Ортодонтическое лечение брекет-системами и элайнерами, функциональная и миофункциональная терапия. Регулярно повышает квалификацию на профильных курсах и конгрессах с 2014 года.</p>
+<p class="mobile-lead-below">Ортодонтическое лечение брекет-системами и элайнерами, функциональная и миофункциональная терапия. Регулярно повышает квалификацию на профильных курсах и конгрессах с 2014 года. Стаж работы — 25 лет.</p>
 
 <section id="protsedury">
   <div class="wrap">
@@ -412,6 +426,23 @@
         <p>Работа с осанкой челюсти, дыханием и мышечным балансом лица — в комплексе с ортодонтическим лечением.</p>
       </a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Квалификация</span>
+      <h2>Образование и опыт работы</h2>
+      <p>Более 25 лет практики в ортодонтии — от интернатуры до собственного клинического пути.</p>
+    </div>
+    <ul class="timeline">
+      <li><span class="year">2001</span><div><h4>Окончила Одесский национальный медицинский университет</h4><p>Специальность «Стоматология».</p></div></li>
+      <li><span class="year">2001–2002</span><div><h4>Интернатура</h4><p>На базе городской клинической больницы №6.</p></div></li>
+      <li><span class="year">2002–2008</span><div><h4>Работала в городской стоматологической клинике №2</h4></div></li>
+      <li><span class="year">С 2008</span><div><h4>Врач-ортодонт стоматологической клиники «ГАЛСИ»</h4></div></li>
+      <li><span class="year">С 2025</span><div><h4>Врач-ортодонт клиники MaslovClinic</h4></div></li>
+    </ul>
   </div>
 </section>
 
