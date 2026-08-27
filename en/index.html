@@ -607,15 +607,19 @@
   }
   .cases-track::-webkit-scrollbar{display:none;}
   .case-slide{
-    display:block;position:relative;flex:0 0 min(1120px,92vw);
-    /* Height follows the viewport's own height, not its width — this is what
-       keeps the photo as large as possible while still guaranteeing the
-       heading, the "See all works" link and the dots below always fit
-       on screen together with it. ~500px covers the fixed header plus that
-       surrounding chrome; the clamp keeps the card from ever going below a
-       legible size or above a size that dwarfs everything else on tall
-       screens. */
-    height:clamp(190px, calc(100vh - 500px), 620px);
+    display:block;position:relative;flex:0 0 auto;
+    /* Same 16:10 photo as before — width is derived FROM the height below via
+       aspect-ratio, it's never set directly. That's what keeps the photo
+       looking like a normal, uncropped shot instead of a squashed-flat strip:
+       when there's plenty of vertical room the card renders at its old full
+       size (up to 1120px / 92vw wide); when the window is short, height AND
+       width shrink together in proportion, so the whole photo just gets
+       smaller rather than getting cropped tighter. calc(100vh - 500px) is the
+       vertical room actually left after the fixed header and the heading
+       above the carousel; the clamp keeps it from ever going below a legible
+       size or above a size that dwarfs everything else on tall screens. */
+    height:clamp(190px, min(calc(min(1120px,92vw) * 10 / 16), calc(100vh - 500px)), 620px);
+    aspect-ratio:16/10;
     border-radius:var(--radius);
     overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
     text-decoration:none;color:inherit;cursor:pointer;border:none;padding:0;font:inherit;text-align:left;
