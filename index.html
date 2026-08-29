@@ -1117,6 +1117,8 @@
       gtag('event', 'phone_click', {event_category:'contact', event_label: href});
     } else if(href.indexOf('mailto:') === 0){
       gtag('event', 'email_click', {event_category:'contact', event_label: href});
+    } else if(href.indexOf('https://t.me/') === 0){
+      gtag('event', 'telegram_click', {event_category:'contact', event_label: href});
     } else if(t.classList.contains('js-open-booking') || href === '/#booking' || href === '#booking'){
       gtag('event', 'booking_click', {event_category:'contact', event_label: (t.textContent||'').trim()});
     } else if(t.id === 'phoneBtn' || t.id === 'mobileMultiTrigger'){
