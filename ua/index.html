@@ -612,66 +612,57 @@
     .doctor-card{flex:0 0 68%;}
   }
 
-  /* cases carousel (Наші роботи) */
+  /* cases carousel (Наші роботи) — full-bleed strip, name/description in a
+     toolbar above the photo instead of on it, image never cropped. */
   #cases{padding:40px 0 44px;}
-  /* The carousel is meant to be one big, full-width "hero" photo per screen —
-     so instead of shrinking the photo to make room, the heading above it
-     gives up some of its own space first. This is a deliberately more
-     compact heading than other sections use. */
   #cases .section-head{margin-bottom:22px;}
   #cases .section-head .eyebrow{margin-bottom:6px;}
   #cases .section-head h2{font-size:26px;}
   #cases .section-head p{margin-top:6px;font-size:14px;}
+  .cases-full{
+    /* Breaks out of .wrap's max-width so the photo strip runs edge-to-edge
+       like a real hero band — the heading above stays inside .wrap. */
+    width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
+  }
+  .case-toolbar{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    background:var(--brand-navy);color:#fff;padding:16px clamp(20px,4vw,48px);
+  }
+  .case-toolbar-text h3{margin:0 0 2px;font-size:18px;font-weight:600;color:#fff;}
+  .case-toolbar-text p{margin:0;font-size:13px;color:rgba(255,255,255,.72);}
+  .case-toolbar-nav{display:flex;gap:10px;flex-shrink:0;}
+  .case-toolbar-nav .case-nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:#fff;}
+  .case-toolbar-nav .case-nav:hover{border-color:#fff;background:rgba(255,255,255,.16);}
   .cases-carousel{position:relative;}
   .cases-track{
-    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;padding:0 32px 8px;scrollbar-width:none;
+    display:flex;gap:2px;overflow-x:auto;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;
   }
   .cases-track::-webkit-scrollbar{display:none;}
   .case-slide{
-    display:block;position:relative;flex:0 0 min(1400px,96vw);
-    border-radius:var(--radius);overflow:hidden;
-    scroll-snap-align:start;scroll-snap-stop:always;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
+    display:block;position:relative;flex:0 0 96%;
+    background:var(--brand-navy);overflow:hidden;
+    scroll-snap-align:start;scroll-snap-stop:always;
     text-decoration:none;color:inherit;cursor:pointer;border:none;padding:0;font:inherit;text-align:left;
-    /* The photo is meant to fill as much of the screen as it can — both
-       ways, not just edge-to-edge horizontally. Height answers to whichever
-       is tighter: the room actually left in the viewport (so it can never
-       push the dots/button below out of view), or a share of the card's own
-       width (so on an in-between window size it still reads as a photo,
-       not a near-square). On a short window the vh term wins and the photo
-       shrinks gracefully instead of overflowing. */
-    height:clamp(400px, min(calc(100vh - 310px), calc(min(1400px,96vw) * 0.68)), 860px);
+    /* A generous, fixed share of the viewport height — tall enough to read
+       as a real hero photo regardless of window width. */
+    height:min(72vh, 760px);
   }
   @media(max-width:760px){
-    /* Phones scroll vertically anyway, so there's no "fits in one screen"
-       constraint to chase here — a plain, friendly photo ratio reads better
-       than a height borrowed from leftover viewport space. */
-    .case-slide{height:auto;aspect-ratio:5/4;}
+    .case-slide{flex:0 0 100%;height:min(60vh, 520px);}
+  }
+  /* The photo itself is shown whole via object-fit:contain — no cropping,
+     whatever its own orientation (landscape or portrait). Whatever empty
+     space that leaves around it is filled by a softly blurred copy of the
+     same photo, not a stark bar of plain background color, so the frame
+     still reads as full no matter how the source photo is shaped. */
+  .case-photo-bg{
+    position:absolute;inset:-24px;background-size:cover;background-position:center;
+    filter:blur(32px) brightness(0.55) saturate(1.1);transform:scale(1.15);
   }
   .case-photo-main{
-    position:absolute;inset:0;background:var(--brand-navy);color:rgba(255,255,255,.55);
-    display:flex;align-items:center;justify-content:center;text-align:center;
-    font-size:14px;line-height:1.5;padding:20px;
-  }
-  /* Thin fades — just enough for the name/description to read over the
-     photo, not the flat dark bars a full-strength gradient turns into once
-     the card gets tall. Percentage-based, so they stay proportional at any
-     card height instead of ballooning on a tall card. */
-  .case-photo-main::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:22%;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(14,37,64,.65) 0%, rgba(14,37,64,0) 100%);
-  }
-  .case-photo-main::after{
-    content:"";position:absolute;bottom:0;left:0;right:0;height:18%;z-index:1;pointer-events:none;
-    background:linear-gradient(0deg, rgba(14,37,64,.75) 0%, rgba(14,37,64,0) 100%);
-  }
-  .case-info{position:absolute;top:20px;left:24px;z-index:2;color:#fff;}
-  .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;font-weight:600;}
-  .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);}
-  @media(max-width:760px){
-    .case-info{top:14px;left:16px;}
-    .case-info h3{font-size:16px;}
-    .case-info p{font-size:12.5px;}
+    position:relative;z-index:1;width:100%;height:100%;
+    display:flex;align-items:center;justify-content:center;
   }
   .case-nav{
     width:40px;height:40px;border-radius:50%;flex-shrink:0;
@@ -691,9 +682,9 @@
     #cases .section-head p{display:none;}
     #cases .cases-cta{margin-top:12px;}
     #cases .cases-dots{margin-top:8px;}
+    .case-toolbar{padding:10px clamp(16px,4vw,48px);}
+    .case-slide{height:min(48vh, 420px);}
   }
-  .cases-row{display:flex;align-items:center;gap:14px;}
-  .cases-row .cases-carousel{flex:1;min-width:0;}
   @media(max-width:760px){.case-nav{display:none;}}
   .cases-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
   .cases-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
@@ -1282,81 +1273,91 @@
       <h2>Результати, якими ми пишаємося</h2>
       <p>Реальні випадки пацієнтів клініки — з етапами «до» та «після».</p>
     </div>
-    <div class="cases-row reveal">
-      <button class="case-nav" id="casesPrev" aria-label="Попередній випадок">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 5l-7 7 7 7"/><path d="M11 5l-7 7 7 7"/></svg>
-      </button>
-      <div class="cases-carousel">
-      <div class="cases-track" id="casesTrack">
-        <button class="case-slide" onclick="openPatientModal('yuliya')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/yuliya-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлія — результат після вінірів" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Юлія</h3><p>Керамічні вініри</p></div>
+  </div>
+  <div class="cases-full reveal">
+    <div class="case-toolbar">
+      <div class="case-toolbar-text">
+        <h3 id="caseToolbarName">Юлія</h3>
+        <p id="caseToolbarDesc">Керамічні вініри</p>
+      </div>
+      <div class="case-toolbar-nav">
+        <button class="case-nav" id="casesPrev" aria-label="Попередній випадок">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 5l-7 7 7 7"/><path d="M11 5l-7 7 7 7"/></svg>
         </button>
-        <button class="case-slide" onclick="openPatientModal('darya')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/darya-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Дар'я — результат після вінірів" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Дар'я</h3><p>Керамічні вініри</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('uriy')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/uriy-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Юрій — результат імплантації" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Юрій</h3><p>Імплантаційне лікування</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('kristina')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/kristina-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Крістіна — результат керамічних вінірів" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Крістіна</h3><p>Керамічні вініри</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('irina')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/irina-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ірина — результат після вінірів і корон" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Ірина</h3><p>Керамічні вініри та корони</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('oksana')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Оксана</h3><p>Імплантаційне лікування</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('olga-v')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамічних вінірів" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Ольга</h3><p>Керамічні вініри</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('natalya')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/natalya-portrait.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталія — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Наталія</h3><p>Імплантаційне лікування</p></div>
-        </button>
-        <button class="case-slide" onclick="openPatientModal('olga-i')">
-          <div class="case-photo-main" style="background:none;padding:0;"><picture>
-            <source srcset="/img/patients/olga-i-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Ольга — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;">
-          </picture></div>
-          <div class="case-info"><h3>Ольга</h3><p>Імплантаційне лікування</p></div>
+        <button class="case-nav" id="casesNext" aria-label="Наступний випадок">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg>
         </button>
       </div>
-      </div>
-      <button class="case-nav" id="casesNext" aria-label="Наступний випадок">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg>
-      </button>
     </div>
+    <div class="cases-carousel">
+      <div class="cases-track" id="casesTrack">
+        <button class="case-slide" data-name="Юлія" data-desc="Керамічні вініри" onclick="openPatientModal('yuliya')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/yuliya-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/yuliya-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлія — результат після вінірів" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Дар'я" data-desc="Керамічні вініри" onclick="openPatientModal('darya')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/darya-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/darya-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Дар'я — результат після вінірів" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Юрій" data-desc="Імплантаційне лікування" onclick="openPatientModal('uriy')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/uriy-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/uriy-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Юрій — результат імплантації" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Крістіна" data-desc="Керамічні вініри" onclick="openPatientModal('kristina')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/kristina-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/kristina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Крістіна — результат керамічних вінірів" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Ірина" data-desc="Керамічні вініри та корони" onclick="openPatientModal('irina')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/irina-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/irina-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ірина — результат після вінірів і корон" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Оксана" data-desc="Імплантаційне лікування" onclick="openPatientModal('oksana')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/oksana-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Ольга" data-desc="Керамічні вініри" onclick="openPatientModal('olga-v')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/olga-v-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамічних вінірів" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Наталія" data-desc="Імплантаційне лікування" onclick="openPatientModal('natalya')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/natalya-portrait.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/natalya-portrait.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталія — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Ольга" data-desc="Імплантаційне лікування" onclick="openPatientModal('olga-i')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/olga-i-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/olga-i-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Ольга — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
     <div class="cases-dots" id="casesDots"></div>
     <div class="cases-cta">
       <a href="/ua/raboty/index.html" class="btn btn-outline">Дивитися всі роботи →</a>
@@ -2415,20 +2416,32 @@ const galleryData = [
     });
   })();
 
-  // Cases carousel arrows + dots
+  // Cases carousel arrows + dots + toolbar (name/description sit in a bar
+  // above the photo now, so they need to track whichever slide is active)
   (function(){
     const track = document.getElementById('casesTrack');
     const prev = document.getElementById('casesPrev');
     const next = document.getElementById('casesNext');
     const dotsWrap = document.getElementById('casesDots');
+    const toolbarName = document.getElementById('caseToolbarName');
+    const toolbarDesc = document.getElementById('caseToolbarDesc');
     if(!track || !prev || !next) return;
     const slides = Array.from(track.querySelectorAll('.case-slide'));
     function slideWidth(){
       const card = track.querySelector('.case-slide');
-      return card ? card.getBoundingClientRect().width + 16 : 300;
+      if(!card) return 300;
+      const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
     }
     function step(dir){
       track.scrollBy({left: dir * slideWidth(), behavior:'smooth'});
+    }
+    function updateToolbar(idx){
+      const s = slides[idx];
+      if(s && toolbarName && toolbarDesc){
+        toolbarName.textContent = s.dataset.name || '';
+        toolbarDesc.textContent = s.dataset.desc || '';
+      }
     }
     prev.addEventListener('click', function(){ step(-1); });
     next.addEventListener('click', function(){ step(1); });
@@ -2449,8 +2462,9 @@ const galleryData = [
       track.addEventListener('scroll', function(){
         if(scrollTimer2) clearTimeout(scrollTimer2);
         scrollTimer2 = setTimeout(function(){
-          const idx = Math.round(track.scrollLeft / slideWidth());
+          const idx = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / slideWidth())));
           dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+          updateToolbar(idx);
         }, 80);
       }, {passive:true});
     }
