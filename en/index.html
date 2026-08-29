@@ -599,7 +599,16 @@
   }
 
   /* cases carousel (Наши работы) */
-  #cases{padding:64px 0 56px;}
+  #cases{padding:40px 0 32px;}
+  /* The carousel is meant to be one big, full-width "hero" photo per screen —
+     so instead of shrinking the photo to make room, the heading above it
+     gives up some of its own space first. This is a deliberately more
+     compact heading than other sections use. */
+  #cases .section-head{margin-bottom:22px;}
+  #cases .section-head .eyebrow{margin-bottom:6px;}
+  #cases .section-head h2{font-size:26px;}
+  #cases .section-head p{margin-top:6px;font-size:14px;}
+  #cases .svc-all{margin-top:14px !important;margin-bottom:18px !important;}
   .cases-carousel{position:relative;}
   .cases-track{
     display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
@@ -607,39 +616,29 @@
   }
   .cases-track::-webkit-scrollbar{display:none;}
   .case-slide{
-    display:block;position:relative;flex:0 0 auto;
-    /* Same 16:10 photo as before — width is derived FROM the height below via
-       aspect-ratio, it's never set directly. That's what keeps the photo
-       looking like a normal, uncropped shot instead of a squashed-flat strip:
-       when there's plenty of vertical room the card renders at its old full
-       size (up to 1120px / 92vw wide); when the window is short, height AND
-       width shrink together in proportion, so the whole photo just gets
-       smaller rather than getting cropped tighter. calc(100vh - 500px) is the
-       vertical room actually left after the fixed header and the heading
-       above the carousel; the clamp keeps it from ever going below a legible
-       size or above a size that dwarfs everything else on tall screens. */
-    height:clamp(190px, min(calc(min(1120px,92vw) * 10 / 16), calc(100vh - 500px)), 620px);
-    aspect-ratio:16/10;
-    border-radius:var(--radius);
-    overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
+    display:block;position:relative;flex:0 0 min(1120px,92vw);
+    background:var(--bg-alt);border-radius:var(--radius);overflow:hidden;
+    scroll-snap-align:start;scroll-snap-stop:always;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);
     text-decoration:none;color:inherit;cursor:pointer;border:none;padding:0;font:inherit;text-align:left;
   }
   .case-photo-main{
-    position:absolute;inset:0;background:var(--brand-navy);color:rgba(255,255,255,.55);
+    position:relative;width:100%;background:var(--brand-navy);color:rgba(255,255,255,.55);
     display:flex;align-items:center;justify-content:center;text-align:center;
     font-size:14px;line-height:1.5;padding:20px;
+    /* The name/description used to live on top of the photo over a dark
+       gradient, which is exactly what looked like "ugly bars" once the card
+       got taller on mobile — the gradient's height was a percentage of the
+       card, so a taller card meant a bigger, flatter-looking dark block.
+       Moving the caption below the photo (see .case-info) removes the need
+       for any gradient at all: the photo stays clean, and only the photo
+       itself answers to the available vertical room. */
+    height:clamp(230px, calc(100vh - 420px), 560px);
+    overflow:hidden;
   }
-  .case-photo-main::before{
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:linear-gradient(135deg, rgba(14,37,64,.75) 0%, rgba(14,37,64,.35) 10%, rgba(14,37,64,.1) 18%, rgba(14,37,64,0) 26%);
-  }
-  .case-photo-main::after{
-    content:"";position:absolute;inset:auto 0 0 0;height:45%;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(18,40,63,0) 0%, rgba(18,40,63,.85) 100%);
-  }
-  .case-info{position:absolute;top:18px;left:18px;z-index:2;color:#fff;}
-  .case-info h3{margin:0 0 4px;font-size:19px;color:#fff;}
-  .case-info p{margin:0;font-size:13.5px;color:rgba(255,255,255,.85);max-width:70%;}
+  .case-info{padding:16px 20px 18px;}
+  .case-info h3{margin:0 0 4px;font-size:17px;font-weight:600;}
+  .case-info p{margin:0 0 10px;font-size:13.5px;color:var(--text-muted);}
+  .case-info .go{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);}
   .case-nav{
     width:40px;height:40px;border-radius:50%;flex-shrink:0;
     background:var(--bg);border:1px solid rgba(var(--text-rgb),0.15);
@@ -1267,63 +1266,63 @@
             <source srcset="/img/patients/yuliya-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Yuliya — veneer results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Yuliya</h3><p>Ceramic veneers</p></div>
+          <div class="case-info"><h3>Yuliya</h3><p>Ceramic veneers</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('darya')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/darya-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/darya-after.jpg" alt="Darya — veneer results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Darya</h3><p>Ceramic veneers</p></div>
+          <div class="case-info"><h3>Darya</h3><p>Ceramic veneers</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('uriy')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/uriy-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-after.jpg" alt="Yuriy — implant results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Yuriy</h3><p>Implant treatment</p></div>
+          <div class="case-info"><h3>Yuriy</h3><p>Implant treatment</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('kristina')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/kristina-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Kristina — veneer results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Kristina</h3><p>Ceramic veneers</p></div>
+          <div class="case-info"><h3>Kristina</h3><p>Ceramic veneers</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('irina')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/irina-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Irina — veneer and crown results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Irina</h3><p>Veneers and crowns</p></div>
+          <div class="case-info"><h3>Irina</h3><p>Veneers and crowns</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('oksana')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/oksana-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Oksana — implant results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Oksana</h3><p>Implant treatment</p></div>
+          <div class="case-info"><h3>Oksana</h3><p>Implant treatment</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('olga-v')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Olga — veneer results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Olga</h3><p>Ceramic veneers</p></div>
+          <div class="case-info"><h3>Olga</h3><p>Ceramic veneers</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('natalya')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/natalya-portrait.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Natalya — implant results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Natalya</h3><p>Implant treatment</p></div>
+          <div class="case-info"><h3>Natalya</h3><p>Implant treatment</p><span class="go">View case →</span></div>
         </button>
         <button class="case-slide" onclick="openPatientModal('olga-i')">
           <div class="case-photo-main" style="background:none;padding:0;"><picture>
             <source srcset="/img/patients/olga-i-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-after.jpg" alt="Olga — implant results" style="width:100%;height:100%;object-fit:cover;">
           </picture></div>
-          <div class="case-info"><h3>Olga</h3><p>Implant treatment</p></div>
+          <div class="case-info"><h3>Olga</h3><p>Implant treatment</p><span class="go">View case →</span></div>
         </button>
       </div>
       </div>
