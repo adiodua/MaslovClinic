@@ -84,7 +84,7 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "How do I get to MaslovClinic?", "acceptedAnswer": {"@type": "Answer", "text": "The clinic is located in Odesa on Gagarin Plateau, between Genuezka and Posmitnoho streets, 100 meters from the sea. It's just as easy to reach from central Odesa as from the Prymorskyi district."}},
+    {"@type": "Question", "name": "How do I get to MaslovClinic?", "acceptedAnswer": {"@type": "Answer", "text": "The clinic is located in Odesa on Arkadiivske Plato, 5A, Bldg 1, between Genuezka and Posmitnoho streets, 100 meters from the sea. It's just as easy to reach from central Odesa as from the Prymorskyi district."}},
     {"@type": "Question", "name": "Does the clinic have free parking?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — MaslovClinic offers free parking for patients, so there's no need to hunt for a spot in advance or pay for parking separately."}},
     {"@type": "Question", "name": "Dental care in Odesa's Prymorskyi district — why choose Arkadiivske Plato?", "acceptedAnswer": {"@type": "Answer", "text": "Arkadiivske Plato is one of Odesa's most well-developed areas — green, and right by the sea. Patients from the Prymorskyi district and the city center can get here just as easily as local residents."}},
     {"@type": "Question", "name": "How much does a dental implant cost in Odesa?", "acceptedAnswer": {"@type": "Answer", "text": "The cost depends on the implant system, the amount of available bone, whether bone grafting is needed, and the type of crown. We give you an exact price after a consultation and diagnostic workup."}},
@@ -594,8 +594,10 @@
   .doctors-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
   .doctors-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.2);border:none;padding:0;cursor:pointer;transition:background .2s;}
   .doctors-dot.active{background:var(--wood);}
+  .carousel-nav-row{display:flex;justify-content:flex-end;gap:10px;margin:0 0 16px;}
   @media(max-width:760px){
     .doctor-card{flex:0 0 68%;}
+    .carousel-nav-row{display:none;}
   }
 
   /* cases carousel (Наши работы) — full-bleed strip, name/description in a
@@ -643,8 +645,12 @@
      same photo, not a stark bar of plain background color, so the frame
      still reads as full no matter how the source photo is shaped. */
   .case-photo-bg{
-    position:absolute;inset:-24px;background-size:cover;background-position:center;
-    filter:blur(32px) brightness(0.55) saturate(1.1);transform:scale(1.15);
+    position:absolute;inset:0;background-color:#ffffff;
+    background-image:none !important;
+  }
+  [data-theme="dark"] .case-photo-bg{background-color:var(--brand-navy);}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .case-photo-bg{background-color:var(--brand-navy);}
   }
   .case-photo-main{
     position:relative;z-index:1;width:100%;height:100%;
@@ -886,14 +892,14 @@
   }
 
   /* Google reviews — masonry wall */
-  .reviews-wall{column-count:3;column-gap:20px;margin-top:48px;}
-  .review-card{break-inside:avoid;background:var(--bg);border-radius:14px;padding:22px;margin-bottom:20px;box-shadow:0 8px 20px rgba(var(--text-rgb),0.08);border:1px solid rgba(var(--text-rgb),0.08);}
+  .reviews-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;align-items:start;}
+  .review-card{background:var(--bg);border-radius:14px;padding:22px;box-shadow:0 8px 20px rgba(var(--text-rgb),0.08);border:1px solid rgba(var(--text-rgb),0.08);}
   .review-card .stars{color:#c9a24b;font-size:14px;letter-spacing:1px;margin-bottom:8px;}
   .review-card .name{font-weight:600;font-size:14px;color:var(--text);margin-bottom:2px;}
   .review-card .date{font-size:12px;color:var(--text-muted);margin-bottom:10px;}
   .review-card p{font-size:13.5px;line-height:1.55;color:var(--text);}
-  @media(max-width:860px){.reviews-wall{column-count:2;}}
-  @media(max-width:560px){.reviews-wall{column-count:1;}}
+  @media(max-width:860px){.reviews-wall{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.reviews-wall{grid-template-columns:1fr;}}
 
   .faq-list{margin-top:56px;border-top:1px solid rgba(var(--text-rgb),0.12);}
   .faq-item{border-bottom:1px solid rgba(var(--text-rgb),0.12);}
@@ -1490,7 +1496,7 @@
       <div class="svc-acc-item">
         <div class="svc-acc-head">
           <svg class="svc-acc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8l-1 6H9L8 4z"/><path d="M9 10v3M12 10v4M15 10v3"/><path d="M10 17h4M10 20h4"/></svg>
-          <a class="svc-acc-link" href="/en/uslugi/implantatsiya-zubov.html">Dental Implants</a>
+          <a class="svc-acc-link" href="/en/uslugi/implantatsiya-zubov.html">Implant Treatment</a>
           <span class="svc-acc-price" data-price="implant-from" data-price-prefix="from ">from UAH 20,000</span>
           <button class="svc-acc-toggle" aria-label="Expand prices" aria-expanded="false"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         </div>
@@ -1527,6 +1533,14 @@
       <span class="eyebrow">Our Team</span>
       <h2>Doctors patients trust with their smile</h2>
       <p>Each doctor's education, specialization, and training — on their individual profile page.</p>
+    </div>
+    <div class="carousel-nav-row">
+      <button class="case-nav" id="doctorsPrev" aria-label="Previous doctor">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 5l-7 7 7 7"/><path d="M11 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="case-nav" id="doctorsNext" aria-label="Next doctor">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg>
+      </button>
     </div>
     <div class="doctors-track reveal" id="doctorsTrack">
       <a class="doctor-card" href="/en/vrachi/maslov-aleksey.html">
@@ -1588,6 +1602,16 @@
   var dotsWrap = document.getElementById('doctorsDots');
   if(!track || !dotsWrap) return;
   var cards = Array.from(track.children);
+  var prevBtn = document.getElementById('doctorsPrev');
+  var nextBtn = document.getElementById('doctorsNext');
+  function doctorsStep(){
+    var card = cards[0];
+    if(!card) return 300;
+    var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || '0') || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+  if(prevBtn) prevBtn.addEventListener('click', function(){ track.scrollBy({left: -doctorsStep(), behavior:'smooth'}); });
+  if(nextBtn) nextBtn.addEventListener('click', function(){ track.scrollBy({left: doctorsStep(), behavior:'smooth'}); });
   cards.forEach(function(_, i){
     var dot = document.createElement('button');
     dot.className = 'doctors-dot' + (i === 0 ? ' active' : '');
@@ -1623,6 +1647,14 @@
       <span class="eyebrow">Our Space</span>
       <h2>Treatment rooms designed to help you relax</h2>
       <p>Calm treatment rooms with panoramic windows, modern equipment, and a transparent treatment plan — with sedation available when clinically indicated, if that's more comfortable for the patient. Learn more on the <a href="/en/o-klinike.html">"About the Clinic"</a> page.</p>
+    </div>
+    <div class="carousel-nav-row">
+      <button class="case-nav" id="galleryPrev" aria-label="Previous photo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 5l-7 7 7 7"/><path d="M11 5l-7 7 7 7"/></svg>
+      </button>
+      <button class="case-nav" id="galleryNext" aria-label="Next photo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg>
+      </button>
     </div>
     <div class="gallery-teaser reveal">
       <div class="gallery-strip" id="galleryStrip"></div>
@@ -2050,7 +2082,18 @@ const galleryData = [
   const closeBtn = document.getElementById('lightboxClose');
   const prevBtn = document.getElementById('lightboxPrev');
   const nextBtn = document.getElementById('lightboxNext');
+  const stripPrevBtn = document.getElementById('galleryPrev');
+  const stripNextBtn = document.getElementById('galleryNext');
   let current = 0;
+
+  function galleryStep(){
+    const thumb = strip.children[0];
+    if(!thumb) return 300;
+    const gap = parseFloat(getComputedStyle(strip).columnGap || getComputedStyle(strip).gap || '0') || 0;
+    return thumb.getBoundingClientRect().width + gap;
+  }
+  if(stripPrevBtn) stripPrevBtn.addEventListener('click', function(){ strip.scrollBy({left: -galleryStep(), behavior:'smooth'}); });
+  if(stripNextBtn) stripNextBtn.addEventListener('click', function(){ strip.scrollBy({left: galleryStep(), behavior:'smooth'}); });
 
   galleryData.forEach(function(item, i){
     const div = document.createElement('div');
@@ -2173,10 +2216,10 @@ const galleryData = [
     </div>
     <div class="reveal" style="max-width:760px;margin:0 auto;text-align:center;color:var(--text-muted);font-size:15.5px;line-height:1.75;">
       <p>MaslovClinic is a full-cycle dental clinic in Odesa's Prymorskyi district, just 100 meters from the sea. We bring restorative, surgical, and prosthetic treatment, dental implants, and cosmetic dentistry together under one roof — no need to travel between different specialists.</p>
-      <h3 style="font-size:17px;color:var(--text);margin:20px 0 8px;">Dental Implants in Odesa</h3>
-      <p>We work with the Nobel Biocare, Straumann, and JDental implant systems — from a single implant to a full All-on-4/6 rehabilitation. Learn more on our <a href="/en/uslugi/implantatsiya-zubov.html">"Dental Implants"</a> page.</p>
+      <h3 style="font-size:17px;color:var(--text);margin:20px 0 8px;">Implant Treatment in Odesa</h3>
+      <p>We work with the Nobel Biocare, Straumann, and JDental implant systems — from a single implant to a full All-on-4/6 rehabilitation. Learn more on our <a href="/en/uslugi/implantatsiya-zubov.html">"Implant Treatment"</a> page.</p>
       <h3 style="font-size:17px;color:var(--text);margin:20px 0 8px;">Dental Care Near the Sea and the City Center</h3>
-      <p>The clinic is located on Arkadiivske Plato — an easy trip from both Arkadia and central Odesa. Free parking is available for patients. See the full list of treatments on our <a href="/en/uslugi/">"Services"</a> page, and meet our team on the <a href="/en/vrachi/">"Doctors"</a> page.</p>
+      <p>The clinic is located on Arkadiivske Plato, 5A, Bldg 1 — an easy trip from both Arkadia and central Odesa. Free parking is available for patients. See the full list of treatments on our <a href="/en/uslugi/">"Services"</a> page, and meet our team on the <a href="/en/vrachi/">"Doctors"</a> page.</p>
       <p>For more on our licenses, certifications, and equipment, visit the <a href="/en/o-klinike.html">"About the Clinic"</a> page.</p>
     </div>
   </div>
@@ -2191,7 +2234,7 @@ const galleryData = [
     <div class="faq-list reveal">
       <details class="faq-item">
         <summary>How do I get to MaslovClinic?<span class="faq-ic">+</span></summary>
-        <div class="faq-a">The clinic is located in Odesa on Gagarin Plateau, between Genuezka and Posmitnoho streets, 100 meters from the sea. It's just as easy to reach from central Odesa as from the Prymorskyi district.</div>
+        <div class="faq-a">The clinic is located in Odesa on Arkadiivske Plato, 5A, Bldg 1, between Genuezka and Posmitnoho streets, 100 meters from the sea. It's just as easy to reach from central Odesa as from the Prymorskyi district.</div>
       </details>
       <details class="faq-item">
         <summary>Does the clinic have free parking?<span class="faq-ic">+</span></summary>
@@ -2274,7 +2317,7 @@ const galleryData = [
           <img class="brand-mark" src="/assets/logo.png" width="44" height="60" alt="" style="height:30px;width:auto;display:block;">
           MaslovClinic
         </div>
-        <p>Arkadiivske Plato, Odesa</p>
+        <p>Arkadiivske Plato, 5A, Bldg 1, Odesa</p>
       </div>
       <div>
         <h5>Navigation</h5>
@@ -2295,7 +2338,7 @@ const galleryData = [
       </div>
     </div>
     <div class="foot-map">
-      <iframe src="https://maps.google.com/maps?q=Одесса,+Аркадиевское+плато,+5а,+корп.1&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MaslovClinic on the map"></iframe>
+      <iframe src="https://maps.google.com/maps?q=Стоматология+Maslov+Clinic,+Одесса&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MaslovClinic on the map"></iframe>
     </div>
     <div class="foot-bottom">
       <span>© 2026 MaslovClinic. Full-cycle dental care.</span>
