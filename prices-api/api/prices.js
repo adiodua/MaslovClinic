@@ -13,11 +13,28 @@
 // вся система остаётся в формате «один файл, одна функция» вместо того,
 // чтобы заводить отдельное хранилище.
 
+const crypto = require("crypto");
+
 const GITHUB_API = "https://api.github.com";
 const FILE_PATH = "assets/prices.json";
+const ALLOWED_ORIGIN = "https://maslovclinic.com";
 
 function unauthorized(res) {
   res.status(401).json({ error: "unauthorized" });
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Сравнение без утечки через тайминг: обе строки хешируются с одним и тем же
+// случайным ключом до фиксированной длины, поэтому даже разная длина пароля
+// не даёт замерить, сколько символов совпало.
+function safeCompare(a, b) {
+  const key = crypto.randomBytes(32);
+  const hashA = crypto.createHmac("sha256", key).update(String(a)).digest();
+  const hashB = crypto.createHmac("sha256", key).update(String(b)).digest();
+  return crypto.timingSafeEqual(hashA, hashB);
 }
 
 async function githubRequest(path, opts = {}) {
@@ -38,14 +55,17 @@ async function githubRequest(path, opts = {}) {
 }
 
 module.exports = async function handler(req, res) {
-  // Разрешаем странице админки (на maslovclinic.com) вызывать этот API.
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // Разрешаем вызывать этот API только странице админки на maslovclinic.com.
+  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
   res.setHeader("Access-Control-Allow-Methods", "GET, PUT, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, X-Admin-Password");
   if (req.method === "OPTIONS") return res.status(204).end();
 
   const password = req.headers["x-admin-password"];
-  if (!password || password !== process.env.ADMIN_PASSWORD) {
+  if (!password || !safeCompare(password, process.env.ADMIN_PASSWORD || "")) {
+    // Искусственная задержка на неверном пароле — усложняет перебор,
+    // не требуя отдельного хранилища для rate-limit (функция без состояния).
+    await delay(700 + Math.floor(Math.random() * 300));
     return unauthorized(res);
   }
 
