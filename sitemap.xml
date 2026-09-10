@@ -528,4 +528,86 @@
       <video:content_loc>https://maslovclinic.com/video/tour-1-preview.mp4</video:content_loc>
     </video:video>
   </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-1.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/viniry-work-poster.jpg</video:thumbnail_loc>
+      <video:title>Veneer bonding — video from the clinic's practice</video:title>
+      <video:description>The process of bonding ceramic veneers with permanent cement at MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-2.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-3.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <video:video>
+      <video:thumbnail_loc>https://maslovclinic.com/video/viniry-work-poster.jpg</video:thumbnail_loc>
+      <video:title>Veneer bonding — video from the clinic's practice</video:title>
+      <video:description>The process of bonding ceramic veneers with permanent cement at MaslovClinic.</video:description>
+      <video:content_loc>https://maslovclinic.com/video/viniry-work.mp4</video:content_loc>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-4.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-5.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-6.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-7.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-8.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/raboty/patient-9.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/blog/implanty-nobel-straumann-jdental.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/blog/keramicheskie-viniry-uhod.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://maslovclinic.com/en/blog/gigiena-kak-chasto.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
