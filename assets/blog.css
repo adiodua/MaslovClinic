@@ -17,6 +17,12 @@
   }
   .article-cta h3{margin:0 0 10px;color:#fff;font-size:20px;}
   .article-cta p{color:#cdd8e6;margin:0 0 18px;font-size:15px;line-height:1.6;}
+  /* .btn.primary is styled for light cards (translucent gold on white,
+     navy text) — on this dark navy block that text is nearly invisible.
+     Give it a solid, high-contrast look here instead. */
+  .article-cta .btn.primary{background:var(--gold);border-color:var(--gold);color:#151b12;}
+  .article-cta .btn.primary:hover{background:#dab662;border-color:#dab662;}
+  .article-cta .btn.primary:active{background:#c9a24b;border-color:#c9a24b;}
   .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
   .blog-card{
     background:var(--paper);border:1px solid var(--divider);border-radius:var(--radius);
