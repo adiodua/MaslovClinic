@@ -919,14 +919,26 @@
   }
 
   /* Google reviews — masonry wall */
-  .reviews-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;align-items:start;}
-  .review-card{background:var(--bg);border-radius:14px;padding:22px;box-shadow:0 8px 20px rgba(var(--text-rgb),0.08);border:1px solid rgba(var(--text-rgb),0.08);}
+  .reviews-summary{display:flex;align-items:center;gap:14px;margin-top:28px;flex-wrap:wrap;}
+  .reviews-summary-score{font-size:34px;font-weight:700;color:var(--text);line-height:1;}
+  .reviews-summary-mid{display:flex;flex-direction:column;gap:3px;}
+  .reviews-summary-stars{color:#c9a24b;font-size:15px;letter-spacing:1px;}
+  .reviews-summary-count{font-size:13px;color:var(--text-muted);}
+  .reviews-summary-count a{color:var(--sage);text-decoration:none;}
+  .reviews-summary-count a:hover{text-decoration:underline;}
+  .reviews-summary-glogo{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-muted);}
+  .reviews-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px;align-items:stretch;}
+  .review-card{display:flex;flex-direction:column;background:var(--bg);border-radius:14px;padding:22px;box-shadow:0 8px 20px rgba(var(--text-rgb),0.08);border:1px solid rgba(var(--text-rgb),0.08);}
+  .review-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+  .review-avatar{flex:none;width:38px;height:38px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;}
+  .review-head-text{min-width:0;}
+  .review-card .name{display:flex;align-items:center;gap:5px;font-weight:600;font-size:14px;color:var(--text);margin-bottom:2px;}
+  .review-card .name svg{flex:none;}
+  .review-card .date{font-size:12px;color:var(--text-muted);}
   .review-card .stars{color:#c9a24b;font-size:14px;letter-spacing:1px;margin-bottom:8px;}
-  .review-card .name{font-weight:600;font-size:14px;color:var(--text);margin-bottom:2px;}
-  .review-card .date{font-size:12px;color:var(--text-muted);margin-bottom:10px;}
-  .review-card p{font-size:13.5px;line-height:1.55;color:var(--text);}
+  .review-card p{font-size:13.5px;line-height:1.55;color:var(--text);white-space:pre-line;}
   @media(max-width:860px){.reviews-wall{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:560px){.reviews-wall{grid-template-columns:1fr;}}
+  @media(max-width:560px){.reviews-wall{grid-template-columns:1fr;} .reviews-summary-glogo{margin-left:0;}}
 
   .faq-list{margin-top:56px;border-top:1px solid rgba(var(--text-rgb),0.12);}
   .faq-item{border-bottom:1px solid rgba(var(--text-rgb),0.12);}
@@ -2195,42 +2207,61 @@ const galleryData = [
       <span class="eyebrow">Відгуки</span>
       <h2>Що кажуть пацієнти</h2>
     </div>
+        <div class="reviews-summary reveal" id="reviewsSummary">
+      <div class="reviews-summary-score">4.4</div>
+      <div class="reviews-summary-mid">
+        <div class="reviews-summary-stars">★★★★☆</div>
+        <div class="reviews-summary-count">на основі <a href="https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одеса" target="_blank" rel="noopener"><span class="reviews-summary-count-num">47</span></a></div>
+      </div>
+      <div class="reviews-summary-glogo">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+        <span>Google Reviews</span>
+      </div>
+    </div>
     <div class="reviews-wall reveal" id="reviewsWall">
       <div class="review-card">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#588CB4;">A</div>
+          <div class="review-head-text">
+            <div class="name">Alina Tsurkan <svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div>
+            <div class="date">6 місяців тому</div>
+          </div>
+        </div>
         <div class="stars">★★★★★</div>
-        <div class="name">Ольга К.</div>
-        <div class="date">2 тижні тому</div>
-        <p>Дуже уважний лікар, усе пояснив крок за кроком. Результатом задоволена, продовжуватиму лікування тільки тут.</p>
+        <p>Дуже задоволена візитом до стоматології! Професійний та уважний підхід, приємна атмосфера та якісна робота</p>
       </div>
       <div class="review-card">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#7A8FA6;">Т</div>
+          <div class="review-head-text">
+            <div class="name">татьяна царапина <svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div>
+            <div class="date">рік тому</div>
+          </div>
+        </div>
         <div class="stars">★★★★★</div>
-        <div class="name">Дмитро М.</div>
-        <div class="date">місяць тому</div>
-        <p>Ставив імпланти — минуло без болю та ускладнень. Персонал ввічливий, чисто, сучасне обладнання.</p>
+        <p>Доброго дня.  Я лікар стоматолог. Сьогодні довелося побачити вашу роботу на пацієнту. МОЛОДЦІ!   Робота зі стажем в 12 років. МОЛОДЦІ!  Дуже гарно !Рекомендую !.</p>
       </div>
       <div class="review-card">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#B48A58;">О</div>
+          <div class="review-head-text">
+            <div class="name">Олександр Репях <svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div>
+            <div class="date">3 роки тому</div>
+          </div>
+        </div>
         <div class="stars">★★★★★</div>
-        <div class="name">Анна С.</div>
-        <div class="date">3 місяці тому</div>
-        <p>Робила вініри — результат перевершив очікування. Дякую за терпіння та детальні консультації на кожному етапі, окрема подяка адміністратору за нагадування про візит!</p>
+        <p>Спасибі за безболісне видалення зуба мудрості. Довго шукав стоматологію чисто випадково натрапив на стоматологію Maslov Clinic. Записався на первинний огляд і мені все сподобалось. Тепер я їх клієнт на довго.</p>
       </div>
       <div class="review-card">
+        <div class="review-head">
+          <div class="review-avatar" style="background:#6B9080;">А</div>
+          <div class="review-head-text">
+            <div class="name">Анастасия Дмитриева <svg width="13" height="13" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div>
+            <div class="date">6 місяців тому</div>
+          </div>
+        </div>
         <div class="stars">★★★★★</div>
-        <div class="name">Ігор П.</div>
-        <div class="date">4 місяці тому</div>
-        <p>Швидко, якісно, без черг.</p>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <div class="name">Марія Т.</div>
-        <div class="date">півроку тому</div>
-        <p>Лікуюся всією родиною вже 3 роки, жодного разу не розчарувалася. Окремо тішить, що ціну називають одразу і без сюрпризів.</p>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <div class="name">Сергій В.</div>
-        <div class="date">7 місяців тому</div>
-        <p>Професійно і по-людськи, рідкісне поєднання.</p>
+        <p>Хожу в цю клініку не вперше і завжди залишаюся задоволена. Персонал дуже уважний і ввічливий: нагадують про прийом, при необхідності переносять запис і ставляться з розумінням. Дякуємо всій команді за хороше ставлення та професіоналізм!</p>
       </div>
     </div>
     <a href="https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одеса" target="_blank" rel="noopener" class="svc-all reveal" style="margin-top:28px;">Дивитися всі відгуки на Google →</a>
@@ -2911,5 +2942,6 @@ const galleryData = [
 
 
 <script src="/assets/prices.js" defer></script>
+<script src="/assets/reviews.js" defer></script>
 </body>
 </html>

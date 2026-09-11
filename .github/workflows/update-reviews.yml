@@ -1,0 +1,75 @@
+name: Обновление отзывов с Google
+
+# Запускается автоматически каждый понедельник в 04:00 (по Киеву — 06:00/07:00),
+# а также вручную через вкладку Actions ("Run workflow") для проверки.
+#
+# Тянет актуальный рейтинг, число отзывов и до 5 "наиболее релевантных"
+# отзывов (таков лимит бесплатного Google Places API) через Place Details,
+# на трёх языках (ru/uk/en — Google сам переводит текст под каждый язык).
+# Кладёт результат в assets/reviews.json — тот же принцип, что и с ценами
+# в assets/prices.json: один файл вместо базы данных, фронтенд
+# (assets/reviews.js) просто подгружает его при каждой загрузке страницы.
+on:
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PLACE_ID: "ChIJfxm5YIozxkARMqI3ZtT8ntU"
+
+jobs:
+  update-reviews:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Скачать репозиторий
+        uses: actions/checkout@v4
+
+      - name: Запросить отзывы у Google Places API и собрать assets/reviews.json
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          for lang in ru uk en; do
+            curl -sf "https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=rating,user_ratings_total,reviews&language=${lang}&key=${GOOGLE_PLACES_API_KEY}" \
+              -o "/tmp/places_${lang}.json"
+            st=$(jq -r '.status' "/tmp/places_${lang}.json")
+            if [ "$st" != "OK" ]; then
+              echo "Places API вернул статус $st для языка $lang — прерываю, оставляю прежний reviews.json"
+              cat "/tmp/places_${lang}.json"
+              exit 1
+            fi
+            # Только отзывы от 4 звёзд — договорённость: честный общий
+            # рейтинг/счётчик показываем как есть, а карточки с текстом
+            # отзывов фильтруем (см. обсуждение в PR/коммите).
+            jq '[.result.reviews[]? | select(.rating >= 4) | {name: .author_name, rating: .rating, relativeTime: .relative_time_description, text: .text, photo: .profile_photo_url, time: .time}]' \
+              "/tmp/places_${lang}.json" > "/tmp/reviews_${lang}.json"
+          done
+
+          jq -n \
+            --argjson rating "$(jq '.result.rating' /tmp/places_ru.json)" \
+            --argjson total "$(jq '.result.user_ratings_total' /tmp/places_ru.json)" \
+            --arg updatedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --slurpfile ru /tmp/reviews_ru.json \
+            --slurpfile uk /tmp/reviews_uk.json \
+            --slurpfile en /tmp/reviews_en.json \
+            '{updatedAt: $updatedAt, rating: $rating, userRatingsTotal: $total, mapsUrl: "https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одесса", reviews: {ru: $ru[0], uk: $uk[0], en: $en[0]}}' \
+            > assets/reviews.json
+
+          echo "Собран assets/reviews.json:"
+          cat assets/reviews.json
+
+      - name: Закоммитить изменения (если есть)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- assets/reviews.json; then
+            echo "Изменений нет — отзывы уже актуальны."
+          else
+            git add assets/reviews.json
+            git commit -m "Автообновление отзывов с Google"
+            git push
+          fi
