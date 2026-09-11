@@ -7,28 +7,28 @@
   try{
     // Skip the auto-redirect entirely for search engine crawlers and other
     // bots — they have no real "device language", so this would otherwise
-    // make every /ua/ page look like it permanently redirects to the RU
-    // version (and vice versa) to a bot with no stored preference, which
-    // stops search engines from indexing each language version at its own
-    // URL. Real visitors still get the convenience redirect below.
+    // make every language mirror look like it permanently redirects away
+    // to a bot with no stored preference, which stops search engines from
+    // indexing each language version at its own URL. Real visitors still
+    // get the convenience redirect below.
     if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
-    var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
+    var onLang = (path === '/ua' || path.indexOf('/ua/') === 0) ? 'UA'
+      : (path === '/en' || path.indexOf('/en/') === 0) ? 'EN'
+      : 'RU';
     var stored = localStorage.getItem('mc-lang');
-    var wantUA;
-    if(stored === 'UA'){ wantUA = true; }
-    else if(stored === 'RU' || stored === 'EN'){ wantUA = false; }
+    var wantLang;
+    if(stored === 'RU' || stored === 'UA' || stored === 'EN'){ wantLang = stored; }
     else {
       // No explicit choice saved yet — follow the device/browser language.
-      // EN has no separate pages yet, so anything other than Ukrainian falls
-      // back to the Russian default (matches the language-pill's own logic).
+      // RU, UA and EN each have a live mirror, so any of the three can be
+      // the auto-detected target; anything else falls back to RU.
       var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
-      wantUA = browserLang.indexOf('uk') === 0;
+      wantLang = browserLang.indexOf('uk') === 0 ? 'UA' : browserLang.indexOf('en') === 0 ? 'EN' : 'RU';
     }
-    if(wantUA !== onUA){
-      var newPath = wantUA
-        ? (onUA ? path : '/ua' + (path === '/' ? '/' : path))
-        : (onUA ? (path.slice(3) || '/') : path);
+    if(wantLang !== onLang){
+      var rest = onLang === 'RU' ? path : (path.slice(3) || '/');
+      var newPath = wantLang === 'RU' ? rest : '/' + wantLang.toLowerCase() + rest;
       if(newPath !== path){
         location.replace(newPath + location.search + location.hash);
       }

@@ -5,19 +5,33 @@
 <script>
 (function(){
   try{
+    // Skip the auto-redirect entirely for search engine crawlers and other
+    // bots — they have no real "device language", so this would otherwise
+    // make every language mirror look like it permanently redirects away
+    // to a bot with no stored preference, which stops search engines from
+    // indexing each language version at its own URL. Real visitors still
+    // get the convenience redirect below.
     if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
-    var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
+    var onLang = (path === '/ua' || path.indexOf('/ua/') === 0) ? 'UA'
+      : (path === '/en' || path.indexOf('/en/') === 0) ? 'EN'
+      : 'RU';
     var stored = localStorage.getItem('mc-lang');
-    var target = null;
-    if(stored === 'UA'){ target = '/ua' + rest; }
-    else if(stored === 'RU'){ target = rest; }
-    else if(stored !== 'EN'){
+    var wantLang;
+    if(stored === 'RU' || stored === 'UA' || stored === 'EN'){ wantLang = stored; }
+    else {
+      // No explicit choice saved yet — follow the device/browser language.
+      // RU, UA and EN each have a live mirror, so any of the three can be
+      // the auto-detected target; anything else falls back to RU.
       var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
-      if(browserLang.indexOf('uk') === 0){ target = '/ua' + rest; }
+      wantLang = browserLang.indexOf('uk') === 0 ? 'UA' : browserLang.indexOf('en') === 0 ? 'EN' : 'RU';
     }
-    if(target && target !== path){
-      location.replace(target + location.search + location.hash);
+    if(wantLang !== onLang){
+      var rest = onLang === 'RU' ? path : (path.slice(3) || '/');
+      var newPath = wantLang === 'RU' ? rest : '/' + wantLang.toLowerCase() + rest;
+      if(newPath !== path){
+        location.replace(newPath + location.search + location.hash);
+      }
     }
   }catch(e){}
 })();
