@@ -103,7 +103,15 @@
     position:relative;
     overflow:hidden;
   }
-  .hero .wrap{display:block;}
+  /* Guarantees the bottom cta-row stays readable even over a bright photo —
+     the diagonal gradient above only darkens left-to-right, not the bottom
+     edge specifically. */
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:220px;
+    background:linear-gradient(0deg, rgba(14,37,64,.7) 0%, rgba(14,37,64,0) 100%);
+    z-index:1;pointer-events:none;
+  }
+  .hero .wrap{display:block;position:relative;z-index:2;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;margin:0;max-width:560px;}
   .hero p.lead{color:#cdd8e6;font-size:17px;line-height:1.6;max-width:460px;margin-top:20px;}
   .hero h1, .hero p.lead, .hero .crumbs-inline{text-shadow:0 2px 16px rgba(0,0,0,.45);}
