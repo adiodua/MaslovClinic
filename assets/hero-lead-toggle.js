@@ -4,7 +4,12 @@
 // harmlessly everywhere and simply has no visible effect on desktop).
 (function () {
   document.querySelectorAll('.hero h1').forEach(function (h1) {
-    var lead = h1.parentElement.querySelector('p.lead');
+    // Usually a direct sibling; on pages where the heading is grouped
+    // with extra markup (e.g. the patient case-tag list) it's one level
+    // further up, so fall back to the grandparent.
+    var scope = h1.parentElement;
+    var lead = scope && scope.querySelector('p.lead');
+    if (!lead && scope) lead = scope.parentElement && scope.parentElement.querySelector('p.lead');
     if (!lead) return;
     h1.addEventListener('click', function () {
       var open = lead.classList.toggle('lead-open');

@@ -87,9 +87,9 @@
 <link rel="stylesheet" href="/assets/base.css">
 <style>
   .case-hero{background-size:140% auto !important;background-position:20% center !important;}
-  @keyframes chevronPulse{
-    0%,100%{opacity:.55;transform:rotate(45deg) scale(1);}
-    50%{opacity:1;transform:rotate(45deg) scale(1.2);}
+  @keyframes chevronShimmer{
+    0%,100%{border-right-color:rgba(255,255,255,.22);border-bottom-color:rgba(255,255,255,.22);}
+    50%{border-right-color:#0e2540;border-bottom-color:#0e2540;}
   }
     @media(max-width:760px){
     .case-hero{
@@ -99,45 +99,53 @@
         url('/img/patients/yuliya-after.jpg') center/cover no-repeat,
         var(--navy-2) !important;
     }
+    .case-hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-start;}
     .case-hero .crumbs-inline{display:none;}
+    .case-hero-head{flex:0 0 170px;width:170px;max-width:170px;margin:22px 0 0;}
     .case-hero h1{
-      display:block;width:220px;max-width:220px;text-align:left;
-      font-size:21px !important;line-height:1.28;margin:22px 0 0;
+      display:block;width:170px;max-width:170px;text-align:left;
+      font-size:24px !important;line-height:1.24;margin:0;
       cursor:pointer;
     }
+    .case-hero .case-tag{margin:10px 0 0;}
     .case-hero h1::after{
-      content:"";display:block;width:8px;height:8px;margin:10px auto 0;
-      border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);
-      transform:rotate(45deg);transition:transform .25s ease;
-      animation:chevronPulse 1.8s ease-in-out infinite;
+      content:"";display:block;width:9px;height:9px;margin:10px auto 0;
+      border-right:2px solid rgba(255,255,255,.22);border-bottom:2px solid rgba(255,255,255,.22);
+      transform:rotate(-45deg);transition:transform .25s ease;
+      animation:chevronShimmer 2.2s ease-in-out infinite;
     }
-    .case-hero h1.lead-open::after{transform:rotate(225deg);margin-top:3px;animation:none;}
+    .case-hero h1.lead-open::after{
+      transform:rotate(135deg);animation:none;
+      border-right-color:rgba(255,255,255,.85);border-bottom-color:rgba(255,255,255,.85);
+    }
     .case-hero p.lead{
-      width:280px !important;max-width:280px !important;text-align:left;font-size:13px;line-height:1.45;margin:0;
+      flex:0 0 auto;width:0;max-width:0;margin:22px 0 0 0;text-align:left;
+      font-size:13px;line-height:1.45;
       text-shadow:0 1px 3px rgba(0,0,0,.35);
-      max-height:0;opacity:0;overflow:hidden;
-      padding:0 12px;border-radius:12px;
+      max-height:220px;opacity:0;overflow:hidden;
+      padding:0;border-radius:12px;
       background:rgba(255,255,255,0);border:1px solid rgba(255,255,255,0);
       backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
-      transform:translateY(-6px);
+      transform:translateX(-6px);
       transition:
-        max-height .35s cubic-bezier(.16,1,.3,1),
-        margin-top .35s cubic-bezier(.16,1,.3,1),
-        padding .35s cubic-bezier(.16,1,.3,1),
+        width .4s cubic-bezier(.16,1,.3,1),
+        max-width .4s cubic-bezier(.16,1,.3,1),
+        margin-left .4s cubic-bezier(.16,1,.3,1),
+        padding .4s cubic-bezier(.16,1,.3,1),
         opacity .3s ease,
-        transform .35s cubic-bezier(.34,1.56,.64,1),
-        background-color .35s ease,
-        border-color .35s ease,
-        backdrop-filter .35s ease;
+        transform .4s cubic-bezier(.34,1.56,.64,1),
+        background-color .4s ease,
+        border-color .4s ease,
+        backdrop-filter .4s ease;
     }
     .case-hero p.lead.lead-open{
-      width:280px !important;max-width:280px !important;
-      max-height:118px;opacity:1;margin-top:8px;
+      width:172px;max-width:172px;margin:22px 0 0 14px;
+      opacity:1;
       padding:10px 12px;
       background:rgba(255,255,255,.14);
       border-color:rgba(255,255,255,.35);
       backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-      transform:translateY(0);
+      transform:translateX(0);
       overflow-y:auto;overflow-x:hidden;
     }
     .case-hero .cta-row{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:wrap;row-gap:10px;}
@@ -298,10 +306,12 @@
 <section class="hero case-hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/yuliya-after.jpg') center/cover no-repeat,var(--navy-2);filter:brightness(1.3);">
   <div class="wrap">
     <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Юлия</span></div>
-    <h1>Юлия</h1>
+    <div class="case-hero-head">
+      <h1>Юлия</h1>
     <ul class="case-tag">
       <li>Керамические виниры</li>
     </ul>
+    </div>
     <p class="lead">Подготовка эмали, изготовление и фиксация виниров по слепкам.</p>
     <div class="cta-row">
       <span class="seg"></span>
