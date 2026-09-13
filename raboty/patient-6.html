@@ -87,6 +87,10 @@
 <link rel="stylesheet" href="/assets/base.css">
 <style>
   .case-hero{background-size:140% auto !important;background-position:20% center !important;}
+  @keyframes chevronPulse{
+    0%,100%{opacity:.55;transform:rotate(45deg) scale(1);}
+    50%{opacity:1;transform:rotate(45deg) scale(1.2);}
+  }
     @media(max-width:760px){
     .case-hero{
       height:auto;min-height:460px;padding:88px 0 90px;
@@ -95,18 +99,21 @@
         url('/img/patients/oksana-portrait.jpg') center/cover no-repeat,
         var(--navy-2) !important;
     }
+    .case-hero .crumbs-inline{display:none;}
     .case-hero h1{
-      max-width:220px;font-size:21px !important;line-height:1.28;margin-top:0;
-      display:flex;align-items:center;gap:7px;cursor:pointer;
+      display:block;width:220px;max-width:220px;text-align:left;
+      font-size:21px !important;line-height:1.28;margin:22px 0 0;
+      cursor:pointer;
     }
     .case-hero h1::after{
-      content:"";flex:none;width:8px;height:8px;margin-top:-3px;
-      border-right:2px solid rgba(255,255,255,.85);border-bottom:2px solid rgba(255,255,255,.85);
+      content:"";display:block;width:8px;height:8px;margin:10px auto 0;
+      border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);
       transform:rotate(45deg);transition:transform .25s ease;
+      animation:chevronPulse 1.8s ease-in-out infinite;
     }
-    .case-hero h1.lead-open::after{transform:rotate(225deg);margin-top:3px;}
+    .case-hero h1.lead-open::after{transform:rotate(225deg);margin-top:3px;animation:none;}
     .case-hero p.lead{
-      max-width:220px !important;font-size:13px;line-height:1.45;margin:0;
+      width:280px !important;max-width:280px !important;text-align:left;font-size:13px;line-height:1.45;margin:0;
       text-shadow:0 1px 3px rgba(0,0,0,.35);
       max-height:0;opacity:0;overflow:hidden;
       padding:0 12px;border-radius:12px;
@@ -124,6 +131,7 @@
         backdrop-filter .35s ease;
     }
     .case-hero p.lead.lead-open{
+      width:280px !important;max-width:280px !important;
       max-height:118px;opacity:1;margin-top:8px;
       padding:10px 12px;
       background:rgba(255,255,255,.14);

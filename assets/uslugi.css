@@ -562,14 +562,19 @@
   a:focus-visible, button:focus-visible, input:focus-visible{outline:2px solid var(--wood-deep);outline-offset:3px;}
   @media(max-width:860px){.navlinks{display:none;}}
   .wrap{width:100%;}
+  @keyframes chevronPulse{
+    0%,100%{opacity:.55;transform:rotate(45deg) scale(1);}
+    50%{opacity:1;transform:rotate(45deg) scale(1.2);}
+  }
   @media(max-width:860px){
     nav.wrap{gap:16px;}
     /* Top-left layout, photo left completely clear (no darkening gradient —
        .hero's own background is overridden below to drop that layer). Only
        the heading+lead sit on a glass plate (two boxes with matching width
        that visually fuse into one — rounded top half + rounded bottom half,
-       zero gap between them); breadcrumbs and buttons stay directly on the
-       photo, no glass, same as before. */
+       zero gap between them); breadcrumbs hidden, buttons stay directly on
+       the photo, no glass, same as before. Chevron centered below the
+       heading, glass-tinted, pulsing until tapped open. */
     .hero{
       padding:88px 0 90px;min-height:0;height:460px;
       background:
@@ -577,20 +582,22 @@
         var(--hero-photo, url('/img/hero-reception.jpg')) center/cover no-repeat,
         var(--navy-2) !important;
     }
+    .hero .crumbs-inline{display:none;}
     .hero h1{
-      max-width:220px;
-      font-size:21px;line-height:1.28;margin:0;
+      display:block;width:220px;max-width:220px;text-align:left;
+      font-size:21px;line-height:1.28;margin:22px 0 0;
       color:#f2f0e8;text-shadow:0 2px 16px rgba(0,0,0,.5);
-      display:flex;align-items:center;gap:7px;cursor:pointer;
+      cursor:pointer;
     }
     .hero h1::after{
-      content:"";flex:none;width:8px;height:8px;margin-top:-3px;
-      border-right:2px solid rgba(255,255,255,.85);border-bottom:2px solid rgba(255,255,255,.85);
+      content:"";display:block;width:8px;height:8px;margin:10px auto 0;
+      border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);
       transform:rotate(45deg);transition:transform .25s ease;
+      animation:chevronPulse 1.8s ease-in-out infinite;
     }
-    .hero h1.lead-open::after{transform:rotate(225deg);margin-top:3px;}
+    .hero h1.lead-open::after{transform:rotate(225deg);margin-top:3px;animation:none;}
     .hero p.lead{
-      max-width:220px;font-size:13px;line-height:1.45;margin:0;
+      width:280px;max-width:280px;text-align:left;font-size:13px;line-height:1.45;margin:0;
       color:#f8fafc;text-shadow:0 1px 3px rgba(0,0,0,.35);
       max-height:0;opacity:0;overflow:hidden;
       padding:0 12px;border-radius:12px;
@@ -609,6 +616,7 @@
         backdrop-filter .35s ease;
     }
     .hero p.lead.lead-open{
+      width:280px;max-width:280px;
       max-height:118px;opacity:1;margin-top:8px;
       padding:10px 12px;
       background:rgba(255,255,255,.14);

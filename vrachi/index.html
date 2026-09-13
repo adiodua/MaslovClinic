@@ -116,23 +116,30 @@
   [data-theme="dark"] .hero-vrachi .cta-row .btn.js-open-booking:hover{background:rgba(201,162,75,.4);border-color:rgba(201,162,75,1);box-shadow:0 0 0 6px rgba(201,162,75,.28);}
   [data-theme="dark"] .hero-vrachi .cta-row .btn.js-open-booking:active{background:rgba(201,162,75,.52);box-shadow:0 0 0 2px rgba(201,162,75,.36);}
   .hero-vrachi .hero-vrachi-cta-wrap{position:static;}
+  @keyframes chevronPulse{
+    0%,100%{opacity:.55;transform:rotate(45deg) scale(1);}
+    50%{opacity:1;transform:rotate(45deg) scale(1.2);}
+  }
   @media(max-width:760px){
     .hero-fade{
       background:radial-gradient(ellipse 75% 75% at 0% 0%, rgba(13,30,53,.8) 0%, rgba(13,30,53,.4) 60%, rgba(13,30,53,0) 100%);
     }
     .hero-vrachi{padding:88px 0 90px;min-height:0;height:460px;position:relative;}
+    .hero-vrachi .crumbs-inline{display:none;}
     .hero-vrachi h1{
-      max-width:220px;font-size:21px;line-height:1.28;margin-top:0;
-      display:flex;align-items:center;gap:7px;cursor:pointer;
+      display:block;width:220px;max-width:220px;text-align:left;
+      font-size:21px;line-height:1.28;margin:22px 0 0;
+      cursor:pointer;
     }
     .hero-vrachi h1::after{
-      content:"";flex:none;width:8px;height:8px;margin-top:-3px;
-      border-right:2px solid rgba(255,255,255,.85);border-bottom:2px solid rgba(255,255,255,.85);
+      content:"";display:block;width:8px;height:8px;margin:10px auto 0;
+      border-right:2px solid rgba(255,255,255,.35);border-bottom:2px solid rgba(255,255,255,.35);
       transform:rotate(45deg);transition:transform .25s ease;
+      animation:chevronPulse 1.8s ease-in-out infinite;
     }
-    .hero-vrachi h1.lead-open::after{transform:rotate(225deg);margin-top:3px;}
+    .hero-vrachi h1.lead-open::after{transform:rotate(225deg);margin-top:3px;animation:none;}
     .hero-vrachi p.lead{
-      max-width:220px;font-size:13px;line-height:1.45;margin:0;
+      width:280px;max-width:280px;text-align:left;font-size:13px;line-height:1.45;margin:0;
       text-shadow:0 1px 3px rgba(0,0,0,.35);
       max-height:0;opacity:0;overflow:hidden;
       padding:0 12px;border-radius:12px;
@@ -150,6 +157,7 @@
         backdrop-filter .35s ease;
     }
     .hero-vrachi p.lead.lead-open{
+      width:280px;max-width:280px;
       max-height:118px;opacity:1;margin-top:8px;
       padding:10px 12px;
       background:rgba(255,255,255,.14);
