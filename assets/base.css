@@ -651,7 +651,7 @@
     .hero{
       padding:88px 0 90px;min-height:0;height:460px;
       background:
-        radial-gradient(ellipse 100% 100% at 0% 0%, rgba(14,37,64,.8) 0%, rgba(14,37,64,.4) 60%, rgba(14,37,64,0) 100%),
+        radial-gradient(ellipse 75% 75% at 0% 0%, rgba(14,37,64,.8) 0%, rgba(14,37,64,.4) 60%, rgba(14,37,64,0) 100%),
         var(--hero-photo, url('/img/hero-reception.jpg')) center/cover no-repeat,
         var(--navy-2) !important;
     }
