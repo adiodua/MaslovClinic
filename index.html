@@ -2045,8 +2045,8 @@
   document.addEventListener('keydown', (e) => {
     if(!document.getElementById('patientModalOverlay').classList.contains('open')) return;
     if(e.key === 'Escape') closePatientModal();
-    if(e.key === 'ArrowLeft') pmStep(-1);
-    if(e.key === 'ArrowRight') pmStep(1);
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); pmStep(-1); }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); pmStep(1); }
   });
 
   /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom */
