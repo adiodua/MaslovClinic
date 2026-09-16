@@ -803,17 +803,7 @@
         0 0 0 1px rgba(255,255,255,.07);
     }
   }
-  @media(max-width:760px){
-    .cases-track{padding:20px calc(50% - 180px) 40px;}
-    .case-slide{flex:0 0 360px;width:360px;}
-    /* Coverflow (dimmed/scaled-down neighbors, full-size active card) is a
-       desktop-hover-friendly effect — on a phone it reads as photos
-       fading/growing into place as you swipe. Dropped entirely on mobile:
-       every slide sits at full size and full opacity, so swiping just
-       flips between full photos one after another, like the iPhone Photos
-       app. Desktop keeps the coverflow effect unchanged. */
-    .case-slide{opacity:1;transform:none;transition:none;}
-  }
+  .cases-story-bar{display:none;}
   .case-photo-bg{
     position:absolute;inset:0;background-color:#ffffff;
     background-image:none !important;
@@ -848,6 +838,64 @@
   .cases-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
   .cases-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
   .cases-dot.active{background:var(--wood);}
+
+  /* Placed after every unconditional .case-* rule above on purpose — same
+     specificity throughout, so this only needs to win on source order, not
+     fight each property one at a time with extra selector weight. */
+  @media(max-width:760px){
+    /* Variant 4 (next card peeking at the right edge) + variant 3's text
+       placement (plain caption below the photo, not overlaid on it).
+       Cards snap to the left instead of centering, sized short of 100% so
+       the next patient's edge is always visible as a "swipe this way"
+       hint — no arrows, no toolbar pill needed. Desktop keeps the existing
+       coverflow + toolbar pill entirely unchanged. */
+    .cases-track{padding:8px 0 40px 16px;gap:14px;}
+    /* .case-slide.active carries its own box-shadow rule further up —
+       matched explicitly here, for both themes, or the shadow still pops
+       between the two values the instant a slide becomes active
+       mid-swipe. That pop was landing as a visible flicker right as each
+       card settled — the actual cause of the earlier "jerky" swipe, not
+       the swipe motion itself. Now that the shadow lives on
+       .case-photo-main instead, the slide's own is just switched off
+       outright, on both states, so there's nothing left to pop. */
+    .case-slide, .case-slide.active{
+      flex:0 0 84%;width:84%;aspect-ratio:auto;overflow:visible;
+      background:transparent;box-shadow:none;opacity:1;transform:none;transition:none;
+      padding:0;display:block;scroll-snap-align:start;
+    }
+    [data-theme="dark"] .case-slide, [data-theme="dark"] .case-slide.active,
+    :root:not([data-theme="light"]) .case-slide, :root:not([data-theme="light"]) .case-slide.active{
+      box-shadow:none;
+    }
+    .case-toolbar{display:none;}
+    .cases-dots{margin-top:20px;}
+    .case-photo-main{
+      position:relative;aspect-ratio:5/4;width:100%;height:auto;
+      border-radius:14px;overflow:hidden;
+      box-shadow:0 8px 20px rgba(14,37,64,.18);
+      /* Scale lives on the photo box only (not .case-slide, which also
+         wraps the caption below it — that stays a fixed size regardless
+         of active state) and is anchored to the left edge to match
+         scroll-snap-align:start, so the card's snapped-to position doesn't
+         shift as it grows. Kept quick and simple (no opacity/shadow
+         change riding along) so it can't reintroduce the shadow-pop
+         "jerky" bug from before. */
+      transform:scale(.92);transform-origin:left center;
+      transition:transform .25s ease;
+    }
+    .case-slide.active .case-photo-main{transform:scale(1);}
+    .case-slide::before{
+      content:attr(data-name);
+      display:block;margin-top:16px;
+      font-size:16px;font-weight:700;color:var(--text);
+    }
+    .case-slide::after{
+      content:attr(data-desc);
+      display:block;margin-top:3px;
+      font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--text-muted);
+    }
+  }
 
   /* Patient modal (lightbox, no separate pages) */
   .patient-modal-overlay{
@@ -1447,6 +1495,7 @@
       </div>
     </div>
     <div class="cases-carousel">
+      <div class="cases-story-bar" id="casesStoryBar"></div>
       <div class="cases-track" id="casesTrack">
         <button class="case-slide" data-name="Юрий" data-desc="Имплантационное лечение" data-slug="uriy">
           <div class="case-photo-bg" style="background-image:url('/img/patients/uriy-portrait.jpg')"></div>
@@ -2639,6 +2688,7 @@ const galleryData = [
     const prev = document.getElementById('casesPrev');
     const next = document.getElementById('casesNext');
     const dotsWrap = document.getElementById('casesDots');
+    const storyBarWrap = document.getElementById('casesStoryBar');
     const toolbarName = document.getElementById('caseToolbarName');
     const toolbarDesc = document.getElementById('caseToolbarDesc');
     if(!track || !prev || !next) return;
@@ -2749,12 +2799,27 @@ const galleryData = [
         dotsWrap.appendChild(d);
       });
       const dots = Array.from(dotsWrap.children);
+      // Same idea as the dots, restyled as segments for the mobile
+      // "stories" bar (see .cases-story-bar) — built and kept in sync
+      // right alongside them rather than as a separate observer.
+      if(storyBarWrap){
+        slides.forEach((s,i)=>{
+          const seg = document.createElement('span');
+          seg.className = 'seg' + (i < 1 ? ' done' : '') + (i === 1 ? ' active' : '');
+          storyBarWrap.appendChild(seg);
+        });
+      }
+      const segs = storyBarWrap ? Array.from(storyBarWrap.children) : [];
       let scrollTimer2 = null;
       track.addEventListener('scroll', function(){
         if(scrollTimer2) clearTimeout(scrollTimer2);
         scrollTimer2 = setTimeout(function(){
           const idx = Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / slideWidth())));
           dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+          segs.forEach((seg,i)=>{
+            seg.classList.toggle('done', i < idx);
+            seg.classList.toggle('active', i === idx);
+          });
           updateToolbar(idx);
           updateActive(idx);
         }, 80);
