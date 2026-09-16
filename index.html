@@ -987,6 +987,26 @@
     position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
     font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
   }
+  /* Same call as the on-page gallery's .cg-before-badge: at mobile sizes
+     the "До" strip's own background bar eats a real chunk of the (already
+     small, then 80%-of-photo when tapped open) badge. The badge itself —
+     corner thumbnail, growing over the "after" photo on tap — already
+     reads as "before" without a label; img alt="До" still carries it for
+     screen readers. */
+  @media(max-width:600px){
+    .pm-before-badge span{display:none;}
+    /* Matches the ~25% cut already applied to the on-page gallery's badge
+       — this one never got the same pass. */
+    .pm-before-badge{width:70px;height:70px;top:calc(100% - 84px);left:calc(100% - 84px);}
+    /* :hover doesn't really exist on touch — without the label, a mobile
+       visitor has no cue at all that this corner photo is tappable.
+       Standing gold ring instead of only-on-hover, so it reads as
+       interactive without needing a tap first. */
+    .pm-before-badge:not(.expanded){
+      border-color:#c9a24b;
+      box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+    }
+  }
 
   /* nashi-raboty catalog grid (used on this page too, shared class names) */
   .cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;margin-top:40px;}

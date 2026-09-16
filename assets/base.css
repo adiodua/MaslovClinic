@@ -893,6 +893,14 @@
        "before" without a label — the img's alt="До" still carries it for
        screen readers. */
     .cg-before-badge span{display:none;}
+    /* :hover doesn't really exist on touch — without the label, a mobile
+       visitor has no cue at all that this corner photo is tappable.
+       Standing gold ring instead of only-on-hover, so it reads as
+       interactive without needing a tap first. */
+    .cg-before-badge:not(.expanded){
+      border-color:var(--gold);
+      box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+    }
   }
 
   /* Inline supplementary video (e.g. procedure clips) */
