@@ -225,17 +225,16 @@
        right as the badge appears (display:none -> block per slide
        restarts the animation each time), then sits still. */
     .pm-before-badge:not(.expanded)::after{
-      content:"";position:absolute;bottom:-6px;right:-6px;z-index:5;
-      width:22px;height:22px;border-radius:50%;background:#c9a24b;
+      content:"";position:absolute;bottom:-2px;right:-2px;z-index:5;
+      width:26px;height:26px;border-radius:50%;background:#c9a24b;
       box-shadow:0 2px 6px rgba(0,0,0,.4);
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10' cy='10' r='6'/%3E%3Cpath d='M20 20l-5.5-5.5'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:center;background-size:60%;
-      animation:beforeBadgeIconPulse 1s ease-in-out 2;
+      /* Handle drawn longer/thicker than a typical search-icon proportion
+         — at this chip's actual on-screen size the standard glyph's handle
+         was too short and thin to read as anything but noise next to the
+         lens circle. */
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='9' r='6.5'/%3E%3Cpath d='M21 21l-7.5-7.5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:center;background-size:75%;
     }
-  }
-  @keyframes beforeBadgeIconPulse{
-    0%, 100%{transform:scale(1);}
-    50%{transform:scale(1.2);}
   }
 
   @media(max-width:600px){
