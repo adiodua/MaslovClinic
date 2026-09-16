@@ -887,7 +887,12 @@
   .cg-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   @media(max-width:600px){
     .cg-before-badge{width:54px;height:54px;top:calc(100% - 68px);left:calc(100% - 68px);}
-    .cg-before-badge span{font-size:9px;}
+    /* At this size the "До" strip's own background bar ate a real chunk of
+       an already-tiny thumbnail. The badge sitting in the corner, on tap
+       growing to compare against the main photo, already reads as
+       "before" without a label — the img's alt="До" still carries it for
+       screen readers. */
+    .cg-before-badge span{display:none;}
   }
 
   /* Inline supplementary video (e.g. procedure clips) */
