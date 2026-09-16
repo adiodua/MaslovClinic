@@ -675,7 +675,21 @@
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.right = '';
+    // Force a synchronous layout pass before scrolling — right after
+    // position:fixed is cleared the page's scrollable height hasn't been
+    // recalculated yet, so scrollTo below would get clamped to the still-
+    // collapsed (zero-ish) height and silently land at the top.
+    void document.body.offsetHeight;
+    // scroll-behavior:smooth is set globally on <html> — passing
+    // behavior:'auto' to scrollTo() is supposed to override that per-call,
+    // but that alone still left a visible animated jump on close. Turning
+    // the CSS property off outright, for the one instant this scroll takes,
+    // is the version that actually sticks.
+    const htmlEl = document.documentElement;
+    const prevScrollBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = 'auto';
     window.scrollTo(0, pmScrollY);
+    htmlEl.style.scrollBehavior = prevScrollBehavior;
   }
   function pmStep(dir){
     const len = pmSlides().length;

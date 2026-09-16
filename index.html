@@ -1433,6 +1433,13 @@
     </div>
     <div class="cases-carousel">
       <div class="cases-track" id="casesTrack">
+        <button class="case-slide" data-name="Юрий" data-desc="Имплантационное лечение" data-slug="uriy">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/uriy-portrait.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/uriy-portrait.webp" type="image/webp">
+            <img width="1200" height="800" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Юрий — портрет" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;">
+          </picture></div>
+        </button>
         <button class="case-slide" data-name="Юлия" data-desc="Керамические виниры" data-slug="yuliya">
           <div class="case-photo-bg" style="background-image:url('/img/patients/yuliya-after.jpg')"></div>
           <div class="case-photo-main"><picture>
@@ -1445,13 +1452,6 @@
           <div class="case-photo-main"><picture>
             <source srcset="/img/patients/darya-portrait2.webp" type="image/webp">
             <img width="1600" height="1280" loading="lazy" src="/img/patients/darya-portrait2.jpg" alt="Дарья — портрет после виниров" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;">
-          </picture></div>
-        </button>
-        <button class="case-slide" data-name="Юрий" data-desc="Имплантационное лечение" data-slug="uriy">
-          <div class="case-photo-bg" style="background-image:url('/img/patients/uriy-portrait.jpg')"></div>
-          <div class="case-photo-main"><picture>
-            <source srcset="/img/patients/uriy-portrait.webp" type="image/webp">
-            <img width="1200" height="800" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Юрий — портрет" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;">
           </picture></div>
         </button>
         <button class="case-slide" data-name="Кристина" data-desc="Керамические виниры" data-slug="kristina">
@@ -1984,7 +1984,24 @@
     // enough on iOS Safari — a scrollable container behind a fixed overlay
     // (here, the carousel track) can still catch the swipe and move on its
     // own, so the body is pinned in place with position:fixed instead.
+    //
+    // The scroll position to lock/restore to is computed here, not just
+    // read off window.scrollY — a slide click also kicks off its own smooth
+    // scroll (ensureCarouselInView/track.scrollTo) that may still be mid-
+    // flight at this exact moment, so window.scrollY alone can be a stale,
+    // half-settled value. Snap straight to the same "toolbar comfortably
+    // below the header" target that scroll is heading toward, so opening
+    // and closing always land in the one correct place, not wherever the
+    // animation happened to be interrupted.
     pmScrollY = window.scrollY;
+    const toolbarEl = document.querySelector('.case-toolbar');
+    if(toolbarEl){
+      const targetTop = 110;
+      const rect = toolbarEl.getBoundingClientRect();
+      if(Math.abs(rect.top - targetTop) > 40){
+        pmScrollY = window.scrollY + rect.top - targetTop;
+      }
+    }
     document.body.style.position = 'fixed';
     document.body.style.top = -pmScrollY + 'px';
     document.body.style.left = '0';
@@ -1996,7 +2013,21 @@
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.right = '';
+    // Force a synchronous layout pass before scrolling — right after
+    // position:fixed is cleared the page's scrollable height hasn't been
+    // recalculated yet, so scrollTo below would get clamped to the still-
+    // collapsed (zero-ish) height and silently land at the top.
+    void document.body.offsetHeight;
+    // scroll-behavior:smooth is set globally on <html> — passing
+    // behavior:'auto' to scrollTo() is supposed to override that per-call,
+    // but that alone still left a visible animated jump on close. Turning
+    // the CSS property off outright, for the one instant this scroll takes,
+    // is the version that actually sticks.
+    const htmlEl = document.documentElement;
+    const prevScrollBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = 'auto';
     window.scrollTo(0, pmScrollY);
+    htmlEl.style.scrollBehavior = prevScrollBehavior;
   }
   function pmStep(dir){
     const len = pmSlides().length;
@@ -2619,21 +2650,28 @@ const galleryData = [
     function updateActive(idx){
       slides.forEach((s,i)=>s.classList.toggle('active', i===idx));
     }
-    updateActive(0);
+    // Юрий (dimmed) — Юлия (active/centered) — Дарья (dimmed), in that
+    // order in the markup, so there's a card on both sides of the focused
+    // one from the very first paint instead of starting flush against the
+    // left edge with nothing to show there.
+    updateActive(1);
+    track.scrollLeft = slideWidth();
 
     // Whatever the visitor clicks in the carousel — an arrow, a dimmed
     // side photo, the focused photo — the toolbar+photo block should end
     // up comfortably on screen afterward, not half cut off above or
     // below the viewport. Only actually scrolls the page if the block
     // isn't already close to that position, so it doesn't jump around
-    // when it's already fine.
+    // when it's already fine. Instant, not smooth — a page-level scroll
+    // racing the popup's own open/close made the whole thing feel like it
+    // was still animating even after the popup close jump was fixed.
     const toolbar = document.querySelector('.case-toolbar');
     function ensureCarouselInView(){
       if(!toolbar) return;
       const targetTop = 110; // fixed header height + breathing room
       const rect = toolbar.getBoundingClientRect();
       if(Math.abs(rect.top - targetTop) > 40){
-        window.scrollTo({top: window.scrollY + rect.top - targetTop, behavior:'smooth'});
+        window.scrollTo({top: window.scrollY + rect.top - targetTop, left: 0, behavior:'auto'});
       }
     }
 
@@ -2688,7 +2726,7 @@ const galleryData = [
       slides.forEach((s,i)=>{
         const d = document.createElement('button');
         d.type='button';
-        d.className = 'cases-dot' + (i===0 ? ' active' : '');
+        d.className = 'cases-dot' + (i===1 ? ' active' : '');
         d.setAttribute('aria-label', 'Случай ' + (i+1));
         d.addEventListener('click', function(){
           track.scrollTo({left: i * slideWidth(), behavior:'smooth'});
