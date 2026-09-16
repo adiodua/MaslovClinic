@@ -920,6 +920,65 @@
 
 
 
+<div class="lightbox" id="certLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="certLightboxClose" aria-label="Закрыть">&#10005;</button>
+  <button class="lightbox-nav prev" id="certLightboxPrev" aria-label="Предыдущий документ">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="certLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="certLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="certLightboxNext" aria-label="Следующий документ">&#8250;</button>
+</div>
+<script>
+  // Certificate/document cards open full-size in a lightbox on click —
+  // they were plain, non-interactive photo cards before.
+  (function(){
+    const cards = Array.from(document.querySelectorAll('#certTrack .cert-card:not(.soon)'));
+    if(!cards.length) return;
+    cards.forEach(function(card){ card.style.cursor = 'pointer'; });
+    const thumbs = cards.map(function(card){ return card.querySelector('.photo-slot img'); });
+    const lightbox = document.getElementById('certLightbox');
+    const lbImg = document.getElementById('certLightboxImg');
+    const lbCounter = document.getElementById('certLightboxCounter');
+    const closeBtn = document.getElementById('certLightboxClose');
+    const prevBtn = document.getElementById('certLightboxPrev');
+    const nextBtn = document.getElementById('certLightboxNext');
+    let current = 0;
+
+    cards.forEach(function(card, i){
+      card.addEventListener('click', function(){ openLightbox(i); });
+    });
+
+    function openLightbox(index){
+      current = index; render();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function render(){
+      const img = thumbs[current];
+      lbImg.src = img.src; lbImg.alt = img.alt || '';
+      lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+    }
+    function next(){ current = (current+1) % thumbs.length; render(); }
+    function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+  })();
+</script>
+
 <div class="booking-modal" id="bookingModal" aria-hidden="true">
   <div class="booking-backdrop" id="bookingBackdrop"></div>
   <div class="booking-card" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
