@@ -886,7 +886,7 @@
      states so all four transition smoothly between the two. */
   .pm-before-badge{
     display:none;position:absolute;top:calc(100% - 107px);left:calc(100% - 107px);
-    width:93px;height:93px;border-radius:14px;cursor:pointer;
+    width:93px;height:93px;border-radius:14px;cursor:zoom-in;
     overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
     transition:
       top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1),
@@ -895,8 +895,14 @@
   }
   .pm-before-badge.show{display:block;}
   .pm-before-badge.expanded{
-    top:10%;left:10%;width:80%;height:80%;
+    top:10%;left:10%;width:80%;height:80%;cursor:zoom-out;
     box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  /* Hint that the badge is clickable — gold ring on hover, same as the rest
+     of the site's accent color, not just the generic pointer cursor. */
+  .pm-before-badge:not(.expanded):hover{
+    border-color:#c9a24b;
+    box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
   }
   .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
   .pm-before-badge span{
@@ -1916,7 +1922,7 @@
       labels: ['Портрет','До','После']
     }
   };
-  let pmSlug = null, pmIndex = 0;
+  let pmSlug = null, pmIndex = 0, pmScrollY = 0;
 
   // Slide list used at every viewport: portraits stay standalone (no badge),
   // "before" photos are pulled out of the swipeable sequence entirely and
@@ -1974,14 +1980,23 @@
     });
     pmRender();
     document.getElementById('patientModalOverlay').classList.add('open');
-    // Lock the page behind the modal — same pattern as the mobile hamburger
-    // menu: nothing underneath should scroll, swipe, or be clickable while
-    // this is open.
-    document.body.style.overflow = 'hidden';
+    // Lock the page behind the modal. Plain overflow:hidden on body isn't
+    // enough on iOS Safari — a scrollable container behind a fixed overlay
+    // (here, the carousel track) can still catch the swipe and move on its
+    // own, so the body is pinned in place with position:fixed instead.
+    pmScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -pmScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
   }
   function closePatientModal(){
     document.getElementById('patientModalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    window.scrollTo(0, pmScrollY);
   }
   function pmStep(dir){
     const len = pmSlides().length;
@@ -2017,7 +2032,11 @@
       e.stopPropagation();
       badge.classList.toggle('expanded');
     });
-    document.addEventListener('click', function(e){
+    // pointerdown (not click) so this fires reliably even when the tap lands
+    // on the main photo — its own zoom handler calls preventDefault() on
+    // pointerdown, which on touch devices suppresses the synthesized click
+    // that a plain 'click' listener here would have relied on.
+    document.addEventListener('pointerdown', function(e){
       if(badge.classList.contains('expanded') && !badge.contains(e.target)){
         badge.classList.remove('expanded');
       }
@@ -2635,6 +2654,10 @@ const galleryData = [
     }
     document.addEventListener('keydown', function(e){
       if(!inView) return;
+      // The patient popup has its own Left/Right handler (pmStep) — without
+      // this guard both fire on the same keypress, stepping the popup photo
+      // and the carousel behind it at once.
+      if(document.getElementById('patientModalOverlay').classList.contains('open')) return;
       const tag = (document.activeElement && document.activeElement.tagName) || '';
       if(tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
       if(e.key === 'ArrowLeft') step(-1);
