@@ -583,9 +583,14 @@
 </script>
 
     <div class="inline-video">
-      <video controls playsinline preload="none" poster="/video/viniry-work-poster.jpg">
-        <source src="/video/viniry-work.mp4" type="video/mp4">
-      </video>
+      <div class="iv-frame">
+        <video controls playsinline preload="none" poster="/video/viniry-work-poster.jpg">
+          <source src="/video/viniry-work.mp4" type="video/mp4">
+        </video>
+        <button class="iv-play" type="button" aria-label="Watch video">
+          <span class="iv-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0e2540"><path d="M9 6.5v11l9-5.5z"/></svg></span>
+        </button>
+      </div>
       <p>Veneer bonding — video from the clinic's practice</p>
     </div>
   </div>
@@ -865,6 +870,18 @@
     });
   });
 })();
+</script>
+
+<script>
+// Inline video — click anywhere on the frame to start playback, not just
+// the native control bar's own play button.
+document.querySelectorAll('.inline-video').forEach(function(wrap){
+  var video = wrap.querySelector('video');
+  var playBtn = wrap.querySelector('.iv-play');
+  if(!video || !playBtn) return;
+  playBtn.addEventListener('click', function(){ video.play(); });
+  video.addEventListener('play', function(){ playBtn.classList.add('hidden'); });
+});
 </script>
 
 <script src="/assets/prices.js" defer></script>
