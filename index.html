@@ -806,6 +806,12 @@
   @media(max-width:760px){
     .cases-track{padding:20px calc(50% - 180px) 40px;}
     .case-slide{flex:0 0 360px;width:360px;}
+    /* The .45s scale/opacity coverflow transition (dimmed -> active) is
+       fine for a deliberate arrow click, but on a swipe it reads as the
+       photo taking a beat to "develop" instead of just being there the
+       instant your finger lets go. Instant on touch, unchanged on desktop
+       where arrows are the only way to switch. */
+    .case-slide{transition:none;}
   }
   .case-photo-bg{
     position:absolute;inset:0;background-color:#ffffff;
