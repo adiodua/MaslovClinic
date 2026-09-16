@@ -806,12 +806,13 @@
   @media(max-width:760px){
     .cases-track{padding:20px calc(50% - 180px) 40px;}
     .case-slide{flex:0 0 360px;width:360px;}
-    /* The .45s scale/opacity coverflow transition (dimmed -> active) is
-       fine for a deliberate arrow click, but on a swipe it reads as the
-       photo taking a beat to "develop" instead of just being there the
-       instant your finger lets go. Instant on touch, unchanged on desktop
-       where arrows are the only way to switch. */
-    .case-slide{transition:none;}
+    /* Coverflow (dimmed/scaled-down neighbors, full-size active card) is a
+       desktop-hover-friendly effect — on a phone it reads as photos
+       fading/growing into place as you swipe. Dropped entirely on mobile:
+       every slide sits at full size and full opacity, so swiping just
+       flips between full photos one after another, like the iPhone Photos
+       app. Desktop keeps the coverflow effect unchanged. */
+    .case-slide{opacity:1;transform:none;transition:none;}
   }
   .case-photo-bg{
     position:absolute;inset:0;background-color:#ffffff;
