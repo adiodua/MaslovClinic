@@ -93,29 +93,38 @@
   .cases-grid{grid-template-columns:1fr;}
 }
   .case-card{
-    position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
+    position:relative;aspect-ratio:5/4;border-radius:var(--radius);overflow:hidden;
     display:block;text-decoration:none;color:inherit;cursor:pointer;
     border:1px solid var(--divider);background:var(--paper);
     padding:0;font:inherit;width:100%;text-align:left;
+    transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
   }
   .case-card.soon{opacity:.55;border-style:dashed;pointer-events:none;cursor:default;}
+  /* Hover: the card lifts slightly with a soft shadow bloom, and the
+     photo underneath gets a gentle zoom — overflow:hidden on the card
+     keeps the zoomed photo clipped to its rounded corners. */
+  .case-card:not(.soon):hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 44px rgba(14,37,64,.2);
+    border-color:transparent;
+  }
+  [data-theme="dark"] .case-card:not(.soon):hover{box-shadow:0 20px 44px rgba(0,0,0,.5);}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .case-card:not(.soon):hover{box-shadow:0 20px 44px rgba(0,0,0,.5);}
+  }
   .case-photo-main{
     position:absolute;inset:0;background:var(--navy-2);color:rgba(242,240,232,.5);
     display:flex;align-items:center;justify-content:center;text-align:center;
     font-size:12.5px;line-height:1.5;padding:16px;
   }
+  .case-photo-main img{transition:transform .5s cubic-bezier(.22,1,.36,1);}
+  .case-card:not(.soon):hover .case-photo-main img{transform:scale(1.06);}
   /* Dark corner wash behind the name/tag overlay — without it, light-toned
      photos (bright teeth, pale background) can make the white text hard to
      read; this guarantees contrast regardless of the underlying photo. */
   .case-card:not(.soon)::before{
     content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:radial-gradient(ellipse 62% 48% at 0% 0%, rgba(6,14,24,.6) 0%, rgba(6,14,24,.28) 45%, rgba(6,14,24,0) 75%);
-  }
-  .case-before-thumbs{position:absolute;left:14px;bottom:14px;width:34%;display:flex;gap:6px;z-index:2;}
-  .case-before-thumb{
-    width:100%;aspect-ratio:3/2;border-radius:8px;overflow:hidden;border:3px solid rgba(242,240,232,.9);
-    background:var(--navy);color:rgba(242,240,232,.5);font-size:8px;
-    display:flex;align-items:center;justify-content:center;
   }
   .case-info{position:absolute;top:14px;left:14px;z-index:2;color:#f2f0e8;}
   .case-info h3{margin:0 0 2px;font-size:16px;color:#f2f0e8;}
@@ -124,110 +133,124 @@
   /* Patient modal (lightbox, no separate pages) */
   .patient-modal-overlay{
     position:fixed;inset:0;background:rgba(10,20,30,.94);z-index:300;
-    display:none;align-items:center;justify-content:center;padding:24px;
+    display:none;align-items:center;justify-content:center;padding:20px 16px;
+    overflow-y:auto;
   }
-  .patient-modal{position:relative;max-width:640px;width:100%;height:80vh;max-height:700px;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);overflow:hidden;}
+  /* Same card as the on-page gallery and homepage modal: only the photo +
+     a text label live on the photo itself (top-left, on a light scrim) —
+     zoom hint, zoom button, nav arrows, counter and progress bar are gone
+     (zoom/swipe still work via click, pinch and drag). Name/tag/
+     description, the "read more" link and thumbnails sit below the photo,
+     not overlaid — one layout at every width. */
+  .patient-modal{
+    position:relative;width:100%;max-width:600px;margin:auto;
+    background:#0a1729;border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .patient-modal-photo{position:relative;flex:none;aspect-ratio:5/4;background:var(--navy-2);overflow:hidden;}
   .patient-modal-photo img{
     width:100%;height:100%;object-fit:cover;display:block;
     touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+    -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
   }
   .patient-modal-photo.zoomed img{cursor:grab;}
   .patient-modal-photo.zoomed img:active{cursor:grabbing;}
   .patient-modal-photo.dragging img{transition:none !important;}
-  .patient-modal-photo img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
-  .pm-zoom-hint{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:3;
-    background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;padding:5px 12px;border-radius:20px;
-    pointer-events:none;opacity:0;transition:opacity .3s ease;white-space:nowrap;
-  }
-  .patient-modal-photo:not(.zoomed):hover .pm-zoom-hint{opacity:1;}
-  @media(hover:none){.pm-zoom-hint{display:none;}}
   .patient-modal-photo::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
+    content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.45), transparent);
   }
-  .patient-modal-photo::after{
-    content:"";position:absolute;bottom:0;left:0;right:0;height:52%;z-index:1;pointer-events:none;
-    background:linear-gradient(0deg, rgba(0,0,0,.82), transparent);
+  .pm-label{
+    position:absolute;top:14px;left:14px;z-index:3;color:#fff;font-size:13px;font-weight:600;
+    text-shadow:0 1px 3px rgba(0,0,0,.5);
   }
   .patient-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav.prev{left:12px;}
-  .patient-modal-nav.next{right:12px;}
-  .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
-  .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
+  .patient-modal-info{padding:18px 20px 20px;}
   .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
-  .pm-case-link{display:inline-block;margin:0 0 16px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none;}
+  .pm-case-link{display:inline-block;margin:0 0 14px;color:#c9a24b;font-size:13.5px;font-weight:600;text-decoration:none;}
   .pm-case-link:hover{text-decoration:underline;}
-  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
-  .pm-progress{position:absolute;top:0;left:0;right:0;display:none;gap:4px;padding:10px 12px;z-index:4;}
-  .pm-progress span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
-  .pm-progress span::after{content:"";display:block;height:100%;width:0;background:#fff;}
-  .pm-progress span.active::after{width:100%;}
-
-  /* The "before" badge works the same way at every width — the "before"
-     photo is never shown on its own, only as a corner overlay on its
-     paired "after" photo once you've opened the modal (see buildSlides in
-     the script below, which merges before/after into one slide regardless
-     of viewport). Zoom button and dots stay mobile-only — desktop keeps the
-     original full-bleed photo, hover zoom hint and thumbnail strip for
-     navigation. */
-  .pm-zoom-btn{display:none;}
-  .pm-dots{display:none;}
+  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:wrap;}
+  .pm-thumb{width:42px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.5);padding:0;cursor:pointer;flex-shrink:0;background:none;}
+  .pm-thumb.active{border-color:#c9a24b;}
+  .pm-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  /* Tap to expand: grows from a corner badge to an 80%-of-photo overlay
+     with a smooth animation, tap again (or tap anywhere else) to shrink
+     back. Expressed via top/left/width/height (not bottom/right) on both
+     states so all four transition smoothly between the two. */
   .pm-before-badge{
-    display:none;position:absolute;bottom:14px;right:14px;width:150px;height:150px;border-radius:16px;
+    display:none;position:absolute;top:calc(100% - 107px);left:calc(100% - 107px);
+    width:93px;height:93px;border-radius:14px;cursor:pointer;
     overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+    transition:
+      top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1),
+      width .45s cubic-bezier(.16,1,.3,1), height .45s cubic-bezier(.16,1,.3,1),
+      box-shadow .35s ease;
   }
   .pm-before-badge.show{display:block;}
+  .pm-before-badge.expanded{
+    top:10%;left:10%;width:80%;height:80%;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
   .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
   .pm-before-badge span{
     position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
-    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+    font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
   }
 
   @media(max-width:600px){
-  .patient-modal-overlay{padding:20px 16px;}
-  .patient-modal{
-    height:auto;max-height:none;width:100%;max-width:420px;margin:0 auto;
-    background:#0a1729;border-radius:20px;
-  }
-  /* Contained card instead of a near-full-screen "story" — photo keeps a
-     fixed ratio instead of stretching to fill the modal height, so it
-     isn't zoomed/cropped as aggressively as before. */
-  .patient-modal-photo{flex:none;aspect-ratio:4/5;}
-  .patient-modal-photo::before,.patient-modal-photo::after{display:none;}
-  /* Info moves from a gradient overlay on the photo to a plain block below
-     it (the card's own dark background already gives the white text
-     enough contrast — no gradient needed). */
-  .patient-modal-info{position:static;background:none;padding:18px 20px 4px;}
-  .patient-modal-info .eyebrow{color:#c9a24b;}
-  .patient-modal-counter{background:rgba(0,0,0,.5);padding:5px 10px;border-radius:20px;font-size:11px;}
-  .patient-modal-thumbs{display:none;}
-
-  .pm-zoom-btn{
-    display:flex;align-items:center;justify-content:center;
-    position:absolute;bottom:12px;left:12px;width:38px;height:38px;border-radius:50%;
-    background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
-    color:#0e2540;z-index:4;
-  }
-  /* Smaller than the base (desktop) size to fit the narrower contained
-     card — was 83x83, then +25% to 104x104; kept as-is here. */
-  .pm-before-badge{width:104px;height:104px;bottom:12px;right:12px;}
-  .pm-before-badge span{font-size:9px;}
-  .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
-  .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
-  .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
-
   /* Unify catalog cards with the homepage's case-slide carousel — same
-     radius, same shadow-based elevation, "before" badge in the same corner
-     with the same size/border treatment. */
+     radius, same shadow-based elevation. */
   .case-card{border-radius:18px;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);}
-  .case-before-thumbs{left:auto;right:16px;width:30%;}
-  .case-before-thumb{border-radius:10px;border-color:rgba(255,255,255,.9);}
 }
+
+  /* Page header — same card language as the patient case page (navy +
+     gold, rounded corners), but instead of one portrait it's a living
+     collage: 3 frames on screen at once, each independently cycling
+     through every patient's portrait on its own timer (offset so there's
+     always one mid-crossfade) — see the script near the bottom of body. */
+  .works-hero{
+    position:relative;overflow:hidden;padding:150px 0 72px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  }
+  .works-hero::before{
+    content:"";position:absolute;top:-140px;right:-100px;width:420px;height:420px;z-index:0;
+    background:radial-gradient(circle, rgba(201,162,75,.28) 0%, rgba(201,162,75,0) 70%);
+    pointer-events:none;
+  }
+  .works-hero-inner{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;
+  }
+  .works-hero-info{color:#f2f0e8;}
+  .works-hero-info .crumbs-inline{color:rgba(242,240,232,.55);font-size:12.5px;margin-bottom:26px;}
+  .works-hero-info .crumbs-inline a{color:rgba(242,240,232,.55);}
+  .works-hero-info h1{font-size:clamp(38px,4.6vw,58px);line-height:1.06;margin:0 0 18px;color:#fff;}
+  .works-hero-lead{font-size:17px;line-height:1.65;color:rgba(242,240,232,.82);max-width:440px;margin:0 0 34px;}
+  .works-hero-info .cta-row{position:static;display:flex;gap:14px;flex-wrap:wrap;}
+  .works-hero-info .cta-row .btn{border-radius:14px;}
+  /* One full-size portrait, not a collage — two stacked <img> layers
+     crossfade into each other (both animate opacity at once, so the new
+     photo visibly emerges through the old one rather than a blank gap
+     between a fade-out and a fade-in). */
+  .works-hero-photo{
+    position:relative;aspect-ratio:5/4;border-radius:26px;overflow:hidden;
+    border:3px solid rgba(201,162,75,.4);box-shadow:0 30px 70px rgba(0,0,0,.4);
+    background:var(--navy-2);
+  }
+  .whp-layer{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+    opacity:0;transition:opacity 1.3s ease;
+  }
+  .whp-layer.active{opacity:1;}
+  @media(max-width:860px){
+    .works-hero{padding:110px 0 48px;}
+    .works-hero-inner{grid-template-columns:1fr;gap:30px;}
+    .works-hero-photo{order:-1;border-radius:20px;max-width:340px;margin:0 auto;}
+    .works-hero-info h1{font-size:34px;}
+    .works-hero-lead{max-width:none;}
+  }
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -378,18 +401,60 @@
 </div>
 
 
-<section class="hero">
-  <div class="wrap">
-    <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Наши работы</span></div>
-    <h1>Результаты<br>наших пациентов</h1>
-    <p class="lead">Реальные случаи из практики клиники — с фото «до» и «после», процедурой и примерной ценовой категорией.</p>
-    <div class="cta-row">
-      <span class="seg"></span>
-      <a href="#" class="btn js-open-booking">Записаться на визит</a>
-      <span class="seg"></span>
+<section class="works-hero">
+  <div class="wrap works-hero-inner">
+    <div class="works-hero-info">
+      <div class="crumbs-inline"><a href="/">Главная</a> / <span class="crumb-active">Наши работы</span></div>
+      <h1>Результаты наших пациентов</h1>
+      <p class="works-hero-lead">Реальные случаи из практики клиники — с фото «до» и «после», процедурой и примерной ценовой категорией.</p>
+      <div class="cta-row">
+        <a href="#" class="btn js-open-booking">Записаться на визит</a>
+      </div>
+    </div>
+    <div class="works-hero-photo" id="worksHeroPhoto">
+      <img class="whp-layer active" id="whpA" alt="Пациент клиники — портрет">
+      <img class="whp-layer" id="whpB" alt="Пациент клиники — портрет">
     </div>
   </div>
 </section>
+<script>
+(function(){
+  var POOL = [
+    '/img/patients/darya-portrait2.jpg',
+    '/img/patients/uriy-portrait.jpg',
+    '/img/patients/yuliya-after.jpg',
+    '/img/patients/kristina-after.jpg',
+    '/img/patients/irina-portrait.jpg',
+    '/img/patients/oksana-portrait.jpg',
+    '/img/patients/olga-v-portrait.jpg',
+    '/img/patients/natalya-portrait.jpg',
+    '/img/patients/olga-i-portrait.jpg'
+  ];
+  var photo = document.getElementById('worksHeroPhoto');
+  if(!photo) return;
+  // Preload the whole pool so swapping .src never shows a blank/broken
+  // frame mid-crossfade.
+  POOL.forEach(function(src){ (new Image()).src = src; });
+
+  var layers = [document.getElementById('whpA'), document.getElementById('whpB')];
+  var idx = 0, activeLayer = 0;
+  layers[0].src = POOL[0];
+
+  function cycle(){
+    idx = (idx + 1) % POOL.length;
+    var next = layers[1 - activeLayer];
+    var cur = layers[activeLayer];
+    next.src = POOL[idx];
+    // Both layers animate opacity at the same time — the incoming photo
+    // fades in exactly as the outgoing one fades out, so it reads as one
+    // photo dissolving into the next rather than fade-out-then-fade-in.
+    next.classList.add('active');
+    cur.classList.remove('active');
+    activeLayer = 1 - activeLayer;
+  }
+  setInterval(cycle, 3300);
+})();
+</script>
 
 <section class="alt">
   <div class="wrap">
@@ -400,18 +465,15 @@
     </div>
     <div class="cases-grid">
       <button class="case-card" onclick="openPatientModal('darya')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/darya-portrait.jpg" alt="Дарья — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/darya-before.jpg" alt="Дарья — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" src="/img/patients/darya-portrait2.jpg" alt="Дарья — портрет после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Дарья</h3><p>Керамические виниры</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('uriy')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Юрий — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/uriy-before.jpg" alt="Юрий — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юрий</h3><p>Имплантационное лечение</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('yuliya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлия — результат после виниров" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/yuliya-before.jpg" alt="Юлия — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юлия</h3><p>Керамические виниры</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('kristina')">
@@ -420,7 +482,6 @@
       </button>
       <button class="case-card" onclick="openPatientModal('irina')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-portrait.jpg" alt="Ирина — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/irina-before.jpg" alt="Ирина — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ирина</h3><p>Керамические виниры и коронки</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('oksana')">
@@ -429,17 +490,14 @@
       </button>
       <button class="case-card" onclick="openPatientModal('olga-v')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-v-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Керамические виниры</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('natalya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталья — результат имплантационного лечения" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/natalya-before.jpg" alt="Наталья — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Наталья</h3><p>Имплантационное лечение</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-i')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-i-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Имплантационное лечение</p></div>
       </button>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
@@ -452,26 +510,16 @@
 <div class="patient-modal-overlay" id="patientModalOverlay" onclick="if(event.target===this) closePatientModal()">
   <div class="patient-modal">
     <div class="patient-modal-photo">
-      <div class="pm-progress" id="pmProgress"></div>
       <img id="pmMain" src="" alt="" draggable="false">
-      <span class="pm-zoom-hint" id="pmZoomHint">Нажмите, чтобы приблизить</span>
-      <!-- Mobile-only: visible zoom affordance. Pinch/double-tap zoom already
-           works (see the "Photo zoom" script below) but the text hint above
-           is hidden on touch devices — this button is the discoverable entry
-           point on phones, not a replacement for the gesture. -->
-      <button class="pm-zoom-btn" id="pmZoomBtn" onclick="pmToggleZoom()" aria-label="Приблизить фото">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
-      </button>
-      <!-- Mobile-only: "before" photo shown as a corner badge on the current
-           "after" photo instead of its own slide in the swipe sequence. -->
+      <div class="pm-label" id="pmLabel"></div>
+      <!-- "Before" photo shown as a corner badge on the current
+           "after"/portrait photo instead of its own slide in the swipe
+           sequence. -->
       <div class="pm-before-badge" id="pmBeforeBadge">
         <img id="pmBeforeImg" src="" alt="До">
         <span>До</span>
       </div>
       <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Закрыть">×</button>
-      <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Предыдущее фото">‹</button>
-      <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Следующее фото">›</button>
-      <div class="patient-modal-counter" id="pmCounter"></div>
     </div>
     <div class="patient-modal-info">
       <span class="eyebrow" id="pmTag"></span>
@@ -479,8 +527,6 @@
       <p id="pmDesc"></p>
       <a href="#" id="pmCaseLink" class="pm-case-link">Подробнее о кейсе →</a>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
-      <!-- Mobile-only: replaces the thumbnail strip with simple dots. -->
-      <div class="pm-dots" id="pmDots"></div>
     </div>
   </div>
 </div>
@@ -491,8 +537,8 @@
       name: 'Дарья', tag: 'Керамические виниры',
       desc: '8 виниров, подготовка эмали и фиксация по индивидуальным слепкам.',
       url: '/raboty/patient-1.html',
-      photos: ['/img/patients/darya-portrait.jpg','/img/patients/darya-before.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg'],
-      labels: ['Портрет','До','После','После, ракурс 2','После, ракурс 3']
+      photos: ['/img/patients/darya-portrait.jpg','/img/patients/darya-portrait2.jpg','/img/patients/darya-portrait3.jpg','/img/patients/darya-before.jpg','/img/patients/darya-before2.jpg','/img/patients/darya-before3.jpg','/img/patients/darya-before4.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg','/img/patients/darya-after4.jpg'],
+      labels: ['Портрет, до','Портрет','Портрет','До','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4']
     },
     uriy: {
       name: 'Юрий', tag: 'Имплантационное лечение',
@@ -553,21 +599,25 @@
   };
   let pmSlug = null, pmIndex = 0;
 
-  function isMobileModal(){ return window.matchMedia('(max-width:600px)').matches; }
-
-  // Mobile-only slide list: portraits stay standalone (no badge), "before"
-  // photos are pulled out of the swipeable sequence entirely and attached as
-  // a corner badge to "after" photos instead — cycling through the available
-  // "before" photos if there's more than one, so each gets used.
-  function buildMobileSlides(p){
-    const portraits = [], befores = [], afters = [];
+  // Slide list: "до" photos — both the close-up ones and a portrait shot
+  // before treatment (if any) — never get their own slide. They're pulled
+  // out and attached as a corner badge to their paired "portrait"/"after"
+  // photo instead, so "до" never appears standalone, at any viewport.
+  function buildSlides(p){
+    const portraits = [], portraitBefores = [], befores = [], afters = [];
     p.photos.forEach((src, i) => {
       const label = p.labels[i];
-      if(/портрет/i.test(label)) portraits.push({src, label});
-      else if(/^до$/i.test(label)) befores.push({src, label});
-      else afters.push({src, label});
+      const entry = {src, label};
+      if(/портрет.*до/i.test(label)) portraitBefores.push(entry);
+      else if(/портрет/i.test(label)) portraits.push(entry);
+      else if(/^до$/i.test(label)) befores.push(entry);
+      else afters.push(entry);
     });
-    const slides = portraits.map(ph => ({src: ph.src, label: ph.label, beforeSrc: null}));
+    const slides = [];
+    portraits.forEach((ph, i) => {
+      const beforeSrc = i === 0 && portraitBefores.length ? portraitBefores[0].src : null;
+      slides.push({src: ph.src, label: ph.label, beforeSrc});
+    });
     afters.forEach((ph, i) => {
       const beforeSrc = befores.length ? befores[i % befores.length].src : null;
       slides.push({src: ph.src, label: ph.label, beforeSrc});
@@ -577,11 +627,8 @@
 
   function pmSlides(){
     const p = PATIENTS[pmSlug];
-    if(isMobileModal()){
-      if(!p._mobileSlides) p._mobileSlides = buildMobileSlides(p);
-      return p._mobileSlides;
-    }
-    return p.photos.map((src, i) => ({src, label: p.labels[i], beforeSrc: null}));
+    if(!p._slides) p._slides = buildSlides(p);
+    return p._slides;
   }
 
   function openPatientModal(slug){
@@ -590,24 +637,19 @@
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
     document.getElementById('pmCaseLink').href = PATIENTS[slug].url;
+    const slides = pmSlides();
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
-    PATIENTS[slug].photos.forEach((src, i) => {
+    slides.forEach((s, i) => {
       const b = document.createElement('button');
       b.className = 'pm-thumb';
-      b.setAttribute('aria-label', PATIENTS[slug].labels[i]);
+      b.setAttribute('aria-label', s.label);
       const img = document.createElement('img');
-      img.src = src;
-      img.alt = PATIENTS[slug].labels[i];
+      img.src = s.src;
+      img.alt = s.label;
       b.appendChild(img);
       b.onclick = () => { pmIndex = i; pmRender(); };
       thumbs.appendChild(b);
-    });
-    const progress = document.getElementById('pmProgress');
-    progress.innerHTML = '';
-    PATIENTS[slug].photos.forEach(() => {
-      const s = document.createElement('span');
-      progress.appendChild(s);
     });
     pmRender();
     document.getElementById('patientModalOverlay').classList.add('open');
@@ -632,35 +674,34 @@
     const cur = slides[pmIndex];
     document.getElementById('pmMain').src = cur.src;
     document.getElementById('pmMain').alt = p.name + ' — ' + cur.label;
-    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + slides.length;
+    document.getElementById('pmLabel').textContent = cur.label;
     Array.from(document.getElementById('pmThumbs').children).forEach((b,i)=>b.classList.toggle('active', i===pmIndex));
-    Array.from(document.getElementById('pmProgress').children).forEach((s,i)=>{
-      s.classList.toggle('done', i < pmIndex);
-      s.classList.toggle('active', i === pmIndex);
-    });
-    // Mobile "before" badge — shown only when the current slide has one.
+    // "Before" badge — shown only when the current slide actually has a
+    // paired "before" photo. Always starts collapsed on a new slide.
     const badge = document.getElementById('pmBeforeBadge');
     const badgeImg = document.getElementById('pmBeforeImg');
+    badge.classList.remove('expanded');
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
     } else {
       badge.classList.remove('show');
     }
-    // Mobile dots — replaces the thumbnail strip, rebuilt per slide list.
-    const dotsWrap = document.getElementById('pmDots');
-    dotsWrap.innerHTML = '';
-    slides.forEach((s, i) => {
-      const d = document.createElement('button');
-      d.className = 'pm-dot' + (i === pmIndex ? ' active' : '');
-      d.setAttribute('aria-label', s.label);
-      d.onclick = () => { pmIndex = i; pmRender(); };
-      dotsWrap.appendChild(d);
-    });
   }
-  window.addEventListener('resize', () => {
-    if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
-  });
+  // Tap the badge to expand it over the "after" photo; tap it again, or
+  // anywhere else, to collapse it back down.
+  (function(){
+    const badge = document.getElementById('pmBeforeBadge');
+    badge.addEventListener('click', function(e){
+      e.stopPropagation();
+      badge.classList.toggle('expanded');
+    });
+    document.addEventListener('click', function(e){
+      if(badge.classList.contains('expanded') && !badge.contains(e.target)){
+        badge.classList.remove('expanded');
+      }
+    });
+  })();
   document.addEventListener('keydown', (e) => {
     if(!document.getElementById('patientModalOverlay').classList.contains('open')) return;
     if(e.key === 'Escape') closePatientModal();
@@ -673,7 +714,6 @@
     const stage = document.querySelector('.patient-modal-photo');
     const img = document.getElementById('pmMain');
     if(!stage || !img) return;
-    const hint = document.getElementById('pmZoomHint');
     const MAX_SCALE = 4, TAP_ZOOM = 2.2;
     let scale = 1, tx = 0, ty = 0;
     const pointers = new Map();
@@ -721,16 +761,8 @@
       apply();
     }
 
-    // Mobile zoom button — same in/out behavior as tap-to-zoom, just reachable
-    // without knowing the gesture exists.
-    window.pmToggleZoom = function(){
-      const rect = stage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-      if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
-    };
-
     stage.addEventListener('pointerdown', function(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       e.preventDefault();
       pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
       dragMoved = false;
@@ -779,7 +811,7 @@
     });
 
     function endPointer(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
       pointers.delete(e.pointerId);
       stage.classList.remove('dragging');
@@ -818,10 +850,6 @@
     }
     stage.addEventListener('pointerup', endPointer);
     stage.addEventListener('pointercancel', endPointer);
-
-    if(hint){
-      stage.addEventListener('pointerdown', function(){ hint.style.opacity = '0'; }, {once:false});
-    }
 
     const _origPmRender = window.pmRender;
     if(typeof _origPmRender === 'function'){

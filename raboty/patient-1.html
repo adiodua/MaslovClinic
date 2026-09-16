@@ -86,72 +86,49 @@
 </script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
-  .case-hero{background-size:140% auto !important;background-position:20% center !important;}
-  @keyframes chevronShimmer{
-    0%,100%{border-right-color:rgba(255,255,255,.22);border-bottom-color:rgba(255,255,255,.22);}
-    50%{border-right-color:#0e2540;border-bottom-color:#0e2540;}
+  /* Patient case header — a two-column card instead of a full-bleed photo
+     hero: portrait (native 5:4) on one side, all the info on the other.
+     Navy + gold, generous rounded corners, a soft gold glow behind the
+     photo for a bit of polish. */
+  .patient-hero{
+    position:relative;overflow:hidden;padding:150px 0 72px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
   }
-    @media(max-width:760px){
-    .case-hero{
-      height:auto;min-height:460px;padding:88px 0 90px;
-      background:
-        radial-gradient(ellipse 75% 75% at 0% 0%, rgba(14,37,64,.8) 0%, rgba(14,37,64,.4) 60%, rgba(14,37,64,0) 100%),
-        url('/img/patients/darya-portrait.jpg') center/cover no-repeat,
-        var(--navy-2) !important;
-    }
-    .case-hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-start;}
-    .case-hero .crumbs-inline{display:none;}
-    .case-hero-head{flex:0 0 170px;width:170px;max-width:170px;margin:22px 0 0;}
-    .case-hero h1{
-      display:block;width:170px;max-width:170px;text-align:left;
-      font-size:24px !important;line-height:1.24;margin:0;
-      cursor:pointer;
-    }
-    .case-hero .case-tag{margin:10px 0 0;}
-    .case-hero h1::after{
-      content:"";display:block;width:9px;height:9px;margin:10px auto 0;
-      border-right:2px solid rgba(255,255,255,.22);border-bottom:2px solid rgba(255,255,255,.22);
-      transform:rotate(-45deg);transition:transform .25s ease;
-      animation:chevronShimmer 2.2s ease-in-out infinite;
-    }
-    .case-hero h1.lead-open::after{
-      transform:rotate(135deg);animation:none;
-      border-right-color:rgba(255,255,255,.85);border-bottom-color:rgba(255,255,255,.85);
-    }
-    .case-hero p.lead{
-      flex:0 0 auto;width:0;max-width:0;margin:22px 0 0 0;text-align:left;
-      font-size:13px;line-height:1.45;
-      text-shadow:0 1px 3px rgba(0,0,0,.35);
-      max-height:220px;opacity:0;overflow:hidden;
-      padding:0;border-radius:12px;
-      background:rgba(255,255,255,0);border:1px solid rgba(255,255,255,0);
-      backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
-      transform:translateX(-6px);
-      transition:
-        width .4s cubic-bezier(.16,1,.3,1),
-        max-width .4s cubic-bezier(.16,1,.3,1),
-        margin-left .4s cubic-bezier(.16,1,.3,1),
-        padding .4s cubic-bezier(.16,1,.3,1),
-        opacity .3s ease,
-        transform .4s cubic-bezier(.34,1.56,.64,1),
-        background-color .4s ease,
-        border-color .4s ease,
-        backdrop-filter .4s ease;
-    }
-    .case-hero p.lead.lead-open{
-      width:172px;max-width:172px;margin:22px 0 0 14px;
-      opacity:1;
-      padding:10px 12px;
-      background:rgba(255,255,255,.14);
-      border-color:rgba(255,255,255,.35);
-      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-      transform:translateX(0);
-      overflow-y:auto;overflow-x:hidden;
-    }
-    .case-hero .cta-row{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:wrap;row-gap:10px;}
-    .case-hero .cta-row .seg{display:none;}
-    .case-hero .cta-row .btn{padding:0 18px;height:40px;font-size:13px;width:auto;justify-content:center;}
-    .case-hero .cta-row .btn:only-of-type{width:100%;}
+  .patient-hero::before{
+    content:"";position:absolute;top:-140px;right:-100px;width:420px;height:420px;z-index:0;
+    background:radial-gradient(circle, rgba(201,162,75,.28) 0%, rgba(201,162,75,0) 70%);
+    pointer-events:none;
+  }
+  .patient-hero-inner{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;
+  }
+  .patient-hero-info{color:#f2f0e8;}
+  .patient-hero-info .crumbs-inline{color:rgba(242,240,232,.55);font-size:12.5px;margin-bottom:26px;}
+  .patient-hero-info .crumbs-inline a{color:rgba(242,240,232,.55);}
+  .patient-hero-tag{
+    display:inline-block;padding:7px 18px;border-radius:999px;margin-bottom:20px;
+    background:rgba(201,162,75,.15);border:1px solid rgba(201,162,75,.5);
+    color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  }
+  .patient-hero-info h1{font-size:clamp(38px,4.6vw,58px);line-height:1.06;margin:0 0 18px;color:#fff;}
+  .patient-hero-lead{font-size:17px;line-height:1.65;color:rgba(242,240,232,.82);max-width:440px;margin:0 0 34px;}
+  /* Base .cta-row is position:absolute for the old photo-overlay hero —
+     here it's a normal flow row under the lead text instead. */
+  .patient-hero-info .cta-row{position:static;display:flex;gap:14px;flex-wrap:wrap;}
+  .patient-hero-info .cta-row .btn{border-radius:14px;}
+  .patient-hero-photo{
+    position:relative;aspect-ratio:5/4;border-radius:26px;overflow:hidden;
+    border:3px solid rgba(201,162,75,.4);box-shadow:0 30px 70px rgba(0,0,0,.4);
+  }
+  .patient-hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  @media(max-width:860px){
+    .patient-hero{padding:110px 0 48px;}
+    .patient-hero-inner{grid-template-columns:1fr;gap:26px;}
+    .patient-hero-photo{order:-1;border-radius:20px;max-width:340px;margin:0 auto;}
+    .patient-hero-info h1{font-size:34px;}
+    .patient-hero-lead{max-width:none;}
+    .patient-hero-info .cta-row{flex-wrap:wrap;}
   }
 </style>
 
@@ -303,22 +280,20 @@
 </div>
 
 
-<section class="hero case-hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/darya-portrait.jpg') center/cover no-repeat,var(--navy-2);filter:brightness(1.3);">
-  <div class="wrap">
-    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Дарья</span></div>
-    <div class="case-hero-head">
+<section class="patient-hero">
+  <div class="wrap patient-hero-inner">
+    <div class="patient-hero-info">
+      <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/raboty/index.html">Наши работы</a> / <span class="crumb-active">Дарья</span></div>
+      <span class="patient-hero-tag">Керамические виниры · 8 единиц</span>
       <h1>Дарья</h1>
-    <ul class="case-tag">
-      <li>Керамические виниры</li>
-      <li>8 единиц</li>
-    </ul>
+      <p class="patient-hero-lead">Подготовка эмали и фиксация виниров по индивидуальным слепкам.</p>
+      <div class="cta-row">
+        <a href="#" class="btn js-open-booking">Записаться на визит</a>
+        <a href="/raboty/index.html" class="btn ghost">← Все работы</a>
+      </div>
     </div>
-    <p class="lead">Подготовка эмали и фиксация виниров по индивидуальным слепкам.</p>
-    <div class="cta-row">
-      <span class="seg"></span>
-      <a href="#" class="btn js-open-booking">Записаться на визит</a>
-      <a href="/raboty/index.html" class="btn ghost">← Все работы</a>
-      <span class="seg"></span>
+    <div class="patient-hero-photo">
+      <img src="/img/patients/darya-portrait2.jpg" alt="Дарья — портрет после виниров">
     </div>
   </div>
 </section>
@@ -332,46 +307,52 @@
     </div>
     <div class="case-gallery">
       <div class="case-gallery-photo" id="cgPhoto">
-        <div class="cg-progress" id="cgProgress"></div>
         <img id="cgMain" src="" alt="" draggable="false">
-        <span class="cg-zoom-hint" id="cgZoomHint">Нажмите, чтобы приблизить</span>
-        <button class="cg-zoom-btn" id="cgZoomBtn" type="button" aria-label="Приблизить фото">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
-        </button>
+        <div class="cg-label" id="cgLabel"></div>
         <div class="cg-before-badge" id="cgBeforeBadge">
           <img id="cgBeforeImg" src="" alt="До">
           <span>До</span>
         </div>
+      </div>
+      <div class="case-gallery-nav-row">
         <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Предыдущее фото">‹</button>
         <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Следующее фото">›</button>
-        <div class="case-gallery-counter" id="cgCounter"></div>
       </div>
-      <div class="case-gallery-thumbs" id="cgThumbs"></div>
-      <div class="cg-dots" id="cgDots"></div>
+      <div class="case-gallery-below">
+        <div class="case-gallery-thumbs" id="cgThumbs"></div>
+        <a href="/uslugi/koronki-i-viniry.html" class="btn btn-outline">Подробнее о лечении →</a>
+      </div>
     </div>
 <script>
 (function(){
-  const photos = ['/img/patients/darya-portrait.jpg','/img/patients/darya-before.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg'];
-  const labels = ['Портрет','До','После','После, ракурс 2','После, ракурс 3'];
-  const alts = ['Дарья — портрет','Дарья — фото до','Дарья — результат после виниров','Дарья — результат, ракурс 2','Дарья — результат, ракурс 3'];
+  const photos = ['/img/patients/darya-portrait.jpg','/img/patients/darya-portrait2.jpg','/img/patients/darya-portrait3.jpg','/img/patients/darya-before.jpg','/img/patients/darya-before2.jpg','/img/patients/darya-before3.jpg','/img/patients/darya-before4.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg','/img/patients/darya-after4.jpg'];
+  const labels = ['Портрет, до','Портрет','Портрет','До','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4'];
+  const alts = ['Дарья — портрет до','Дарья — портрет','Дарья — портрет, ракурс 2','Дарья — фото до','Дарья — фото до','Дарья — фото до','Дарья — фото до','Дарья — результат после виниров','Дарья — результат, ракурс 2','Дарья — результат, ракурс 3','Дарья — результат, ракурс 4'];
 
-  // Slide list: portraits stay standalone (no badge); "before" photos are
-  // pulled out of the swipeable sequence and attached as a corner badge to
-  // their paired "after" photo instead — same logic as the homepage / "Наши
-  // работы" carousel, so the "before" photo never appears as its own slide.
+  // Slide list: "до" photos — both the close-up ones and the one portrait
+  // shot before treatment — never get their own slide. They're pulled out
+  // and attached as a corner badge to their paired "portrait"/"after"
+  // photo instead (same logic as the homepage carousel), so "до" never
+  // appears standalone. The per-slide label is now an on-photo overlay
+  // (top-left), not a separate counter/progress bar.
   function buildSlides(){
-    const portraits = [], befores = [], afters = [];
+    const portraits = [], portraitBefores = [], befores = [], afters = [];
     photos.forEach((src, i) => {
       const label = labels[i];
-      const entry = {src, alt: alts[i]};
-      if(/портрет/i.test(label)) portraits.push(entry);
+      const entry = {src, alt: alts[i], label};
+      if(/портрет.*до/i.test(label)) portraitBefores.push(entry);
+      else if(/портрет/i.test(label)) portraits.push(entry);
       else if(/^до$/i.test(label)) befores.push(entry);
       else afters.push(entry);
     });
-    const slides = portraits.map(ph => ({src: ph.src, alt: ph.alt, beforeSrc: null}));
+    const slides = [];
+    portraits.forEach((ph, i) => {
+      const beforeSrc = i === 0 && portraitBefores.length ? portraitBefores[0].src : null;
+      slides.push({src: ph.src, alt: ph.alt, label: ph.label, beforeSrc});
+    });
     afters.forEach((ph, i) => {
       const beforeSrc = befores.length ? befores[i % befores.length].src : null;
-      slides.push({src: ph.src, alt: ph.alt, beforeSrc});
+      slides.push({src: ph.src, alt: ph.alt, label: ph.label, beforeSrc});
     });
     return slides;
   }
@@ -380,19 +361,11 @@
 
   const photo = document.getElementById('cgPhoto');
   const main = document.getElementById('cgMain');
-  const counter = document.getElementById('cgCounter');
-  const progress = document.getElementById('cgProgress');
+  const label = document.getElementById('cgLabel');
   const thumbsWrap = document.getElementById('cgThumbs');
-  const dotsWrap = document.getElementById('cgDots');
   const badge = document.getElementById('cgBeforeBadge');
   const badgeImg = document.getElementById('cgBeforeImg');
-  const zoomHint = document.getElementById('cgZoomHint');
-  const zoomBtn = document.getElementById('cgZoomBtn');
 
-  slides.forEach(() => {
-    const s = document.createElement('span');
-    progress.appendChild(s);
-  });
   slides.forEach((s, i) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -409,27 +382,14 @@
     const cur = slides[index];
     main.src = cur.src;
     main.alt = cur.alt;
-    counter.textContent = (index+1) + ' / ' + slides.length;
+    label.textContent = cur.label;
     Array.from(thumbsWrap.children).forEach((b,i)=>b.classList.toggle('active', i===index));
-    Array.from(progress.children).forEach((s,i)=>{
-      s.classList.toggle('done', i < index);
-      s.classList.toggle('active', i === index);
-    });
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
     } else {
       badge.classList.remove('show');
     }
-    dotsWrap.innerHTML = '';
-    slides.forEach((s, i) => {
-      const d = document.createElement('button');
-      d.type = 'button';
-      d.className = 'cg-dot' + (i === index ? ' active' : '');
-      d.setAttribute('aria-label', s.alt);
-      d.addEventListener('click', () => { index = i; render(); });
-      dotsWrap.appendChild(d);
-    });
   }
   function step(dir){
     index = (index + dir + slides.length) % slides.length;
@@ -478,14 +438,8 @@
     clampPan();
     apply();
   }
-  zoomBtn.addEventListener('click', function(){
-    const rect = photo.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-    if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
-  });
-
   photo.addEventListener('pointerdown', function(e){
-    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
+    if(e.target.closest('.case-gallery-nav, .cg-before-badge')) return;
     e.preventDefault();
     pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
     dragMoved = false;
@@ -534,7 +488,7 @@
   });
 
   function endPointer(e){
-    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
+    if(e.target.closest('.case-gallery-nav, .cg-before-badge')) return;
     const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
     pointers.delete(e.pointerId);
     photo.classList.remove('dragging');
@@ -573,10 +527,6 @@
   }
   photo.addEventListener('pointerup', endPointer);
   photo.addEventListener('pointercancel', endPointer);
-
-  if(zoomHint){
-    photo.addEventListener('pointerdown', function(){ zoomHint.style.opacity = '0'; }, {once:false});
-  }
 
   document.addEventListener('keydown', function(e){
     if(e.key === 'ArrowLeft') step(-1);
