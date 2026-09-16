@@ -306,26 +306,30 @@
       <p>Процедура: подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация. Ниже — этапы «до» и результат. Подробнее о процедуре и ценах — на странице <a href="/uslugi/koronki-i-viniry.html">«Ортопедическое лечение»</a>.</p>
     </div>
     <div class="case-gallery">
-      <div class="case-gallery-photo" id="cgPhoto">
-        <img id="cgMain" src="" alt="" draggable="false">
-        <div class="cg-label" id="cgLabel"></div>
-        <div class="cg-before-badge" id="cgBeforeBadge">
-          <img id="cgBeforeImg" src="" alt="До">
-          <span>До</span>
+      <div class="cg-card">
+        <div class="case-gallery-photo" id="cgPhoto">
+          <img id="cgMain" src="" alt="" draggable="false">
+          <div class="cg-label" id="cgLabel"></div>
+          <div class="cg-before-badge" id="cgBeforeBadge">
+            <img id="cgBeforeImg" src="" alt="До">
+            <span>До</span>
+          </div>
         </div>
-      </div>
-      <div class="case-gallery-nav-row">
-        <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Предыдущее фото">‹</button>
-        <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Следующее фото">›</button>
-      </div>
-      <div class="case-gallery-below">
-        <div class="case-gallery-thumbs" id="cgThumbs"></div>
-        <a href="/uslugi/koronki-i-viniry.html" class="btn btn-outline">Подробнее о лечении →</a>
+        <div class="cg-card-body">
+          <div class="case-gallery-nav-row">
+            <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Предыдущее фото">‹</button>
+            <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Следующее фото">›</button>
+          </div>
+          <div class="case-gallery-below">
+            <div class="case-gallery-thumbs" id="cgThumbs"></div>
+            <a href="/uslugi/koronki-i-viniry.html" class="btn btn-outline">Подробнее о лечении →</a>
+          </div>
+        </div>
       </div>
     </div>
 <script>
 (function(){
-  const photos = ['/img/patients/darya-portrait.jpg','/img/patients/darya-portrait2.jpg','/img/patients/darya-portrait3.jpg','/img/patients/darya-before.jpg','/img/patients/darya-before2.jpg','/img/patients/darya-before3.jpg','/img/patients/darya-before4.jpg','/img/patients/darya-after.jpg','/img/patients/darya-after2.jpg','/img/patients/darya-after3.jpg','/img/patients/darya-after4.jpg'];
+  const photos = ['/img/patients/darya-portrait.webp','/img/patients/darya-portrait2.webp','/img/patients/darya-portrait3.webp','/img/patients/darya-before.webp','/img/patients/darya-before2.webp','/img/patients/darya-before3.webp','/img/patients/darya-before4.webp','/img/patients/darya-after.webp','/img/patients/darya-after2.webp','/img/patients/darya-after3.webp','/img/patients/darya-after4.webp'];
   const labels = ['Портрет, до','Портрет','Портрет','До','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4'];
   const alts = ['Дарья — портрет до','Дарья — портрет','Дарья — портрет, ракурс 2','Дарья — фото до','Дарья — фото до','Дарья — фото до','Дарья — фото до','Дарья — результат после виниров','Дарья — результат, ракурс 2','Дарья — результат, ракурс 3','Дарья — результат, ракурс 4'];
 
@@ -384,6 +388,7 @@
     main.alt = cur.alt;
     label.textContent = cur.label;
     Array.from(thumbsWrap.children).forEach((b,i)=>b.classList.toggle('active', i===index));
+    badge.classList.remove('expanded');
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
@@ -398,6 +403,21 @@
   document.getElementById('cgPrev').addEventListener('click', () => step(-1));
   document.getElementById('cgNext').addEventListener('click', () => step(1));
   render();
+
+  // Tap the badge to expand it over the "after" photo; tap it again, or
+  // anywhere else, to collapse it back down.
+  badge.addEventListener('click', function(e){
+    e.stopPropagation();
+    badge.classList.toggle('expanded');
+  });
+  // pointerdown (not click) — the photo's own zoom handler calls
+  // preventDefault() on pointerdown, which on touch devices suppresses the
+  // synthesized click a plain 'click' listener here would rely on.
+  document.addEventListener('pointerdown', function(e){
+    if(badge.classList.contains('expanded') && !badge.contains(e.target)){
+      badge.classList.remove('expanded');
+    }
+  });
 
   /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom, swipe to
      navigate; background scroll stays locked to this element only (there's
@@ -440,10 +460,12 @@
   }
   photo.addEventListener('pointerdown', function(e){
     if(e.target.closest('.case-gallery-nav, .cg-before-badge')) return;
-    e.preventDefault();
     pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
     dragMoved = false;
     if(pointers.size === 1 && scale > 1.01){
+      // Already zoomed in — this drag pans the photo, not the page, so
+      // it's safe to claim the gesture immediately.
+      e.preventDefault();
       dragging = true;
       setTransition(false);
       photo.classList.add('dragging');
@@ -451,10 +473,16 @@
       dragOrigin = {x:tx, y:ty};
     }
     if(pointers.size === 1 && scale <= 1.01){
+      // Not zoomed — this could turn into our horizontal swipe or a normal
+      // vertical page scroll. Don't call preventDefault yet: on touch,
+      // that would cancel the page's own scroll for the whole gesture
+      // before we even know which way it's going. pointermove below
+      // decides once it sees a direction.
       swiping = true;
       swipeStartX = e.clientX; swipeStartY = e.clientY;
     }
     if(pointers.size === 2){
+      e.preventDefault();
       dragging = false;
       swiping = false;
       const pts = Array.from(pointers.values());
@@ -468,6 +496,7 @@
     if(!pointers.has(e.pointerId)) return;
     pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
     if(pointers.size === 2){
+      e.preventDefault();
       const pts = Array.from(pointers.values());
       const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
       const midX = (pts[0].x + pts[1].x) / 2, midY = (pts[0].y + pts[1].y) / 2;
@@ -475,6 +504,7 @@
       zoomToward(midX, midY, newScale);
       dragMoved = true;
     } else if(dragging && pointers.size === 1){
+      e.preventDefault();
       const p = pointers.get(e.pointerId);
       if(Math.abs(p.x - dragStart.x) > 3 || Math.abs(p.y - dragStart.y) > 3) dragMoved = true;
       tx = dragOrigin.x + (p.x - dragStart.x);
@@ -483,7 +513,18 @@
       apply();
     } else if(swiping && pointers.size === 1){
       const p = pointers.get(e.pointerId);
-      if(Math.abs(p.x - swipeStartX) > 3 || Math.abs(p.y - swipeStartY) > 3) dragMoved = true;
+      const dx = p.x - swipeStartX, dy = p.y - swipeStartY;
+      if(Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+      if(Math.abs(dx) > Math.abs(dy)){
+        // Predominantly horizontal — ours. Claim it so the page doesn't
+        // also try to rubber-band/scroll sideways.
+        e.preventDefault();
+      } else if(Math.abs(dy) > 6){
+        // Predominantly vertical — a page scroll, not our swipe. Hand it
+        // back: touch-action:pan-y lets the browser keep scrolling this
+        // same touch natively from here.
+        swiping = false;
+      }
     }
   });
 

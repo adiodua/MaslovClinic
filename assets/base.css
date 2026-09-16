@@ -795,16 +795,38 @@
      view, so there's nothing to pop over. See buildSlides()/pmRender() in
      index.html for the overlay version this mirrors. */
   .case-gallery{max-width:640px;margin:0 auto;}
+  /* Same card as the patient popup gallery (photo + info in one rounded
+     card with a shadow) — recolored to follow the page's own light/dark
+     theme (var(--paper)) instead of the popup's fixed navy, since this
+     card sits directly on the page rather than on a dark overlay scrim. */
+  .cg-card{
+    background:var(--paper);border-radius:20px;overflow:hidden;
+    box-shadow:0 16px 40px rgba(var(--ink-rgb),0.14);
+  }
+  [data-theme="dark"] .cg-card{box-shadow:0 16px 40px rgba(0,0,0,.4);}
+  @media(prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .cg-card{box-shadow:0 16px 40px rgba(0,0,0,.4);}
+  }
+  .cg-card-body{padding:18px 20px 20px;}
+  .cg-card .case-gallery-nav-row{margin-top:0;}
+  .cg-card .case-gallery-below{margin-top:16px;}
   /* Photos are landscape (native 5:4), matching the carousel/hero — width
      fills the container, height derives from that, comfortably short on
      any screen (no more viewport-height juggling needed). */
   .case-gallery-photo{
-    position:relative;border-radius:var(--radius);overflow:hidden;background:var(--navy-2);
+    position:relative;overflow:hidden;background:var(--navy-2);
     aspect-ratio:5/4;
   }
+  .cg-card .case-gallery-photo{border-radius:0;}
   .case-gallery-photo #cgMain{
     width:100%;height:100%;object-fit:cover;display:block;
-    touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+    /* pan-y (not none) — this card sits inline in a scrolling page, not
+       behind a locked overlay like the popup's version. "none" here was
+       blocking the browser's own vertical scroll for any touch that
+       started on the photo, even a straight-up-down one; pan-y hands
+       vertical drags to native scrolling and leaves horizontal/pinch to
+       the JS below. */
+    touch-action:pan-y;cursor:zoom-in;transform-origin:center center;will-change:transform;
     -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
   }
   .case-gallery-photo.zoomed #cgMain{cursor:grab;}
@@ -830,11 +852,29 @@
     display:flex;align-items:center;justify-content:center;transition:background .2s ease, border-color .2s ease;
   }
   .case-gallery-nav:hover{border-color:var(--accent);color:var(--accent);}
+  .cg-card .case-gallery-nav{background:var(--bg-alt);}
+  /* Tap to expand over the "after" photo, same interaction as the popup
+     gallery's badge — tap again, or anywhere else on the card, to shrink
+     back. top/left/width/height (not bottom/right) on both states so all
+     four transition smoothly between them. */
   .cg-before-badge{
-    display:none;position:absolute;bottom:14px;right:14px;width:98px;height:98px;border-radius:14px;
+    display:none;position:absolute;top:calc(100% - 112px);left:calc(100% - 112px);
+    width:98px;height:98px;border-radius:14px;cursor:zoom-in;
     overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+    transition:
+      top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1),
+      width .45s cubic-bezier(.16,1,.3,1), height .45s cubic-bezier(.16,1,.3,1),
+      box-shadow .35s ease;
   }
   .cg-before-badge.show{display:block;}
+  .cg-before-badge.expanded{
+    top:10%;left:10%;width:80%;height:80%;cursor:zoom-out;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  .cg-before-badge:not(.expanded):hover{
+    border-color:var(--gold);
+    box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+  }
   .cg-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
   .cg-before-badge span{
     position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
@@ -846,7 +886,7 @@
   .cg-thumb.active{border-color:var(--accent);}
   .cg-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   @media(max-width:600px){
-    .cg-before-badge{width:72px;height:72px;bottom:10px;right:10px;}
+    .cg-before-badge{width:54px;height:54px;top:calc(100% - 68px);left:calc(100% - 68px);}
     .cg-before-badge span{font-size:9px;}
   }
 
