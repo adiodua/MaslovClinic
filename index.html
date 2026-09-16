@@ -868,7 +868,22 @@
       box-shadow:none;
     }
     .case-toolbar{display:none;}
+    /* .case-photo-bg is position:absolute;inset:0 relative to .case-slide
+       — harmless on desktop, where the slide IS just the photo (aspect-
+       ratio:5/4, overflow:hidden), but here .case-slide now also wraps the
+       caption below the photo, so inset:0 stretched this solid white/navy
+       layer down over the caption text too. Worse: with no z-index of its
+       own, a positioned element like this one paints ABOVE the caption's
+       plain in-flow text regardless, hiding it entirely — not just
+       covering part of it. It's a decorative fallback behind the <img>
+       (object-fit:cover already fills the photo box on its own), so
+       simplest correct fix is just not rendering it here. It was also
+       what showed through as stripes above/below inactive (scaled-down)
+       photos — same root cause, since it never scaled down together with
+       the photo it sits behind.  */
+    .case-photo-bg{display:none;}
     .cases-dots{margin-top:20px;}
+    .cases-dot{background:rgba(var(--text-rgb),0.4);width:7px;height:7px;}
     .case-photo-main{
       position:relative;aspect-ratio:5/4;width:100%;height:auto;
       border-radius:14px;overflow:hidden;
