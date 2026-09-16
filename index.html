@@ -721,12 +721,13 @@
   @media(max-width:760px){
     .case-toolbar{max-width:360px;}
   }
-  /* The generic .reveal fade-up (opacity .9s/transform .9s) reads as
-     sluggish for this block on phones, where it's the first thing visitors
-     scroll to right after the hero — 1.5x faster here specifically, not
-     site-wide. */
+  /* The generic .reveal fade-up (opacity 0→1, translateY 24px→0 over .9s)
+     is dropped entirely for this block on phones — it's the first thing
+     visitors scroll to right after the hero, and even the sped-up version
+     still read as an unwanted delay there. Desktop keeps the normal
+     .reveal behavior; this is mobile-only. */
   @media(max-width:760px){
-    .cases-full.reveal{transition:opacity .6s ease, transform .6s ease;}
+    .cases-full.reveal{opacity:1;transform:none;transition:none;}
   }
   .cases-carousel{position:relative;}
   /* overflow-x:auto with no explicit overflow-y forces overflow-y to
