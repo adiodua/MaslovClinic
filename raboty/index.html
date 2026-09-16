@@ -222,7 +222,16 @@
     .pm-before-badge:not(.expanded){
       border-color:#c9a24b;
       box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+      /* A couple of pulses right as the badge appears (it toggles
+         display:none -> block per slide, which restarts the animation
+         each time) — draws the eye to it once, then settles into the
+         plain standing ring above. */
+      animation:beforeBadgePulse 1s ease-in-out 2;
     }
+  }
+  @keyframes beforeBadgePulse{
+    0%, 100%{box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);}
+    50%{box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 6px rgba(201,162,75,.9);}
   }
 
   @media(max-width:600px){
