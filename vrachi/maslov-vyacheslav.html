@@ -380,7 +380,11 @@
       border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
     }
     .doc-hero-grid .eyebrow{color:var(--gold);}
-    .doc-hero-grid h1{color:#181611;text-shadow:none;}
+    /* font-family matches the original variant-4 mockup (Fraunces,
+       weight 600) — this page never loaded Fraunces on desktop, only
+       added it for the mobile block, so h1 fell through to the site
+       default Inter. */
+    .doc-hero-grid h1{font-family:'Fraunces',Georgia,serif;font-weight:600;color:#181611;text-shadow:none;}
     .doc-role{color:#5a5145;}
     .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.3);background:rgba(24,22,17,.05);}
     /* ".doc-hero-grid .lead" (two classes) loses to base.css's unconditional
@@ -396,8 +400,17 @@
        clear it instead. .btn.js-open-booking is restyled for the cream
        side — its default translucent teal fill is tuned for sitting over
        a photo. */
-    .doc-hero-grid .cta-row .btn.js-open-booking{background:#1d5a76;border-color:#1d5a76;}
-    .doc-hero-grid .cta-row .btn.js-open-booking:hover{background:#164861;}
+    /* Primary button is gold-filled in the mockup (var(--gold), dark
+       ink text) — I had it as a dark teal fill instead, a color that
+       never appears anywhere in the mockup. Ghost/.btn.ghost was never
+       given a desktop override at all, so it was still white-on-
+       transparent (base.css default, built for a dark photo) and
+       invisible against this card's cream side — same issue as the
+       mobile one, just never carried over to desktop. */
+    .doc-hero-grid .cta-row .btn.js-open-booking{background:var(--gold);border-color:var(--gold);color:#221a08;}
+    .doc-hero-grid .cta-row .btn.js-open-booking:hover{background:#b8934a;border-color:#b8934a;}
+    .doc-hero-grid .cta-row .btn.ghost{background:none;border-color:rgba(20,25,30,.25);color:var(--brand-navy);}
+    .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(20,25,30,.06);border-color:rgba(20,25,30,.4);color:var(--brand-navy);}
   }
 </style>
 
