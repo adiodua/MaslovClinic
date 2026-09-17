@@ -342,9 +342,24 @@
        text is giving the box itself enough room, not moving the
        buttons out of that pattern. */
     .hero{background:var(--brand-navy);min-height:900px;}
+    /* Wedge cutoff used to be a flat 42% of the viewport — fine at the
+       one width it was eyeballed at, but the text column's actual left
+       edge (wrap's centered max-width:1180px boundary + 280px photo +
+       44px gap) doesn't scale at the same rate, so at other widths the
+       cutoff landed short of that edge and the start of every line
+       (name, role, eyebrow) sat on the navy side with light/dark text
+       tuned for the cream side — unreadable there. max(380px, 50%-210px)
+       tracks the text edge instead (with a 24px margin past it) at any
+       viewport ≥761px: the 50%-210px branch matches it once .wrap hits
+       its max-width, the 380px floor covers it below that. Cream side is
+       var(--paper) (not a hardcoded hex) so it darkens with the rest of
+       the site in dark theme instead of staying a fixed off-white. */
     .hero::before{
       content:"";position:absolute;inset:0;z-index:0;
-      background:linear-gradient(100deg, var(--brand-navy) 0%, var(--brand-navy) 42%, #f7f5f0 42%, #f7f5f0 100%);
+      background:linear-gradient(100deg,
+        var(--brand-navy) 0%, var(--brand-navy) max(380px, calc(50% - 210px)),
+        var(--paper) max(380px, calc(50% - 210px)), var(--paper) 100%
+      );
     }
     /* The generic bottom-darkening wash (base.css .hero::after) is tuned
        for a full-bleed photo hero — over this navy/cream split it muddies
@@ -361,13 +376,21 @@
     .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
       border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
     }
-    .doc-hero-grid .eyebrow{color:var(--gold);}
+    /* var(--gold) (#c9a24b) is close in lightness to the cream background
+       behind it — low contrast, close to unreadable. Darker gold/bronze
+       instead (same tone already used for this on mobile). Role text
+       shares this color too now, on purpose: previously it used the same
+       muted brownish-gray as the badges and lead paragraph, so eyebrow/
+       name/role/badges/lead all blurred into one undifferentiated block
+       of text. Eyebrow+role in gold/bronze reads as "label" information,
+       gray stays for the descriptive text (badges, lead). */
+    .doc-hero-grid .eyebrow{color:#a9823f;}
     /* font-family matches the original variant-4 mockup (Fraunces,
        weight 600) — this page never loaded Fraunces on desktop, only
        added it for the mobile block, so h1 fell through to the site
        default Inter. */
     .doc-hero-grid h1{font-family:'Fraunces',Georgia,serif;font-weight:600;color:#181611;text-shadow:none;}
-    .doc-role{color:#5a5145;}
+    .doc-role{color:#a9823f;}
     .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.3);background:rgba(24,22,17,.05);}
     /* ".doc-hero-grid .lead" (two classes) loses to base.css's unconditional
        ".hero p.lead{color:#cdd8e6}" (class+element+class — one more
@@ -393,6 +416,26 @@
     .doc-hero-grid .cta-row .btn.js-open-booking:hover{background:#b8934a;border-color:#b8934a;}
     .doc-hero-grid .cta-row .btn.ghost{background:none;border-color:rgba(20,25,30,.25);color:var(--brand-navy);}
     .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(20,25,30,.06);border-color:rgba(20,25,30,.4);color:var(--brand-navy);}
+    /* Cream side is var(--paper), which already goes dark navy in dark
+       theme — but the text colors above are hardcoded for a light
+       surface and would go dark-on-dark there. Same colors the mobile
+       card would use if it had a dark variant, chosen fresh here since
+       this desktop layout's structure differs (wedge, not a card). */
+    [data-theme="dark"] .doc-hero-grid .eyebrow, [data-theme="dark"] .doc-role{color:var(--gold);}
+    [data-theme="dark"] .doc-hero-grid h1{color:var(--ink);}
+    [data-theme="dark"] .doc-hero-grid p.lead{color:var(--muted);}
+    [data-theme="dark"] .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+    [data-theme="dark"] .doc-hero-grid .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+    [data-theme="dark"] .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]) .doc-hero-grid .eyebrow,
+      :root:not([data-theme="light"]) .doc-role{color:var(--gold);}
+      :root:not([data-theme="light"]) .doc-hero-grid h1{color:var(--ink);}
+      :root:not([data-theme="light"]) .doc-hero-grid p.lead{color:var(--muted);}
+      :root:not([data-theme="light"]) .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+      :root:not([data-theme="light"]) .doc-hero-grid .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+      :root:not([data-theme="light"]) .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+    }
   }
 </style>
 
