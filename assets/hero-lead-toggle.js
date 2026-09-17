@@ -9,6 +9,12 @@
     return window.matchMedia && window.matchMedia('(max-width:860px)').matches;
   }
   document.querySelectorAll('.hero h1').forEach(function (h1) {
+    // Doctor bio pages (.doc-hero-grid) opted out of this toggle — their
+    // lead text is always visible in the redesigned mobile card, and this
+    // page also carries a second, visually-hidden copy of the same text
+    // for older layouts, which the typing animation would touch and read
+    // as text appearing "in two places" at once.
+    if (h1.closest('.doc-hero-grid')) return;
     // Usually a direct sibling; on pages where the heading is grouped
     // with extra markup (e.g. the patient case-tag list) it's one level
     // further up, so fall back to the grandparent.
