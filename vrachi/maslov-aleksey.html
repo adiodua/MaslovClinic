@@ -282,7 +282,14 @@
          below can anchor to it. Flat, undecorated text read as too
          plain against the rest of the card — italic serif + an oversized
          gold quote mark sets it apart as a pull-quote instead. */
-      position:relative !important;
+      /* base.css'''s .hero p.lead also sets left:50%;top:50% (it'''s
+         normally position:absolute, centering it) — those offsets don'''t
+         stop applying just because position switched to relative here,
+         they now shift this relatively-positioned box instead, which is
+         exactly what pushed the text ~50% of the card'''s width to the
+         right and off the edge. Zeroing them out is what position:static
+         was doing implicitly before (static ignores left/top entirely). */
+      position:relative !important;left:0 !important;top:0 !important;
       padding-left:16px !important;
       font-family:'Fraunces',serif;font-style:italic;font-weight:500;
       font-size:13.5px;line-height:1.65;color:var(--muted);text-shadow:none;text-align:left;
