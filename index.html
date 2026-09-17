@@ -488,7 +488,7 @@
     box-shadow:inset 1px 0 0 rgba(255,255,255,.18), inset -1px 0 0 rgba(255,255,255,.18);}
   .hero-grid{display:block;position:relative;}
   .hero-eyebrow-wrap{position:relative;z-index:3;}
-  .hero-grid > .reveal:not(.hero-photo){position:relative;z-index:3;max-width:560px;}
+  .hero-grid > .reveal:not(.hero-photo), .hero-grid > .hero-text{position:relative;z-index:3;max-width:560px;}
   .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--wood-deep);font-weight:600;margin-bottom:20px;text-transform:uppercase;}
   .hero .eyebrow{color:rgba(255,255,255,.8);display:block;margin-bottom:24px;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;color:#fff;}
@@ -1504,11 +1504,18 @@
 </div>
 
 <section class="hero">
-  <div class="hero-photo reveal" style="background:none;padding:0;overflow:hidden;"><picture>
+  <!-- Not .reveal: this is the very first thing rendered on the page, so
+       "reveal on scroll into view" doesn't apply — it starts in view. The
+       IntersectionObserver that adds .in only sets up in a <script> near
+       the end of body (after the entire rest of this long page has been
+       parsed), so a .reveal here sat at opacity:0 for however long that
+       took, then popped in all at once — the "blank page, then a flash"
+       some visitors saw on arrival. -->
+  <div class="hero-photo" style="background:none;padding:0;overflow:hidden;"><picture>
     <img width="1264" height="842" src="/img/o-klinike-hero.jpg" alt="Интерьер MaslovClinic — синие стены, лепнина, картина в золотой раме" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block;">
   </picture></div>
   <div class="wrap hero-grid">
-    <div class="reveal">
+    <div class="hero-text">
       <span class="eyebrow">Одесса · Аркадия</span>
       <h1>Стоматология, где точность встречается с эстетикой.</h1>
       <p class="lead">В нашей клинике мы предлагаем все виды стоматологической помощи. Наша команда специализируется на тотальных реабилитациях, эстетическом и функциональном протезировании и дентальной имплантации.</p>
@@ -2109,8 +2116,17 @@
     // and closing always land in the one correct place, not wherever the
     // animation happened to be interrupted.
     pmScrollY = window.scrollY;
+    // .case-toolbar is display:none on mobile (the toolbar pill is a
+    // desktop-only piece of the carousel) — getBoundingClientRect() on a
+    // display:none element always reports an all-zero rect, so rect.top
+    // was unconditionally read as 0 on every mobile open. That made the
+    // ">40" check always true and pmScrollY always land ~110px above the
+    // real scroll position, so closing the modal always jumped the page
+    // up by that amount. offsetParent is null for display:none elements
+    // (and only them, for anything not position:fixed) — cheap way to
+    // skip this adjustment when the toolbar isn't actually on screen.
     const toolbarEl = document.querySelector('.case-toolbar');
-    if(toolbarEl){
+    if(toolbarEl && toolbarEl.offsetParent !== null){
       const targetTop = 110;
       const rect = toolbarEl.getBoundingClientRect();
       if(Math.abs(rect.top - targetTop) > 40){
