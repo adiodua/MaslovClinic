@@ -325,12 +325,13 @@
      only base.css's generic default). Mobile keeps its own separately-
      tuned background photo above, untouched. */
   @media(min-width:761px){
-    /* Taller than the shared 736px min-height — .cta-row stays the
-       site-wide absolute-pinned-near-the-bottom pattern (unchanged,
-       not overridden here), so the fix for it overlapping the lead
-       text is giving the box itself enough room, not moving the
-       buttons out of that pattern. */
-    .hero{background:var(--brand-navy);min-height:900px;}
+    /* Same min-height as every other hero on the site (the shared
+       736px, unset here rather than repeated) — it only needed to be
+       taller while .cta-row was pinned absolute near the bottom, to
+       keep it clear of the lead text below. Buttons are in-flow now
+       (see .doc-hero-grid .cta-row below), so nothing forces the hero
+       to be any taller than its own content. */
+    .hero{background:var(--brand-navy);}
     /* Wedge cutoff used to be a flat 42% of the viewport — fine at the
        one width it was eyeballed at, but the text column's actual left
        edge (wrap's centered max-width:1180px boundary + 280px photo +
@@ -354,27 +355,37 @@
        for a full-bleed photo hero — over this navy/cream split it muddies
        the cream side instead. Doesn't suit this layout at all. */
     .hero::after{display:none;}
-    .hero .wrap{position:relative;z-index:1;min-height:900px;}
-    /* .cta-row is position:absolute — its containing block is the
-       nearest positioned ancestor, which is now .wrap (needed
-       position:relative above for the wedge z-index stacking), not
-       .hero. Without giving .wrap the same min-height as .hero, .wrap
-       stays only as tall as its own content and "bottom:52px" lands
-       near ITS bottom edge — a few hundred px above where it visually
-       needs to be, back on top of the lead text. */
+    .hero .wrap{position:relative;z-index:1;}
     .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
       border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
     }
     /* Text column shifted further right, off the photo/seam, for more
        breathing room on the cream side — percentage margin on a grid
-       item resolves against that grid area'''s own width, so this is 20%
-       of the text column'''s own width, not the whole hero. */
+       item resolves against that grid area's own width, so this is 20%
+       of the text column's own width, not the whole hero. */
     .doc-hero-grid > div:not(.doc-photo-slot){margin-left:20%;}
-    /* .cta-row breaks out of the grid (position:absolute, anchored to
-       .wrap'''s left edge) so the text column'''s margin-left above
-       doesn'''t move it — matched here separately or the buttons stay
-       under the photo while the text above them shifts right. */
-    .doc-hero-grid .cta-row{left:calc(32px + 20%);}
+    /* Buttons in-flow under the text (right where the mockup put them),
+       not pinned to the hero's bottom edge — the site-wide .cta-row
+       pattern (position:absolute) doesn't fit this layout, whose height
+       now just follows its own content. Kept the .seg divider markup
+       rather than touching the shared HTML across 5 pages, but redesigned
+       what it does: the site-wide version is two segments flanking a
+       centered button row edge-to-edge, which doesn't translate to a
+       left-aligned compact row — restyled as a single rule above the
+       buttons instead (first .seg forced onto its own full-width row via
+       flex-wrap, second one hidden), preserving the idea of "a line marks
+       where the actions start" rather than the exact mechanics. Color is
+       dark/muted, not the site default white — that default is tuned for
+       sitting on a dark photo, invisible here on the cream side. */
+    .doc-hero-grid .cta-row{
+      position:static;left:auto;right:auto;bottom:auto;top:auto;
+      margin-top:28px;flex-wrap:wrap;
+    }
+    .doc-hero-grid .cta-row .seg{
+      flex:0 0 100%;order:-1;height:1px;margin-bottom:18px;
+      background:rgba(24,22,17,.15);
+    }
+    .doc-hero-grid .cta-row .seg:last-child{display:none;}
 
     /* var(--gold) (#c9a24b) is close in lightness to the cream background
        behind it — low contrast, close to unreadable. Darker gold/bronze
