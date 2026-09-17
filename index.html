@@ -832,13 +832,16 @@
      specificity throughout, so this only needs to win on source order, not
      fight each property one at a time with extra selector weight. */
   @media(max-width:760px){
-    /* Variant 4 (next card peeking at the right edge) + variant 3's text
-       placement (plain caption below the photo, not overlaid on it).
-       Cards snap to the left instead of centering, sized short of 100% so
-       the next patient's edge is always visible as a "swipe this way"
-       hint — no arrows, no toolbar pill needed. Desktop keeps the existing
-       coverflow + toolbar pill entirely unchanged. */
-    .cases-track{padding:8px 0 40px 16px;gap:14px;}
+    /* Centered carousel: the active card sits in the middle of the
+       screen with both neighbors peeking in symmetrically at the edges
+       (a sliver only — about as wide as 2 letters of the caption below,
+       ~24px — not a "swipe this way" hint card like before). Track gets
+       equal left/right padding so the first and last cards can center
+       too; that padding has to equal peek+gap or the centered slide's
+       snap math (scrollLeft = index * (cardWidth+gap), used below in the
+       JS) drifts — see the padding-formula note by the card width itself.
+       Desktop keeps the existing coverflow + toolbar pill unchanged. */
+    .cases-track{padding:8px 36px 40px;gap:12px;}
     /* .case-slide.active carries its own box-shadow rule further up —
        matched explicitly here, for both themes, or the shadow still pops
        between the two values the instant a slide becomes active
@@ -848,9 +851,12 @@
        .case-photo-main instead, the slide's own is just switched off
        outright, on both states, so there's nothing left to pop. */
     .case-slide, .case-slide.active{
-      flex:0 0 84%;width:84%;aspect-ratio:auto;overflow:visible;
+      /* 72px = 2 * (24px peek + 12px gap) — keeps the padding above and
+         this width in lockstep so every slide, not just the edge ones,
+         ends up with the same ~24px peek on both sides once centered. */
+      flex:0 0 calc(100vw - 72px);width:calc(100vw - 72px);aspect-ratio:auto;overflow:visible;
       background:transparent;box-shadow:none;opacity:1;transform:none;transition:none;
-      padding:0;display:block;scroll-snap-align:start;
+      padding:0;display:block;scroll-snap-align:center;
     }
     [data-theme="dark"] .case-slide, [data-theme="dark"] .case-slide.active,
     :root:not([data-theme="light"]) .case-slide, :root:not([data-theme="light"]) .case-slide.active{
@@ -879,12 +885,12 @@
       box-shadow:0 8px 20px rgba(14,37,64,.18);
       /* Scale lives on the photo box only (not .case-slide, which also
          wraps the caption below it — that stays a fixed size regardless
-         of active state) and is anchored to the left edge to match
-         scroll-snap-align:start, so the card's snapped-to position doesn't
-         shift as it grows. Kept quick and simple (no opacity/shadow
+         of active state) and is anchored to center to match
+         scroll-snap-align:center, so the card grows evenly instead of
+         drifting toward one edge. Kept quick and simple (no opacity/shadow
          change riding along) so it can't reintroduce the shadow-pop
          "jerky" bug from before. */
-      transform:scale(.92);transform-origin:left center;
+      transform:scale(.92);transform-origin:center center;
       transition:transform .25s ease;
     }
     .case-slide.active .case-photo-main{transform:scale(1);}
