@@ -292,6 +292,10 @@
       content:"";position:absolute;inset:0;z-index:0;
       background:linear-gradient(100deg, var(--brand-navy) 0%, var(--brand-navy) 42%, #f7f5f0 42%, #f7f5f0 100%);
     }
+    /* The generic bottom-darkening wash (base.css .hero::after) is tuned
+       for a full-bleed photo hero — over this navy/cream split it muddies
+       the cream side instead. Doesn't suit this layout at all. */
+    .hero::after{display:none;}
     .hero .wrap{position:relative;z-index:1;}
     .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
       border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
@@ -300,7 +304,29 @@
     .doc-hero-grid h1{color:#181611;text-shadow:none;}
     .doc-role{color:#5a5145;}
     .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.3);background:rgba(24,22,17,.05);}
-    .doc-hero-grid .lead{color:#6b6255;text-shadow:none;}
+    /* ".doc-hero-grid .lead" (two classes) loses to base.css's unconditional
+       ".hero p.lead{color:#cdd8e6}" (class+element+class — one more
+       specificity point) regardless of source order, so the light
+       photo-tuned blue-gray was winning here and reading poorly against
+       the cream panel. ".doc-hero-grid p.lead" matches that specificity
+       and wins on source order instead. */
+    .doc-hero-grid p.lead{color:#6b6255;text-shadow:none;}
+    /* base.css's .cta-row is position:absolute, pinned near the bottom of
+       the whole (736px-min-height) .hero box — built for short hero copy.
+       This page's stacked eyebrow+name+role+badges+lead runs taller, so
+       the fixed-position buttons ended up overlapping the lead paragraph
+       instead of sitting below it. In-flow instead, so it always follows
+       whatever height the text column actually ends up. Also restyled for
+       the cream side — .btn.ghost and .btn.js-open-booking's default
+       colors are white-on-dark, built for sitting over a photo. */
+    .doc-hero-grid .cta-row{
+      position:static;left:auto;right:auto;bottom:auto;
+      margin-top:28px;
+    }
+    .doc-hero-grid .cta-row .btn.ghost{background:none;border-color:rgba(24,22,17,.25);color:#181611;}
+    .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(24,22,17,.06);border-color:rgba(24,22,17,.4);color:#181611;}
+    .doc-hero-grid .cta-row .btn.js-open-booking{background:#1d5a76;border-color:#1d5a76;}
+    .doc-hero-grid .cta-row .btn.js-open-booking:hover{background:#164861;}
   }
 </style>
 
