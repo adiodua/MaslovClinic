@@ -249,8 +249,14 @@
        duplicate (.mobile-lead-below) is gone — .doc-hero-grid p.lead is
        the only copy of the text now, and it's fully visible here instead
        of clipped off-screen. */
+    /* padding-top:88px — not a design choice, matches nav.wrap's own
+       height. header is position:fixed with a translucent/blurred
+       background, so it visually sits over whatever is at the very top
+       of the page underneath it; anything less here and it crops the
+       top of the photo card (was 20px, which ate about the top 10% of
+       the portrait, head included). */
     .hero{
-      height:auto;min-height:0;padding:20px 0 28px;
+      height:auto;min-height:0;padding:88px 0 28px;
       background:var(--paper) !important;
     }
     .doc-hero-grid{display:block;}
@@ -265,7 +271,7 @@
       border-radius:0 !important;aspect-ratio:auto !important;
     }
     .doc-hero-grid > div{
-      position:relative;margin:-6px 8px 0;padding:18px 16px 16px;
+      position:relative;margin:-48px 8px 0;padding:18px 16px 16px;
       background:var(--paper);border-radius:14px;
       box-shadow:0 12px 24px rgba(24,22,17,.1);
       z-index:2;
