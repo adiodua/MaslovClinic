@@ -223,6 +223,9 @@
   @media(max-width:760px){
     .doc-hero-grid{grid-template-columns:1fr;}
     .doc-hero-grid > picture{display:none !important;}
+    /* The diagonal-split wedge is desktop-only — without this it would
+       still paint on top of the mobile background photo below. */
+    .hero::before{display:none;}
     .hero{
       background:linear-gradient(180deg,
         rgba(14,37,64,.35) 0%,
@@ -252,6 +255,32 @@
     .cert-timeline li{width:auto;margin-left:26px !important;text-align:left !important;}
     .cert-timeline li::after{left:-22px !important;right:auto !important;}
     .cert-timeline .cert-card-inner{display:block;padding:14px 16px;}
+  }
+  /* Diagonal-split hero — desktop only (min-width, not a bare selector):
+     navy wedge on the left (crumbs/eyebrow live here), light on the right
+     (name/role/lead). Placed last and behind a media query on purpose —
+     .hero, .doc-role, .cred-badge etc. all have earlier unconditional
+     rules of equal specificity above (or, on this page, base.css's own
+     default .hero background); without both of those this loses the
+     cascade to them, or leaks its light-background text colors onto the
+     still-dark mobile hero below. Photo becomes a floating bordered card
+     straddling the seam instead of a backdrop. Mobile keeps its own
+     separately-tuned background photo, untouched. */
+  @media(min-width:761px){
+    .hero{background:var(--brand-navy);}
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;
+      background:linear-gradient(100deg, var(--brand-navy) 0%, var(--brand-navy) 42%, #f7f5f0 42%, #f7f5f0 100%);
+    }
+    .hero .wrap{position:relative;z-index:1;}
+    .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
+      border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
+    }
+    .doc-hero-grid .eyebrow{color:var(--gold);}
+    .doc-hero-grid h1{color:#181611;text-shadow:none;}
+    .doc-role{color:#5a5145;}
+    .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.3);background:rgba(24,22,17,.05);}
+    .doc-hero-grid .lead{color:#6b6255;text-shadow:none;}
   }
 </style>
 
