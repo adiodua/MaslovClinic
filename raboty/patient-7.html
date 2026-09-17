@@ -116,15 +116,24 @@
       content:"Свернуть";
       color:#fff;text-decoration-color:rgba(255,255,255,.7);
     }
+    /* Wider/taller card (was 320px/70% cap) so longer lead text has room;
+       min-height + flex-centered content so a short lead (e.g. the
+       vrachi/index.html one-liner) sits centered in the card instead of
+       stuck to its top edge. Light-gray glass instead of dark navy — was
+       matched to a dark photo backdrop, now reads as a distinct "note"
+       card regardless of what's behind it; text/border swapped from
+       white-on-dark to dark-on-light to match. */
     .case-hero p.lead{
       position:absolute;left:50%;top:50%;z-index:5;
-      width:88%;max-width:320px;margin:0;text-align:center;
-      font-size:14.5px;line-height:1.6;
-      color:#f8fafc;text-shadow:0 1px 3px rgba(0,0,0,.4);
-      max-height:70%;overflow:hidden;
-      padding:20px 22px;border-radius:14px;
-      background:rgba(10,20,35,.72);
-      border:1px solid rgba(255,255,255,.18);
+      width:92%;max-width:420px;margin:0;text-align:center;
+      font-size:15px;line-height:1.65;
+      color:var(--brand-navy);text-shadow:none;
+      display:flex;flex-direction:column;justify-content:center;
+      min-height:110px;max-height:80%;overflow:hidden;
+      padding:28px 26px;border-radius:16px;
+      background:rgba(240,240,238,.94);
+      border:1px solid rgba(24,22,17,.08);
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
       backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
       opacity:0;pointer-events:none;
       transform:translate(-50%,-50%) scale(.96);
