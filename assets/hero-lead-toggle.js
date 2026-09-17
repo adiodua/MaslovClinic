@@ -29,6 +29,15 @@
     function typeIn() {
       clearInterval(typeTimer);
       if (reduceMotion) { lead.textContent = fullText; return; }
+      // The card's height is auto, unanimated — with the full text typed
+      // in character by character, every time a new line wraps in the box
+      // suddenly jumps taller instead of growing smoothly, which is what
+      // read as "jerky". Locking min-height to the card's own final size
+      // (read now, while fullText is still in it, before clearing it below)
+      // keeps the box that size throughout, so only the text changes.
+      // clientHeight (not scrollHeight) so a card whose full text exceeds
+      // max-height locks at the capped height, not the overflowing one.
+      lead.style.minHeight = lead.clientHeight + 'px';
       lead.textContent = '';
       var i = 0;
       var step = Math.max(1, Math.round(fullText.length / 55));
@@ -36,6 +45,7 @@
         i += step;
         if (i >= fullText.length) {
           lead.textContent = fullText;
+          lead.style.minHeight = '';
           clearInterval(typeTimer);
         } else {
           lead.textContent = fullText.slice(0, i);
@@ -51,6 +61,7 @@
         typeIn();
       } else {
         clearInterval(typeTimer);
+        lead.style.minHeight = '';
         lead.textContent = fullText;
       }
     });
