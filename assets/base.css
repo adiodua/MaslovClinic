@@ -679,6 +679,15 @@
       content:"Свернуть";
       color:#fff;text-decoration-color:rgba(255,255,255,.7);
     }
+    /* Doctor bio pages (.doc-hero-grid) opt out of this toggle entirely —
+       hero-lead-toggle.js skips them (h1.closest('.doc-hero-grid') guard),
+       so this "Подробнее" label would otherwise sit there doing nothing
+       on click. RU vrachi/*.html pages already cancel it in their own
+       inline <style>; ua/ и en/ mirrors don't carry that same inline
+       override yet, so without this shared-file version the label was
+       still rendering (and now inert) there. Centralized here instead of
+       waiting on every mirror to catch up individually. */
+    .doc-hero-grid h1::after{content:none !important;display:none !important;}
     /* Wider/taller card (was 320px/70% cap) so longer lead text has room;
        min-height + flex-centered content so a short lead (e.g. the
        vrachi/index.html one-liner) sits centered in the card instead of
