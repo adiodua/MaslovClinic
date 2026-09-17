@@ -379,13 +379,18 @@
        sitting on a dark photo, invisible here on the cream side. */
     .doc-hero-grid .cta-row{
       position:static;left:auto;right:auto;bottom:auto;top:auto;
-      margin-top:28px;flex-wrap:wrap;
+      margin-top:28px;width:100%;flex-wrap:nowrap;
     }
+    /* Both segments back as the site-wide flex:1 fillers (not one
+       forced full-width, the other hidden) — with .cta-row now spanning
+       the text column'''s full width, they have real room either side
+       of the buttons instead of collapsing to near-nothing, and the
+       buttons land centered as a side effect of both segs growing
+       equally, same as the default mechanic elsewhere on the site. */
     .doc-hero-grid .cta-row .seg{
-      flex:0 0 100%;order:-1;height:1px;margin-bottom:18px;
+      flex:1 1 auto;height:1px;
       background:rgba(24,22,17,.15);
     }
-    .doc-hero-grid .cta-row .seg:last-child{display:none;}
 
     /* var(--gold) (#c9a24b) is close in lightness to the cream background
        behind it — low contrast, close to unreadable. Darker gold/bronze
