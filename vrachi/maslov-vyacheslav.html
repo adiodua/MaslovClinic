@@ -296,9 +296,16 @@
     /* .btn.js-open-booking is a translucent teal fill (rgba(20,90,118,.35))
        tuned to sit on a dark hero photo — over this card's white background
        that same translucency reads as pale, low-contrast text-on-teal.
-       Solid fill instead, same hue. */
+       Solid fill instead, same hue. .btn.ghost is white-on-transparent,
+       built for the same dark photo — invisible on white, so it needs the
+       same kind of adaptation. Values (border-color, text color) match the
+       approved variant-8 mockup exactly (rgba(18,40,63,.3) / var(--navy)),
+       not an invented substitute — a hand-picked ink tone read as a
+       different design from what was shown and approved. */
     .hero .cta-row .btn.js-open-booking{background:#1d5a76;border-color:#1d5a76;}
     .hero .cta-row .btn.js-open-booking:hover{background:#164861;}
+    .hero .cta-row .btn.ghost{background:none;border-color:rgba(18,40,63,.3);color:var(--brand-navy);}
+    .hero .cta-row .btn.ghost:hover{background:rgba(18,40,63,.06);border-color:rgba(18,40,63,.45);color:var(--brand-navy);}
     .doc-photo-slot{color:#5a5145;background:var(--paper);}
     .proc-grid{grid-template-columns:1fr;}
     .timeline li{grid-template-columns:80px 1fr;}
