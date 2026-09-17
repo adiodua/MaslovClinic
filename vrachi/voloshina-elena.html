@@ -265,8 +265,20 @@
          the text sits flat on the card. */
       box-shadow:none !important;
       backdrop-filter:none !important;
+      /* position:relative (not just static) so the quote-mark ::before
+         below can anchor to it. Flat, undecorated text read as too
+         plain against the rest of the card — italic serif + an oversized
+         gold quote mark sets it apart as a pull-quote instead. */
+      position:relative !important;
+      padding-left:16px !important;
+      font-family:'Fraunces',serif;font-style:italic;font-weight:500;
       font-size:13.5px;line-height:1.65;color:var(--muted);text-shadow:none;text-align:left;
       max-width:none;
+    }
+    .doc-hero-grid p.lead::before{
+      content:"\201C";position:absolute;left:-2px;top:-11px;
+      font-family:'Fraunces',serif;font-style:normal;font-weight:700;font-size:34px;
+      color:rgba(201,162,75,.5);line-height:1;
     }
     .hero .cta-row{
       position:static !important;left:auto;right:auto;bottom:auto;top:auto;
