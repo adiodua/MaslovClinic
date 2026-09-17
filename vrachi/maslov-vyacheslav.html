@@ -413,6 +413,17 @@
     .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
       border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
     }
+    /* Text column shifted further right, off the photo/seam, for more
+       breathing room on the cream side — percentage margin on a grid
+       item resolves against that grid area'''s own width, so this is 20%
+       of the text column'''s own width, not the whole hero. */
+    .doc-hero-grid > div:not(.doc-photo-slot){margin-left:20%;}
+    /* .cta-row breaks out of the grid (position:absolute, anchored to
+       .wrap'''s left edge) so the text column'''s margin-left above
+       doesn'''t move it — matched here separately or the buttons stay
+       under the photo while the text above them shifts right. */
+    .doc-hero-grid .cta-row{left:calc(32px + 20%);}
+
     /* var(--gold) (#c9a24b) is close in lightness to the cream background
        behind it — low contrast, close to unreadable. Darker gold/bronze
        instead (same tone already used for this on mobile). Role text
