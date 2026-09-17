@@ -72,7 +72,7 @@
 <meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -250,8 +250,12 @@
       z-index:2;
     }
     .doc-hero-grid .eyebrow{color:#a9823f;text-shadow:none;}
+    /* font-family here matches the approved mockup's serif display name
+       (Fraunces) — the page never actually loaded that font before, so
+       h1 was silently falling through to the site's default Inter. */
     .doc-hero-grid h1{
       margin:4px 0 2px !important;font-size:21px !important;
+      font-family:'Fraunces',serif;font-weight:700;
       color:#181611;text-shadow:none;
     }
     .doc-hero-grid h1::after{content:none !important;display:none !important;}
@@ -264,6 +268,13 @@
       clip:auto !important;white-space:normal !important;
       opacity:1 !important;pointer-events:auto !important;transform:none !important;
       max-height:none !important;background:none !important;border:none !important;
+      /* base.css's .hero p.lead also carries its own box-shadow (a
+         20px/50px dark drop-shadow, sized for a card floating over a
+         photo) — background/border above were overridden already but
+         this wasn't, so the lead paragraph still rendered inside a
+         visible shadowed "box" that doesn't exist in the mockup, where
+         the text sits flat on the card. */
+      box-shadow:none !important;
       backdrop-filter:none !important;
       font-size:13.5px;line-height:1.65;color:var(--muted);text-shadow:none;text-align:left;
       max-width:none;
@@ -271,6 +282,16 @@
     .hero .cta-row{
       position:static !important;left:auto;right:auto;bottom:auto;top:auto;
       margin:16px 0 0 !important;
+      flex-wrap:nowrap !important;
+    }
+    /* Mockup shows both buttons side by side, sharing the row evenly —
+       at the site's normal .btn size (46px tall, 26px side padding,
+       14px text) "Записаться на визит" and "Что делает врач" don't fit
+       side by side in this card's ~316px width and wrap to stacked full-
+       width buttons instead. Sized down specifically for this row so
+       they hold the one-row layout the mockup showed. */
+    .doc-hero-grid .cta-row .btn{
+      flex:1 1 0;min-width:0;height:42px;padding:0 10px;font-size:12.5px;
     }
     .hero .cta-row .btn.js-open-booking{background:#1d5a76;border-color:#1d5a76;}
     .hero .cta-row .btn.js-open-booking:hover{background:#164861;}
