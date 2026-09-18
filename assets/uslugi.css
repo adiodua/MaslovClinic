@@ -429,8 +429,13 @@
   .lang-dropdown{position:relative;display:block;flex-shrink:0;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;}
   .lang-current{
     display:flex;align-items:center;justify-content:center;
-    background:transparent;
-    border:1.5px solid #588cb4;border-radius:17px;
+    /* Was fully transparent with just a thin border — on light backgrounds
+       (the header's own near-white glass, rgba(var(--bg-rgb),0.85)) that
+       read as almost invisible, just faint text with barely-there stroke.
+       Tinted background wash + a darker border give it real visual weight
+       as a badge, on both light and dark headers. */
+    background:rgba(88,140,180,.14);
+    border:1.5px solid #3f7ba3;border-radius:17px;
     height:34px;padding:0 12px;
     font-size:12px;font-weight:600;color:var(--text);cursor:pointer;
     position:relative;z-index:2;
