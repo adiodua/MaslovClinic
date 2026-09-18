@@ -391,21 +391,41 @@
         <div class="photo-slot" style="padding:0;border-color:var(--gold);"><img loading="lazy" decoding="async" src="/img/certificates/nobel-excellence-clinic-2026.jpg" alt="Nobel Excellence Clinic 2026 — InSPE status from Nobel Biocare" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
         <h3>Nobel Excellence Clinic 2026</h3>
       </div>
-      <div class="cert-card soon">
-        <div class="photo-slot">Ministry of Health<br>medical practice license</div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/moz-license.jpg" alt="Extract from the Ukraine Ministry of Health license registry for medical practice" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
         <h3>Ukraine Ministry of Health License</h3>
       </div>
-      <div class="cert-card soon">
-        <div class="photo-slot">Tecno-Gaz<br>sterilization<br>certificate</div>
-        <h3>Equipment Certificate</h3>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/tecno-gaz.jpg" alt="Compliance certificate for Tecno-Gaz sedation and sterilization equipment" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>Tecno-Gaz Equipment</h3>
       </div>
-      <div class="cert-card soon">
-        <div class="photo-slot">Nobel Biocare<br>implant<br>certificate</div>
-        <h3>Materials Certificate</h3>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/xray-cbct.jpg" alt="Compliance certificate for X-ray and CBCT systems" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>3D CBCT Diagnostics</h3>
       </div>
-      <div class="cert-card soon">
-        <div class="photo-slot">3D CBCT<br>diagnostics certificate</div>
-        <h3>Equipment Certificate</h3>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/implants-nobel.jpg" alt="Compliance certificate for Nobel Biocare implants" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>Nobel Biocare Implants</h3>
+      </div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/implants-straumann.jpg" alt="Compliance certificate for Straumann implants and instruments" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>Straumann Implants</h3>
+      </div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/implants-jdental.jpg" alt="Compliance certificate for JDental implants" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>JDental Implants</h3>
+      </div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/materials-dmg.jpg" alt="Compliance certificate for DMG dental materials" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>DMG Materials</h3>
+      </div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/instruments-mani.jpg" alt="Compliance certificate for MANI dental instruments" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>MANI Instruments</h3>
+      </div>
+      <div class="cert-card">
+        <div class="photo-slot" style="padding:0;"><img loading="lazy" decoding="async" src="/img/certificates/trademark.jpg" alt="MaslovClinic trademark registration certificate" style="width:100%;height:100%;object-fit:cover;border-radius:4px;"></div>
+        <h3>MaslovClinic Trademark</h3>
       </div>
     </div>
     <div class="cert-dots" id="certDots"></div>
@@ -900,6 +920,64 @@
 </script>
 
 
+<div class="lightbox" id="certLightbox" aria-hidden="true">
+  <button class="lightbox-close" id="certLightboxClose" aria-label="Close">&#10005;</button>
+  <button class="lightbox-nav prev" id="certLightboxPrev" aria-label="Previous document">&#8249;</button>
+  <div class="lightbox-stage">
+    <img id="certLightboxImg" src="" alt="">
+    <div class="lightbox-counter" id="certLightboxCounter"></div>
+  </div>
+  <button class="lightbox-nav next" id="certLightboxNext" aria-label="Next document">&#8250;</button>
+</div>
+<script>
+  // Certificate/document cards open full-size in a lightbox on click —
+  // they were plain, non-interactive photo cards before.
+  (function(){
+    const cards = Array.from(document.querySelectorAll('#certTrack .cert-card:not(.soon)'));
+    if(!cards.length) return;
+    cards.forEach(function(card){ card.style.cursor = 'pointer'; });
+    const thumbs = cards.map(function(card){ return card.querySelector('.photo-slot img'); });
+    const lightbox = document.getElementById('certLightbox');
+    const lbImg = document.getElementById('certLightboxImg');
+    const lbCounter = document.getElementById('certLightboxCounter');
+    const closeBtn = document.getElementById('certLightboxClose');
+    const prevBtn = document.getElementById('certLightboxPrev');
+    const nextBtn = document.getElementById('certLightboxNext');
+    let current = 0;
+
+    cards.forEach(function(card, i){
+      card.addEventListener('click', function(){ openLightbox(i); });
+    });
+
+    function openLightbox(index){
+      current = index; render();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function render(){
+      const img = thumbs[current];
+      lbImg.src = img.src; lbImg.alt = img.alt || '';
+      lbCounter.textContent = (current+1) + ' / ' + thumbs.length;
+    }
+    function next(){ current = (current+1) % thumbs.length; render(); }
+    function prev(){ current = (current-1+thumbs.length) % thumbs.length; render(); }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(e){
+      if(!lightbox.classList.contains('open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+  })();
+</script>
 
 <div class="booking-modal" id="bookingModal" aria-hidden="true">
   <div class="booking-backdrop" id="bookingBackdrop"></div>
