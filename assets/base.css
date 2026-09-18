@@ -25,6 +25,21 @@
     /* accent/divider: readable on LIGHT backgrounds (cards, sections) */
     --accent: #145a76;
     --divider: rgba(14,37,64,.14);
+    /* Mobile hero lead-toggle label text (.hero h1::after below) — this
+       file is shared across ru/ua/en, so the label can't just be a
+       hardcoded Russian string. Defaults to Russian; html:lang(uk)/(en)
+       below override per mirror, keyed off each page's own <html lang>
+       attribute rather than needing a per-page inline override. */
+    --lead-more: "Подробнее";
+    --lead-less: "Свернуть";
+  }
+  html:lang(uk){
+    --lead-more: "Детальніше";
+    --lead-less: "Згорнути";
+  }
+  html:lang(en){
+    --lead-more: "Read more";
+    --lead-less: "Show less";
   }
   [data-theme="dark"]{
     --bg: #0E161F;
@@ -668,7 +683,7 @@
       cursor:pointer;
     }
     .hero h1::after{
-      content:"Подробнее";display:block;margin:10px 0 0;
+      content:var(--lead-more);display:block;margin:10px 0 0;
       font-size:12px;font-weight:600;letter-spacing:.02em;
       color:rgba(255,255,255,.8);
       text-decoration:underline;text-underline-offset:3px;
@@ -676,7 +691,7 @@
       transition:color .2s ease;
     }
     .hero h1.lead-open::after{
-      content:"Свернуть";
+      content:var(--lead-less);
       color:#fff;text-decoration-color:rgba(255,255,255,.7);
     }
     /* Doctor bio pages (.doc-hero-grid) opt out of this toggle entirely —

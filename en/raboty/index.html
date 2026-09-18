@@ -126,101 +126,108 @@
     position:fixed;inset:0;background:rgba(10,20,30,.94);z-index:300;
     display:none;align-items:center;justify-content:center;padding:24px;
   }
-  .patient-modal{position:relative;max-width:640px;width:100%;height:80vh;max-height:700px;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);overflow:hidden;}
+  /* Same card as the on-page gallery and homepage modal: only the photo +
+     a text label live on the photo itself (top-left, on a light scrim) —
+     zoom hint, zoom button, nav arrows, counter and progress bar are gone
+     (zoom/swipe still work via click, pinch and drag). Name/tag/
+     description, the "read more" link and thumbnails sit below the photo,
+     not overlaid — one layout at every width. */
+  .patient-modal{
+    position:relative;width:100%;max-width:600px;margin:auto;
+    background:#0a1729;border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .patient-modal-photo{position:relative;flex:none;aspect-ratio:5/4;background:var(--navy-2);overflow:hidden;}
   .patient-modal-photo img{
     width:100%;height:100%;object-fit:cover;display:block;
     touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+    -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
   }
   .patient-modal-photo.zoomed img{cursor:grab;}
   .patient-modal-photo.zoomed img:active{cursor:grabbing;}
   .patient-modal-photo.dragging img{transition:none !important;}
-  .patient-modal-photo img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
-  .pm-zoom-hint{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:3;
-    background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;padding:5px 12px;border-radius:20px;
-    pointer-events:none;opacity:0;transition:opacity .3s ease;white-space:nowrap;
-  }
-  .patient-modal-photo:not(.zoomed):hover .pm-zoom-hint{opacity:1;}
-  @media(hover:none){.pm-zoom-hint{display:none;}}
   .patient-modal-photo::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
+    content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.45), transparent);
   }
-  .patient-modal-photo::after{
-    content:"";position:absolute;bottom:0;left:0;right:0;height:52%;z-index:1;pointer-events:none;
-    background:linear-gradient(0deg, rgba(0,0,0,.82), transparent);
+  .pm-label{
+    position:absolute;top:14px;left:14px;z-index:3;color:#fff;font-size:13px;font-weight:600;
+    text-shadow:0 1px 3px rgba(0,0,0,.5);
   }
   .patient-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav.prev{left:12px;}
-  .patient-modal-nav.next{right:12px;}
-  .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
-  .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
+  .patient-modal-info{padding:18px 20px 20px;}
   .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
-  .pm-case-link{display:inline-block;margin:0 0 16px;color:var(--accent);font-size:13.5px;font-weight:600;text-decoration:none;}
+  .pm-case-link{display:inline-block;margin:0 0 14px;color:#c9a24b;font-size:13.5px;font-weight:600;text-decoration:none;}
   .pm-case-link:hover{text-decoration:underline;}
-  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
-  .pm-progress{position:absolute;top:0;left:0;right:0;display:none;gap:4px;padding:10px 12px;z-index:4;}
-  .pm-progress span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
-  .pm-progress span::after{content:"";display:block;height:100%;width:0;background:#fff;}
-  .pm-progress span.active::after{width:100%;}
-
-  /* The "before" badge works the same way at every width — the "before"
-     photo is never shown on its own, only as a corner overlay on its
-     paired "after" photo once you've opened the modal (see buildSlides in
-     the script below, which merges before/after into one slide regardless
-     of viewport). Zoom button and dots stay mobile-only — desktop keeps the
-     original full-bleed photo, hover zoom hint and thumbnail strip for
-     navigation. */
-  .pm-zoom-btn{display:none;}
-  .pm-dots{display:none;}
+  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:wrap;}
+  .pm-thumb{width:42px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.5);padding:0;cursor:pointer;flex-shrink:0;background:none;}
+  .pm-thumb.active{border-color:#c9a24b;}
+  .pm-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  /* Tap to expand: grows from a corner badge to an 80%-of-photo overlay
+     with a smooth animation, tap again (or tap anywhere else) to shrink
+     back. Expressed via top/left/width/height (not bottom/right) on both
+     states so all four transition smoothly between the two. */
   .pm-before-badge{
-    display:none;position:absolute;bottom:14px;right:14px;width:150px;height:150px;border-radius:16px;
+    display:none;position:absolute;top:calc(100% - 107px);left:calc(100% - 107px);
+    width:93px;height:93px;border-radius:14px;cursor:zoom-in;
     overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+    transition:
+      top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1),
+      width .45s cubic-bezier(.16,1,.3,1), height .45s cubic-bezier(.16,1,.3,1),
+      box-shadow .35s ease;
   }
   .pm-before-badge.show{display:block;}
+  .pm-before-badge.expanded{
+    top:10%;left:10%;width:80%;height:80%;cursor:zoom-out;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  /* Hint that the badge is clickable — gold ring on hover, same as the rest
+     of the site's accent color, not just the generic pointer cursor. */
+  .pm-before-badge:not(.expanded):hover{
+    border-color:var(--gold);
+    box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+  }
   .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
   .pm-before-badge span{
     position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
-    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+    font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+  }
+  /* Same call as the on-page gallery's .cg-before-badge: at mobile sizes
+     the "До" strip's own background bar eats a real chunk of the (already
+     small, then 80%-of-photo when tapped open) badge. The badge itself —
+     corner thumbnail, growing over the "after" photo on tap — already
+     reads as "before" without a label; img alt="До" still carries it for
+     screen readers. */
+  @media(max-width:600px){
+    .pm-before-badge span{display:none;}
+    /* Matches the ~25% cut already applied to the on-page gallery's badge
+       — this one never got the same pass. */
+    .pm-before-badge{width:70px;height:70px;top:calc(100% - 84px);left:calc(100% - 84px);}
+    /* :hover doesn't really exist on touch — without the label, a mobile
+       visitor has no cue at all that this corner photo is tappable.
+       Standing gold ring instead of only-on-hover, so it reads as
+       interactive without needing a tap first. */
+    /* Small zoom-icon chip pinned to the corner instead of a ring around
+       the whole badge — reads as "tap to zoom" on its own, without
+       covering the thumbnail underneath. Pulses (scale) a couple of times
+       right as the badge appears (display:none -> block per slide
+       restarts the animation each time), then sits still. */
+    .pm-before-badge:not(.expanded)::after{
+      content:"";position:absolute;bottom:-2px;right:-2px;z-index:5;
+      width:26px;height:26px;border-radius:50%;background:#c9a24b;
+      box-shadow:0 2px 6px rgba(0,0,0,.4);
+      /* Handle drawn longer/thicker than a typical search-icon proportion
+         — at this chip's actual on-screen size the standard glyph's handle
+         was too short and thin to read as anything but noise next to the
+         lens circle. */
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='9' r='6.5'/%3E%3Cpath d='M21 21l-7.5-7.5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:center;background-size:75%;
+    }
   }
 
   @media(max-width:600px){
-  .patient-modal-overlay{padding:20px 16px;}
-  .patient-modal{
-    height:auto;max-height:none;width:100%;max-width:420px;margin:0 auto;
-    background:#0a1729;border-radius:20px;
-  }
-  /* Contained card instead of a near-full-screen "story" — photo keeps a
-     fixed ratio instead of stretching to fill the modal height, so it
-     isn't zoomed/cropped as aggressively as before. */
-  .patient-modal-photo{flex:none;aspect-ratio:4/5;}
-  .patient-modal-photo::before,.patient-modal-photo::after{display:none;}
-  /* Info moves from a gradient overlay on the photo to a plain block below
-     it (the card's own dark background already gives the white text
-     enough contrast — no gradient needed). */
-  .patient-modal-info{position:static;background:none;padding:18px 20px 4px;}
-  .patient-modal-info .eyebrow{color:#c9a24b;}
-  .patient-modal-counter{background:rgba(0,0,0,.5);padding:5px 10px;border-radius:20px;font-size:11px;}
-  .patient-modal-thumbs{display:none;}
-
-  .pm-zoom-btn{
-    display:flex;align-items:center;justify-content:center;
-    position:absolute;bottom:12px;left:12px;width:38px;height:38px;border-radius:50%;
-    background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
-    color:#0e2540;z-index:4;
-  }
-  /* Smaller than the base (desktop) size to fit the narrower contained
-     card — was 83x83, then +25% to 104x104; kept as-is here. */
-  .pm-before-badge{width:104px;height:104px;bottom:12px;right:12px;}
-  .pm-before-badge span{font-size:9px;}
-  .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
-  .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
-  .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
-
   /* Unify catalog cards with the homepage's case-slide carousel — same
      radius, same shadow-based elevation, "before" badge in the same corner
      with the same size/border treatment. */
@@ -420,14 +427,14 @@
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/irina-before.jpg" alt="Irina — before" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Irina</h3><p>Ceramic Veneers &amp; Crowns</p></div>
       </button>
-      <button class="case-card" onclick="openPatientModal('oksana')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-portrait.jpg" alt="Oksana — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-info"><h3>Oksana</h3><p>Implant Treatment</p></div>
-      </button>
       <button class="case-card" onclick="openPatientModal('olga-v')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-portrait.jpg" alt="Olga — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-v-before.jpg" alt="Olga — before" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Olga</h3><p>Ceramic Veneers</p></div>
+      </button>
+      <button class="case-card" onclick="openPatientModal('oksana')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-portrait.jpg" alt="Oksana — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Oksana</h3><p>Implant Treatment</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('natalya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Natalya — implant treatment result" style="width:100%;height:100%;object-fit:cover;"></div>
@@ -449,26 +456,16 @@
 <div class="patient-modal-overlay" id="patientModalOverlay" onclick="if(event.target===this) closePatientModal()">
   <div class="patient-modal">
     <div class="patient-modal-photo">
-      <div class="pm-progress" id="pmProgress"></div>
       <img id="pmMain" src="" alt="" draggable="false">
-      <span class="pm-zoom-hint" id="pmZoomHint">Tap to zoom</span>
-      <!-- Mobile-only: visible zoom affordance. Pinch/double-tap zoom already
-           works (see the "Photo zoom" script below) but the text hint above
-           is hidden on touch devices — this button is the discoverable entry
-           point on phones, not a replacement for the gesture. -->
-      <button class="pm-zoom-btn" id="pmZoomBtn" onclick="pmToggleZoom()" aria-label="Zoom photo">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
-      </button>
-      <!-- Mobile-only: "before" photo shown as a corner badge on the current
-           "after" photo instead of its own slide in the swipe sequence. -->
+      <div class="pm-label" id="pmLabel"></div>
+      <!-- "Before" photo shown as a corner badge on the current
+           "after"/portrait photo instead of its own slide in the swipe
+           sequence. -->
       <div class="pm-before-badge" id="pmBeforeBadge">
         <img id="pmBeforeImg" src="" alt="Before">
         <span>Before</span>
       </div>
       <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Close">×</button>
-      <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Previous photo">‹</button>
-      <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Next photo">›</button>
-      <div class="patient-modal-counter" id="pmCounter"></div>
     </div>
     <div class="patient-modal-info">
       <span class="eyebrow" id="pmTag"></span>
@@ -476,8 +473,6 @@
       <p id="pmDesc"></p>
       <a href="#" id="pmCaseLink" class="pm-case-link">View full case →</a>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
-      <!-- Mobile-only: replaces the thumbnail strip with simple dots. -->
-      <div class="pm-dots" id="pmDots"></div>
     </div>
   </div>
 </div>
@@ -548,23 +543,27 @@
       labels: ['Portrait','Before','After']
     }
   };
-  let pmSlug = null, pmIndex = 0;
+  let pmSlug = null, pmIndex = 0, pmScrollY = 0;
 
-  function isMobileModal(){ return window.matchMedia('(max-width:600px)').matches; }
-
-  // Mobile-only slide list: portraits stay standalone (no badge), "before"
-  // photos are pulled out of the swipeable sequence entirely and attached as
-  // a corner badge to "after" photos instead — cycling through the available
-  // "before" photos if there's more than one, so each gets used.
-  function buildMobileSlides(p){
-    const portraits = [], befores = [], afters = [];
+  // Slide list: "before" photos — both the close-up ones and a portrait shot
+  // before treatment (if any) — never get their own slide. They're pulled
+  // out and attached as a corner badge to their paired "portrait"/"after"
+  // photo instead, so "before" never appears standalone, at any viewport.
+  function buildSlides(p){
+    const portraits = [], portraitBefores = [], befores = [], afters = [];
     p.photos.forEach((src, i) => {
       const label = p.labels[i];
-      if(/portrait/i.test(label)) portraits.push({src, label});
-      else if(/^before$/i.test(label)) befores.push({src, label});
-      else afters.push({src, label});
+      const entry = {src, label};
+      if(/portrait.*before/i.test(label)) portraitBefores.push(entry);
+      else if(/portrait/i.test(label)) portraits.push(entry);
+      else if(/^before$/i.test(label)) befores.push(entry);
+      else afters.push(entry);
     });
-    const slides = portraits.map(ph => ({src: ph.src, label: ph.label, beforeSrc: null}));
+    const slides = [];
+    portraits.forEach((ph, i) => {
+      const beforeSrc = i === 0 && portraitBefores.length ? portraitBefores[0].src : null;
+      slides.push({src: ph.src, label: ph.label, beforeSrc});
+    });
     afters.forEach((ph, i) => {
       const beforeSrc = befores.length ? befores[i % befores.length].src : null;
       slides.push({src: ph.src, label: ph.label, beforeSrc});
@@ -574,11 +573,8 @@
 
   function pmSlides(){
     const p = PATIENTS[pmSlug];
-    if(isMobileModal()){
-      if(!p._mobileSlides) p._mobileSlides = buildMobileSlides(p);
-      return p._mobileSlides;
-    }
-    return p.photos.map((src, i) => ({src, label: p.labels[i], beforeSrc: null}));
+    if(!p._slides) p._slides = buildSlides(p);
+    return p._slides;
   }
 
   function openPatientModal(slug){
@@ -587,35 +583,53 @@
     document.getElementById('pmName').textContent = PATIENTS[slug].name;
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
     document.getElementById('pmCaseLink').href = PATIENTS[slug].url;
+    const slides = pmSlides();
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
-    PATIENTS[slug].photos.forEach((src, i) => {
+    slides.forEach((s, i) => {
       const b = document.createElement('button');
       b.className = 'pm-thumb';
-      b.setAttribute('aria-label', PATIENTS[slug].labels[i]);
+      b.setAttribute('aria-label', s.label);
       const img = document.createElement('img');
-      img.src = src;
-      img.alt = PATIENTS[slug].labels[i];
+      img.src = s.src;
+      img.alt = s.label;
       b.appendChild(img);
       b.onclick = () => { pmIndex = i; pmRender(); };
       thumbs.appendChild(b);
     });
-    const progress = document.getElementById('pmProgress');
-    progress.innerHTML = '';
-    PATIENTS[slug].photos.forEach(() => {
-      const s = document.createElement('span');
-      progress.appendChild(s);
-    });
     pmRender();
     document.getElementById('patientModalOverlay').classList.add('open');
-    // Lock the page behind the modal — same pattern as the mobile hamburger
-    // menu: nothing underneath should scroll, swipe, or be clickable while
-    // this is open.
-    document.body.style.overflow = 'hidden';
+    // Lock the page behind the modal. Plain overflow:hidden on body isn't
+    // enough on iOS Safari — a scrollable container behind a fixed overlay
+    // can still catch the swipe and move on its own, so the body is pinned
+    // in place with position:fixed instead.
+    pmScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -pmScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
   }
   function closePatientModal(){
     document.getElementById('patientModalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    // Force a synchronous layout pass before scrolling — right after
+    // position:fixed is cleared the page's scrollable height hasn't been
+    // recalculated yet, so scrollTo below would get clamped to the still-
+    // collapsed (zero-ish) height and silently land at the top.
+    void document.body.offsetHeight;
+    // scroll-behavior:smooth is set globally on <html> — passing
+    // behavior:'auto' to scrollTo() is supposed to override that per-call,
+    // but that alone still left a visible animated jump on close. Turning
+    // the CSS property off outright, for the one instant this scroll takes,
+    // is the version that actually sticks.
+    const htmlEl = document.documentElement;
+    const prevScrollBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = 'auto';
+    window.scrollTo(0, pmScrollY);
+    htmlEl.style.scrollBehavior = prevScrollBehavior;
   }
   function pmStep(dir){
     const len = pmSlides().length;
@@ -629,35 +643,38 @@
     const cur = slides[pmIndex];
     document.getElementById('pmMain').src = cur.src;
     document.getElementById('pmMain').alt = p.name + ' — ' + cur.label;
-    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + slides.length;
+    document.getElementById('pmLabel').textContent = cur.label;
     Array.from(document.getElementById('pmThumbs').children).forEach((b,i)=>b.classList.toggle('active', i===pmIndex));
-    Array.from(document.getElementById('pmProgress').children).forEach((s,i)=>{
-      s.classList.toggle('done', i < pmIndex);
-      s.classList.toggle('active', i === pmIndex);
-    });
-    // Mobile "before" badge — shown only when the current slide has one.
+    // "Before" badge — shown only when the current slide actually has a
+    // paired "before" photo. Always starts collapsed on a new slide.
     const badge = document.getElementById('pmBeforeBadge');
     const badgeImg = document.getElementById('pmBeforeImg');
+    badge.classList.remove('expanded');
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
     } else {
       badge.classList.remove('show');
     }
-    // Mobile dots — replaces the thumbnail strip, rebuilt per slide list.
-    const dotsWrap = document.getElementById('pmDots');
-    dotsWrap.innerHTML = '';
-    slides.forEach((s, i) => {
-      const d = document.createElement('button');
-      d.className = 'pm-dot' + (i === pmIndex ? ' active' : '');
-      d.setAttribute('aria-label', s.label);
-      d.onclick = () => { pmIndex = i; pmRender(); };
-      dotsWrap.appendChild(d);
-    });
   }
-  window.addEventListener('resize', () => {
-    if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
-  });
+  // Tap the badge to expand it over the "after" photo; tap it again, or
+  // anywhere else, to collapse it back down.
+  (function(){
+    const badge = document.getElementById('pmBeforeBadge');
+    badge.addEventListener('click', function(e){
+      e.stopPropagation();
+      badge.classList.toggle('expanded');
+    });
+    // pointerdown (not click) so this fires reliably even when the tap lands
+    // on the main photo — its own zoom handler calls preventDefault() on
+    // pointerdown, which on touch devices suppresses the synthesized click
+    // that a plain 'click' listener here would have relied on.
+    document.addEventListener('pointerdown', function(e){
+      if(badge.classList.contains('expanded') && !badge.contains(e.target)){
+        badge.classList.remove('expanded');
+      }
+    });
+  })();
   document.addEventListener('keydown', (e) => {
     if(!document.getElementById('patientModalOverlay').classList.contains('open')) return;
     if(e.key === 'Escape') closePatientModal();
@@ -670,7 +687,6 @@
     const stage = document.querySelector('.patient-modal-photo');
     const img = document.getElementById('pmMain');
     if(!stage || !img) return;
-    const hint = document.getElementById('pmZoomHint');
     const MAX_SCALE = 4, TAP_ZOOM = 2.2;
     let scale = 1, tx = 0, ty = 0;
     const pointers = new Map();
@@ -718,16 +734,8 @@
       apply();
     }
 
-    // Mobile zoom button — same in/out behavior as tap-to-zoom, just reachable
-    // without knowing the gesture exists.
-    window.pmToggleZoom = function(){
-      const rect = stage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-      if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
-    };
-
     stage.addEventListener('pointerdown', function(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       e.preventDefault();
       pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
       dragMoved = false;
@@ -776,7 +784,7 @@
     });
 
     function endPointer(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
       pointers.delete(e.pointerId);
       stage.classList.remove('dragging');
@@ -815,10 +823,6 @@
     }
     stage.addEventListener('pointerup', endPointer);
     stage.addEventListener('pointercancel', endPointer);
-
-    if(hint){
-      stage.addEventListener('pointerdown', function(){ hint.style.opacity = '0'; }, {once:false});
-    }
 
     const _origPmRender = window.pmRender;
     if(typeof _origPmRender === 'function'){

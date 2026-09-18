@@ -72,7 +72,7 @@
 <meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -208,31 +208,96 @@
   .course-item h4{margin:0 0 4px;font-size:15.5px;}
   .course-item p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
 
-  .mobile-lead-below{display:none;}
   @media(max-width:760px){
-    .doc-hero-grid{grid-template-columns:1fr;}
-    .doc-hero-grid > picture{display:none !important;}
+    /* Overlapping photo card (chosen redesign) — see maslov-vyacheslav.html
+       for the full rationale comment. */
+    /* padding-top:88px — not a design choice, matches nav.wrap's own
+       height. header is position:fixed with a translucent/blurred
+       background, so it visually sits over whatever is at the very top
+       of the page underneath it; anything less here and it crops the
+       top of the photo card (was 20px, which ate about the top 10% of
+       the portrait, head included). */
     .hero{
-      background:linear-gradient(180deg,
-        rgba(14,37,64,.35) 0%,
-        rgba(14,37,64,.55) 55%,
-        rgba(14,37,64,.85) 100%
-      ), url('/img/vrachi/voloshina-elena-portrait.jpg') left 5%/160% auto no-repeat, var(--navy-2);
+      height:auto;min-height:0;padding:88px 0 28px;
+      background:var(--paper) !important;
     }
-    .doc-hero-grid .eyebrow,
-    .doc-hero-grid .lead{
-      position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
-      clip:rect(0,0,0,0);white-space:nowrap;border:0;
+    .doc-hero-grid{display:block;}
+    .doc-hero-grid > picture,
+    .doc-hero-grid > .doc-photo-slot{
+      display:flex !important;align-items:center;justify-content:center;width:100%;max-width:none;aspect-ratio:4/5;
+      border-radius:16px;overflow:hidden;margin:0;
+      box-shadow:0 10px 22px rgba(24,22,17,.18);
     }
-    .doc-hero-grid h1{margin-top:0 !important;font-size:22px !important;}
-    .mobile-lead-below{
-      display:block;margin:16px 20px 4px;padding:16px 18px;
-      background:var(--paper);border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;
-      font-family:'Fraunces',serif;font-style:italic;
-      color:var(--muted);font-size:15.5px;line-height:1.7;
+    .doc-hero-grid > picture img{
+      width:100%;height:100%;object-fit:cover;
+      border-radius:0 !important;aspect-ratio:auto !important;
     }
-    .mobile-lead-below + section{padding-top:32px;}
-    .doc-photo-slot{max-width:220px;margin:0 auto;}
+    .doc-hero-grid > div{
+      position:relative;margin:-48px 8px 0;padding:18px 16px 16px;
+      background:var(--paper);border-radius:14px;
+      box-shadow:0 12px 24px rgba(24,22,17,.1);
+      z-index:2;
+    }
+    .doc-hero-grid .eyebrow{color:#a9823f;text-shadow:none;}
+    /* font-family here matches the approved mockup's serif display name
+       (Fraunces) — the page never actually loaded that font before, so
+       h1 was silently falling through to the site's default Inter. */
+    .doc-hero-grid h1{
+      margin:4px 0 2px !important;font-size:21px !important;
+      font-family:'Fraunces',serif;font-weight:700;
+      color:#181611;text-shadow:none;
+    }
+    .doc-hero-grid h1::after{content:none !important;display:none !important;}
+    .doc-role{margin-top:2px;color:#5a5145;text-shadow:none;}
+    .cred-badges{margin-top:8px;}
+    .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.2);background:rgba(24,22,17,.05);}
+    .doc-hero-grid p.lead{
+      position:static !important;width:auto !important;height:auto !important;
+      padding:0 !important;margin:12px 0 0 !important;overflow:visible !important;
+      clip:auto !important;white-space:normal !important;
+      opacity:1 !important;pointer-events:auto !important;transform:none !important;
+      max-height:none !important;background:none !important;border:none !important;
+      box-shadow:none !important;
+      backdrop-filter:none !important;
+      position:relative !important;left:0 !important;top:0 !important;
+      padding-left:16px !important;
+      font-family:'Fraunces',serif;font-style:italic;font-weight:500;
+      font-size:13.5px;line-height:1.65;color:var(--muted);text-shadow:none;text-align:left;
+      max-width:none;
+    }
+    .doc-hero-grid p.lead::before{
+      content:"\201C";position:absolute;left:-2px;top:-11px;
+      font-family:'Fraunces',serif;font-style:normal;font-weight:700;font-size:34px;
+      color:rgba(201,162,75,.5);line-height:1;
+    }
+    .hero .cta-row{
+      position:static !important;left:auto;right:auto;bottom:auto;top:auto;
+      margin:16px 0 0 !important;
+      flex-wrap:nowrap !important;
+    }
+    .doc-hero-grid .cta-row .btn{
+      flex:1 1 0;min-width:0;height:42px;padding:0 10px;font-size:12.5px;
+    }
+    .hero .cta-row .btn.js-open-booking{background:#1d5a76;border-color:#1d5a76;}
+    .hero .cta-row .btn.js-open-booking:hover{background:#164861;}
+    .hero .cta-row .btn.ghost{background:none;border-color:rgba(18,40,63,.3);color:var(--brand-navy);}
+    .hero .cta-row .btn.ghost:hover{background:rgba(18,40,63,.06);border-color:rgba(18,40,63,.45);color:var(--brand-navy);}
+    .doc-photo-slot{color:#5a5145;background:var(--paper);}
+    [data-theme="dark"] .doc-hero-grid .eyebrow, [data-theme="dark"] .doc-role{color:var(--gold);}
+    [data-theme="dark"] .doc-hero-grid h1{color:var(--ink);}
+    [data-theme="dark"] .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+    [data-theme="dark"] .hero .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+    [data-theme="dark"] .hero .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+    [data-theme="dark"] .doc-photo-slot{color:var(--muted);}
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]) .doc-hero-grid .eyebrow,
+      :root:not([data-theme="light"]) .doc-role{color:var(--gold);}
+      :root:not([data-theme="light"]) .doc-hero-grid h1{color:var(--ink);}
+      :root:not([data-theme="light"]) .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+      :root:not([data-theme="light"]) .hero .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+      :root:not([data-theme="light"]) .hero .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+      :root:not([data-theme="light"]) .doc-photo-slot{color:var(--muted);}
+    }
     .proc-grid{grid-template-columns:1fr;}
     .timeline li{grid-template-columns:80px 1fr;}
     .cert-thumb-btn img.cert-thumb{width:36px;height:36px;}
@@ -241,6 +306,60 @@
     .cert-timeline li{width:auto;margin-left:26px !important;text-align:left !important;}
     .cert-timeline li::after{left:-22px !important;right:auto !important;}
     .cert-timeline .cert-card-inner{display:block;padding:14px 16px;}
+  }
+
+  /* Diagonal-split hero — desktop only. Scoped by min-width, placed last:
+     .hero, .doc-role, .cred-badge etc. have earlier unconditional rules
+     of equal specificity above (this page had no desktop .hero override,
+     only base.css's generic default). Mobile keeps its own separately-
+     tuned background photo above, untouched. */
+  @media(min-width:761px){
+    .hero{background:var(--brand-navy);}
+    .hero::before{
+      content:"";position:absolute;inset:0;z-index:0;
+      background:linear-gradient(100deg,
+        var(--brand-navy) 0%, var(--brand-navy) max(380px, calc(50% - 210px)),
+        var(--paper) max(380px, calc(50% - 210px)), var(--paper) 100%
+      );
+    }
+    .hero::after{display:none;}
+    .hero .wrap{position:relative;z-index:1;}
+    .doc-hero-grid picture img, .doc-hero-grid .doc-photo-slot{
+      border:5px solid #fff;box-shadow:0 24px 50px rgba(0,0,0,.4);
+    }
+    .doc-hero-grid > div:not(.doc-photo-slot){margin-left:20%;}
+    .doc-hero-grid .cta-row{
+      position:static;left:auto;right:auto;bottom:auto;top:auto;
+      margin-top:28px;width:100%;flex-wrap:nowrap;
+    }
+    .doc-hero-grid .cta-row .seg{
+      flex:1 1 auto;height:1px;
+      background:rgba(24,22,17,.15);
+    }
+    .doc-hero-grid .eyebrow{color:#a9823f;}
+    .doc-hero-grid h1{font-family:'Fraunces',Georgia,serif;font-weight:600;color:#181611;text-shadow:none;}
+    .doc-role{color:#a9823f;}
+    .cred-badge{color:#5a5145;border-color:rgba(24,22,17,.3);background:rgba(24,22,17,.05);}
+    .doc-hero-grid p.lead{color:#6b6255;text-shadow:none;}
+    .doc-hero-grid .cta-row .btn.js-open-booking{background:var(--gold);border-color:var(--gold);color:#221a08;}
+    .doc-hero-grid .cta-row .btn.js-open-booking:hover{background:#b8934a;border-color:#b8934a;}
+    .doc-hero-grid .cta-row .btn.ghost{background:none;border-color:rgba(20,25,30,.25);color:var(--brand-navy);}
+    .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(20,25,30,.06);border-color:rgba(20,25,30,.4);color:var(--brand-navy);}
+    [data-theme="dark"] .doc-hero-grid .eyebrow, [data-theme="dark"] .doc-role{color:var(--gold);}
+    [data-theme="dark"] .doc-hero-grid h1{color:var(--ink);}
+    [data-theme="dark"] .doc-hero-grid p.lead{color:var(--muted);}
+    [data-theme="dark"] .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+    [data-theme="dark"] .doc-hero-grid .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+    [data-theme="dark"] .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+    @media(prefers-color-scheme:dark){
+      :root:not([data-theme="light"]) .doc-hero-grid .eyebrow,
+      :root:not([data-theme="light"]) .doc-role{color:var(--gold);}
+      :root:not([data-theme="light"]) .doc-hero-grid h1{color:var(--ink);}
+      :root:not([data-theme="light"]) .doc-hero-grid p.lead{color:var(--muted);}
+      :root:not([data-theme="light"]) .cred-badge{color:var(--muted);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);}
+      :root:not([data-theme="light"]) .doc-hero-grid .cta-row .btn.ghost{border-color:rgba(255,255,255,.3);color:var(--ink);}
+      :root:not([data-theme="light"]) .doc-hero-grid .cta-row .btn.ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.5);color:var(--ink);}
+    }
   }
 </style>
 
@@ -414,8 +533,6 @@
     </div>
   </div>
 </section>
-
-<p class="mobile-lead-below">Лікування захворювань ясен і професійна гігієна порожнини рота.</p>
 
 <section id="protsedury">
   <div class="wrap">

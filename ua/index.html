@@ -488,7 +488,7 @@
     box-shadow:inset 1px 0 0 rgba(255,255,255,.18), inset -1px 0 0 rgba(255,255,255,.18);}
   .hero-grid{display:block;position:relative;}
   .hero-eyebrow-wrap{position:relative;z-index:3;}
-  .hero-grid > .reveal:not(.hero-photo){position:relative;z-index:3;max-width:560px;}
+  .hero-grid > .reveal:not(.hero-photo), .hero-grid > .hero-text{position:relative;z-index:3;max-width:560px;}
   .eyebrow{font-size:13px;letter-spacing:.08em;color:var(--wood-deep);font-weight:600;margin-bottom:20px;text-transform:uppercase;}
   .hero .eyebrow{color:rgba(255,255,255,.8);display:block;margin-bottom:24px;}
   .hero h1{font-size:clamp(36px,5vw,58px);line-height:1.08;color:#fff;}
@@ -526,10 +526,6 @@
     content:"";position:absolute;inset:0;z-index:2;
     background:linear-gradient(100deg, rgba(18,40,63,.93) 0%, rgba(18,40,63,.76) 38%, rgba(18,40,63,.32) 68%, rgba(18,40,63,.1) 100%);
   }
-  @keyframes chevronShimmer{
-    0%,100%{border-right-color:rgba(255,255,255,.22);border-bottom-color:rgba(255,255,255,.22);}
-    50%{border-right-color:#0e2540;border-bottom-color:#0e2540;}
-  }
   @media(max-width:860px){
     .hero{padding:88px 0 90px;min-height:0;height:460px;display:block;}
     .hero::before{
@@ -538,50 +534,41 @@
     .hero-grid > .reveal{display:flex;flex-wrap:wrap;align-items:flex-start;}
     .hero .eyebrow{flex:0 0 100%;width:100%;}
     .hero h1{
-      display:block;flex:0 0 170px;width:170px;max-width:170px;text-align:left;
+      display:block;width:auto;max-width:240px;text-align:left;
       font-size:24px;line-height:1.24;margin:22px 0 0;
       cursor:pointer;
     }
     .hero h1::after{
-      content:"";display:block;width:9px;height:9px;margin:10px auto 0;
-      border-right:2px solid rgba(255,255,255,.22);border-bottom:2px solid rgba(255,255,255,.22);
-      transform:rotate(-45deg);transition:transform .25s ease;
-      animation:chevronShimmer 2.2s ease-in-out infinite;
+      content:"Детальніше";display:block;margin:10px 0 0;
+      font-size:12px;font-weight:600;letter-spacing:.02em;
+      color:rgba(255,255,255,.8);
+      text-decoration:underline;text-underline-offset:3px;
+      text-decoration-color:rgba(255,255,255,.4);
+      transition:color .2s ease;
     }
     .hero h1.lead-open::after{
-      transform:rotate(135deg);animation:none;
-      border-right-color:rgba(255,255,255,.85);border-bottom-color:rgba(255,255,255,.85);
+      content:"Згорнути";
+      color:#fff;text-decoration-color:rgba(255,255,255,.7);
     }
     .hero p.lead{
-      flex:0 0 auto;width:0;max-width:0;margin:22px 0 0 0;text-align:left;
-      font-size:13px;line-height:1.45;
-      text-shadow:0 1px 3px rgba(0,0,0,.35);
-      max-height:220px;opacity:0;overflow:hidden;
-      padding:0;border-radius:12px;
-      background:rgba(255,255,255,0);
-      border:1px solid rgba(255,255,255,0);
-      backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);
-      transform:translateX(-6px);
-      transition:
-        width .4s cubic-bezier(.16,1,.3,1),
-        max-width .4s cubic-bezier(.16,1,.3,1),
-        margin-left .4s cubic-bezier(.16,1,.3,1),
-        padding .4s cubic-bezier(.16,1,.3,1),
-        opacity .3s ease,
-        transform .4s cubic-bezier(.34,1.56,.64,1),
-        background-color .4s ease,
-        border-color .4s ease,
-        backdrop-filter .4s ease;
+      position:absolute;left:50%;top:50%;z-index:5;
+      width:92%;max-width:420px;margin:0;text-align:center;
+      font-size:15px;line-height:1.65;
+      color:var(--brand-navy);text-shadow:none;
+      display:flex;flex-direction:column;justify-content:center;
+      min-height:110px;max-height:80%;overflow:hidden;
+      padding:28px 26px;border-radius:16px;
+      background:rgba(240,240,238,.94);
+      border:1px solid rgba(24,22,17,.08);
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      opacity:0;pointer-events:none;
+      transform:translate(-50%,-50%) scale(.96);
+      transition:opacity .3s ease, transform .3s cubic-bezier(.16,1,.3,1);
     }
     .hero p.lead.lead-open{
-      width:172px;max-width:172px;margin:22px 0 0 14px;
-      opacity:1;
-      padding:10px 12px;
-      background:rgba(255,255,255,.14);
-      border-color:rgba(255,255,255,.35);
-      backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-      transform:translateX(0);
-      overflow-y:auto;overflow-x:hidden;
+      opacity:1;pointer-events:auto;overflow-y:auto;
+      transform:translate(-50%,-50%) scale(1);
     }
   }
 
@@ -689,38 +676,117 @@
        like a real hero band — the heading above stays inside .wrap. */
     width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;
   }
+  /* Sized and centered to match the carousel's focused card (not a
+     full-bleed strip like before) — a caption pill that visually belongs
+     to the card underneath it, rather than an unrelated full-width band. */
   .case-toolbar{
     display:flex;align-items:center;justify-content:space-between;gap:20px;
-    background:var(--brand-navy);color:#fff;padding:16px clamp(20px,4vw,48px);
+    max-width:600px;margin:0 auto;background:var(--brand-navy);color:#fff;
+    padding:14px 24px;border-radius:16px;
+    box-shadow:0 10px 26px rgba(14,37,64,.16);
   }
   .case-toolbar-text h3{margin:0 0 2px;font-size:18px;font-weight:600;color:#fff;}
   .case-toolbar-text p{margin:0;font-size:13px;color:rgba(255,255,255,.72);}
   .case-toolbar-nav{display:flex;gap:10px;flex-shrink:0;}
-  .case-toolbar-nav .case-nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);color:#fff;}
-  .case-toolbar-nav .case-nav:hover{border-color:#fff;background:rgba(255,255,255,.16);}
+  /* Thin 2px strokes on a near-invisible (.08 opacity) circle read as
+     barely-there against the navy toolbar — bumped the fill/border to
+     actually look like a button, and the icon stroke got thicker to
+     match (see the inline svg stroke-width). Hover is a solid gold fill
+     with navy icon — unmistakably different from the resting state. */
+  .case-toolbar-nav .case-nav{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.4);color:#fff;transition:background .2s ease, border-color .2s ease, color .2s ease;}
+  /* index.html defines its own :root tokens and doesn't include --gold
+     (that only exists in assets/base.css) — var(--gold) here silently
+     resolved to nothing, which made the whole hover declaration invalid
+     and left the button showing its dark default state on hover instead.
+     Hardcoded to the same gold hex base.css uses, so it actually applies
+     regardless of which stylesheet is in play. */
+  .case-toolbar-nav .case-nav:hover{background:#c9a24b;border-color:#c9a24b;color:var(--brand-navy);}
+  @media(max-width:760px){
+    .case-toolbar{max-width:360px;}
+  }
+  /* The generic .reveal fade-up (opacity 0→1, translateY 24px→0 over .9s)
+     is dropped entirely for this block on phones — it's the first thing
+     visitors scroll to right after the hero, and even the sped-up version
+     still read as an unwanted delay there. Desktop keeps the normal
+     .reveal behavior; this is mobile-only. */
+  @media(max-width:760px){
+    .cases-full.reveal{opacity:1;transform:none;transition:none;}
+  }
   .cases-carousel{position:relative;}
+  /* overflow-x:auto with no explicit overflow-y forces overflow-y to
+     "auto" too (per spec), so anything a card paints past the track's own
+     box — the soft shadow — gets hard-clipped right at that edge instead
+     of fading out, reading as a sharp line. Padding here just needs to be
+     taller than the shadow's own reach so it fully dissolves before it
+     ever gets to that boundary. */
   .cases-track{
-    display:flex;gap:2px;overflow-x:auto;scroll-snap-type:x mandatory;
+    display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;scrollbar-width:none;
+    padding:32px calc(50% - 300px) 56px;
   }
   .cases-track::-webkit-scrollbar{display:none;}
+  /* Slides are patient portraits, sized to actually read as a real photo
+     (not a thumbnail strip). The centered slide sits at full size; its
+     neighbors sit scaled down and dimmed — a coverflow-style focus effect
+     — so the row still feels rich even though only one card is "the"
+     photo at a time. Scaling is on the slide itself (not an inner
+     wrapper): a CSS transform doesn't change the box's layout size, so
+     the flex row spacing and scroll-snap math are unaffected regardless
+     of which card is currently focused.
+     Shadow is layered (3 stacked shadows, tight-to-wide, dark-to-faint)
+     for a soft ambient falloff instead of one hard-edged blur — and gets
+     its own dark-theme version, since a navy-toned shadow disappears
+     against an already-near-black page background. */
   .case-slide{
-    display:block;position:relative;flex:0 0 96%;
-    background:var(--brand-navy);overflow:hidden;
-    scroll-snap-align:start;scroll-snap-stop:always;
+    display:block;position:relative;flex:0 0 600px;width:600px;aspect-ratio:5/4;
+    background:var(--brand-navy);overflow:hidden;border-radius:22px;
+    scroll-snap-align:center;scroll-snap-stop:always;
     text-decoration:none;color:inherit;cursor:pointer;border:none;padding:0;font:inherit;text-align:left;
-    /* A generous, fixed share of the viewport height — tall enough to read
-       as a real hero photo regardless of window width. */
-    height:min(72vh, 760px);
+    box-shadow:
+      0 2px 6px rgba(14,37,64,.10),
+      0 10px 20px rgba(14,37,64,.12),
+      0 24px 40px rgba(14,37,64,.14);
+    transform:scale(.84);opacity:.5;
+    transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .45s ease, box-shadow .45s ease;
   }
-  @media(max-width:760px){
-    .case-slide{flex:0 0 100%;height:min(60vh, 520px);}
+  .case-slide.active{
+    transform:scale(1);opacity:1;
+    box-shadow:
+      0 3px 8px rgba(14,37,64,.12),
+      0 16px 30px rgba(14,37,64,.15),
+      0 36px 60px rgba(14,37,64,.18);
   }
-  /* The photo itself is shown whole via object-fit:contain — no cropping,
-     whatever its own orientation (landscape or portrait). Whatever empty
-     space that leaves around it is filled by a softly blurred copy of the
-     same photo, not a stark bar of plain background color, so the frame
-     still reads as full no matter how the source photo is shaped. */
+  [data-theme="dark"] .case-slide{
+    box-shadow:
+      0 2px 6px rgba(0,0,0,.35),
+      0 10px 20px rgba(0,0,0,.38),
+      0 24px 40px rgba(0,0,0,.32),
+      0 0 0 1px rgba(255,255,255,.05);
+  }
+  [data-theme="dark"] .case-slide.active{
+    box-shadow:
+      0 3px 8px rgba(0,0,0,.4),
+      0 16px 30px rgba(0,0,0,.45),
+      0 36px 60px rgba(0,0,0,.4),
+      0 0 0 1px rgba(255,255,255,.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .case-slide{
+      box-shadow:
+        0 2px 6px rgba(0,0,0,.35),
+        0 10px 20px rgba(0,0,0,.38),
+        0 24px 40px rgba(0,0,0,.32),
+        0 0 0 1px rgba(255,255,255,.05);
+    }
+    :root:not([data-theme="light"]) .case-slide.active{
+      box-shadow:
+        0 3px 8px rgba(0,0,0,.4),
+        0 16px 30px rgba(0,0,0,.45),
+        0 36px 60px rgba(0,0,0,.4),
+        0 0 0 1px rgba(255,255,255,.07);
+    }
+  }
+  .cases-story-bar{display:none;}
   .case-photo-bg{
     position:absolute;inset:0;background-color:#ffffff;
     background-image:none !important;
@@ -729,10 +795,8 @@
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]) .case-photo-bg{background-color:var(--brand-navy);}
   }
-  .case-photo-main{
-    position:relative;z-index:1;width:100%;height:100%;
-    display:flex;align-items:center;justify-content:center;
-  }
+  .case-photo-main{position:relative;z-index:1;width:100%;height:100%;}
+  .case-photo-main img{object-fit:cover !important;}
   .case-nav{
     width:40px;height:40px;border-radius:50%;flex-shrink:0;
     background:var(--bg);border:1px solid rgba(var(--text-rgb),0.15);
@@ -752,117 +816,197 @@
     #cases .cases-cta{margin-top:12px;}
     #cases .cases-dots{margin-top:8px;}
     .case-toolbar{padding:10px clamp(16px,4vw,48px);}
-    .case-slide{height:min(48vh, 420px);}
   }
   @media(max-width:760px){.case-nav{display:none;}}
   .cases-dots{display:flex;justify-content:center;gap:6px;margin-top:16px;}
   .cases-dot{width:6px;height:6px;border-radius:50%;background:rgba(var(--text-rgb),0.25);border:none;padding:0;cursor:pointer;transition:background .2s;}
   .cases-dot.active{background:var(--wood);}
 
+  /* Placed after every unconditional .case-* rule above on purpose — same
+     specificity throughout, so this only needs to win on source order, not
+     fight each property one at a time with extra selector weight. */
+  @media(max-width:760px){
+    /* Centered carousel: the active card sits in the middle of the
+       screen with both neighbors peeking in symmetrically at the edges
+       (a sliver only — about as wide as 2 letters of the caption below,
+       ~24px — not a "swipe this way" hint card like before). Track gets
+       equal left/right padding so the first and last cards can center
+       too; that padding has to equal peek+gap or the centered slide's
+       snap math (scrollLeft = index * (cardWidth+gap), used below in the
+       JS) drifts — see the padding-formula note by the card width itself.
+       Desktop keeps the existing coverflow + toolbar pill unchanged. */
+    .cases-track{padding:8px 36px 40px;gap:12px;}
+    /* .case-slide.active carries its own box-shadow rule further up —
+       matched explicitly here, for both themes, or the shadow still pops
+       between the two values the instant a slide becomes active
+       mid-swipe. That pop was landing as a visible flicker right as each
+       card settled — the actual cause of the earlier "jerky" swipe, not
+       the swipe motion itself. Now that the shadow lives on
+       .case-photo-main instead, the slide's own is just switched off
+       outright, on both states, so there's nothing left to pop. */
+    .case-slide, .case-slide.active{
+      /* 72px = 2 * (24px peek + 12px gap) — keeps the padding above and
+         this width in lockstep so every slide, not just the edge ones,
+         ends up with the same ~24px peek on both sides once centered. */
+      flex:0 0 calc(100vw - 72px);width:calc(100vw - 72px);aspect-ratio:auto;overflow:visible;
+      background:transparent;box-shadow:none;opacity:1;transform:none;transition:none;
+      padding:0;display:block;scroll-snap-align:center;
+    }
+    [data-theme="dark"] .case-slide, [data-theme="dark"] .case-slide.active,
+    :root:not([data-theme="light"]) .case-slide, :root:not([data-theme="light"]) .case-slide.active{
+      box-shadow:none;
+    }
+    .case-toolbar{display:none;}
+    /* .case-photo-bg is position:absolute;inset:0 relative to .case-slide
+       — harmless on desktop, where the slide IS just the photo (aspect-
+       ratio:5/4, overflow:hidden), but here .case-slide now also wraps the
+       caption below the photo, so inset:0 stretched this solid white/navy
+       layer down over the caption text too. Worse: with no z-index of its
+       own, a positioned element like this one paints ABOVE the caption's
+       plain in-flow text regardless, hiding it entirely — not just
+       covering part of it. It's a decorative fallback behind the <img>
+       (object-fit:cover already fills the photo box on its own), so
+       simplest correct fix is just not rendering it here. It was also
+       what showed through as stripes above/below inactive (scaled-down)
+       photos — same root cause, since it never scaled down together with
+       the photo it sits behind.  */
+    .case-photo-bg{display:none;}
+    .cases-dots{margin-top:20px;}
+    .cases-dot{background:rgba(var(--text-rgb),0.4);width:7px;height:7px;}
+    .case-photo-main{
+      position:relative;aspect-ratio:5/4;width:100%;height:auto;
+      border-radius:14px;overflow:hidden;
+      box-shadow:0 8px 20px rgba(14,37,64,.18);
+      /* Scale lives on the photo box only (not .case-slide, which also
+         wraps the caption below it — that stays a fixed size regardless
+         of active state) and is anchored to center to match
+         scroll-snap-align:center, so the card grows evenly instead of
+         drifting toward one edge. Kept quick and simple (no opacity/shadow
+         change riding along) so it can't reintroduce the shadow-pop
+         "jerky" bug from before. */
+      transform:scale(.92);transform-origin:center center;
+      transition:transform .25s ease;
+    }
+    .case-slide.active .case-photo-main{transform:scale(1);}
+    .case-slide::before{
+      content:attr(data-name);
+      display:block;margin-top:16px;
+      font-size:16px;font-weight:700;color:var(--text);
+    }
+    .case-slide::after{
+      content:attr(data-desc);
+      display:block;margin-top:3px;
+      font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+      color:var(--text-muted);
+    }
+  }
+
   /* Patient modal (lightbox, no separate pages) */
   .patient-modal-overlay{
     position:fixed;inset:0;background:rgba(10,20,30,.94);z-index:300;
-    display:none;align-items:center;justify-content:center;padding:24px;
+    display:none;align-items:center;justify-content:center;padding:20px 16px;
+    overflow-y:auto;
   }
   .patient-modal-overlay.open{display:flex;}
-  .patient-modal{position:relative;max-width:640px;width:100%;height:80vh;max-height:700px;background:var(--bg);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);}
-  .patient-modal-photo{position:relative;flex:1;min-height:0;background:var(--navy-2);overflow:hidden;}
+  /* Same card as the on-page gallery: only the photo + a text label live
+     on the photo itself (top-left, on a light scrim) — zoom hint, zoom
+     button, nav arrows, counter and progress bar are gone (zoom/swipe
+     still work via click, pinch and drag). Name/tag/description, the
+     "read more" link and thumbnails sit below the photo, not overlaid —
+     one layout at every width, no separate desktop/mobile version. */
+  .patient-modal{
+    position:relative;width:100%;max-width:600px;margin:auto;
+    background:#0a1729;border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.35);
+  }
+  .patient-modal-photo{position:relative;flex:none;aspect-ratio:5/4;background:var(--navy-2);overflow:hidden;}
   .patient-modal-photo img{
     width:100%;height:100%;object-fit:cover;display:block;
     touch-action:none;cursor:zoom-in;transform-origin:center center;will-change:transform;
+    -webkit-user-drag:none;user-select:none;-webkit-user-select:none;
   }
   .patient-modal-photo.zoomed img{cursor:grab;}
   .patient-modal-photo.zoomed img:active{cursor:grabbing;}
   .patient-modal-photo.dragging img{transition:none !important;}
-  .patient-modal-photo img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;}
-  .pm-zoom-hint{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:3;
-    background:rgba(0,0,0,.5);color:#fff;font-size:11.5px;padding:5px 12px;border-radius:20px;
-    pointer-events:none;opacity:0;transition:opacity .3s ease;white-space:nowrap;
-  }
-  .patient-modal-photo:not(.zoomed):hover .pm-zoom-hint{opacity:1;}
-  @media(hover:none){.pm-zoom-hint{display:none;}}
   .patient-modal-photo::before{
-    content:"";position:absolute;top:0;left:0;right:0;height:110px;z-index:1;pointer-events:none;
-    background:linear-gradient(180deg, rgba(0,0,0,.55), transparent);
+    content:"";position:absolute;top:0;left:0;right:0;height:90px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, rgba(0,0,0,.45), transparent);
   }
-  .patient-modal-photo::after{
-    content:"";position:absolute;bottom:0;left:0;right:0;height:52%;z-index:1;pointer-events:none;
-    background:linear-gradient(0deg, rgba(0,0,0,.82), transparent);
+  .pm-label{
+    position:absolute;top:14px;left:14px;z-index:3;color:#fff;font-size:13px;font-weight:600;
+    text-shadow:0 1px 3px rgba(0,0,0,.5);
   }
   .patient-modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);border:none;color:#fff;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;color:#fff;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer;z-index:4;}
-  .patient-modal-nav.prev{left:12px;}
-  .patient-modal-nav.next{right:12px;}
-  .patient-modal-counter{position:absolute;top:14px;left:14px;color:#fff;font-size:12px;z-index:4;}
-  .patient-modal-info{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 26px;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.55) 45%,rgba(0,0,0,.75) 100%);}
+  .patient-modal-info{padding:18px 20px 20px;}
   .patient-modal-info .eyebrow{color:#c9a24b;}
   .patient-modal-info h3{margin:6px 0 6px;font-size:21px;color:#fff;}
   .patient-modal-info p{margin:0 0 14px;color:rgba(255,255,255,.85);font-size:13.5px;}
   .pm-case-link{display:inline-block;margin:0 0 14px;color:#c9a24b;font-size:13.5px;font-weight:600;text-decoration:none;}
   .pm-case-link:hover{text-decoration:underline;}
-  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:nowrap;}
+  .patient-modal-thumbs{display:flex;gap:6px;flex-wrap:wrap;}
   .pm-thumb{width:42px;height:42px;border-radius:7px;overflow:hidden;border:2px solid rgba(255,255,255,.5);padding:0;cursor:pointer;flex-shrink:0;background:none;}
-  .pm-thumb.active{border-color:var(--wood-deep, #fff);}
+  .pm-thumb.active{border-color:#c9a24b;}
   .pm-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
-  .pm-progress{position:absolute;top:0;left:0;right:0;display:none;gap:4px;padding:10px 12px;z-index:4;}
-  .pm-progress span{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.35);overflow:hidden;}
-  .pm-progress span::after{content:"";display:block;height:100%;width:0;background:#fff;}
-  .pm-progress span.done::after{width:100%;}
-  .pm-progress span.active::after{width:100%;}
-
-  /* The "before" badge works the same way at every width — the "before"
-     photo is never shown on its own, only as a corner overlay on its
-     paired "after" photo once you've opened the modal (see buildSlides in
-     the script above, which merges before/after into one slide regardless
-     of viewport). Zoom button and dots stay mobile-only — desktop keeps the
-     original full-bleed photo, hover zoom hint and thumbnail strip for
-     navigation. */
-  .pm-zoom-btn{display:none;}
-  .pm-dots{display:none;}
+  /* Tap to expand: grows from a corner badge to an 80%-of-photo overlay
+     with a smooth animation, tap again (or tap anywhere else) to shrink
+     back. Expressed via top/left/width/height (not bottom/right) on both
+     states so all four transition smoothly between the two. */
   .pm-before-badge{
-    display:none;position:absolute;bottom:14px;right:14px;width:150px;height:150px;border-radius:16px;
+    display:none;position:absolute;top:calc(100% - 107px);left:calc(100% - 107px);
+    width:93px;height:93px;border-radius:14px;cursor:zoom-in;
     overflow:hidden;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.45);z-index:4;
+    transition:
+      top .45s cubic-bezier(.16,1,.3,1), left .45s cubic-bezier(.16,1,.3,1),
+      width .45s cubic-bezier(.16,1,.3,1), height .45s cubic-bezier(.16,1,.3,1),
+      box-shadow .35s ease;
   }
   .pm-before-badge.show{display:block;}
+  .pm-before-badge.expanded{
+    top:10%;left:10%;width:80%;height:80%;cursor:zoom-out;
+    box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  /* Hint that the badge is clickable — gold ring on hover, same as the rest
+     of the site's accent color, not just the generic pointer cursor. */
+  .pm-before-badge:not(.expanded):hover{
+    border-color:#c9a24b;
+    box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 3px rgba(201,162,75,.55);
+  }
   .pm-before-badge img{width:100%;height:100%;object-fit:cover;display:block;}
   .pm-before-badge span{
     position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.55);color:#fff;
-    font-size:10px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
+    font-size:9px;text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.04em;
   }
-
+  /* Same call as the on-page gallery's .cg-before-badge: at mobile sizes
+     the "До" strip's own background bar eats a real chunk of the (already
+     small, then 80%-of-photo when tapped open) badge. The badge itself —
+     corner thumbnail, growing over the "after" photo on tap — already
+     reads as "before" without a label; img alt="До" still carries it for
+     screen readers. */
   @media(max-width:600px){
-    .patient-modal-overlay{padding:20px 16px;}
-    .patient-modal{
-      height:auto;max-height:none;width:100%;max-width:420px;margin:0 auto;
-      background:#0a1729;border-radius:20px;
+    .pm-before-badge span{display:none;}
+    /* Matches the ~25% cut already applied to the on-page gallery's badge
+       — this one never got the same pass. */
+    .pm-before-badge{width:70px;height:70px;top:calc(100% - 84px);left:calc(100% - 84px);}
+    /* :hover doesn't really exist on touch — without the label, a mobile
+       visitor has no cue at all that this corner photo is tappable.
+       Standing gold ring instead of only-on-hover, so it reads as
+       interactive without needing a tap first. */
+    /* Small zoom-icon chip pinned to the corner instead of a ring around
+       the whole badge — reads as "tap to zoom" on its own, without
+       covering the thumbnail underneath. Pulses (scale) a couple of times
+       right as the badge appears (display:none -> block per slide
+       restarts the animation each time), then sits still. */
+    .pm-before-badge:not(.expanded)::after{
+      content:"";position:absolute;bottom:-2px;right:-2px;z-index:5;
+      width:26px;height:26px;border-radius:50%;background:#c9a24b;
+      box-shadow:0 2px 6px rgba(0,0,0,.4);
+      /* Handle drawn longer/thicker than a typical search-icon proportion
+         — at this chip's actual on-screen size the standard glyph's handle
+         was too short and thin to read as anything but noise next to the
+         lens circle. */
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='9' r='6.5'/%3E%3Cpath d='M21 21l-7.5-7.5'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:center;background-size:75%;
     }
-    /* Contained card instead of a near-full-screen "story" — photo keeps a
-       fixed ratio instead of stretching to fill the modal height, so it
-       isn't zoomed/cropped as aggressively as before. */
-    .patient-modal-photo{flex:none;aspect-ratio:4/5;}
-    .patient-modal-photo::before,.patient-modal-photo::after{display:none;}
-    /* Info moves from a gradient overlay on the photo to a plain block below
-       it (the card's own dark background already gives the white text
-       enough contrast — no gradient needed). */
-    .patient-modal-info{position:static;background:none;padding:18px 20px 4px;}
-    .patient-modal-info .eyebrow{color:#c9a24b;}
-    .patient-modal-counter{background:rgba(0,0,0,.5);padding:5px 10px;border-radius:20px;font-size:11px;}
-    .patient-modal-thumbs{display:none;}
-
-    .pm-zoom-btn{
-      display:flex;align-items:center;justify-content:center;
-      position:absolute;bottom:12px;left:12px;width:38px;height:38px;border-radius:50%;
-      background:rgba(255,255,255,.92);border:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
-      color:#0e2540;z-index:4;
-    }
-    /* Smaller than the base (desktop) size to fit the narrower contained
-       card — was 83x83, then +25% to 104x104; kept as-is here. */
-    .pm-before-badge{width:104px;height:104px;bottom:12px;right:12px;}
-    .pm-before-badge span{font-size:9px;}
-    .pm-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 18px;}
-    .pm-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);border:none;padding:0;cursor:pointer;}
-    .pm-dot.active{background:#c9a24b;width:16px;border-radius:3px;}
   }
 
   /* nashi-raboty catalog grid (used on this page too, shared class names) */
@@ -1337,11 +1481,18 @@
 </div>
 
 <section class="hero">
-  <div class="hero-photo reveal" style="background:none;padding:0;overflow:hidden;"><picture>
+  <!-- Not .reveal: this is the very first thing rendered on the page, so
+       "reveal on scroll into view" doesn't apply — it starts in view. The
+       IntersectionObserver that adds .in only sets up in a <script> near
+       the end of body (after the entire rest of this long page has been
+       parsed), so a .reveal here sat at opacity:0 for however long that
+       took, then popped in all at once — the "blank page, then a flash"
+       some visitors saw on arrival. -->
+  <div class="hero-photo" style="background:none;padding:0;overflow:hidden;"><picture>
     <img width="1264" height="842" src="/img/o-klinike-hero.jpg" alt="Інтер'єр MaslovClinic — сині стіни, ліпнина, картина в золотій рамі" fetchpriority="high" style="width:100%;height:100%;object-fit:cover;border-radius:0;display:block;">
   </picture></div>
   <div class="wrap hero-grid">
-    <div class="reveal">
+    <div class="hero-text">
       <span class="eyebrow">Одеса · Аркадія</span>
       <h1>Стоматологія, де точність зустрічається з естетикою.</h1>
       <p class="lead">У нашій клініці ми пропонуємо всі види стоматологічної допомоги. Наша команда спеціалізується на тотальних реабілітаціях, естетичному та функціональному протезуванні й дентальній імплантації.</p>
@@ -1415,18 +1566,18 @@
             <img width="1600" height="1067" loading="lazy" src="/img/patients/irina-after.jpg" alt="Ірина — результат після вінірів і корон" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
           </picture></div>
         </button>
-        <button class="case-slide" data-name="Оксана" data-desc="Імплантаційне лікування" onclick="openPatientModal('oksana')">
-          <div class="case-photo-bg" style="background-image:url('/img/patients/oksana-after.jpg')"></div>
-          <div class="case-photo-main"><picture>
-            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
-            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
-          </picture></div>
-        </button>
         <button class="case-slide" data-name="Ольга" data-desc="Керамічні вініри" onclick="openPatientModal('olga-v')">
           <div class="case-photo-bg" style="background-image:url('/img/patients/olga-v-after.jpg')"></div>
           <div class="case-photo-main"><picture>
             <source srcset="/img/patients/olga-v-after.webp" type="image/webp">
             <img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-after.jpg" alt="Ольга — результат керамічних вінірів" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
+          </picture></div>
+        </button>
+        <button class="case-slide" data-name="Оксана" data-desc="Імплантаційне лікування" onclick="openPatientModal('oksana')">
+          <div class="case-photo-bg" style="background-image:url('/img/patients/oksana-after.jpg')"></div>
+          <div class="case-photo-main"><picture>
+            <source srcset="/img/patients/oksana-after.webp" type="image/webp">
+            <img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-after.jpg" alt="Оксана — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:contain;position:relative;z-index:1;">
           </picture></div>
         </button>
         <button class="case-slide" data-name="Наталія" data-desc="Імплантаційне лікування" onclick="openPatientModal('natalya')">
@@ -1782,26 +1933,16 @@
 <div class="patient-modal-overlay" id="patientModalOverlay" onclick="if(event.target===this) closePatientModal()">
   <div class="patient-modal">
     <div class="patient-modal-photo">
-      <div class="pm-progress" id="pmProgress"></div>
       <img id="pmMain" src="" alt="" draggable="false">
-      <span class="pm-zoom-hint" id="pmZoomHint">Натисніть, щоб наблизити</span>
-      <!-- Mobile-only: visible zoom affordance. Pinch/double-tap zoom already
-           works (see the "Photo zoom" script below) but the text hint above
-           is hidden on touch devices — this button is the discoverable entry
-           point on phones, not a replacement for the gesture. -->
-      <button class="pm-zoom-btn" id="pmZoomBtn" onclick="pmToggleZoom()" aria-label="Наблизити фото">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
-      </button>
-      <!-- Mobile-only: "before" photo shown as a corner badge on the current
-           "after" photo instead of its own slide in the swipe sequence. -->
+      <div class="pm-label" id="pmLabel"></div>
+      <!-- "Before" photo shown as a corner badge on the current
+           "after"/portrait photo instead of its own slide in the swipe
+           sequence. -->
       <div class="pm-before-badge" id="pmBeforeBadge">
         <img id="pmBeforeImg" src="" alt="До">
         <span>До</span>
       </div>
       <button class="patient-modal-close" onclick="closePatientModal()" aria-label="Закрити">×</button>
-      <button class="patient-modal-nav prev" onclick="pmStep(-1)" aria-label="Попереднє фото">‹</button>
-      <button class="patient-modal-nav next" onclick="pmStep(1)" aria-label="Наступне фото">›</button>
-      <div class="patient-modal-counter" id="pmCounter"></div>
     </div>
     <div class="patient-modal-info">
       <span class="eyebrow" id="pmTag"></span>
@@ -1809,8 +1950,6 @@
       <p id="pmDesc"></p>
       <a href="#" id="pmCaseLink" class="pm-case-link">Детальніше про кейс →</a>
       <div class="patient-modal-thumbs" id="pmThumbs"></div>
-      <!-- Mobile-only: replaces the thumbnail strip with simple dots. -->
-      <div class="pm-dots" id="pmDots"></div>
     </div>
   </div>
 </div>
@@ -1881,7 +2020,7 @@
       labels: ['Портрет','До','Після']
     }
   };
-  let pmSlug = null, pmIndex = 0;
+  let pmSlug = null, pmIndex = 0, pmScrollY = 0;
 
   // Slide list used at every viewport: portraits stay standalone (no badge),
   // "before" photos are pulled out of the swipeable sequence entirely and
@@ -1891,14 +2030,19 @@
   // teaser card or as a separate thumbnail) — it only ever appears as an
   // overlay on its paired "after" photo, once the modal is open.
   function buildSlides(p){
-    const portraits = [], befores = [], afters = [];
+    const portraits = [], portraitBefores = [], befores = [], afters = [];
     p.photos.forEach((src, i) => {
       const label = p.labels[i];
-      if(/портрет/i.test(label)) portraits.push({src, label});
+      if(/портрет.*до/i.test(label)) portraitBefores.push({src, label});
+      else if(/портрет/i.test(label)) portraits.push({src, label});
       else if(/^до$/i.test(label)) befores.push({src, label});
       else afters.push({src, label});
     });
-    const slides = portraits.map(ph => ({src: ph.src, label: ph.label, beforeSrc: null}));
+    const slides = [];
+    portraits.forEach((ph, i) => {
+      const beforeSrc = i === 0 && portraitBefores.length ? portraitBefores[0].src : null;
+      slides.push({src: ph.src, label: ph.label, beforeSrc});
+    });
     afters.forEach((ph, i) => {
       const beforeSrc = befores.length ? befores[i % befores.length].src : null;
       slides.push({src: ph.src, label: ph.label, beforeSrc});
@@ -1932,22 +2076,65 @@
       b.onclick = () => { pmIndex = i; pmRender(); };
       thumbs.appendChild(b);
     });
-    const progress = document.getElementById('pmProgress');
-    progress.innerHTML = '';
-    slides.forEach(() => {
-      const s = document.createElement('span');
-      progress.appendChild(s);
-    });
     pmRender();
     document.getElementById('patientModalOverlay').classList.add('open');
-    // Lock the page behind the modal — same pattern as the mobile hamburger
-    // menu: nothing underneath should scroll, swipe, or be clickable while
-    // this is open.
-    document.body.style.overflow = 'hidden';
+    // Lock the page behind the modal. Plain overflow:hidden on body isn't
+    // enough on iOS Safari — a scrollable container behind a fixed overlay
+    // (here, the carousel track) can still catch the swipe and move on its
+    // own, so the body is pinned in place with position:fixed instead.
+    //
+    // The scroll position to lock/restore to is computed here, not just
+    // read off window.scrollY — a slide click also kicks off its own smooth
+    // scroll (ensureCarouselInView/track.scrollTo) that may still be mid-
+    // flight at this exact moment, so window.scrollY alone can be a stale,
+    // half-settled value. Snap straight to the same "toolbar comfortably
+    // below the header" target that scroll is heading toward, so opening
+    // and closing always land in the one correct place, not wherever the
+    // animation happened to be interrupted.
+    pmScrollY = window.scrollY;
+    // .case-toolbar is display:none on mobile (the toolbar pill is a
+    // desktop-only piece of the carousel) — getBoundingClientRect() on a
+    // display:none element always reports an all-zero rect, so rect.top
+    // was unconditionally read as 0 on every mobile open. That made the
+    // ">40" check always true and pmScrollY always land ~110px above the
+    // real scroll position, so closing the modal always jumped the page
+    // up by that amount. offsetParent is null for display:none elements
+    // (and only them, for anything not position:fixed) — cheap way to
+    // skip this adjustment when the toolbar isn't actually on screen.
+    const toolbarEl = document.querySelector('.case-toolbar');
+    if(toolbarEl && toolbarEl.offsetParent !== null){
+      const targetTop = 110;
+      const rect = toolbarEl.getBoundingClientRect();
+      if(Math.abs(rect.top - targetTop) > 40){
+        pmScrollY = window.scrollY + rect.top - targetTop;
+      }
+    }
+    document.body.style.position = 'fixed';
+    document.body.style.top = -pmScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
   }
   function closePatientModal(){
     document.getElementById('patientModalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    // Force a synchronous layout pass before scrolling — right after
+    // position:fixed is cleared the page's scrollable height hasn't been
+    // recalculated yet, so scrollTo below would get clamped to the still-
+    // collapsed (zero-ish) height and silently land at the top.
+    void document.body.offsetHeight;
+    // scroll-behavior:smooth is set globally on <html> — passing
+    // behavior:'auto' to scrollTo() is supposed to override that per-call,
+    // but that alone still left a visible animated jump on close. Turning
+    // the CSS property off outright, for the one instant this scroll takes,
+    // is the version that actually sticks.
+    const htmlEl = document.documentElement;
+    const prevScrollBehavior = htmlEl.style.scrollBehavior;
+    htmlEl.style.scrollBehavior = 'auto';
+    window.scrollTo(0, pmScrollY);
+    htmlEl.style.scrollBehavior = prevScrollBehavior;
   }
   function pmStep(dir){
     const len = pmSlides().length;
@@ -1961,44 +2148,43 @@
     const cur = slides[pmIndex];
     document.getElementById('pmMain').src = cur.src;
     document.getElementById('pmMain').alt = p.name + ' — ' + cur.label;
-    document.getElementById('pmCounter').textContent = (pmIndex+1) + ' / ' + slides.length;
+    document.getElementById('pmLabel').textContent = cur.label;
     Array.from(document.getElementById('pmThumbs').children).forEach((b,i)=>b.classList.toggle('active', i===pmIndex));
-    Array.from(document.getElementById('pmProgress').children).forEach((s,i)=>{
-      s.classList.toggle('done', i < pmIndex);
-      s.classList.toggle('active', i === pmIndex);
-    });
-    // "Before" badge — shown (at any viewport) only once the modal is open
-    // and only when the current slide actually has a paired "before" photo.
+    // "Before" badge — shown only when the current slide actually has a
+    // paired "before" photo. Always starts collapsed on a new slide.
     const badge = document.getElementById('pmBeforeBadge');
     const badgeImg = document.getElementById('pmBeforeImg');
+    badge.classList.remove('expanded');
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
     } else {
       badge.classList.remove('show');
     }
-    // Mobile dots — replaces the thumbnail strip, rebuilt per slide list.
-    const dotsWrap = document.getElementById('pmDots');
-    dotsWrap.innerHTML = '';
-    slides.forEach((s, i) => {
-      const d = document.createElement('button');
-      d.className = 'pm-dot' + (i === pmIndex ? ' active' : '');
-      d.setAttribute('aria-label', s.label);
-      d.onclick = () => { pmIndex = i; pmRender(); };
-      dotsWrap.appendChild(d);
-    });
   }
+  // Tap the badge to expand it over the "after" photo; tap it again, or
+  // anywhere else, to collapse it back down.
+  (function(){
+    const badge = document.getElementById('pmBeforeBadge');
+    badge.addEventListener('click', function(e){
+      e.stopPropagation();
+      badge.classList.toggle('expanded');
+    });
+    // pointerdown (not click) so this fires reliably even when the tap lands
+    // on the main photo — its own zoom handler calls preventDefault() on
+    // pointerdown, which on touch devices suppresses the synthesized click
+    // that a plain 'click' listener here would have relied on.
+    document.addEventListener('pointerdown', function(e){
+      if(badge.classList.contains('expanded') && !badge.contains(e.target)){
+        badge.classList.remove('expanded');
+      }
+    });
+  })();
   document.addEventListener('keydown', (e) => {
     if(!document.getElementById('patientModalOverlay').classList.contains('open')) return;
     if(e.key === 'Escape') closePatientModal();
-    if(e.key === 'ArrowLeft') pmStep(-1);
-    if(e.key === 'ArrowRight') pmStep(1);
-  });
-  // Re-render on resize (e.g. orientation change) so the layout that swaps
-  // at the mobile breakpoint (contained card vs. full-bleed + thumb strip)
-  // stays in sync while the modal is open — pmRender() clamps pmIndex safely.
-  window.addEventListener('resize', () => {
-    if(document.getElementById('patientModalOverlay').classList.contains('open')) pmRender();
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); pmStep(-1); }
+    if(e.key === 'ArrowRight'){ e.preventDefault(); pmStep(1); }
   });
 
   /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom */
@@ -2006,7 +2192,6 @@
     const stage = document.querySelector('.patient-modal-photo');
     const img = document.getElementById('pmMain');
     if(!stage || !img) return;
-    const hint = document.getElementById('pmZoomHint');
     const MAX_SCALE = 4, TAP_ZOOM = 2.2;
     let scale = 1, tx = 0, ty = 0;
     const pointers = new Map();
@@ -2054,16 +2239,8 @@
       apply();
     }
 
-    // Mobile zoom button — same in/out behavior as tap-to-zoom, just reachable
-    // without knowing the gesture exists.
-    window.pmToggleZoom = function(){
-      const rect = stage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-      if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
-    };
-
     stage.addEventListener('pointerdown', function(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       e.preventDefault();
       pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
       dragMoved = false;
@@ -2112,7 +2289,7 @@
     });
 
     function endPointer(e){
-      if(e.target.closest('.patient-modal-nav, .patient-modal-close, .pm-zoom-btn, .pm-before-badge')) return;
+      if(e.target.closest('.patient-modal-close, .pm-before-badge')) return;
       const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
       pointers.delete(e.pointerId);
       stage.classList.remove('dragging');
@@ -2151,10 +2328,6 @@
     }
     stage.addEventListener('pointerup', endPointer);
     stage.addEventListener('pointercancel', endPointer);
-
-    if(hint){
-      stage.addEventListener('pointerdown', function(){ hint.style.opacity = '0'; }, {once:false});
-    }
 
     const _origPmRender = window.pmRender;
     if(typeof _origPmRender === 'function'){
