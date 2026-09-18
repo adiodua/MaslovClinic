@@ -768,7 +768,7 @@
       0 10px 20px rgba(14,37,64,.12),
       0 24px 40px rgba(14,37,64,.14);
     transform:scale(.84);opacity:.5;
-    transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .45s ease, box-shadow .45s ease;
+    transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .45s ease;
   }
   .case-slide.active{
     transform:scale(1);opacity:1;
@@ -2150,11 +2150,6 @@
     document.body.style.top = '';
     document.body.style.left = '';
     document.body.style.right = '';
-    // Force a synchronous layout pass before scrolling — right after
-    // position:fixed is cleared the page's scrollable height hasn't been
-    // recalculated yet, so scrollTo below would get clamped to the still-
-    // collapsed (zero-ish) height and silently land at the top.
-    void document.body.offsetHeight;
     // scroll-behavior:smooth is set globally on <html> — passing
     // behavior:'auto' to scrollTo() is supposed to override that per-call,
     // but that alone still left a visible animated jump on close. Turning
@@ -2163,8 +2158,18 @@
     const htmlEl = document.documentElement;
     const prevScrollBehavior = htmlEl.style.scrollBehavior;
     htmlEl.style.scrollBehavior = 'auto';
-    window.scrollTo(0, pmScrollY);
-    htmlEl.style.scrollBehavior = prevScrollBehavior;
+    // Right after position:fixed is cleared, the page's scrollable height
+    // hasn't been recalculated yet, so scrollTo here would get clamped to
+    // the still-collapsed (zero-ish) height and silently land at the top.
+    // Forcing that recalculation synchronously (void document.body.offsetHeight)
+    // worked but blocks the main thread right at this instant. Deferring to
+    // the next animation frame instead lets the browser recalculate layout
+    // on its own normal, non-blocking schedule — by the time this callback
+    // runs, the height is already correct, one frame (~16ms) later.
+    requestAnimationFrame(function(){
+      window.scrollTo(0, pmScrollY);
+      htmlEl.style.scrollBehavior = prevScrollBehavior;
+    });
   }
   function pmStep(dir){
     const len = pmSlides().length;
