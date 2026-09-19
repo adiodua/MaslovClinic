@@ -42,6 +42,17 @@
     var t = localStorage.getItem('mc-theme');
     if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
     document.documentElement.setAttribute('data-theme', t);
+    // Also set color-scheme directly (not just via the [data-theme] CSS rule
+    // further down): the browser paints its very first frame - the native
+    // background/scrollbar before any author CSS is applied - using the
+    // OS/browser's own dark-vs-light guess. On a full page navigation (this
+    // site has no client-side routing, every link is a real page load) that
+    // first frame briefly flashes with the wrong theme whenever the visitor's
+    // saved choice disagrees with their OS setting, most visible in the
+    // fixed header since it's the first thing on screen. Setting the inline
+    // style here takes effect immediately, before the stylesheet is even
+    // parsed, so that first frame already matches.
+    document.documentElement.style.colorScheme = t;
   }catch(e){}
 })();
 </script>
@@ -605,6 +616,7 @@
         root.setAttribute('data-theme','light');
         sun.style.display='block'; moon.style.display='none';
       }
+      root.style.colorScheme = theme;
       document.querySelectorAll('.brand-mark').forEach(img=>{
         img.style.filter = (theme==='dark') ? 'brightness(0) invert(1)' : 'none';
       });
