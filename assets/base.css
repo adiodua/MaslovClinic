@@ -674,7 +674,7 @@
     }
     .hero p.lead{display:none;}
     .hero .cta-row{
-      position:relative;width:100%;left:auto;right:auto;top:auto;bottom:auto;margin:20px 0 0;
+      position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;
       flex-wrap:wrap;row-gap:10px;
     }
     .hero .cta-row .seg{display:none;}

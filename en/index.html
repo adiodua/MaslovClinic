@@ -527,7 +527,7 @@
   [data-theme="dark"] .hero-actions .btn-outline:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.7);box-shadow:0 0 0 6px rgba(255,255,255,.16);}
   [data-theme="dark"] .hero-actions .btn-outline:active{background:rgba(255,255,255,.22);box-shadow:0 0 0 2px rgba(255,255,255,.24);}
   @media(max-width:860px){
-    .hero-actions{position:relative;left:auto;right:auto;bottom:auto;top:auto;margin:20px 0 0;flex-wrap:nowrap;justify-content:center;}
+    .hero-actions{position:absolute;left:18px;right:18px;bottom:22px;top:auto;margin-top:0;flex-wrap:nowrap;justify-content:center;}
     .hero-actions .seg{display:none;}
     .hero-actions .btn{flex:0 0 auto;justify-content:center;}
   }
@@ -3244,6 +3244,15 @@ const galleryData = [
     if(dy > 90 && dx < 60) collapse();
     touchStartY = null; touchStartX = null;
   }, {passive:true});
+
+  // The bubble video autoplays on loop from the moment the page loads and
+  // never had anything telling it to stop - switching tabs or backgrounding
+  // the browser left it decoding video in the background indefinitely,
+  // burning CPU/GPU (and battery) for a preview clip nobody was looking at.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ video.pause(); }
+    else { video.play().catch(function(){}); }
+  });
 })();
 </script>
 
