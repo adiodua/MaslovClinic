@@ -93,29 +93,38 @@
   .cases-grid{grid-template-columns:1fr;}
 }
   .case-card{
-    position:relative;aspect-ratio:4/5;border-radius:var(--radius);overflow:hidden;
+    position:relative;aspect-ratio:5/4;border-radius:var(--radius);overflow:hidden;
     display:block;text-decoration:none;color:inherit;cursor:pointer;
     border:1px solid var(--divider);background:var(--paper);
     padding:0;font:inherit;width:100%;text-align:left;
+    transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease, border-color .35s ease;
   }
   .case-card.soon{opacity:.55;border-style:dashed;pointer-events:none;cursor:default;}
+  /* Hover: the card lifts slightly with a soft shadow bloom, and the
+     photo underneath gets a gentle zoom — overflow:hidden on the card
+     keeps the zoomed photo clipped to its rounded corners. */
+  .case-card:not(.soon):hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 44px rgba(14,37,64,.2);
+    border-color:transparent;
+  }
+  [data-theme="dark"] .case-card:not(.soon):hover{box-shadow:0 20px 44px rgba(0,0,0,.5);}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .case-card:not(.soon):hover{box-shadow:0 20px 44px rgba(0,0,0,.5);}
+  }
   .case-photo-main{
     position:absolute;inset:0;background:var(--navy-2);color:rgba(242,240,232,.5);
     display:flex;align-items:center;justify-content:center;text-align:center;
     font-size:12.5px;line-height:1.5;padding:16px;
   }
+  .case-photo-main img{transition:transform .5s cubic-bezier(.22,1,.36,1);}
+  .case-card:not(.soon):hover .case-photo-main img{transform:scale(1.06);}
   /* Dark corner wash behind the name/tag overlay — without it, light-toned
      photos (bright teeth, pale background) can make the white text hard to
      read; this guarantees contrast regardless of the underlying photo. */
   .case-card:not(.soon)::before{
     content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:radial-gradient(ellipse 62% 48% at 0% 0%, rgba(6,14,24,.6) 0%, rgba(6,14,24,.28) 45%, rgba(6,14,24,0) 75%);
-  }
-  .case-before-thumbs{position:absolute;left:14px;bottom:14px;width:34%;display:flex;gap:6px;z-index:2;}
-  .case-before-thumb{
-    width:100%;aspect-ratio:3/2;border-radius:8px;overflow:hidden;border:3px solid rgba(242,240,232,.9);
-    background:var(--navy);color:rgba(242,240,232,.5);font-size:8px;
-    display:flex;align-items:center;justify-content:center;
   }
   .case-info{position:absolute;top:14px;left:14px;z-index:2;color:#f2f0e8;}
   .case-info h3{margin:0 0 2px;font-size:16px;color:#f2f0e8;}
@@ -229,11 +238,8 @@
 
   @media(max-width:600px){
   /* Unify catalog cards with the homepage's case-slide carousel — same
-     radius, same shadow-based elevation, "before" badge in the same corner
-     with the same size/border treatment. */
+     radius, same shadow-based elevation. */
   .case-card{border-radius:18px;box-shadow:0 16px 40px rgba(var(--text-rgb),0.12);}
-  .case-before-thumbs{left:auto;right:16px;width:30%;}
-  .case-before-thumb{border-radius:10px;border-color:rgba(255,255,255,.9);}
 }
 
   /* Page header — same card language as the patient case page (navy +
@@ -496,17 +502,14 @@
     <div class="cases-grid">
       <button class="case-card" onclick="openPatientModal('darya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" src="/img/patients/darya-portrait2.jpg" alt="Дар’я — портрет після вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/darya-before.jpg" alt="Дар’я — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Дар’я</h3><p>Керамічні вініри</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('uriy')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Юрій — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/uriy-before.jpg" alt="Юрій — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юрій</h3><p>Імплантаційне лікування</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('yuliya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/yuliya-after.jpg" alt="Юлія — результат після вінірів" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/yuliya-before.jpg" alt="Юлія — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Юлія</h3><p>Керамічні вініри</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('kristina')">
@@ -515,12 +518,10 @@
       </button>
       <button class="case-card" onclick="openPatientModal('irina')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-portrait.jpg" alt="Ірина — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/irina-before.jpg" alt="Ірина — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ірина</h3><p>Керамічні вініри та корони</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-v')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-v-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Керамічні вініри</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('oksana')">
@@ -529,12 +530,10 @@
       </button>
       <button class="case-card" onclick="openPatientModal('natalya')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Наталія — результат імплантаційного лікування" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/natalya-before.jpg" alt="Наталія — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Наталія</h3><p>Імплантаційне лікування</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-i')">
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
-        <div class="case-before-thumbs"><div class="case-before-thumb" style="background:none;"><img width="1000" height="667" loading="lazy" src="/img/patients/olga-i-before.jpg" alt="Ольга — до" style="width:100%;height:100%;object-fit:cover;"></div></div>
         <div class="case-info"><h3>Ольга</h3><p>Імплантаційне лікування</p></div>
       </button>
       <div class="case-card soon"><span class="badge">Незабаром</span></div>
