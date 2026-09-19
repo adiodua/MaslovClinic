@@ -97,32 +97,49 @@
 </script>
 <link rel="stylesheet" href="/assets/base.css">
 <style>
-  .case-hero{background-size:140% auto !important;background-position:20% center !important;}
-    @media(max-width:760px){
-    .case-hero{
-      height:auto;min-height:460px;padding:88px 0 90px;
-      background:
-        radial-gradient(ellipse 75% 75% at 0% 0%, rgba(14,37,64,.8) 0%, rgba(14,37,64,.4) 60%, rgba(14,37,64,0) 100%),
-        url('/img/patients/olga-i-portrait.jpg') center/cover no-repeat,
-        var(--navy-2) !important;
-    }
-    .case-hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-start;}
-    .case-hero .crumbs-inline{display:none;}
-    .case-hero-head{width:auto;max-width:240px;margin:22px 0 0;}
-    .case-hero h1{
-      display:block;width:auto;max-width:240px;text-align:left;
-      font-size:24px !important;line-height:1.24;margin:0;
-    }
-    .case-hero .case-tag{margin:10px 0 0;}
-    .case-hero p.lead{
-      position:relative;width:100%;margin:14px 0 0;text-align:left;
-      font-size:14px;line-height:1.55;
-      color:rgba(255,255,255,.82);text-shadow:0 2px 12px rgba(0,0,0,.45);
-    }
-    .case-hero .cta-row{position:relative;width:100%;left:auto;right:auto;top:auto;bottom:auto;margin:20px 0 0;flex-wrap:wrap;row-gap:10px;}
-    .case-hero .cta-row .seg{display:none;}
-    .case-hero .cta-row .btn{padding:0 18px;height:40px;font-size:13px;width:auto;justify-content:center;}
-    .case-hero .cta-row .btn:only-of-type{width:100%;}
+  /* Patient case header — a two-column card instead of a full-bleed photo
+     hero: portrait (native 5:4) on one side, all the info on the other.
+     Navy + gold, generous rounded corners, a soft gold glow behind the
+     photo for a bit of polish. */
+  .patient-hero{
+    position:relative;overflow:hidden;padding:150px 0 72px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  }
+  .patient-hero::before{
+    content:"";position:absolute;top:-140px;right:-100px;width:420px;height:420px;z-index:0;
+    background:radial-gradient(circle, rgba(201,162,75,.28) 0%, rgba(201,162,75,0) 70%);
+    pointer-events:none;
+  }
+  .patient-hero-inner{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;
+  }
+  .patient-hero-info{color:#f2f0e8;}
+  .patient-hero-info .crumbs-inline{color:rgba(242,240,232,.55);font-size:12.5px;margin-bottom:26px;}
+  .patient-hero-info .crumbs-inline a{color:rgba(242,240,232,.55);}
+  .patient-hero-tag{
+    display:inline-block;padding:7px 18px;border-radius:999px;margin-bottom:20px;
+    background:rgba(201,162,75,.15);border:1px solid rgba(201,162,75,.5);
+    color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  }
+  .patient-hero-info h1{font-size:clamp(38px,4.6vw,58px);line-height:1.06;margin:0 0 18px;color:#fff;}
+  .patient-hero-lead{font-size:17px;line-height:1.65;color:rgba(242,240,232,.82);max-width:440px;margin:0 0 34px;}
+  /* Base .cta-row is position:absolute for the old photo-overlay hero —
+     here it's a normal flow row under the lead text instead. */
+  .patient-hero-info .cta-row{position:static;display:flex;gap:14px;flex-wrap:wrap;}
+  .patient-hero-info .cta-row .btn{border-radius:14px;}
+  .patient-hero-photo{
+    position:relative;aspect-ratio:5/4;border-radius:26px;overflow:hidden;
+    border:3px solid rgba(201,162,75,.4);box-shadow:0 30px 70px rgba(0,0,0,.4);
+  }
+  .patient-hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  @media(max-width:860px){
+    .patient-hero{padding:110px 0 48px;}
+    .patient-hero-inner{grid-template-columns:1fr;gap:26px;}
+    .patient-hero-photo{order:-1;border-radius:20px;max-width:340px;margin:0 auto;}
+    .patient-hero-info h1{font-size:34px;}
+    .patient-hero-lead{max-width:none;}
+    .patient-hero-info .cta-row{flex-wrap:wrap;}
   }
 </style>
 
@@ -273,21 +290,20 @@
 </div>
 
 
-<section class="hero case-hero" style="background:linear-gradient(180deg,rgba(15,33,47,.45) 0%,rgba(15,33,47,.92) 100%),url('/img/patients/olga-i-portrait.jpg') center/cover no-repeat,var(--navy-2);filter:brightness(1.3);">
-  <div class="wrap">
-    <div class="crumbs-inline"><a href="/ua/">Головна</a> / <a href="/ua/raboty/index.html">Наші роботи</a> / <span class="crumb-active">Ольга</span></div>
-    <div class="case-hero-head">
+<section class="patient-hero">
+  <div class="wrap patient-hero-inner">
+    <div class="patient-hero-info">
+      <div class="crumbs-inline"><a href="/ua/">Головна</a> / <a href="/ua/raboty/index.html">Наші роботи</a> / <span class="crumb-active">Ольга</span></div>
+      <span class="patient-hero-tag">Імплантаційне лікування</span>
       <h1>Ольга</h1>
-    <ul class="case-tag">
-      <li>Імплантаційне лікування</li>
-    </ul>
+      <p class="patient-hero-lead">Діагностика, встановлення імплантів та протезування під ключ.</p>
+      <div class="cta-row">
+        <a href="#" class="btn js-open-booking">Записатися на візит</a>
+        <a href="/ua/raboty/index.html" class="btn ghost">← Усі роботи</a>
+      </div>
     </div>
-    <p class="lead">Діагностика, встановлення імплантів та протезування під ключ.</p>
-    <div class="cta-row">
-      <span class="seg"></span>
-      <a href="#" class="btn js-open-booking">Записатися на візит</a>
-      <a href="/ua/raboty/index.html" class="btn ghost">← Усі роботи</a>
-      <span class="seg"></span>
+    <div class="patient-hero-photo">
+      <img src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет">
     </div>
   </div>
 </section>
