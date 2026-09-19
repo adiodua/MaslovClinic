@@ -235,6 +235,53 @@
   .case-before-thumbs{left:auto;right:16px;width:30%;}
   .case-before-thumb{border-radius:10px;border-color:rgba(255,255,255,.9);}
 }
+
+  /* Page header — same card language as the patient case page (navy +
+     gold, rounded corners), but instead of one portrait it's a living
+     collage: 3 frames on screen at once, each independently cycling
+     through every patient's portrait on its own timer (offset so there's
+     always one mid-crossfade) — see the script near the bottom of body. */
+  .works-hero{
+    position:relative;overflow:hidden;padding:150px 0 72px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  }
+  .works-hero::before{
+    content:"";position:absolute;top:-140px;right:-100px;width:420px;height:420px;z-index:0;
+    background:radial-gradient(circle, rgba(201,162,75,.28) 0%, rgba(201,162,75,0) 70%);
+    pointer-events:none;
+  }
+  .works-hero-inner{
+    position:relative;z-index:1;
+    display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;
+  }
+  .works-hero-info{color:#f2f0e8;}
+  .works-hero-info .crumbs-inline{color:rgba(242,240,232,.55);font-size:12.5px;margin-bottom:26px;}
+  .works-hero-info .crumbs-inline a{color:rgba(242,240,232,.55);}
+  .works-hero-info h1{font-size:clamp(38px,4.6vw,58px);line-height:1.06;margin:0 0 18px;color:#fff;}
+  .works-hero-lead{font-size:17px;line-height:1.65;color:rgba(242,240,232,.82);max-width:440px;margin:0 0 34px;}
+  .works-hero-info .cta-row{position:static;display:flex;gap:14px;flex-wrap:wrap;}
+  .works-hero-info .cta-row .btn{border-radius:14px;}
+  /* One full-size portrait, not a collage — two stacked <img> layers
+     crossfade into each other (both animate opacity at once, so the new
+     photo visibly emerges through the old one rather than a blank gap
+     between a fade-out and a fade-in). */
+  .works-hero-photo{
+    position:relative;aspect-ratio:5/4;border-radius:26px;overflow:hidden;
+    border:3px solid rgba(201,162,75,.4);box-shadow:0 30px 70px rgba(0,0,0,.4);
+    background:var(--navy-2);
+  }
+  .whp-layer{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;
+    opacity:0;transition:opacity 1.3s ease;
+  }
+  .whp-layer.active{opacity:1;}
+  @media(max-width:860px){
+    .works-hero{padding:110px 0 48px;}
+    .works-hero-inner{grid-template-columns:1fr;gap:30px;}
+    .works-hero-photo{order:-1;border-radius:20px;max-width:340px;margin:0 auto;}
+    .works-hero-info h1{font-size:34px;}
+    .works-hero-lead{max-width:none;}
+  }
 </style>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
@@ -382,18 +429,60 @@
 </div>
 
 
-<section class="hero">
-  <div class="wrap">
-    <div class="crumbs-inline"><a href="/en/">Home</a> / <span class="crumb-active">Our Cases</span></div>
-    <h1>Results<br>from Our Patients</h1>
-    <p class="lead">Real cases from the clinic's practice — with before-and-after photos, the procedure, and an approximate price range.</p>
-    <div class="cta-row">
-      <span class="seg"></span>
-      <a href="#" class="btn js-open-booking">Book a Visit</a>
-      <span class="seg"></span>
+<section class="works-hero">
+  <div class="wrap works-hero-inner">
+    <div class="works-hero-info">
+      <div class="crumbs-inline"><a href="/en/">Home</a> / <span class="crumb-active">Our Cases</span></div>
+      <h1>Results from Our Patients</h1>
+      <p class="works-hero-lead">Real cases from the clinic's practice — with before-and-after photos, the procedure, and an approximate price range.</p>
+      <div class="cta-row">
+        <a href="#" class="btn js-open-booking">Book a Visit</a>
+      </div>
+    </div>
+    <div class="works-hero-photo" id="worksHeroPhoto">
+      <img class="whp-layer active" id="whpA" alt="Clinic patient — portrait">
+      <img class="whp-layer" id="whpB" alt="Clinic patient — portrait">
     </div>
   </div>
 </section>
+<script>
+(function(){
+  var POOL = [
+    '/img/patients/darya-portrait2.jpg',
+    '/img/patients/uriy-portrait.jpg',
+    '/img/patients/yuliya-after.jpg',
+    '/img/patients/kristina-after.jpg',
+    '/img/patients/irina-portrait.jpg',
+    '/img/patients/oksana-portrait.jpg',
+    '/img/patients/olga-v-portrait.jpg',
+    '/img/patients/natalya-portrait.jpg',
+    '/img/patients/olga-i-portrait.jpg'
+  ];
+  var photo = document.getElementById('worksHeroPhoto');
+  if(!photo) return;
+  // Preload the whole pool so swapping .src never shows a blank/broken
+  // frame mid-crossfade.
+  POOL.forEach(function(src){ (new Image()).src = src; });
+
+  var layers = [document.getElementById('whpA'), document.getElementById('whpB')];
+  var idx = 0, activeLayer = 0;
+  layers[0].src = POOL[0];
+
+  function cycle(){
+    idx = (idx + 1) % POOL.length;
+    var next = layers[1 - activeLayer];
+    var cur = layers[activeLayer];
+    next.src = POOL[idx];
+    // Both layers animate opacity at the same time — the incoming photo
+    // fades in exactly as the outgoing one fades out, so it reads as one
+    // photo dissolving into the next rather than fade-out-then-fade-in.
+    next.classList.add('active');
+    cur.classList.remove('active');
+    activeLayer = 1 - activeLayer;
+  }
+  setInterval(cycle, 3300);
+})();
+</script>
 
 <section class="alt">
   <div class="wrap">
