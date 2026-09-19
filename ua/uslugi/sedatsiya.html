@@ -257,8 +257,8 @@
     <a href="/ua/o-klinike.html" data-nav="o-klinike">Про нас</a>
     <a href="/ua/raboty/index.html" class="nav-works-dot" data-nav="raboty">Наші роботи</a>
     <div class="mobile-langs">
-      <button class="langbtn active">RU</button>
-      <button class="langbtn">UA</button>
+      <button class="langbtn">RU</button>
+      <button class="langbtn active">UA</button>
       <button class="langbtn">EN</button>
     </div>
   </div>
@@ -438,6 +438,32 @@
     const current = document.getElementById('langCurrentBtn');
     const menu = document.getElementById('langMenu');
     const label = document.getElementById('langCurrentLabel');
+    // Mobile-menu language pills (.mobile-langs) mirror the same three
+    // targets in a fixed RU/UA/EN order but carry no data-lang of their
+    // own and previously had no click handler at all — wired up here so
+    // they share the same path-rewriting logic as the dropdown below.
+    const mobileLangBtns = document.querySelectorAll('.mobile-langs .langbtn');
+    const mobileLangOrder = ['RU','UA','EN'];
+    function go(target){
+      const path = location.pathname;
+      // Remember the visitor's explicit choice so the auto-detect script
+      // (which otherwise follows navigator.language on every fresh visit)
+      // never fights a manual pick on a later page load.
+      try{ localStorage.setItem('mc-lang', target); }catch(e){}
+      // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
+      // same folder structure, so switching is pure path manipulation —
+      // strip whichever prefix is currently active, then add the new one.
+      const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
+        : path.indexOf('/en/') === 0 ? path.slice(3)
+        : (path === '/ua' || path === '/en') ? '/'
+        : path;
+      const newPath = target === 'UA' ? '/ua' + rest : target === 'EN' ? '/en' + rest : (rest || '/');
+      if(newPath !== path){ location.href = newPath; return true; }
+      return false;
+    }
+    mobileLangBtns.forEach((btn, i)=>{
+      btn.addEventListener('click', function(){ go(mobileLangOrder[i]); });
+    });
     if(!wrap || !current || !menu || !label) return;
     current.addEventListener('click', function(e){
       e.stopPropagation();
@@ -445,24 +471,7 @@
     });
     menu.querySelectorAll('button').forEach(btn=>{
       btn.addEventListener('click', function(){
-        const target = btn.dataset.lang;
-        const path = location.pathname;
-        // Remember the visitor's explicit choice so the auto-detect script
-        // (which otherwise follows navigator.language on every fresh visit)
-        // never fights a manual pick on a later page load.
-        try{ localStorage.setItem('mc-lang', target); }catch(e){}
-        // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
-        // same folder structure, so switching is pure path manipulation —
-        // strip whichever prefix is currently active, then add the new one.
-        const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
-          : path.indexOf('/en/') === 0 ? path.slice(3)
-          : (path === '/ua' || path === '/en') ? '/'
-          : path;
-        const newPath = target === 'UA' ? '/ua' + rest : target === 'EN' ? '/en' + rest : (rest || '/');
-        if(newPath !== path){
-          location.href = newPath;
-          return;
-        }
+        if(go(btn.dataset.lang)) return;
         label.textContent = btn.dataset.lang;
         menu.querySelectorAll('button').forEach(b => b.classList.remove('current'));
         btn.classList.add('current');
