@@ -672,11 +672,7 @@
       font-size:24px;line-height:1.24;margin:22px 0 0;
       color:#f2f0e8;text-shadow:0 2px 16px rgba(0,0,0,.5);
     }
-    .hero p.lead{
-      position:relative;width:100%;margin:14px 0 0;text-align:left;
-      font-size:14px;line-height:1.55;
-      color:rgba(255,255,255,.82);text-shadow:0 2px 12px rgba(0,0,0,.45);
-    }
+    .hero p.lead{display:none;}
     .hero .cta-row{
       position:relative;width:100%;left:auto;right:auto;top:auto;bottom:auto;margin:20px 0 0;
       flex-wrap:wrap;row-gap:10px;
