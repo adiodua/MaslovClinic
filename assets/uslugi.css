@@ -585,6 +585,14 @@
         var(--hero-photo, url('/img/hero-reception.jpg')) center/cover no-repeat,
         var(--navy-2) !important;
     }
+    /* The desktop bottom-fade (::after, fixed 220px) was sized for the
+       cta-row that used to float absolutely over the photo at the hero's
+       bottom edge. Now that the lead/cta sit in-flow instead, this fixed
+       height fade lands wherever the box happens to end up — commonly
+       right across the CTA button and the last bit of visible photo,
+       reading as a muddy dark band. Nothing here still needs it: the
+       radial gradient above already keeps the heading/lead readable. */
+    .hero::after{display:none;}
     .hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-start;}
     .hero .crumbs-inline{display:none;}
     .hero h1{
