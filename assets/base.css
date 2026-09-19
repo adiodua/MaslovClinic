@@ -679,6 +679,15 @@
     }
     .hero .cta-row .seg{display:none;}
     .hero .cta-row .btn{padding:0 18px;height:40px;font-size:13px;width:auto;justify-content:center;}
+    /* Mobile floating over the photo directly (no dark gradient reaches
+       the bottom-right corner where this row sits) - the low-opacity
+       glass background these buttons use assumes a dark backdrop, and on
+       a light photo (e.g. the light marble uslugi hero) the white label
+       nearly disappears. Stronger, near-solid background fixes it
+       regardless of what's behind. */
+    .hero .cta-row .btn.js-open-booking{background:rgba(20,90,118,.85);}
+    .hero .cta-row .btn.ghost{background:rgba(0,0,0,.5);}
+    [data-theme="dark"] .hero .cta-row .btn.js-open-booking{background:rgba(201,162,75,.8);}
     .hero .cta-row .btn:only-of-type{width:100%;}
     .wrap{padding:0 12px 0 14px;}
     .logo{font-size:16px;gap:6px !important;}
