@@ -289,47 +289,57 @@
       <p>Процедура: діагностика, встановлення імплантів, протезування. Нижче — етапи «до» та результат. Детальніше про протоколи і ціни — на сторінці <a href="/ua/uslugi/implantatsiya-zubov.html">«Імплантаційне лікування»</a>.</p>
     </div>
     <div class="case-gallery">
-      <div class="case-gallery-photo" id="cgPhoto">
-        <div class="cg-progress" id="cgProgress"></div>
-        <img id="cgMain" src="" alt="" draggable="false">
-        <span class="cg-zoom-hint" id="cgZoomHint">Натисніть, щоб наблизити</span>
-        <button class="cg-zoom-btn" id="cgZoomBtn" type="button" aria-label="Наблизити фото">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6"/><path d="M20 20l-5.5-5.5"/></svg>
-        </button>
-        <div class="cg-before-badge" id="cgBeforeBadge">
-          <img id="cgBeforeImg" src="" alt="До">
-          <span>До</span>
+      <div class="cg-card">
+        <div class="case-gallery-photo" id="cgPhoto">
+          <img id="cgMain" src="" alt="" draggable="false">
+          <div class="cg-label" id="cgLabel"></div>
+          <div class="cg-before-badge" id="cgBeforeBadge">
+            <img id="cgBeforeImg" src="" alt="До">
+            <span>До</span>
+          </div>
         </div>
-        <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Попереднє фото">‹</button>
-        <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Наступне фото">›</button>
-        <div class="case-gallery-counter" id="cgCounter"></div>
+        <div class="cg-card-body">
+          <div class="case-gallery-nav-row">
+            <button class="case-gallery-nav prev" id="cgPrev" type="button" aria-label="Попереднє фото">‹</button>
+            <button class="case-gallery-nav next" id="cgNext" type="button" aria-label="Наступне фото">›</button>
+          </div>
+          <div class="case-gallery-below">
+            <div class="case-gallery-thumbs" id="cgThumbs"></div>
+            <a href="/ua/uslugi/implantatsiya-zubov.html" class="btn btn-outline">Детальніше про лікування →</a>
+          </div>
+        </div>
       </div>
-      <div class="case-gallery-thumbs" id="cgThumbs"></div>
-      <div class="cg-dots" id="cgDots"></div>
     </div>
 <script>
 (function(){
-  const photos = ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-after.jpg'];
+  const photos = ['/img/patients/olga-i-portrait.webp','/img/patients/olga-i-before.webp','/img/patients/olga-i-after.webp'];
   const labels = ['Портрет','До','Після'];
   const alts = ['Ольга — портрет','Ольга — фото до','Ольга — результат імплантаційного лікування'];
 
-  // Slide list: portraits stay standalone (no badge); "before" photos are
-  // pulled out of the swipeable sequence and attached as a corner badge to
-  // their paired "after" photo instead — same logic as the homepage / "Наши
-  // работы" carousel, so the "before" photo never appears as its own slide.
+  // Slide list: "до" photos — both the close-up ones and the one portrait
+  // shot before treatment — never get their own slide. They're pulled out
+  // and attached as a corner badge to their paired "portrait"/"after"
+  // photo instead (same logic as the homepage carousel), so "до" never
+  // appears standalone. The per-slide label is now an on-photo overlay
+  // (top-left), not a separate counter/progress bar.
   function buildSlides(){
-    const portraits = [], befores = [], afters = [];
+    const portraits = [], portraitBefores = [], befores = [], afters = [];
     photos.forEach((src, i) => {
       const label = labels[i];
-      const entry = {src, alt: alts[i]};
-      if(/портрет/i.test(label)) portraits.push(entry);
+      const entry = {src, alt: alts[i], label};
+      if(/портрет.*до/i.test(label)) portraitBefores.push(entry);
+      else if(/портрет/i.test(label)) portraits.push(entry);
       else if(/^до$/i.test(label)) befores.push(entry);
       else afters.push(entry);
     });
-    const slides = portraits.map(ph => ({src: ph.src, alt: ph.alt, beforeSrc: null}));
+    const slides = [];
+    portraits.forEach((ph, i) => {
+      const beforeSrc = i === 0 && portraitBefores.length ? portraitBefores[0].src : null;
+      slides.push({src: ph.src, alt: ph.alt, label: ph.label, beforeSrc});
+    });
     afters.forEach((ph, i) => {
       const beforeSrc = befores.length ? befores[i % befores.length].src : null;
-      slides.push({src: ph.src, alt: ph.alt, beforeSrc});
+      slides.push({src: ph.src, alt: ph.alt, label: ph.label, beforeSrc});
     });
     return slides;
   }
@@ -338,19 +348,11 @@
 
   const photo = document.getElementById('cgPhoto');
   const main = document.getElementById('cgMain');
-  const counter = document.getElementById('cgCounter');
-  const progress = document.getElementById('cgProgress');
+  const label = document.getElementById('cgLabel');
   const thumbsWrap = document.getElementById('cgThumbs');
-  const dotsWrap = document.getElementById('cgDots');
   const badge = document.getElementById('cgBeforeBadge');
   const badgeImg = document.getElementById('cgBeforeImg');
-  const zoomHint = document.getElementById('cgZoomHint');
-  const zoomBtn = document.getElementById('cgZoomBtn');
 
-  slides.forEach(() => {
-    const s = document.createElement('span');
-    progress.appendChild(s);
-  });
   slides.forEach((s, i) => {
     const b = document.createElement('button');
     b.type = 'button';
@@ -367,27 +369,15 @@
     const cur = slides[index];
     main.src = cur.src;
     main.alt = cur.alt;
-    counter.textContent = (index+1) + ' / ' + slides.length;
+    label.textContent = cur.label;
     Array.from(thumbsWrap.children).forEach((b,i)=>b.classList.toggle('active', i===index));
-    Array.from(progress.children).forEach((s,i)=>{
-      s.classList.toggle('done', i < index);
-      s.classList.toggle('active', i === index);
-    });
+    badge.classList.remove('expanded');
     if(cur.beforeSrc){
       badgeImg.src = cur.beforeSrc;
       badge.classList.add('show');
     } else {
       badge.classList.remove('show');
     }
-    dotsWrap.innerHTML = '';
-    slides.forEach((s, i) => {
-      const d = document.createElement('button');
-      d.type = 'button';
-      d.className = 'cg-dot' + (i === index ? ' active' : '');
-      d.setAttribute('aria-label', s.alt);
-      d.addEventListener('click', () => { index = i; render(); });
-      dotsWrap.appendChild(d);
-    });
   }
   function step(dir){
     index = (index + dir + slides.length) % slides.length;
@@ -396,6 +386,21 @@
   document.getElementById('cgPrev').addEventListener('click', () => step(-1));
   document.getElementById('cgNext').addEventListener('click', () => step(1));
   render();
+
+  // Tap the badge to expand it over the "after" photo; tap it again, or
+  // anywhere else, to collapse it back down.
+  badge.addEventListener('click', function(e){
+    e.stopPropagation();
+    badge.classList.toggle('expanded');
+  });
+  // pointerdown (not click) — the photo's own zoom handler calls
+  // preventDefault() on pointerdown, which on touch devices suppresses the
+  // synthesized click a plain 'click' listener here would rely on.
+  document.addEventListener('pointerdown', function(e){
+    if(badge.classList.contains('expanded') && !badge.contains(e.target)){
+      badge.classList.remove('expanded');
+    }
+  });
 
   /* Photo zoom — pinch, drag-to-pan, click/double-tap to zoom, swipe to
      navigate; background scroll stays locked to this element only (there's
@@ -436,18 +441,14 @@
     clampPan();
     apply();
   }
-  zoomBtn.addEventListener('click', function(){
-    const rect = photo.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
-    if(scale > 1.01){ resetZoom(); } else { zoomToward(cx, cy, TAP_ZOOM); }
-  });
-
   photo.addEventListener('pointerdown', function(e){
-    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
-    e.preventDefault();
+    if(e.target.closest('.case-gallery-nav, .cg-before-badge')) return;
     pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
     dragMoved = false;
     if(pointers.size === 1 && scale > 1.01){
+      // Already zoomed in — this drag pans the photo, not the page, so
+      // it's safe to claim the gesture immediately.
+      e.preventDefault();
       dragging = true;
       setTransition(false);
       photo.classList.add('dragging');
@@ -455,10 +456,16 @@
       dragOrigin = {x:tx, y:ty};
     }
     if(pointers.size === 1 && scale <= 1.01){
+      // Not zoomed — this could turn into our horizontal swipe or a normal
+      // vertical page scroll. Don't call preventDefault yet: on touch,
+      // that would cancel the page's own scroll for the whole gesture
+      // before we even know which way it's going. pointermove below
+      // decides once it sees a direction.
       swiping = true;
       swipeStartX = e.clientX; swipeStartY = e.clientY;
     }
     if(pointers.size === 2){
+      e.preventDefault();
       dragging = false;
       swiping = false;
       const pts = Array.from(pointers.values());
@@ -472,6 +479,7 @@
     if(!pointers.has(e.pointerId)) return;
     pointers.set(e.pointerId, {x:e.clientX, y:e.clientY, type:e.pointerType});
     if(pointers.size === 2){
+      e.preventDefault();
       const pts = Array.from(pointers.values());
       const dist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y) || 1;
       const midX = (pts[0].x + pts[1].x) / 2, midY = (pts[0].y + pts[1].y) / 2;
@@ -479,6 +487,7 @@
       zoomToward(midX, midY, newScale);
       dragMoved = true;
     } else if(dragging && pointers.size === 1){
+      e.preventDefault();
       const p = pointers.get(e.pointerId);
       if(Math.abs(p.x - dragStart.x) > 3 || Math.abs(p.y - dragStart.y) > 3) dragMoved = true;
       tx = dragOrigin.x + (p.x - dragStart.x);
@@ -487,12 +496,23 @@
       apply();
     } else if(swiping && pointers.size === 1){
       const p = pointers.get(e.pointerId);
-      if(Math.abs(p.x - swipeStartX) > 3 || Math.abs(p.y - swipeStartY) > 3) dragMoved = true;
+      const dx = p.x - swipeStartX, dy = p.y - swipeStartY;
+      if(Math.abs(dx) > 3 || Math.abs(dy) > 3) dragMoved = true;
+      if(Math.abs(dx) > Math.abs(dy)){
+        // Predominantly horizontal — ours. Claim it so the page doesn't
+        // also try to rubber-band/scroll sideways.
+        e.preventDefault();
+      } else if(Math.abs(dy) > 6){
+        // Predominantly vertical — a page scroll, not our swipe. Hand it
+        // back: touch-action:pan-y lets the browser keep scrolling this
+        // same touch natively from here.
+        swiping = false;
+      }
     }
   });
 
   function endPointer(e){
-    if(e.target.closest('.case-gallery-nav, .cg-zoom-btn, .cg-before-badge')) return;
+    if(e.target.closest('.case-gallery-nav, .cg-before-badge')) return;
     const wasTouch = pointers.get(e.pointerId) && pointers.get(e.pointerId).type === 'touch';
     pointers.delete(e.pointerId);
     photo.classList.remove('dragging');
@@ -531,10 +551,6 @@
   }
   photo.addEventListener('pointerup', endPointer);
   photo.addEventListener('pointercancel', endPointer);
-
-  if(zoomHint){
-    photo.addEventListener('pointerdown', function(){ zoomHint.style.opacity = '0'; }, {once:false});
-  }
 
   document.addEventListener('keydown', function(e){
     if(e.key === 'ArrowLeft') step(-1);
