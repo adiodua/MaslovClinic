@@ -442,7 +442,7 @@
 
   header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(var(--bg-rgb),0.85);backdrop-filter:blur(8px);}
   nav.wrap{height:88px;display:flex;align-items:center;gap:28px;}
-  .logo{font-family:'Inter',sans-serif;font-size:22px;font-weight:300;flex-shrink:0;white-space:nowrap;}
+  .logo{font-family:'Questrial',sans-serif;font-size:22px;font-weight:400;flex-shrink:0;white-space:nowrap;}
   .navlinks{display:flex;gap:22px;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--text-muted);}
   .navlinks a{white-space:nowrap;}
   .navlinks a:hover{color:var(--wood-deep);}
