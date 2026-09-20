@@ -1273,7 +1273,7 @@
   /* Desktop expanded: card, black frame, centered */
   .vtour[data-state="expanded"] .vtour-frame{
     left:50%;bottom:50%;transform:translate(-50%,50%);
-    width:88vw;max-width:360px;height:80vh;max-height:640px;border-radius:18px;
+    height:min(80vh,640px);width:auto;aspect-ratio:9/16;max-width:88vw;border-radius:18px;
     box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 8px #000;
   }
   .vtour[data-state="expanded"] .vtour-bubble-ui{display:none;}
