@@ -470,19 +470,16 @@
     </div>
   </div>
 </section>
+<script src="/assets/patients-en.js"></script>
 <script>
 (function(){
-  var POOL = [
-    '/img/patients/darya-portrait2.jpg',
-    '/img/patients/uriy-portrait.jpg',
-    '/img/patients/yuliya-portrait.jpg',
-    '/img/patients/kristina-after.jpg',
-    '/img/patients/irina-portrait.jpg',
-    '/img/patients/oksana-portrait.jpg',
-    '/img/patients/olga-v-portrait.jpg',
-    '/img/patients/natalya-portrait.jpg',
-    '/img/patients/olga-i-portrait.jpg'
-  ];
+  // Built from the shared PATIENTS object (assets/patients-*.js) instead of
+  // a hand-maintained list - a hardcoded copy here is exactly how Mikhail
+  // silently never made it into this crossfade after being added elsewhere
+  // on this same page.
+  var POOL = Object.keys(window.PATIENTS || {}).map(function(slug){
+    return '/img/patients/' + window.PATIENTS[slug].cover + '.webp';
+  });
   var photo = document.getElementById('worksHeroPhoto');
   if(!photo) return;
   // Preload the whole pool so swapping .src never shows a blank/broken
@@ -525,43 +522,43 @@
     </div>
     <div class="cases-grid">
       <button class="case-card" onclick="openPatientModal('darya')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" src="/img/patients/darya-portrait2.jpg" alt="Darya — portrait after veneers" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Darya</h3><p>Ceramic Veneers</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('uriy')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/uriy-portrait.jpg" alt="Yuriy — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Yuriy</h3><p>Implant Treatment</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('yuliya')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" src="/img/patients/yuliya-portrait.jpg" alt="Yuliya — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1280" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Yuliya</h3><p>Ceramic Veneers</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('kristina')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/kristina-after.jpg" alt="Kristina — ceramic veneer results" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Kristina</h3><p>Ceramic Veneers</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('irina')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/irina-portrait.jpg" alt="Irina — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Irina</h3><p>Ceramic Veneers &amp; Crowns</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-v')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-v-portrait.jpg" alt="Olga — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Olga</h3><p>Ceramic Veneers</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('oksana')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/oksana-portrait.jpg" alt="Oksana — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Oksana</h3><p>Implant Treatment</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('natalya')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/natalya-portrait.jpg" alt="Natalya — implant treatment result" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Natalya</h3><p>Implant Treatment</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('olga-i')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Olga — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Olga</h3><p>Implant Treatment</p></div>
       </button>
       <button class="case-card" onclick="openPatientModal('mikhail')">
-        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/mikhail-after.jpg" alt="Mikhail — ceramic restoration result" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Mikhail</h3><p>Ceramic Restorations</p></div>
       </button>
       <div class="case-card soon"><span class="badge">Coming Soon</span></div>
@@ -595,79 +592,17 @@
 </div>
 
 <script>
-  const PATIENTS = {
-    darya: {
-      name: 'Darya', tag: 'Ceramic Veneers',
-      desc: '8 veneers, enamel preparation, and bonding using individual impressions.',
-      url: '/en/raboty/patient-1.html',
-      photos: ['/img/patients/darya-portrait.webp','/img/patients/darya-portrait2.webp','/img/patients/darya-portrait3.webp','/img/patients/darya-before.webp','/img/patients/darya-before2.webp','/img/patients/darya-before3.webp','/img/patients/darya-before4.webp','/img/patients/darya-after.webp','/img/patients/darya-after2.webp','/img/patients/darya-after3.webp','/img/patients/darya-after4.webp'],
-      labels: ['Portrait, before','Portrait','Portrait','Before','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
-    },
-    uriy: {
-      name: 'Yuriy', tag: 'Implant Treatment',
-      desc: 'Diagnostics, implant placement, and prosthetics.',
-      url: '/en/raboty/patient-2.html',
-      photos: ['/img/patients/uriy-portrait.jpg','/img/patients/uriy-before.jpg','/img/patients/uriy-after.jpg'],
-      labels: ['Portrait','Before','After']
-    },
-    yuliya: {
-      name: 'Yuliya', tag: 'Ceramic Veneers',
-      desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
-      url: '/en/raboty/patient-3.html',
-      photos: ['/img/patients/yuliya-before.jpg','/img/patients/yuliya-before2.jpg','/img/patients/yuliya-before3.jpg','/img/patients/yuliya-after.jpg','/img/patients/yuliya-after2.jpg','/img/patients/yuliya-after3.jpg','/img/patients/yuliya-after4.jpg'],
-      labels: ['Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
-    },
-    kristina: {
-      name: 'Kristina', tag: 'Ceramic Veneers',
-      desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
-      url: '/en/raboty/patient-4.html',
-      photos: ['/img/patients/kristina-after.jpg'],
-      labels: ['After']
-    },
-    irina: {
-      name: 'Irina', tag: 'Ceramic Veneers & Crowns',
-      desc: 'Tooth preparation, veneers and crowns custom-made from individual impressions, and bonding.',
-      url: '/en/raboty/patient-5.html',
-      photos: ['/img/patients/irina-portrait.jpg','/img/patients/irina-before.jpg','/img/patients/irina-after.jpg','/img/patients/irina-after2.jpg','/img/patients/irina-after3.jpg','/img/patients/irina-after4.jpg','/img/patients/irina-after5.jpg'],
-      labels: ['Portrait','Before','After','After, angle 2','After, angle 3','After, angle 4','After, angle 5']
-    },
-    oksana: {
-      name: 'Oksana', tag: 'Implant Treatment',
-      desc: 'Diagnostics, implant placement, and prosthetics.',
-      url: '/en/raboty/patient-6.html',
-      photos: ['/img/patients/oksana-portrait.jpg','/img/patients/oksana-after.jpg'],
-      labels: ['Portrait','After']
-    },
-    'olga-v': {
-      name: 'Olga', tag: 'Ceramic Veneers',
-      desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
-      url: '/en/raboty/patient-7.html',
-      photos: ['/img/patients/olga-v-portrait.jpg','/img/patients/olga-v-before.jpg','/img/patients/olga-v-after.jpg'],
-      labels: ['Portrait','Before','After']
-    },
-    natalya: {
-      name: 'Natalya', tag: 'Implant Treatment',
-      desc: 'CT/X-ray diagnostics, implant placement, and prosthetics.',
-      url: '/en/raboty/patient-8.html',
-      photos: ['/img/patients/natalya-portrait.jpg','/img/patients/natalya-after.jpg'],
-      labels: ['Portrait','After']
-    },
-    'olga-i': {
-      name: 'Olga', tag: 'Implant Treatment',
-      desc: 'Diagnostics, implant placement, and prosthetics.',
-      url: '/en/raboty/patient-9.html',
-      photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-before2.jpg','/img/patients/olga-i-before3.jpg','/img/patients/olga-i-after.jpg','/img/patients/olga-i-after2.jpg','/img/patients/olga-i-after3.jpg','/img/patients/olga-i-after4.jpg'],
-      labels: ['Portrait','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
-    },
-    mikhail: {
-      name: 'Mikhail', tag: 'Ceramic Restorations',
-      desc: 'Placement of 28 ceramic restorations.',
-      url: '/en/raboty/patient-10.html',
-      photos: ['/img/patients/mikhail-before.jpg','/img/patients/mikhail-before2.jpg','/img/patients/mikhail-before3.jpg','/img/patients/mikhail-after.jpg','/img/patients/mikhail-after2.jpg','/img/patients/mikhail-after3.jpg'],
-      labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
-    }
-  };
-  let pmSlug = null, pmIndex = 0, pmScrollY = 0;
+  // Card thumbnails also come from the shared PATIENTS object now — see
+  // assets/patients-*.js — instead of a hardcoded src/alt per card.
+  document.querySelectorAll('.case-card[onclick]').forEach(function(btn){
+    var m = btn.getAttribute('onclick').match(/openPatientModal\('([^']+)'\)/);
+    var p = m && window.PATIENTS && window.PATIENTS[m[1]];
+    if(!p) return;
+    var img = btn.querySelector('.case-photo-main img');
+    if(img){ img.src = '/img/patients/' + p.cover + '.webp'; img.alt = p.name + ' — ' + p.tag; }
+  });
+
+    let pmSlug = null, pmIndex = 0, pmScrollY = 0;
 
   // Slide list: "before" photos — both the close-up ones and a portrait shot
   // before treatment (if any) — never get their own slide. They're pulled
