@@ -81,5 +81,13 @@ window.PATIENTS = {
     cover: 'mikhail-after',
     photos: ['/img/patients/mikhail-before.webp','/img/patients/mikhail-before2.webp','/img/patients/mikhail-before3.webp','/img/patients/mikhail-after.webp','/img/patients/mikhail-after2.webp','/img/patients/mikhail-after3.webp'],
     labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
+  },
+  irina2: {
+    name: 'Irina', tag: 'Implants & Veneers',
+    desc: 'Diagnostics, implant placement, and custom-made ceramic veneers.',
+    url: '/en/raboty/patient-11.html',
+    cover: 'irina2-portrait',
+    photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
+    labels: ['Portrait','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
   }
 };

@@ -81,5 +81,13 @@ window.PATIENTS = {
     cover: 'mikhail-after',
     photos: ['/img/patients/mikhail-before.webp','/img/patients/mikhail-before2.webp','/img/patients/mikhail-before3.webp','/img/patients/mikhail-after.webp','/img/patients/mikhail-after2.webp','/img/patients/mikhail-after3.webp'],
     labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
+  },
+  irina2: {
+    name: 'Ірина', tag: 'Імпланти і вініри',
+    desc: 'Діагностика, встановлення імплантів і керамічних вінірів за індивідуальними зліпками.',
+    url: '/ua/raboty/patient-11.html',
+    cover: 'irina2-portrait',
+    photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
+    labels: ['Портрет','До','До','До','Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4']
   }
 };
