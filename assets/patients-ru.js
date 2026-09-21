@@ -30,8 +30,8 @@ window.PATIENTS = {
     desc: 'Подготовка эмали, изготовление виниров по индивидуальным слепкам, фиксация.',
     url: '/raboty/patient-3.html',
     cover: 'yuliya-portrait',
-    photos: ['/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
-    labels: ['До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4']
+    photos: ['/img/patients/yuliya-portrait.webp','/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
+    labels: ['Портрет','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4']
   },
   kristina: {
     name: 'Кристина', tag: 'Керамические виниры',

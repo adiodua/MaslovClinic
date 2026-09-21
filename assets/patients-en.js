@@ -23,8 +23,8 @@ window.PATIENTS = {
     desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
     url: '/en/raboty/patient-3.html',
     cover: 'yuliya-portrait',
-    photos: ['/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
-    labels: ['Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
+    photos: ['/img/patients/yuliya-portrait.webp','/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
+    labels: ['Portrait','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
   },
   kristina: {
     name: 'Kristina', tag: 'Ceramic Veneers',

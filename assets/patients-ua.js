@@ -23,8 +23,8 @@ window.PATIENTS = {
     desc: 'Підготовка емалі, виготовлення вінірів за індивідуальними зліпками, фіксація.',
     url: '/ua/raboty/patient-3.html',
     cover: 'yuliya-portrait',
-    photos: ['/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
-    labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4']
+    photos: ['/img/patients/yuliya-portrait.webp','/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
+    labels: ['Портрет','До','До','До','Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4']
   },
   kristina: {
     name: 'Крістіна', tag: 'Керамічні вініри',
