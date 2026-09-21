@@ -562,7 +562,10 @@
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Ольга</h3><p>Імплантаційне лікування</p></div>
       </button>
-      <div class="case-card soon"><span class="badge">Незабаром</span></div>
+      <button class="case-card" onclick="openPatientModal('mikhail')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/mikhail-after.jpg" alt="Михайло — результат керамічних реставрацій" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Михайло</h3><p>Керамічні реставрації</p></div>
+      </button>
       <div class="case-card soon"><span class="badge">Незабаром</span></div>
       <div class="case-card soon"><span class="badge">Незабаром</span></div>
     </div>
@@ -657,6 +660,13 @@
       url: '/ua/raboty/patient-9.html',
       photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-before2.jpg','/img/patients/olga-i-before3.jpg','/img/patients/olga-i-after.jpg','/img/patients/olga-i-after2.jpg','/img/patients/olga-i-after3.jpg','/img/patients/olga-i-after4.jpg'],
       labels: ['Портрет','До','До','До','Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4']
+    },
+    mikhail: {
+      name: 'Михайло', tag: 'Керамічні реставрації',
+      desc: 'Встановлення 28 керамічних реставрацій.',
+      url: '/ua/raboty/patient-10.html',
+      photos: ['/img/patients/mikhail-before.jpg','/img/patients/mikhail-before2.jpg','/img/patients/mikhail-before3.jpg','/img/patients/mikhail-after.jpg','/img/patients/mikhail-after2.jpg','/img/patients/mikhail-after3.jpg'],
+      labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
     }
   };
   let pmSlug = null, pmIndex = 0, pmScrollY = 0;

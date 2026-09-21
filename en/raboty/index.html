@@ -560,7 +560,10 @@
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Olga — portrait" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Olga</h3><p>Implant Treatment</p></div>
       </button>
-      <div class="case-card soon"><span class="badge">Coming Soon</span></div>
+      <button class="case-card" onclick="openPatientModal('mikhail')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/mikhail-after.jpg" alt="Mikhail — ceramic restoration result" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Mikhail</h3><p>Ceramic Restorations</p></div>
+      </button>
       <div class="case-card soon"><span class="badge">Coming Soon</span></div>
       <div class="case-card soon"><span class="badge">Coming Soon</span></div>
     </div>
@@ -655,6 +658,13 @@
       url: '/en/raboty/patient-9.html',
       photos: ['/img/patients/olga-i-portrait.jpg','/img/patients/olga-i-before.jpg','/img/patients/olga-i-before2.jpg','/img/patients/olga-i-before3.jpg','/img/patients/olga-i-after.jpg','/img/patients/olga-i-after2.jpg','/img/patients/olga-i-after3.jpg','/img/patients/olga-i-after4.jpg'],
       labels: ['Portrait','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
+    },
+    mikhail: {
+      name: 'Mikhail', tag: 'Ceramic Restorations',
+      desc: 'Placement of 28 ceramic restorations.',
+      url: '/en/raboty/patient-10.html',
+      photos: ['/img/patients/mikhail-before.jpg','/img/patients/mikhail-before2.jpg','/img/patients/mikhail-before3.jpg','/img/patients/mikhail-after.jpg','/img/patients/mikhail-after2.jpg','/img/patients/mikhail-after3.jpg'],
+      labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
     }
   };
   let pmSlug = null, pmIndex = 0, pmScrollY = 0;

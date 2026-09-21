@@ -564,7 +564,10 @@
         <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/olga-i-portrait.jpg" alt="Ольга — портрет" style="width:100%;height:100%;object-fit:cover;"></div>
         <div class="case-info"><h3>Ольга</h3><p>Имплантационное лечение</p></div>
       </button>
-      <div class="case-card soon"><span class="badge">Скоро</span></div>
+      <button class="case-card" onclick="openPatientModal('mikhail')">
+        <div class="case-photo-main" style="background:none;padding:0;"><img width="1600" height="1067" loading="lazy" src="/img/patients/mikhail-after.jpg" alt="Михаил — результат керамических реставраций" style="width:100%;height:100%;object-fit:cover;"></div>
+        <div class="case-info"><h3>Михаил</h3><p>Керамические реставрации</p></div>
+      </button>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
       <div class="case-card soon"><span class="badge">Скоро</span></div>
     </div>
@@ -659,6 +662,13 @@
       url: '/raboty/patient-9.html',
       photos: ['/img/patients/olga-i-portrait.webp','/img/patients/olga-i-before.webp','/img/patients/olga-i-before2.webp','/img/patients/olga-i-before3.webp','/img/patients/olga-i-after.webp','/img/patients/olga-i-after2.webp','/img/patients/olga-i-after3.webp','/img/patients/olga-i-after4.webp'],
       labels: ['Портрет','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4']
+    },
+    mikhail: {
+      name: 'Михаил', tag: 'Керамические реставрации',
+      desc: 'Установка 28 керамических реставраций.',
+      url: '/raboty/patient-10.html',
+      photos: ['/img/patients/mikhail-before.webp','/img/patients/mikhail-before2.webp','/img/patients/mikhail-before3.webp','/img/patients/mikhail-after.webp','/img/patients/mikhail-after2.webp','/img/patients/mikhail-after3.webp'],
+      labels: ['До','До','До','После','После, ракурс 2','После, ракурс 3']
     }
   };
   let pmSlug = null, pmIndex = 0, pmScrollY = 0;
