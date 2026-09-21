@@ -2058,6 +2058,15 @@
     document.getElementById('pmDesc').textContent = PATIENTS[slug].desc;
     document.getElementById('pmCaseLink').href = PATIENTS[slug].url;
     const slides = pmSlides();
+    // The "before" badge photos are full-resolution files (300-400KB)
+    // shown at a tiny 93px corner, and pmRender() only fetches one the
+    // moment its slide becomes current - stepping to a new slide meant a
+    // fresh network fetch each time, so the badge sat blank/slow to
+    // appear on anything but a fast connection. Warm the cache for all of
+    // this patient's before-photos as soon as the modal opens instead.
+    const beforeSrcs = new Set();
+    slides.forEach(function(s){ if(s.beforeSrc) beforeSrcs.add(s.beforeSrc); });
+    beforeSrcs.forEach(function(src){ (new Image()).src = src; });
     const thumbs = document.getElementById('pmThumbs');
     thumbs.innerHTML = '';
     slides.forEach((s, i) => {
