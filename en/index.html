@@ -3219,7 +3219,13 @@ const galleryData = [
 
   frame.addEventListener('click', function(e){
     if(e.target.closest('.vtour-sound, .vtour-close, .vtour-tapzone')) return;
-    if(!expanded) expand();
+    // Expanding into the story view only makes sense on mobile, where it
+    // goes true fullscreen (see the max-width:640px block above). On
+    // desktop the expanded card kept the video's real proportions but
+    // still read as an odd, oddly-cropped-feeling zoom to the client, so
+    // the interaction is off entirely there - the bubble just plays on
+    // loop and that's it.
+    if(!expanded && window.innerWidth <= 640) expand();
   });
   closeBtn.addEventListener('click', function(e){ e.stopPropagation(); collapse(); });
   soundBtn.addEventListener('click', function(e){
