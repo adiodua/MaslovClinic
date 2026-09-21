@@ -937,6 +937,15 @@
     if(dy > 90 && dx < 60) collapse();
     touchStartY = null; touchStartX = null;
   }, {passive:true});
+
+  // The bubble video autoplays on loop from the moment the page loads and
+  // never had anything telling it to stop - switching tabs or backgrounding
+  // the browser left it decoding video in the background indefinitely,
+  // burning CPU/GPU (and battery) for a preview clip nobody was looking at.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ video.pause(); }
+    else { video.play().catch(function(){}); }
+  });
 })();
 </script>
 

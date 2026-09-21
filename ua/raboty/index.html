@@ -499,7 +499,14 @@
     cur.classList.remove('active');
     activeLayer = 1 - activeLayer;
   }
-  setInterval(cycle, 3300);
+  var cycleTimer = setInterval(cycle, 3300);
+  // Ran forever regardless of tab visibility - burning CPU on a background
+  // tab for a crossfade nobody is looking at. Stop it while hidden, restart
+  // on return.
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden){ clearInterval(cycleTimer); }
+    else { cycleTimer = setInterval(cycle, 3300); }
+  });
 })();
 </script>
 
