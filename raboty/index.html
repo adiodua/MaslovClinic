@@ -201,8 +201,16 @@
   }
   .pm-before-badge.show{display:block;}
   .pm-before-badge.expanded{
-    top:10%;left:10%;width:80%;height:80%;cursor:zoom-out;
+    top:0;left:0;width:100%;height:100%;cursor:zoom-out;border-radius:0;
     box-shadow:0 20px 50px rgba(0,0,0,.55);
+  }
+  /* Right after tapping to collapse, the cursor is still resting over the
+     (still large, mid-shrink) badge, so :hover below would otherwise kick
+     in and flash the gold ring/border for the whole collapse animation —
+     reads as an unwanted colour change rather than a hover hint. */
+  .pm-before-badge.collapsing:hover{
+    border-color:#fff;
+    box-shadow:0 6px 18px rgba(0,0,0,.45);
   }
   /* Hint that the badge is clickable — gold ring on hover, same as the rest
      of the site's accent color, not just the generic pointer cursor. */
@@ -776,9 +784,21 @@
   // anywhere else, to collapse it back down.
   (function(){
     const badge = document.getElementById('pmBeforeBadge');
+    // Collapsing needs its own step (not just removing .expanded) because
+    // the cursor is still resting on the badge right as it starts shrinking
+    // back down — :hover would otherwise paint the gold ring for the whole
+    // 450ms animation, reading as an unwanted colour flash. The .collapsing
+    // class overrides that hover styling for exactly as long as the
+    // transition takes, then clears itself.
+    function collapseBadge(){
+      badge.classList.remove('expanded');
+      badge.classList.add('collapsing');
+      setTimeout(function(){ badge.classList.remove('collapsing'); }, 450);
+    }
     badge.addEventListener('click', function(e){
       e.stopPropagation();
-      badge.classList.toggle('expanded');
+      if(badge.classList.contains('expanded')) collapseBadge();
+      else badge.classList.add('expanded');
     });
     // pointerdown (not click) so this fires reliably even when the tap lands
     // on the main photo — its own zoom handler calls preventDefault() on
@@ -786,7 +806,7 @@
     // that a plain 'click' listener here would have relied on.
     document.addEventListener('pointerdown', function(e){
       if(badge.classList.contains('expanded') && !badge.contains(e.target)){
-        badge.classList.remove('expanded');
+        collapseBadge();
       }
     });
   })();
