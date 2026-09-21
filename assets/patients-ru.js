@@ -54,8 +54,8 @@ window.PATIENTS = {
     desc: 'Диагностика, установка имплантов, протезирование.',
     url: '/raboty/patient-6.html',
     cover: 'oksana-portrait',
-    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp'],
-    labels: ['Портрет','После']
+    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp','/img/patients/oksana-after2.webp'],
+    labels: ['Портрет','После','После, рентген']
   },
   'olga-v': {
     name: 'Ольга', tag: 'Керамические виниры',

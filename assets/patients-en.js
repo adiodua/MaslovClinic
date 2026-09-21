@@ -47,8 +47,8 @@ window.PATIENTS = {
     desc: 'Diagnostics, implant placement, and prosthetics.',
     url: '/en/raboty/patient-6.html',
     cover: 'oksana-portrait',
-    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp'],
-    labels: ['Portrait','After']
+    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp','/img/patients/oksana-after2.webp'],
+    labels: ['Portrait','After','After, X-ray']
   },
   'olga-v': {
     name: 'Olga', tag: 'Ceramic Veneers',

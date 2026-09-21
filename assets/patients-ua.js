@@ -47,8 +47,8 @@ window.PATIENTS = {
     desc: 'Діагностика, встановлення імплантів, протезування.',
     url: '/ua/raboty/patient-6.html',
     cover: 'oksana-portrait',
-    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp'],
-    labels: ['Портрет','Після']
+    photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp','/img/patients/oksana-after2.webp'],
+    labels: ['Портрет','Після','Після, рентген']
   },
   'olga-v': {
     name: 'Ольга', tag: 'Керамічні вініри',
