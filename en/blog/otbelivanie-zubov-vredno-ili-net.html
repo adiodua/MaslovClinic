@@ -5,12 +5,6 @@
 <script>
 (function(){
   try{
-    // Skip the auto-redirect entirely for search engine crawlers and other
-    // bots — they have no real "device language", so this would otherwise
-    // make every language mirror look like it permanently redirects away
-    // to a bot with no stored preference, which stops search engines from
-    // indexing each language version at its own URL. Real visitors still
-    // get the convenience redirect below.
     if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
     var onLang = (path === '/ua' || path.indexOf('/ua/') === 0) ? 'UA'
@@ -20,9 +14,6 @@
     var wantLang;
     if(stored === 'RU' || stored === 'UA' || stored === 'EN'){ wantLang = stored; }
     else {
-      // No explicit choice saved yet — follow the device/browser language.
-      // RU, UA and EN each have a live mirror, so any of the three can be
-      // the auto-detected target; anything else falls back to RU.
       var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
       wantLang = browserLang.indexOf('uk') === 0 ? 'UA' : browserLang.indexOf('en') === 0 ? 'EN' : 'RU';
     }
@@ -42,44 +33,34 @@
     var t = localStorage.getItem('mc-theme');
     if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
     document.documentElement.setAttribute('data-theme', t);
-    // Also set color-scheme directly (not just via the [data-theme] CSS rule
-    // further down): the browser paints its very first frame - the native
-    // background/scrollbar before any author CSS is applied - using the
-    // OS/browser's own dark-vs-light guess. On a full page navigation (this
-    // site has no client-side routing, every link is a real page load) that
-    // first frame briefly flashes with the wrong theme whenever the visitor's
-    // saved choice disagrees with their OS setting, most visible in the
-    // fixed header since it's the first thing on screen. Setting the inline
-    // style here takes effect immediately, before the stylesheet is even
-    // parsed, so that first frame already matches.
     document.documentElement.style.colorScheme = t;
   }catch(e){}
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sedation Dentistry in Odesa — Treatment Without Fear, from UAH 6,900 | MaslovClinic</title>
-<meta name="description" content="Sedation dentistry at MaslovClinic on Arkadiivske Plato — for anxious patients and complex cases. Dr. Vyacheslav Maslov. From UAH 6,900.">
-<link rel="canonical" href="https://maslovclinic.com/en/uslugi/sedatsiya.html">
-<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/uslugi/sedatsiya.html">
-<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/uslugi/sedatsiya.html">
-<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/uslugi/sedatsiya.html">
-<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/uslugi/sedatsiya.html">
+<title>Teeth Whitening: Is It Harmful, and How to Choose a Safe Method | MaslovClinic</title>
+<meta name="description" content="We unpack the biggest myth about teeth whitening, how in-office whitening differs from at-home whitening, and how long the results last.">
+<link rel="canonical" href="https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/blog/otbelivanie-zubov-vredno-ili-net.html">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/blog/otbelivanie-zubov-vredno-ili-net.html">
+<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/blog/otbelivanie-zubov-vredno-ili-net.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:site_name" content="MaslovClinic">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sedation Dentistry in Odesa — Treatment Without Fear, from UAH 6,900 | MaslovClinic">
-<meta property="og:description" content="Sedation dentistry at MaslovClinic on Arkadiivske Plato — for anxious patients and complex cases. Dr. Vyacheslav Maslov. From UAH 6,900.">
-<meta property="og:url" content="https://maslovclinic.com/en/uslugi/sedatsiya.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Teeth Whitening: Is It Harmful, and How to Choose a Safe Method | MaslovClinic">
+<meta property="og:description" content="We unpack the biggest myth about teeth whitening, how in-office whitening differs from at-home whitening, and how long the results last.">
+<meta property="og:url" content="https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html">
 <meta property="og:image" content="https://maslovclinic.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Sedation Dentistry in Odesa — Treatment Without Fear, from UAH 6,900 | MaslovClinic">
-<meta name="twitter:description" content="Sedation dentistry at MaslovClinic on Arkadiivske Plato — for anxious patients and complex cases. Dr. Vyacheslav Maslov. From UAH 6,900.">
+<meta name="twitter:title" content="Teeth Whitening: Is It Harmful, and How to Choose a Safe Method | MaslovClinic">
+<meta name="twitter:description" content="We unpack the biggest myth about teeth whitening, how in-office whitening differs from at-home whitening, and how long the results last.">
 <meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,44 +68,12 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MedicalProcedure",
-  "name": "Sedation Dentistry",
-  "procedureType": "https://schema.org/NoninvasiveProcedure",
-  "bodyLocation": "Whole body (pharmacological relaxation)",
-  "howPerformed": "Pharmacological sedation administered under the supervision of an anesthesiologist during dental treatment.",
-  "provider": {
-    "@type": "Dentist",
-    "name": "MaslovClinic",
-    "image": "https://maslovclinic.com/assets/img/clinic-reception.jpg",
-    "telephone": "+380949405514",
-    "email": "maslovclinic@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "5A Arkadiivske Plato St, Bldg 1",
-      "addressLocality": "Odesa",
-      "addressRegion": "Odesa Oblast",
-      "postalCode": "65000",
-      "addressCountry": "UA"
-    }
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "6900",
-    "priceCurrency": "UAH",
-    "priceValidUntil": "2026-12-31"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Physician",
-  "name": "Vyacheslav Maslov",
-  "medicalSpecialty": "Dentistry",
-  "worksFor": {
-    "@type": "Dentist",
-    "name": "MaslovClinic"
-  }
+  "@type": "Article",
+  "headline": "Teeth Whitening: Is It Harmful, and How to Choose a Safe Method",
+  "author": {"@type": "Organization", "name": "MaslovClinic"},
+  "publisher": {"@type": "Organization", "name": "MaslovClinic", "logo": {"@type": "ImageObject", "url": "https://maslovclinic.com/assets/logo.png"}},
+  "datePublished": "2026-09-21",
+  "mainEntityOfPage": "https://maslovclinic.com/blog/otbelivanie-zubov-vredno-ili-net.html"
 }
 </script>
 <script type="application/ld+json">
@@ -133,9 +82,21 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://maslovclinic.com/en/"},
-    {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://maslovclinic.com/en/uslugi/"},
-    {"@type": "ListItem", "position": 3, "name": "Sedation", "item": "https://maslovclinic.com/en/uslugi/sedatsiya.html"}
+    {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://maslovclinic.com/en/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Is Whitening Harmful", "item": "https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html"}
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Teeth Whitening: Is It Harmful, and How to Choose a Safe Method",
+  "description": "We unpack the biggest myth about teeth whitening, how in-office whitening differs from at-home whitening, and how long the results last.",
+  "url": "https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html",
+  "author": {"@type": "Organization", "name": "MaslovClinic"},
+  "publisher": {"@type": "Organization", "name": "MaslovClinic", "logo": {"@type": "ImageObject", "url": "https://maslovclinic.com/assets/logo.png"}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://maslovclinic.com/en/blog/otbelivanie-zubov-vredno-ili-net.html"}
 }
 </script>
 <script type="application/ld+json">
@@ -143,14 +104,15 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "Is sedation safe?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, sedation is administered under the supervision of an anesthesiologist, with vital signs monitored throughout the entire treatment."}},
-    {"@type": "Question", "name": "How is sedation different from general anesthesia?", "acceptedAnswer": {"@type": "Answer", "text": "During sedation, the patient stays conscious and can respond to the dentist's requests, but remains in a deeply relaxed state, free of anxiety, with minimal memory of the procedure."}},
-    {"@type": "Question", "name": "Who is sedation treatment suitable for?", "acceptedAnswer": {"@type": "Answer", "text": "Patients with pronounced dental anxiety, a strong gag reflex, and those undergoing lengthy or extensive procedures in a single visit."}},
-    {"@type": "Question", "name": "How much time is needed to recover after sedation?", "acceptedAnswer": {"@type": "Answer", "text": "Usually 30–60 minutes of monitored rest at the clinic is enough, but driving is not recommended on the day of the procedure."}}
+    {"@type": "Question", "name": "Is teeth whitening harmful?", "acceptedAnswer": {"@type": "Answer", "text": "Done correctly by a dentist — no, the enamel isn't damaged. Temporary sensitivity after the procedure is a normal reaction that fades within a few days."}},
+    {"@type": "Question", "name": "How much does teeth whitening cost in Odesa?", "acceptedAnswer": {"@type": "Answer", "text": "Beyond Polus whitening at MaslovClinic starts from 4000 UAH."}},
+    {"@type": "Question", "name": "How many shades lighter do teeth get?", "acceptedAnswer": {"@type": "Answer", "text": "4–8 shades on the Vita scale on average — the exact result depends on your starting shade and enamel structure."}},
+    {"@type": "Question", "name": "How long does the whitening effect last?", "acceptedAnswer": {"@type": "Answer", "text": "1 to 2 years if you follow the \"white diet\" for the first 48 hours and keep up regular oral hygiene."}}
   ]
 }
 </script>
 <link rel="stylesheet" href="/assets/uslugi.css">
+<link rel="stylesheet" href="/assets/blog.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -195,10 +157,6 @@
     var rest = path.indexOf('/en/') === 0 ? path.slice(3) : (path === '/en' ? '/' : path);
     var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
     var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
-    // Only worth mentioning when the page you're already on actually
-    // matches what your device reports — a French or English browser
-    // landing on the RU default isn't "shown in Russian because of your
-    // device", it's just the site's fallback, so no banner there.
     var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
     if(!relevant) return;
     sessionStorage.setItem('mc-lang-banner-seen', '1');
@@ -300,82 +258,53 @@
 </div>
 
 
-<section class="hero" style="--hero-photo:url('/img/uslugi/sedatsiya.jpg');">
+<section class="hero" style="--hero-photo:url('/img/uslugi/otbelivanie-zubov.jpg');">
   <div class="wrap">
-    <div class="crumbs-inline"><a href="/en/">Home</a> / <a href="/en/uslugi/">Services</a> / <span class="crumb-active">Sedation</span></div>
-    <h1>We work —<br>you sleep</h1>
-    <p class="lead">For anxious patients, we offer sedation for any procedure — from treating a cavity to major surgery. Sedation also makes it possible to complete a large volume of treatment without the patient feeling fatigued.</p>
+    <div class="crumbs-inline"><a href="/en/">Home</a> / <a href="/en/blog/">Blog</a> / <span class="crumb-active">Is Whitening Harmful</span></div>
+    <h1>Teeth Whitening: Is It Harmful,<br>and How to Choose a Safe Method</h1>
+    <p class="lead">We unpack the biggest myth about teeth whitening, how in-office whitening differs from at-home whitening, and how long the results last.</p>
     <div class="cta-row">
       <span class="seg"></span>
       <a href="#" class="btn js-open-booking">Book a Visit</a>
-      <a href="#vrach" class="btn ghost">Clinic Doctors</a>
       <span class="seg"></span>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <div class="price-native">
-    <h3>Pricing</h3>
-    <div class="price-row"><span>First hour</span> <span data-price="sedatsiya-first-hour">UAH 6,900</span></div>
-    <div class="price-row"><span>Each additional hour</span> <span data-price="sedatsiya-next-hour">UAH 4,600</span></div>
-  </div>
-</div>
-
 <section class="alt">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Overview</span>
-      <h2>Pharmacological Relaxation Under Medical Supervision</h2>
-      <p>Sedation is a form of pharmacological relaxation in which the patient stays conscious but feels no anxiety and retains almost no memory of the procedure itself. It is carried out under the supervision of an anesthesiologist.</p>
+    <div class="article-body">
+      <div class="article-meta">MaslovClinic · Blog</div>
+
+      <h2>So is teeth whitening actually harmful</h2>
+      <p>Done correctly — no. Modern whitening, such as the Beyond Polus in-office system, works with a light-activated gel that lightens the pigment inside the enamel without breaking down its structure. The discomfort some people feel is temporary tooth sensitivity, not enamel damage, and it fades within a few days.</p>
+
+      <h2>Who whitening isn't recommended for</h2>
+      <p>The dentist rules out contraindications at a consultation before the procedure: pregnancy and breastfeeding, untreated cavities and gum disease, and significant tooth sensitivity. That's why whitening is usually preceded by an exam, and sometimes by professional hygiene.</p>
+
+      <h2>In-office vs. at-home whitening — what's the difference</h2>
+      <p>In-office whitening (the Beyond Polus system at our clinic) delivers a noticeable result in a single session under a dentist's supervision. At-home whitening uses custom trays worn for a set time at home as prescribed by the dentist, with results building up gradually. Both options lighten natural enamel by several shades.</p>
+
+      <h2>How the in-clinic procedure works</h2>
+      <p>Exam and consultation — the dentist assesses the condition of your enamel and gums, rules out contraindications, and selects a target shade. Next comes preparation — protecting the soft tissue and gums, plus professional hygiene if needed. The gel is applied to the enamel and activated with a lamp in several short cycles. The procedure finishes with a desensitizing treatment and a rundown of the "white diet" rules for the first 48 hours.</p>
+
+      <h2>How long the result lasts, and what it costs</h2>
+      <p>The effect lasts 1 to 2 years if you follow the "white diet" for the first 48 hours and keep up regular hygiene. At MaslovClinic, Beyond Polus whitening starts from 4000 UAH.</p>
     </div>
-    <div class="grid-3">
-      <div class="card">
-        <h3>What It Offers</h3>
-        <p>Relieves anxiety and fear of treatment, reduces the gag reflex, and makes lengthy procedures more comfortable.</p>
-      </div>
-      <div class="card">
-        <h3>Who It's For</h3>
-        <p>Patients with dental phobia, a strong gag reflex, or those undergoing extensive treatment in a single visit.</p>
-      </div>
-      <div class="card">
-        <h3>Safety</h3>
-        <p>Vital signs are monitored throughout treatment by an anesthesiologist.</p>
+
+    <div class="article-cta">
+      <h3>Want a brighter smile?</h3>
+      <p>Beyond Polus whitening and at-home trays — at MaslovClinic on Arkadiivske Plato.</p>
+      <div class="cta-row">
+        <a href="/en/uslugi/otbelivanie-zubov.html" class="btn primary">Whitening & Pricing</a>
       </div>
     </div>
   </div>
 </section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Visit Steps</span>
-      <h2>How Sedation Treatment Works</h2>
-    </div>
-    <ol class="steps">
-      <li><div><h4>Anesthesiologist Consultation</h4><p>Assessing contraindications and selecting the appropriate type of sedation before treatment.</p></div></li>
-      <li><div><h4>Sedation Administration</h4><p>Pharmacological relaxation takes effect quickly, and the patient remains conscious.</p></div></li>
-      <li><div><h4>Treatment Under Supervision</h4><p>The dentist performs the necessary procedures while the anesthesiologist monitors the patient's condition.</p></div></li>
-      <li><div><h4>Recovery</h4><p>After treatment, the patient rests under observation for 30–60 minutes before leaving the clinic.</p></div></li>
-    </ol>
-  </div>
-</section>
-
-<section class="alt" id="vrach">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Doctors</span>
-      <h2>Who Performs the Treatment</h2>
-      <p>This service is performed by our clinic's dentists according to their specialization and experience. Meet the full team on the Doctors page.</p>
-    </div>
-    <a href="/en/vrachi/" class="btn ghost">Meet Our Doctors →</a>
-  </div>
-</section>
-
 
 <div class="locality">
   <div class="wrap">
-    <strong>MaslovClinic</strong> is located on Arkadiivske Plato, 5A, Bldg 1 (Prymorskyi district, Odesa), near Henuezka Street and Posmitnoho Street. Free parking is available for patients at the clinic.
+    <strong>MaslovClinic</strong> is located on Arkadiivske Plato, 5A, Bldg 1 (Prymorskyi district, Odesa), near Henueska St and Posmitnoho St. Free parking is available for patients by the clinic.
   </div>
 </div>
 
@@ -383,27 +312,26 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">FAQ</span>
-      <h2>Frequently Asked Questions About Sedation</h2>
+      <h2>Frequently Asked Questions</h2>
     </div>
     <div class="faq">
       <details>
-        <summary>Is sedation safe?</summary>
-        <p>Yes, sedation is administered under the supervision of an anesthesiologist, with vital signs monitored throughout the entire treatment.</p>
+        <summary>Is teeth whitening harmful?</summary>
+        <p>Done correctly by a dentist — no, the enamel isn't damaged. Temporary sensitivity after the procedure is a normal reaction that fades within a few days.</p>
       </details>
       <details>
-        <summary>How is sedation different from general anesthesia?</summary>
-        <p>During sedation, the patient stays conscious and can respond to the dentist's requests, but remains in a deeply relaxed state, free of anxiety, with minimal memory of the procedure.</p>
+        <summary>How much does teeth whitening cost in Odesa?</summary>
+        <p>Beyond Polus whitening at MaslovClinic starts from 4000 UAH.</p>
       </details>
       <details>
-        <summary>Who is sedation treatment suitable for?</summary>
-        <p>Patients with pronounced dental anxiety, a strong gag reflex, and those undergoing lengthy or extensive procedures in a single visit.</p>
+        <summary>How many shades lighter do teeth get?</summary>
+        <p>4–8 shades on the Vita scale on average — the exact result depends on your starting shade and enamel structure.</p>
       </details>
       <details>
-        <summary>How much time is needed to recover after sedation?</summary>
-        <p>Usually 30–60 minutes of monitored rest at the clinic is enough, but driving is not recommended on the day of the procedure.</p>
+        <summary>How long does the whitening effect last?</summary>
+        <p>1 to 2 years if you follow the "white diet" for the first 48 hours and keep up regular oral hygiene.</p>
       </details>
     </div>
-    <p style="margin-top:24px;"><a href="/en/blog/sedatsiya-lechenie-vo-sne.html" style="color:var(--wood);font-weight:600;">Read also: what sedation is and who it's for →</a></p>
   </div>
 </section>
 
@@ -453,21 +381,11 @@
     const current = document.getElementById('langCurrentBtn');
     const menu = document.getElementById('langMenu');
     const label = document.getElementById('langCurrentLabel');
-    // Mobile-menu language pills (.mobile-langs) mirror the same three
-    // targets in a fixed RU/UA/EN order but carry no data-lang of their
-    // own and previously had no click handler at all — wired up here so
-    // they share the same path-rewriting logic as the dropdown below.
     const mobileLangBtns = document.querySelectorAll('.mobile-langs .langbtn');
     const mobileLangOrder = ['RU','UA','EN'];
     function go(target){
       const path = location.pathname;
-      // Remember the visitor's explicit choice so the auto-detect script
-      // (which otherwise follows navigator.language on every fresh visit)
-      // never fights a manual pick on a later page load.
       try{ localStorage.setItem('mc-lang', target); }catch(e){}
-      // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
-      // same folder structure, so switching is pure path manipulation —
-      // strip whichever prefix is currently active, then add the new one.
       const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
         : path.indexOf('/en/') === 0 ? path.slice(3)
         : (path === '/ua' || path === '/en') ? '/'
@@ -498,12 +416,7 @@
     });
   })();
 
-  // Active-page nav highlight — marks the current section's nav link instead of
-  // ever hiding/removing it, on both the desktop menu and the mobile menu.
   (function(){
-    // Strip a leading /ua or /en so section detection works the same on
-    // the Ukrainian and English mirrors (paths there are /ua/uslugi/...,
-    // /en/uslugi/..., etc.) without a separate ruleset per language.
     const rawPath = location.pathname;
     const path = rawPath.startsWith('/ua/') ? rawPath.slice(3)
       : rawPath.startsWith('/en/') ? rawPath.slice(3)
@@ -522,7 +435,6 @@
     });
   })();
 
-  // Mobile hamburger menu
   (function(){
     const btn = document.getElementById('menuToggle');
     const menu = document.getElementById('mobileMenu');
@@ -543,7 +455,6 @@
     menu.querySelectorAll('a').forEach(a=>{
       a.addEventListener('click', function(){ setOpen(false); });
     });
-    // tap elsewhere closes the menu without activating whatever was tapped there
     document.addEventListener('click', function(e){
       if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
         e.preventDefault();
@@ -573,10 +484,6 @@
         openScrollY = null;
       }
     }, true);
-    // Close the panel if the visitor scrolls far away from where they
-    // opened it — the scroll-driven "floating drop" squish animation that
-    // used to live here has been removed (the button no longer reacts to
-    // scrolling at all, just sits still until hovered or clicked).
     window.addEventListener('scroll', function(){
       const y = window.scrollY;
       if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){

@@ -5,12 +5,6 @@
 <script>
 (function(){
   try{
-    // Skip the auto-redirect entirely for search engine crawlers and other
-    // bots — they have no real "device language", so this would otherwise
-    // make every language mirror look like it permanently redirects away
-    // to a bot with no stored preference, which stops search engines from
-    // indexing each language version at its own URL. Real visitors still
-    // get the convenience redirect below.
     if(/bot|spider|crawl|slurp|facebookexternalhit|whatsapp|telegrambot|preview/i.test(navigator.userAgent || '')) return;
     var path = location.pathname;
     var onLang = (path === '/ua' || path.indexOf('/ua/') === 0) ? 'UA'
@@ -20,9 +14,6 @@
     var wantLang;
     if(stored === 'RU' || stored === 'UA' || stored === 'EN'){ wantLang = stored; }
     else {
-      // No explicit choice saved yet — follow the device/browser language.
-      // RU, UA and EN each have a live mirror, so any of the three can be
-      // the auto-detected target; anything else falls back to RU.
       var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
       wantLang = browserLang.indexOf('uk') === 0 ? 'UA' : browserLang.indexOf('en') === 0 ? 'EN' : 'RU';
     }
@@ -42,44 +33,34 @@
     var t = localStorage.getItem('mc-theme');
     if(!t){ t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; }
     document.documentElement.setAttribute('data-theme', t);
-    // Also set color-scheme directly (not just via the [data-theme] CSS rule
-    // further down): the browser paints its very first frame - the native
-    // background/scrollbar before any author CSS is applied - using the
-    // OS/browser's own dark-vs-light guess. On a full page navigation (this
-    // site has no client-side routing, every link is a real page load) that
-    // first frame briefly flashes with the wrong theme whenever the visitor's
-    // saved choice disagrees with their OS setting, most visible in the
-    // fixed header since it's the first thing on screen. Setting the inline
-    // style here takes effect immediately, before the stylesheet is even
-    // parsed, so that first frame already matches.
     document.documentElement.style.colorScheme = t;
   }catch(e){}
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Диагностика в стоматологии Одессы — консультация, снимки, КТ | MaslovClinic</title>
-<meta name="description" content="Первичная консультация, прицельные и панорамные снимки, КТ и сканирование двух челюстей, фотопротокол в MaslovClinic на Аркадийском плато. Цена от 400 грн.">
-<link rel="canonical" href="https://maslovclinic.com/uslugi/diagnostika.html">
-<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/uslugi/diagnostika.html">
-<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/uslugi/diagnostika.html">
-<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/uslugi/diagnostika.html">
-<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/uslugi/diagnostika.html">
+<title>Лечение каналов зуба под микроскопом: как проходит и сколько стоит | MaslovClinic</title>
+<meta name="description" content="Зачем стоматологи используют микроскоп при лечении каналов, как проходит процедура и сколько стоит эндодонтическое лечение в Одессе.">
+<link rel="canonical" href="https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html">
+<link rel="alternate" hreflang="ru" href="https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html">
+<link rel="alternate" hreflang="uk" href="https://maslovclinic.com/ua/blog/lechenie-kanalov-pod-mikroskopom.html">
+<link rel="alternate" hreflang="en" href="https://maslovclinic.com/en/blog/lechenie-kanalov-pod-mikroskopom.html">
+<link rel="alternate" hreflang="x-default" href="https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="apple-touch-icon" href="/favicon-180.png">
 <meta property="og:site_name" content="MaslovClinic">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Диагностика в стоматологии Одессы — консультация, снимки, КТ | MaslovClinic">
-<meta property="og:description" content="Первичная консультация, прицельные и панорамные снимки, КТ и сканирование двух челюстей, фотопротокол в MaslovClinic на Аркадийском плато. Цена от 400 грн.">
-<meta property="og:url" content="https://maslovclinic.com/uslugi/diagnostika.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Лечение каналов зуба под микроскопом: как проходит и сколько стоит | MaslovClinic">
+<meta property="og:description" content="Зачем стоматологи используют микроскоп при лечении каналов, как проходит процедура и сколько стоит эндодонтическое лечение в Одессе.">
+<meta property="og:url" content="https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html">
 <meta property="og:image" content="https://maslovclinic.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Диагностика в стоматологии Одессы — консультация, снимки, КТ | MaslovClinic">
-<meta name="twitter:description" content="Первичная консультация, прицельные и панорамные снимки, КТ и сканирование двух челюстей, фотопротокол в MaslovClinic на Аркадийском плато. Цена от 400 грн.">
+<meta name="twitter:title" content="Лечение каналов зуба под микроскопом: как проходит и сколько стоит | MaslovClinic">
+<meta name="twitter:description" content="Зачем стоматологи используют микроскоп при лечении каналов, как проходит процедура и сколько стоит эндодонтическое лечение в Одессе.">
 <meta name="twitter:image" content="https://maslovclinic.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,44 +68,12 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MedicalProcedure",
-  "name": "Диагностика в стоматологии",
-  "procedureType": "https://schema.org/Test",
-  "bodyLocation": "Зубы и челюсти",
-  "howPerformed": "Первичная консультация, прицельные и панорамные снимки, компьютерная томография и сканирование двух челюстей, фотопротокол.",
-  "provider": {
-    "@type": "Dentist",
-    "name": "MaslovClinic",
-    "image": "https://maslovclinic.com/assets/img/clinic-reception.jpg",
-    "telephone": "+380949405514",
-    "email": "maslovclinic@gmail.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "вул. Аркадійське плато, 5А к1",
-      "addressLocality": "Одеса",
-      "addressRegion": "Одеська область",
-      "postalCode": "65000",
-      "addressCountry": "UA"
-    }
-  },
-  "offers": {
-    "@type": "Offer",
-    "price": "400",
-    "priceCurrency": "UAH",
-    "priceValidUntil": "2026-12-31"
-  }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Physician",
-  "name": "Маслов Вячеслав Алексеевич",
-  "medicalSpecialty": "Dentistry",
-  "worksFor": {
-    "@type": "Dentist",
-    "name": "MaslovClinic"
-  }
+  "@type": "Article",
+  "headline": "Лечение каналов зуба под микроскопом: как проходит и сколько стоит",
+  "author": {"@type": "Organization", "name": "MaslovClinic"},
+  "publisher": {"@type": "Organization", "name": "MaslovClinic", "logo": {"@type": "ImageObject", "url": "https://maslovclinic.com/assets/logo.png"}},
+  "datePublished": "2026-09-21",
+  "mainEntityOfPage": "https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html"
 }
 </script>
 <script type="application/ld+json">
@@ -133,9 +82,21 @@
   "@type": "BreadcrumbList",
   "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://maslovclinic.com/"},
-    {"@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://maslovclinic.com/uslugi/"},
-    {"@type": "ListItem", "position": 3, "name": "Диагностика", "item": "https://maslovclinic.com/uslugi/diagnostika.html"}
+    {"@type": "ListItem", "position": 2, "name": "Блог", "item": "https://maslovclinic.com/blog/"},
+    {"@type": "ListItem", "position": 3, "name": "Лечение каналов под микроскопом", "item": "https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html"}
   ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Лечение каналов зуба под микроскопом: как проходит и сколько стоит",
+  "description": "Зачем стоматологи используют микроскоп при лечении каналов, как проходит процедура и сколько стоит эндодонтическое лечение в Одессе.",
+  "url": "https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html",
+  "author": {"@type": "Organization", "name": "MaslovClinic"},
+  "publisher": {"@type": "Organization", "name": "MaslovClinic", "logo": {"@type": "ImageObject", "url": "https://maslovclinic.com/assets/logo.png"}},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://maslovclinic.com/blog/lechenie-kanalov-pod-mikroskopom.html"}
 }
 </script>
 <script type="application/ld+json">
@@ -143,14 +104,15 @@
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {"@type": "Question", "name": "Нужен ли снимок перед любым лечением?", "acceptedAnswer": {"@type": "Answer", "text": "Не всегда — простая консультация иногда достаточна, но для лечения каналов, имплантации или сложных случаев снимок или КТ обязательны для точного плана лечения."}},
-    {"@type": "Question", "name": "Что такое КТ и когда она нужна?", "acceptedAnswer": {"@type": "Answer", "text": "Компьютерная томография даёт объёмное изображение челюсти — необходима перед имплантацией, сложным удалением и для оценки объёма костной ткани."}},
-    {"@type": "Question", "name": "Сколько длится первичная консультация?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно 20–30 минут: осмотр, разбор жалоб, при необходимости — направление на снимки и предварительный план лечения."}},
-    {"@type": "Question", "name": "Входит ли диагностика в стоимость лечения?", "acceptedAnswer": {"@type": "Answer", "text": "Диагностика оплачивается отдельно, но нужные снимки и консультация учитываются при составлении общего плана и сметы лечения."}}
+    {"@type": "Question", "name": "Сколько стоит лечение каналов зуба в Одессе?", "acceptedAnswer": {"@type": "Answer", "text": "Эндодонтическое лечение в MaslovClinic начинается от 5500 грн, точная цена зависит от количества каналов и того, первичное это лечение или повторное."}},
+    {"@type": "Question", "name": "Что даёт лечение под микроскопом?", "acceptedAnswer": {"@type": "Answer", "text": "Увеличение в 10–25 раз позволяет врачу увидеть все каналы, боковые ответвления и трещины напрямую, а не полагаться только на ощущения — это снижает риск осложнений и повышает шанс сохранить зуб."}},
+    {"@type": "Question", "name": "Можно ли сохранить зуб при пульпите?", "acceptedAnswer": {"@type": "Answer", "text": "Да, лечение каналов как раз направлено на сохранение зуба — удаление рассматривают только в крайних случаях."}},
+    {"@type": "Question", "name": "Сколько визитов нужно для лечения каналов?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно 1–2 визита в зависимости от количества каналов и стадии воспаления, точный план врач определяет после снимка."}}
   ]
 }
 </script>
 <link rel="stylesheet" href="/assets/uslugi.css">
+<link rel="stylesheet" href="/assets/blog.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-D3DMK6FB59"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -194,10 +156,6 @@
     var path = location.pathname;
     var onUA = path === '/ua' || path.indexOf('/ua/') === 0;
     var browserLang = ((navigator.language || (navigator.languages && navigator.languages[0]) || '') + '').toLowerCase();
-    // Only worth mentioning when the page you're already on actually
-    // matches what your device reports — a French or English browser
-    // landing on the RU default isn't "shown in Russian because of your
-    // device", it's just the site's fallback, so no banner there.
     var relevant = onUA ? (browserLang.indexOf('uk') === 0) : (browserLang.indexOf('ru') === 0);
     if(!relevant) return;
     sessionStorage.setItem('mc-lang-banner-seen', '1');
@@ -299,93 +257,49 @@
 </div>
 
 
-<section class="hero" style="--hero-photo:url('/img/uslugi/diagnostika.jpg');">
+<section class="hero" style="--hero-photo:url('/img/uslugi/endodonticheskoe-lechenie.jpg');">
   <div class="wrap">
-    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/uslugi/">Услуги</a> / <span class="crumb-active">Диагностика</span></div>
-    <h1>Точная диагностика —<br>успех будущего лечения</h1>
-    <p class="lead">Перед каждым лечением мы проводим качественную диагностику и составляем индивидуальный план лечения.</p>
+    <div class="crumbs-inline"><a href="/">Главная</a> / <a href="/blog/">Блог</a> / <span class="crumb-active">Лечение каналов под микроскопом</span></div>
+    <h1>Лечение каналов зуба под микроскопом:<br>как проходит и сколько стоит</h1>
+    <p class="lead">Разбираем, зачем стоматологи используют микроскоп при лечении каналов, как проходит процедура и сколько стоит эндодонтическое лечение в Одессе.</p>
     <div class="cta-row">
       <span class="seg"></span>
       <a href="#" class="btn js-open-booking">Записаться на визит</a>
-      <a href="#vrach" class="btn ghost">Врачи клиники</a>
       <span class="seg"></span>
     </div>
   </div>
 </section>
 
-<div class="wrap">
-  <div class="price-native">
-    <h3>Стоимость</h3>
-    <div class="price-row"><span>Первичная консультация</span> <span data-price="diagnostika-consult">500 грн</span></div>
-    <div class="price-row"><span>Прицельный снимок</span> <span data-price="diagnostika-photo-targeted">400 грн</span></div>
-    <div class="price-row"><span>Панорамный снимок</span> <span data-price="diagnostika-photo-panoramic">500 грн</span></div>
-    <div class="price-row"><span>КТ двух челюстей</span> <span data-price="diagnostika-ct">1 200 грн</span></div>
-    <div class="price-row"><span>Сканирование двух челюстей</span> <span data-price="diagnostika-scan">2 500 грн</span></div>
-    <div class="price-row"><span>Фотопротокол</span> <span data-price="diagnostika-photo-protocol">800 грн</span></div>
-  </div>
-</div>
-
 <section class="alt">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Что это</span>
-      <h2>Осмотр, снимки и 3D-диагностика</h2>
-      <p>Точный план лечения начинается с диагностики: врач оценивает состояние зубов и дёсен, а рентген и КТ показывают то, что не видно глазу — состояние корней, костной ткани и скрытые очаги воспаления.</p>
+    <div class="article-body">
+      <div class="article-meta">MaslovClinic · Блог</div>
+
+      <h2>Зачем нужен микроскоп при лечении каналов</h2>
+      <p>Корневые каналы имеют сложную, часто разветвлённую форму и толщину меньше миллиметра — без увеличения врач ориентируется на ощущения и опыт, а под микроскопом видит канал, боковые ответвления и трещины напрямую, с увеличением в 10–25 раз. Это снижает риск пропустить канал или повредить корень и напрямую влияет на то, удастся ли сохранить зуб.</p>
+
+      <h2>Когда нужно лечение каналов</h2>
+      <p>Показания — пульпит (воспаление нерва зуба) и периодонтит (воспаление тканей вокруг корня), а также повторное лечение каналов, если предыдущее пломбирование оказалось неполным или в канале развилось новое воспаление.</p>
+
+      <h2>Как проходит лечение</h2>
+      <p>Сначала — снимок, который показывает количество каналов, их форму и степень воспаления. Дальше местная анестезия для полностью комфортного лечения. Врач удаляет воспалённую пульпу, обрабатывает каналы механически и медикаментозно под микроскопом и пломбирует их на всю длину. Финальный этап — восстановление коронки зуба пломбой или коронкой, которые возвращают ему форму и жевательную функцию.</p>
+
+      <h2>Можно ли сохранить зуб при пульпите</h2>
+      <p>Да, именно на это направлено эндодонтическое лечение. Удаление зуба при пульпите или периодонтите — крайняя мера, когда сохранить структуру зуба уже невозможно; в большинстве случаев лечение каналов позволяет обойтись без удаления.</p>
+
+      <h2>Сколько стоит лечение каналов в Одессе</h2>
+      <p>Цена зависит от количества каналов в зубе и объёма ранее выполненного лечения (первичное или повторное). В MaslovClinic эндодонтическое лечение начинается от 5500 грн — точную стоимость врач называет после снимка.</p>
     </div>
-    <div class="grid-3">
-      <div class="card">
-        <h3>Осмотр и консультация</h3>
-        <p>Врач разбирает жалобы, осматривает полость рта, объясняет находки и предлагает дальнейшие шаги.</p>
-      </div>
-      <div class="card">
-        <h3>Прицельные и панорамные снимки</h3>
-        <p>Быстрые 2D-снимки для оценки отдельного зуба или всей челюстной дуги целиком.</p>
-      </div>
-      <div class="card">
-        <h3>КТ и сканирование</h3>
-        <p>Объёмная 3D-диагностика перед имплантацией, сложным удалением или ортодонтическим лечением.</p>
+
+    <div class="article-cta">
+      <h3>Болит или ноет зуб?</h3>
+      <p>Лечение и перелечивание каналов под микроскопом — сохраняем зуб при пульпите и периодонтите, в MaslovClinic на Аркадийском плато.</p>
+      <div class="cta-row">
+        <a href="/uslugi/endodonticheskoe-lechenie.html" class="btn primary">Лечение каналов и цена</a>
       </div>
     </div>
   </div>
 </section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Этапы приёма</span>
-      <h2>Как проходит приём</h2>
-    </div>
-    <ol class="steps">
-      <li><div><h4>Запись и разбор жалоб</h4><p>Уточняем причину визита ещё до приёма, чтобы точнее спланировать нужные исследования.</p></div></li>
-      <li><div><h4>Осмотр</h4><p>Визуальная и инструментальная проверка зубов, дёсен и прикуса.</p></div></li>
-      <li><div><h4>Снимки при необходимости</h4><p>Прицельный, панорамный снимок, КТ или сканирование — по показаниям для конкретного случая.</p></div></li>
-      <li><div><h4>План лечения</h4><p>Врач объясняет результаты диагностики и предлагает варианты лечения с ценами.</p></div></li>
-    </ol>
-    <div class="inline-video">
-      <div class="iv-frame">
-        <video controls playsinline preload="none" poster="/video/tomograf-poster.jpg">
-          <source src="/video/tomograf.mp4" type="video/mp4">
-        </video>
-        <button class="iv-play" type="button" aria-label="Смотреть видео">
-          <span class="iv-play-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0e2540"><path d="M9 6.5v11l9-5.5z"/></svg></span>
-        </button>
-      </div>
-      <p>3D-томография челюсти и зубов — видео из практики клиники</p>
-    </div>
-  </div>
-</section>
-
-<section class="alt" id="vrach">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Врачи</span>
-      <h2>Кто проводит лечение</h2>
-      <p>Услугу выполняют врачи клиники в соответствии со специализацией и опытом. Познакомьтесь со всей командой на странице врачей.</p>
-    </div>
-    <a href="/vrachi/" class="btn ghost">Смотреть врачей клиники →</a>
-  </div>
-</section>
-
 
 <div class="locality">
   <div class="wrap">
@@ -397,27 +311,26 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Вопросы</span>
-      <h2>Частые вопросы о диагностике</h2>
+      <h2>Частые вопросы</h2>
     </div>
     <div class="faq">
       <details>
-        <summary>Нужен ли снимок перед любым лечением?</summary>
-        <p>Не всегда — простая консультация иногда достаточна, но для лечения каналов, имплантации или сложных случаев снимок или КТ обязательны для точного плана лечения.</p>
+        <summary>Сколько стоит лечение каналов зуба в Одессе?</summary>
+        <p>Эндодонтическое лечение в MaslovClinic начинается от 5500 грн, точная цена зависит от количества каналов и того, первичное это лечение или повторное.</p>
       </details>
       <details>
-        <summary>Что такое КТ и когда она нужна?</summary>
-        <p>Компьютерная томография даёт объёмное изображение челюсти — необходима перед имплантацией, сложным удалением и для оценки объёма костной ткани.</p>
+        <summary>Что даёт лечение под микроскопом?</summary>
+        <p>Увеличение в 10–25 раз позволяет врачу увидеть все каналы, боковые ответвления и трещины напрямую, а не полагаться только на ощущения — это снижает риск осложнений и повышает шанс сохранить зуб.</p>
       </details>
       <details>
-        <summary>Сколько длится первичная консультация?</summary>
-        <p>Обычно 20–30 минут: осмотр, разбор жалоб, при необходимости — направление на снимки и предварительный план лечения.</p>
+        <summary>Можно ли сохранить зуб при пульпите?</summary>
+        <p>Да, лечение каналов как раз направлено на сохранение зуба — удаление рассматривают только в крайних случаях.</p>
       </details>
       <details>
-        <summary>Входит ли диагностика в стоимость лечения?</summary>
-        <p>Диагностика оплачивается отдельно, но нужные снимки и консультация учитываются при составлении общего плана и сметы лечения.</p>
+        <summary>Сколько визитов нужно для лечения каналов?</summary>
+        <p>Обычно 1–2 визита в зависимости от количества каналов и стадии воспаления, точный план врач определяет после снимка.</p>
       </details>
     </div>
-    <p style="margin-top:24px;"><a href="/blog/kt-i-panoramnyi-snimok-zubov.html" style="color:var(--wood);font-weight:600;">Читайте также: чем КТ отличается от панорамного снимка и когда что нужно →</a></p>
   </div>
 </section>
 
@@ -467,21 +380,11 @@
     const current = document.getElementById('langCurrentBtn');
     const menu = document.getElementById('langMenu');
     const label = document.getElementById('langCurrentLabel');
-    // Mobile-menu language pills (.mobile-langs) mirror the same three
-    // targets in a fixed RU/UA/EN order but carry no data-lang of their
-    // own and previously had no click handler at all — wired up here so
-    // they share the same path-rewriting logic as the dropdown below.
     const mobileLangBtns = document.querySelectorAll('.mobile-langs .langbtn');
     const mobileLangOrder = ['RU','UA','EN'];
     function go(target){
       const path = location.pathname;
-      // Remember the visitor's explicit choice so the auto-detect script
-      // (which otherwise follows navigator.language on every fresh visit)
-      // never fights a manual pick on a later page load.
       try{ localStorage.setItem('mc-lang', target); }catch(e){}
-      // RU, UA and EN each have a live mirror (root, /ua/, /en/) with the
-      // same folder structure, so switching is pure path manipulation —
-      // strip whichever prefix is currently active, then add the new one.
       const rest = path.indexOf('/ua/') === 0 ? path.slice(3)
         : path.indexOf('/en/') === 0 ? path.slice(3)
         : (path === '/ua' || path === '/en') ? '/'
@@ -512,12 +415,7 @@
     });
   })();
 
-  // Active-page nav highlight — marks the current section's nav link instead of
-  // ever hiding/removing it, on both the desktop menu and the mobile menu.
   (function(){
-    // Strip a leading /ua or /en so section detection works the same on
-    // the Ukrainian and English mirrors (paths there are /ua/uslugi/...,
-    // /en/uslugi/..., etc.) without a separate ruleset per language.
     const rawPath = location.pathname;
     const path = rawPath.startsWith('/ua/') ? rawPath.slice(3)
       : rawPath.startsWith('/en/') ? rawPath.slice(3)
@@ -536,7 +434,6 @@
     });
   })();
 
-  // Mobile hamburger menu
   (function(){
     const btn = document.getElementById('menuToggle');
     const menu = document.getElementById('mobileMenu');
@@ -557,7 +454,6 @@
     menu.querySelectorAll('a').forEach(a=>{
       a.addEventListener('click', function(){ setOpen(false); });
     });
-    // tap elsewhere closes the menu without activating whatever was tapped there
     document.addEventListener('click', function(e){
       if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
         e.preventDefault();
@@ -587,10 +483,6 @@
         openScrollY = null;
       }
     }, true);
-    // Close the panel if the visitor scrolls far away from where they
-    // opened it — the scroll-driven "floating drop" squish animation that
-    // used to live here has been removed (the button no longer reacts to
-    // scrolling at all, just sits still until hovered or clicked).
     window.addEventListener('scroll', function(){
       const y = window.scrollY;
       if(panel.classList.contains('open') && openScrollY !== null && Math.abs(y - openScrollY) > window.innerHeight/2){
@@ -699,18 +591,6 @@
     });
   });
 })();
-</script>
-
-<script>
-// Inline video — click anywhere on the frame to start playback, not just
-// the native control bar's own play button.
-document.querySelectorAll('.inline-video').forEach(function(wrap){
-  var video = wrap.querySelector('video');
-  var playBtn = wrap.querySelector('.iv-play');
-  if(!video || !playBtn) return;
-  playBtn.addEventListener('click', function(){ video.play(); });
-  video.addEventListener('play', function(){ playBtn.classList.add('hidden'); });
-});
 </script>
 
 <script src="/assets/prices.js" defer></script>
