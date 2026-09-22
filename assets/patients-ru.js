@@ -96,5 +96,45 @@ window.PATIENTS = {
     cover: 'irina2-portrait',
     photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
     labels: ['Портрет','До','До','До','После','После, ракурс 2','После, ракурс 3','После, ракурс 4']
+  },
+  andrey: {
+    name: 'Андрей', tag: 'Тотальное протезирование',
+    desc: 'Тотальное протезирование с помощью виниров, накладок и коронок.',
+    url: '/raboty/patient-12.html',
+    cover: 'andrey-after',
+    photos: ['/img/patients/andrey-before.webp','/img/patients/andrey-before2.webp','/img/patients/andrey-before3.webp','/img/patients/andrey-before4.webp','/img/patients/andrey-before5.webp','/img/patients/andrey-before6.webp','/img/patients/andrey-after.webp','/img/patients/andrey-after2.webp','/img/patients/andrey-after3.webp'],
+    labels: ['До','До','До','До','До','До','После','После, ракурс 2','После, ракурс 3']
+  },
+  maria: {
+    name: 'Мария', tag: 'Протезирование зубов',
+    desc: 'Протезирование верхних 4 зубов с помощью коронок, винира и импланта.',
+    url: '/raboty/patient-13.html',
+    cover: 'maria-after',
+    photos: ['/img/patients/maria-before.webp','/img/patients/maria-after.webp'],
+    labels: ['До','После']
+  },
+  inna: {
+    name: 'Инна', tag: 'Керамические виниры',
+    desc: 'Протезирование верхних 6 зубов с помощью натуральных виниров.',
+    url: '/raboty/patient-14.html',
+    cover: 'inna-after',
+    photos: ['/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp','/img/patients/inna-after4.webp','/img/patients/inna-after5.webp','/img/patients/inna-after6.webp'],
+    labels: ['После','После, ракурс 2','После, ракурс 3','После, ракурс 4','После, ракурс 5','После, ракурс 6']
+  },
+  pavel: {
+    name: 'Павел', tag: 'Тотальное протезирование',
+    desc: 'Тотальное протезирование с помощью виниров, накладок и коронок. Раскрытие рецессий.',
+    url: '/raboty/patient-15.html',
+    cover: 'pavel-after',
+    photos: ['/img/patients/pavel-before.webp','/img/patients/pavel-before2.webp','/img/patients/pavel-before3.webp','/img/patients/pavel-after.webp','/img/patients/pavel-after2.webp','/img/patients/pavel-after3.webp'],
+    labels: ['До','До','До','После','После, ракурс 2','После, ракурс 3']
+  },
+  pavel2: {
+    name: 'Павел', tag: 'Тотальное протезирование',
+    desc: 'Тотальное протезирование с помощью виниров и накладок.',
+    url: '/raboty/patient-16.html',
+    cover: 'pavel2-after',
+    photos: ['/img/patients/pavel2-before.webp','/img/patients/pavel2-before2.webp','/img/patients/pavel2-before3.webp','/img/patients/pavel2-after.webp','/img/patients/pavel2-after2.webp','/img/patients/pavel2-after3.webp'],
+    labels: ['До','До','До','После','После, ракурс 2','После, ракурс 3']
   }
 };

@@ -89,5 +89,45 @@ window.PATIENTS = {
     cover: 'irina2-portrait',
     photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
     labels: ['Портрет','До','До','До','Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4']
+  },
+  andrey: {
+    name: 'Андрій', tag: 'Тотальне протезування',
+    desc: 'Тотальне протезування за допомогою вінірів, накладок і коронок.',
+    url: '/ua/raboty/patient-12.html',
+    cover: 'andrey-after',
+    photos: ['/img/patients/andrey-before.webp','/img/patients/andrey-before2.webp','/img/patients/andrey-before3.webp','/img/patients/andrey-before4.webp','/img/patients/andrey-before5.webp','/img/patients/andrey-before6.webp','/img/patients/andrey-after.webp','/img/patients/andrey-after2.webp','/img/patients/andrey-after3.webp'],
+    labels: ['До','До','До','До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
+  },
+  maria: {
+    name: 'Марія', tag: 'Протезування зубів',
+    desc: 'Протезування верхніх 4 зубів за допомогою коронок, вініра та імпланта.',
+    url: '/ua/raboty/patient-13.html',
+    cover: 'maria-after',
+    photos: ['/img/patients/maria-before.webp','/img/patients/maria-after.webp'],
+    labels: ['До','Після']
+  },
+  inna: {
+    name: 'Інна', tag: 'Керамічні вініри',
+    desc: 'Протезування верхніх 6 зубів за допомогою натуральних вінірів.',
+    url: '/ua/raboty/patient-14.html',
+    cover: 'inna-after',
+    photos: ['/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp','/img/patients/inna-after4.webp','/img/patients/inna-after5.webp','/img/patients/inna-after6.webp'],
+    labels: ['Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4','Після, ракурс 5','Після, ракурс 6']
+  },
+  pavel: {
+    name: 'Павло', tag: 'Тотальне протезування',
+    desc: 'Тотальне протезування за допомогою вінірів, накладок і коронок. Розкриття рецесій.',
+    url: '/ua/raboty/patient-15.html',
+    cover: 'pavel-after',
+    photos: ['/img/patients/pavel-before.webp','/img/patients/pavel-before2.webp','/img/patients/pavel-before3.webp','/img/patients/pavel-after.webp','/img/patients/pavel-after2.webp','/img/patients/pavel-after3.webp'],
+    labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
+  },
+  pavel2: {
+    name: 'Павло', tag: 'Тотальне протезування',
+    desc: 'Тотальне протезування за допомогою вінірів і накладок.',
+    url: '/ua/raboty/patient-16.html',
+    cover: 'pavel2-after',
+    photos: ['/img/patients/pavel2-before.webp','/img/patients/pavel2-before2.webp','/img/patients/pavel2-before3.webp','/img/patients/pavel2-after.webp','/img/patients/pavel2-after2.webp','/img/patients/pavel2-after3.webp'],
+    labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
   }
 };

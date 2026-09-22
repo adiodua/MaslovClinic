@@ -89,5 +89,45 @@ window.PATIENTS = {
     cover: 'irina2-portrait',
     photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
     labels: ['Portrait','Before','Before','Before','After','After, angle 2','After, angle 3','After, angle 4']
+  },
+  andrey: {
+    name: 'Andrey', tag: 'Full Mouth Restoration',
+    desc: 'Full mouth restoration with veneers, onlays and crowns.',
+    url: '/en/raboty/patient-12.html',
+    cover: 'andrey-after',
+    photos: ['/img/patients/andrey-before.webp','/img/patients/andrey-before2.webp','/img/patients/andrey-before3.webp','/img/patients/andrey-before4.webp','/img/patients/andrey-before5.webp','/img/patients/andrey-before6.webp','/img/patients/andrey-after.webp','/img/patients/andrey-after2.webp','/img/patients/andrey-after3.webp'],
+    labels: ['Before','Before','Before','Before','Before','Before','After','After, angle 2','After, angle 3']
+  },
+  maria: {
+    name: 'Maria', tag: 'Dental Restoration',
+    desc: 'Restoration of 4 upper teeth with crowns, a veneer and an implant.',
+    url: '/en/raboty/patient-13.html',
+    cover: 'maria-after',
+    photos: ['/img/patients/maria-before.webp','/img/patients/maria-after.webp'],
+    labels: ['Before','After']
+  },
+  inna: {
+    name: 'Inna', tag: 'Ceramic Veneers',
+    desc: 'Restoration of 6 upper teeth with natural-look veneers.',
+    url: '/en/raboty/patient-14.html',
+    cover: 'inna-after',
+    photos: ['/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp','/img/patients/inna-after4.webp','/img/patients/inna-after5.webp','/img/patients/inna-after6.webp'],
+    labels: ['After','After, angle 2','After, angle 3','After, angle 4','After, angle 5','After, angle 6']
+  },
+  pavel: {
+    name: 'Pavel', tag: 'Full Mouth Restoration',
+    desc: 'Full mouth restoration with veneers, onlays and crowns. Gum recession coverage.',
+    url: '/en/raboty/patient-15.html',
+    cover: 'pavel-after',
+    photos: ['/img/patients/pavel-before.webp','/img/patients/pavel-before2.webp','/img/patients/pavel-before3.webp','/img/patients/pavel-after.webp','/img/patients/pavel-after2.webp','/img/patients/pavel-after3.webp'],
+    labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
+  },
+  pavel2: {
+    name: 'Pavel', tag: 'Full Mouth Restoration',
+    desc: 'Full mouth restoration with veneers and onlays.',
+    url: '/en/raboty/patient-16.html',
+    cover: 'pavel2-after',
+    photos: ['/img/patients/pavel2-before.webp','/img/patients/pavel2-before2.webp','/img/patients/pavel2-before3.webp','/img/patients/pavel2-after.webp','/img/patients/pavel2-after2.webp','/img/patients/pavel2-after3.webp'],
+    labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
   }
 };
