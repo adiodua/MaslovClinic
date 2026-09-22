@@ -111,8 +111,8 @@ window.PATIENTS = {
     desc: 'Restoration of 6 upper teeth with natural-look veneers.',
     url: '/en/raboty/patient-14.html',
     cover: 'inna-after',
-    photos: ['/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp','/img/patients/inna-after4.webp','/img/patients/inna-after5.webp','/img/patients/inna-after6.webp'],
-    labels: ['After','After, angle 2','After, angle 3','After, angle 4','After, angle 5','After, angle 6']
+    photos: ['/img/patients/inna-before.webp','/img/patients/inna-before2.webp','/img/patients/inna-before3.webp','/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp'],
+    labels: ['Before','Before','Before','After','After, angle 2','After, angle 3']
   },
   pavel: {
     name: 'Pavel', tag: 'Full Mouth Restoration',

@@ -111,8 +111,8 @@ window.PATIENTS = {
     desc: 'Протезування верхніх 6 зубів за допомогою натуральних вінірів.',
     url: '/ua/raboty/patient-14.html',
     cover: 'inna-after',
-    photos: ['/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp','/img/patients/inna-after4.webp','/img/patients/inna-after5.webp','/img/patients/inna-after6.webp'],
-    labels: ['Після','Після, ракурс 2','Після, ракурс 3','Після, ракурс 4','Після, ракурс 5','Після, ракурс 6']
+    photos: ['/img/patients/inna-before.webp','/img/patients/inna-before2.webp','/img/patients/inna-before3.webp','/img/patients/inna-after.webp','/img/patients/inna-after2.webp','/img/patients/inna-after3.webp'],
+    labels: ['До','До','До','Після','Після, ракурс 2','Після, ракурс 3']
   },
   pavel: {
     name: 'Павло', tag: 'Тотальне протезування',
