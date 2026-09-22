@@ -4,7 +4,7 @@
 window.PATIENTS = {
   darya: {
     name: 'Darya', tag: 'Ceramic Veneers',
-    desc: '8 veneers, enamel preparation, and bonding using individual impressions.',
+    desc: 'Full mouth restoration with veneers and onlays.',
     url: '/en/raboty/patient-1.html',
     cover: 'darya-portrait2',
     photos: ['/img/patients/darya-portrait.webp','/img/patients/darya-portrait2.webp','/img/patients/darya-portrait3.webp','/img/patients/darya-before.webp','/img/patients/darya-before2.webp','/img/patients/darya-before3.webp','/img/patients/darya-before4.webp','/img/patients/darya-after.webp','/img/patients/darya-after2.webp','/img/patients/darya-after3.webp','/img/patients/darya-after4.webp'],
@@ -12,7 +12,7 @@ window.PATIENTS = {
   },
   uriy: {
     name: 'Yuriy', tag: 'Implant Treatment',
-    desc: 'Diagnostics, implant placement, and prosthetics.',
+    desc: 'Full mouth restoration with Nobel Biocare implants.',
     url: '/en/raboty/patient-2.html',
     cover: 'uriy-portrait',
     photos: ['/img/patients/uriy-portrait.webp','/img/patients/uriy-before.webp','/img/patients/uriy-after.webp'],
@@ -20,7 +20,7 @@ window.PATIENTS = {
   },
   yuliya: {
     name: 'Yuliya', tag: 'Ceramic Veneers',
-    desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
+    desc: 'Full mouth restoration with veneers, onlays and crowns.',
     url: '/en/raboty/patient-3.html',
     cover: 'yuliya-portrait',
     photos: ['/img/patients/yuliya-portrait.webp','/img/patients/yuliya-before.webp','/img/patients/yuliya-before2.webp','/img/patients/yuliya-before3.webp','/img/patients/yuliya-after.webp','/img/patients/yuliya-after2.webp','/img/patients/yuliya-after3.webp','/img/patients/yuliya-after4.webp'],
@@ -28,7 +28,7 @@ window.PATIENTS = {
   },
   kristina: {
     name: 'Kristina', tag: 'Ceramic Veneers',
-    desc: 'Enamel preparation, veneers custom-made from individual impressions, and bonding.',
+    desc: 'Restoration of the upper jaw with veneers.',
     url: '/en/raboty/patient-4.html',
     cover: 'kristina-after',
     photos: ['/img/patients/kristina-after.webp'],
@@ -36,7 +36,7 @@ window.PATIENTS = {
   },
   irina: {
     name: 'Irina', tag: 'Ceramic Veneers & Crowns',
-    desc: 'Tooth preparation, veneers and crowns custom-made from individual impressions, and bonding.',
+    desc: 'Full mouth restoration with veneers, onlays and crowns.',
     url: '/en/raboty/patient-5.html',
     cover: 'irina-portrait',
     photos: ['/img/patients/irina-portrait.webp','/img/patients/irina-before.webp','/img/patients/irina-after.webp','/img/patients/irina-after2.webp','/img/patients/irina-after3.webp','/img/patients/irina-after4.webp','/img/patients/irina-after5.webp'],
@@ -44,7 +44,7 @@ window.PATIENTS = {
   },
   oksana: {
     name: 'Oksana', tag: 'Implant Treatment',
-    desc: 'Diagnostics, implant placement, and prosthetics.',
+    desc: 'Full mouth restoration with implants.',
     url: '/en/raboty/patient-6.html',
     cover: 'oksana-portrait',
     photos: ['/img/patients/oksana-portrait.webp','/img/patients/oksana-after.webp','/img/patients/oksana-after2.webp'],
@@ -60,7 +60,7 @@ window.PATIENTS = {
   },
   natalya: {
     name: 'Natalya', tag: 'Implant Treatment',
-    desc: 'CT/X-ray diagnostics, implant placement, and prosthetics.',
+    desc: 'Restoration of the upper jaw with Straumann implants.',
     url: '/en/raboty/patient-8.html',
     cover: 'natalya-portrait',
     photos: ['/img/patients/natalya-portrait.webp','/img/patients/natalya-after.webp'],
@@ -68,7 +68,7 @@ window.PATIENTS = {
   },
   'olga-i': {
     name: 'Olga', tag: 'Implant Treatment',
-    desc: 'Diagnostics, implant placement, and prosthetics.',
+    desc: 'Restoration of the upper jaw with Nobel Biocare implants.',
     url: '/en/raboty/patient-9.html',
     cover: 'olga-i-portrait',
     photos: ['/img/patients/olga-i-portrait.webp','/img/patients/olga-i-before.webp','/img/patients/olga-i-before2.webp','/img/patients/olga-i-before3.webp','/img/patients/olga-i-after.webp','/img/patients/olga-i-after2.webp','/img/patients/olga-i-after3.webp','/img/patients/olga-i-after4.webp'],
@@ -76,7 +76,7 @@ window.PATIENTS = {
   },
   mikhail: {
     name: 'Mikhail', tag: 'Ceramic Restorations',
-    desc: 'Placement of 28 ceramic restorations.',
+    desc: 'Full mouth restoration with veneers, onlays and crowns.',
     url: '/en/raboty/patient-10.html',
     cover: 'mikhail-after',
     photos: ['/img/patients/mikhail-before.webp','/img/patients/mikhail-before2.webp','/img/patients/mikhail-before3.webp','/img/patients/mikhail-after.webp','/img/patients/mikhail-after2.webp','/img/patients/mikhail-after3.webp'],
@@ -84,7 +84,7 @@ window.PATIENTS = {
   },
   irina2: {
     name: 'Irina', tag: 'Implants & Veneers',
-    desc: 'Diagnostics, implant placement, and custom-made ceramic veneers.',
+    desc: 'Full mouth restoration. Upper jaw with Nobel Biocare implants. Lower jaw with veneers and crowns.',
     url: '/en/raboty/patient-11.html',
     cover: 'irina2-portrait',
     photos: ['/img/patients/irina2-portrait.webp','/img/patients/irina2-before.webp','/img/patients/irina2-before2.webp','/img/patients/irina2-before3.webp','/img/patients/irina2-after.webp','/img/patients/irina2-after2.webp','/img/patients/irina2-after3.webp','/img/patients/irina2-after4.webp'],
