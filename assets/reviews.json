@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-09-28T10:40:40Z",
+  "updatedAt": "2026-10-05T11:15:01Z",
   "rating": 4.4,
-  "userRatingsTotal": 47,
+  "userRatingsTotal": 48,
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одесса",
   "reviews": {
     "ru": [
@@ -56,12 +56,12 @@
         "time": 1685553253
       },
       {
-        "name": "Анастасия Дмитриева",
+        "name": "daniel williams",
         "rating": 5,
-        "relativeTime": "7 місяців тому",
-        "text": "Хожу в цю клініку не вперше і завжди залишаюся задоволена. Персонал дуже уважний і ввічливий: нагадують про прийом, при необхідності переносять запис і ставляться з розумінням. Дякуємо всій команді за хороше ставлення та професіоналізм!",
-        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
-        "time": 1772112041
+        "relativeTime": "минулого тижня",
+        "text": "Я приїхав до Одеси як турист і знайшов MaslovClinic через ChatGPT 😂 І це було дуже вдале рішення.\nУ клініці дуже чисто, сучасно і комфортно. Усі були дуже доброзичливі та професійні, я одразу відчув себе бажаним гостем. Робив відбілювання зубів, результат реально сподобався.\nЯкщо ви зараз читаєте відгуки і думаєте, куди піти, дуже рекомендую MaslovClinic. Це справді одна з найкращих клінік, у яких я був. Обов’язково повернуся ще раз.",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocLimDmrEYQH9lFswP27SNbpRau20ES5ZA7u4kAtiNnA0C_BMQ=s128-c0x00000000-cc-rp-mo",
+        "time": 1790688487
       }
     ],
     "en": [
