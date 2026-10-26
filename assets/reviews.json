@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-19T09:41:29Z",
+  "updatedAt": "2026-10-26T09:51:53Z",
   "rating": 4.4,
   "userRatingsTotal": 48,
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одесса",
@@ -8,7 +8,7 @@
       {
         "name": "Анастасия Дмитриева",
         "rating": 5,
-        "relativeTime": "7 месяцев назад",
+        "relativeTime": "8 месяцев назад",
         "text": "Хожу в эту клинику не первый раз и всегда остаюсь довольна.Персонал очень внимательный и вежливый: напоминают о приёме, при необходимости переносят запись и относятся с пониманием. Спасибо всей команде за хорошее отношение и профессионализм!",
         "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
         "time": 1772112041
@@ -32,20 +32,20 @@
     ],
     "uk": [
       {
-        "name": "Alina Tsurkan",
-        "rating": 5,
-        "relativeTime": "8 місяців тому",
-        "text": "Дуже задоволена візитом до стоматології! Професійний та уважний підхід, приємна атмосфера та якісна робота",
-        "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXikOAw8nu6b2tJzFgyBAy_MUMy56cNFod7d-_cV2vJHMxDhkXR=s128-c0x00000000-cc-rp-mo",
-        "time": 1771321089
-      },
-      {
         "name": "татьяна царапина",
         "rating": 5,
         "relativeTime": "рік тому",
         "text": "Доброго дня.  Я лікар стоматолог. Сьогодні довелося побачити вашу роботу на пацієнту. МОЛОДЦІ!   Робота зі стажем в 12 років. МОЛОДЦІ!  Дуже гарно !Рекомендую !.",
         "photo": "https://lh3.googleusercontent.com/a/ACg8ocJEgMoK0Ud1dRg2aaDKtSk18_afY93rON1CijWYNT3nPy4OvQ=s128-c0x00000000-cc-rp-mo",
         "time": 1746533042
+      },
+      {
+        "name": "Alina Tsurkan",
+        "rating": 5,
+        "relativeTime": "8 місяців тому",
+        "text": "Дуже задоволена візитом до стоматології! Професійний та уважний підхід, приємна атмосфера та якісна робота",
+        "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXikOAw8nu6b2tJzFgyBAy_MUMy56cNFod7d-_cV2vJHMxDhkXR=s128-c0x00000000-cc-rp-mo",
+        "time": 1771321089
       },
       {
         "name": "Олександр Репях",
@@ -58,7 +58,7 @@
       {
         "name": "daniel williams",
         "rating": 5,
-        "relativeTime": "2 тижні тому",
+        "relativeTime": "3 тижні тому",
         "text": "Я приїхав до Одеси як турист і знайшов MaslovClinic через ChatGPT 😂 І це було дуже вдале рішення.\nУ клініці дуже чисто, сучасно і комфортно. Усі були дуже доброзичливі та професійні, я одразу відчув себе бажаним гостем. Робив відбілювання зубів, результат реально сподобався.\nЯкщо ви зараз читаєте відгуки і думаєте, куди піти, дуже рекомендую MaslovClinic. Це справді одна з найкращих клінік, у яких я був. Обов’язково повернуся ще раз.",
         "photo": "https://lh3.googleusercontent.com/a/ACg8ocLimDmrEYQH9lFswP27SNbpRau20ES5ZA7u4kAtiNnA0C_BMQ=s128-c0x00000000-cc-rp-mo",
         "time": 1790688487
@@ -76,18 +76,18 @@
       {
         "name": "Анастасия Дмитриева",
         "rating": 5,
-        "relativeTime": "7 months ago",
+        "relativeTime": "8 months ago",
         "text": "I've been to this clinic several times and am always satisfied. The staff is very attentive and polite: they remind me of my appointment, reschedule it if necessary, and are very understanding. Thank you to the entire team for their kind attitude and professionalism!",
         "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
         "time": 1772112041
       },
       {
-        "name": "Alina Tsurkan",
+        "name": "Настя Кащук",
         "rating": 5,
-        "relativeTime": "8 months ago",
-        "text": "Very satisfied with my visit to the dentist! Professional and attentive approach, pleasant atmosphere and high-quality work",
-        "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXikOAw8nu6b2tJzFgyBAy_MUMy56cNFod7d-_cV2vJHMxDhkXR=s128-c0x00000000-cc-rp-mo",
-        "time": 1771321089
+        "relativeTime": "a year ago",
+        "text": "I'd like to leave a sincere review of a stunning dental clinic in Odessa. From the very first glance, I was impressed by the expensive, stylish renovations. Everything is modern, thoughtfully designed, and cozy and pleasant to be in. The cleanliness, comfort, and aesthetics are top notch.\nThe staff is friendly and attentive, from the receptionist to the doctors. They explain everything clearly and thoroughly, and you can feel their genuine desire to help and make your stay as comfortable as possible.\nA special thank you to the doctors at the clinic for their professionalism. They work carefully, confidently, and with great care for their patients. It's clear they truly love their work and value each client.\n\nFrom now on, I'll only come to you and highly recommend you!",
+        "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUXjENns3AXyDWttYK-giy2XgFI-x0ak9IFgQsFb__4Dxp72v8J=s128-c0x00000000-cc-rp-mo",
+        "time": 1747730294
       }
     ]
   }
