@@ -1,18 +1,10 @@
 {
-  "updatedAt": "2026-11-09T12:37:06Z",
+  "updatedAt": "2026-11-16T12:29:52Z",
   "rating": 4.4,
   "userRatingsTotal": 48,
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одесса",
   "reviews": {
     "ru": [
-      {
-        "name": "Анастасия Дмитриева",
-        "rating": 5,
-        "relativeTime": "8 месяцев назад",
-        "text": "Хожу в эту клинику не первый раз и всегда остаюсь довольна.Персонал очень внимательный и вежливый: напоминают о приёме, при необходимости переносят запись и относятся с пониманием. Спасибо всей команде за хорошее отношение и профессионализм!",
-        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
-        "time": 1772112041
-      },
       {
         "name": "Настя Кащук",
         "rating": 5,
@@ -30,6 +22,14 @@
         "time": 1750100536
       },
       {
+        "name": "Анастасия Дмитриева",
+        "rating": 5,
+        "relativeTime": "8 месяцев назад",
+        "text": "Хожу в эту клинику не первый раз и всегда остаюсь довольна.Персонал очень внимательный и вежливый: напоминают о приёме, при необходимости переносят запись и относятся с пониманием. Спасибо всей команде за хорошее отношение и профессионализм!",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
+        "time": 1772112041
+      },
+      {
         "name": "наддир алун",
         "rating": 5,
         "relativeTime": "год назад",
@@ -39,6 +39,14 @@
       }
     ],
     "uk": [
+      {
+        "name": "daniel williams",
+        "rating": 5,
+        "relativeTime": "місяць тому",
+        "text": "Я приїхав до Одеси як турист і знайшов MaslovClinic через ChatGPT 😂 І це було дуже вдале рішення.\nУ клініці дуже чисто, сучасно і комфортно. Усі були дуже доброзичливі та професійні, я одразу відчув себе бажаним гостем. Робив відбілювання зубів, результат реально сподобався.\nЯкщо ви зараз читаєте відгуки і думаєте, куди піти, дуже рекомендую MaslovClinic. Це справді одна з найкращих клінік, у яких я був. Обов’язково повернуся ще раз.",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocLimDmrEYQH9lFswP27SNbpRau20ES5ZA7u4kAtiNnA0C_BMQ=s128-c0x00000000-cc-rp-mo",
+        "time": 1790688487
+      },
       {
         "name": "татьяна царапина",
         "rating": 5,
@@ -50,7 +58,7 @@
       {
         "name": "Alina Tsurkan",
         "rating": 5,
-        "relativeTime": "8 місяців тому",
+        "relativeTime": "9 місяців тому",
         "text": "Дуже задоволена візитом до стоматології! Професійний та уважний підхід, приємна атмосфера та якісна робота",
         "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXikOAw8nu6b2tJzFgyBAy_MUMy56cNFod7d-_cV2vJHMxDhkXR=s128-c0x00000000-cc-rp-mo",
         "time": 1771321089
@@ -62,14 +70,6 @@
         "text": "Спасибі за безболісне видалення зуба мудрості. Довго шукав стоматологію чисто випадково натрапив на стоматологію Maslov Clinic. Записався на первинний огляд і мені все сподобалось. Тепер я їх клієнт на довго.",
         "photo": "https://lh3.googleusercontent.com/a/ACg8ocKM0t6AyAmpWLS0W93Vr9axSzxDUdJYepgoya4HmkR8geneEw=s128-c0x00000000-cc-rp-mo",
         "time": 1685553253
-      },
-      {
-        "name": "daniel williams",
-        "rating": 5,
-        "relativeTime": "місяць тому",
-        "text": "Я приїхав до Одеси як турист і знайшов MaslovClinic через ChatGPT 😂 І це було дуже вдале рішення.\nУ клініці дуже чисто, сучасно і комфортно. Усі були дуже доброзичливі та професійні, я одразу відчув себе бажаним гостем. Робив відбілювання зубів, результат реально сподобався.\nЯкщо ви зараз читаєте відгуки і думаєте, куди піти, дуже рекомендую MaslovClinic. Це справді одна з найкращих клінік, у яких я був. Обов’язково повернуся ще раз.",
-        "photo": "https://lh3.googleusercontent.com/a/ACg8ocLimDmrEYQH9lFswP27SNbpRau20ES5ZA7u4kAtiNnA0C_BMQ=s128-c0x00000000-cc-rp-mo",
-        "time": 1790688487
       }
     ],
     "en": [
@@ -82,12 +82,12 @@
         "time": 1709216612
       },
       {
-        "name": "Анастасия Дмитриева",
+        "name": "daniel williams",
         "rating": 5,
-        "relativeTime": "8 months ago",
-        "text": "I've been to this clinic several times and am always satisfied. The staff is very attentive and polite: they remind me of my appointment, reschedule it if necessary, and are very understanding. Thank you to the entire team for their kind attitude and professionalism!",
-        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
-        "time": 1772112041
+        "relativeTime": "a month ago",
+        "text": "I came to Odessa as a tourist and found MaslovClinic through ChatGPT 😂 And it was a very good decision.\nThe clinic is very clean, modern and comfortable. Everyone was very friendly and professional, I immediately felt like a welcome guest. I had teeth whitening done, I really liked the result.\nIf you are reading the reviews now and thinking where to go, I highly recommend MaslovClinic. This is truly one of the best clinics I have been to. I will definitely come back again.",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocLimDmrEYQH9lFswP27SNbpRau20ES5ZA7u4kAtiNnA0C_BMQ=s128-c0x00000000-cc-rp-mo",
+        "time": 1790688487
       },
       {
         "name": "Настя Кащук",
