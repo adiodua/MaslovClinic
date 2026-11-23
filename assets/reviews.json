@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-16T12:29:52Z",
+  "updatedAt": "2026-11-23T14:08:25Z",
   "rating": 4.4,
   "userRatingsTotal": 48,
   "mapsUrl": "https://www.google.com/maps/search/?api=1&query=MaslovClinic+Одесса",
@@ -14,20 +14,20 @@
         "time": 1747730294
       },
       {
+        "name": "Анастасия Дмитриева",
+        "rating": 5,
+        "relativeTime": "9 месяцев назад",
+        "text": "Хожу в эту клинику не первый раз и всегда остаюсь довольна.Персонал очень внимательный и вежливый: напоминают о приёме, при необходимости переносят запись и относятся с пониманием. Спасибо всей команде за хорошее отношение и профессионализм!",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
+        "time": 1772112041
+      },
+      {
         "name": "Svetochka",
         "rating": 5,
         "relativeTime": "год назад",
         "text": "10 из 5 🙂\nРебята максимально старались сохранить мои живые зубы, что не совсем интересно им. К сожалению так поступают не все стоматологии, в моем личном опыте. В плане лечения - только действительно необходимое, все остальное, если хотим.\nСкрупулезность, внимательность, без лишнего пафоса.\nЗабота о пациенте, с учетом всех нюансов и потребностей. Максимально подстроились под мой график. Удалось избежать почти всех болезненных моментов. А самое главное улучшили мою внешность и качество жизни, само собой.\nХожу весь день улыбаюсь) Приятно обслуживаться у адекватных людей.\nОтдельная благодарность доктору Вячеславу, вы умничка, с удовольствием доверяю вам свою улыбку и в будущем.",
         "photo": "https://lh3.googleusercontent.com/a-/ALV-UjX27QTGmgbWVC9zXk_zp8R2-n5v-lv9Te0f2sSrCHbgVOL80AQH=s128-c0x00000000-cc-rp-mo-ba2",
         "time": 1750100536
-      },
-      {
-        "name": "Анастасия Дмитриева",
-        "rating": 5,
-        "relativeTime": "8 месяцев назад",
-        "text": "Хожу в эту клинику не первый раз и всегда остаюсь довольна.Персонал очень внимательный и вежливый: напоминают о приёме, при необходимости переносят запись и относятся с пониманием. Спасибо всей команде за хорошее отношение и профессионализм!",
-        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
-        "time": 1772112041
       },
       {
         "name": "наддир алун",
@@ -98,12 +98,12 @@
         "time": 1747730294
       },
       {
-        "name": "Svetochka",
+        "name": "Анастасия Дмитриева",
         "rating": 5,
-        "relativeTime": "a year ago",
-        "text": "10 out of 5 🙂\nThe guys did their best to preserve my living teeth, which wasn't exactly their interest. Unfortunately, not all dentists do this, in my personal experience. In terms of treatment, they only provide what's truly necessary; everything else is left to chance.\nMeticulous, attentive, and without unnecessary pretentiousness.\nThey care deeply about the patient, taking into account every detail and need. They accommodated my schedule as much as possible. We managed to avoid almost all painful moments. And most importantly, they improved my appearance and quality of life, of course.\nI smile all day long. It's a pleasure to be treated by competent people.\nSpecial thanks to Dr. Vyacheslav, you're a great person, and I'll be happy to trust you with my smile in the future.",
-        "photo": "https://lh3.googleusercontent.com/a-/ALV-UjX27QTGmgbWVC9zXk_zp8R2-n5v-lv9Te0f2sSrCHbgVOL80AQH=s128-c0x00000000-cc-rp-mo-ba2",
-        "time": 1750100536
+        "relativeTime": "9 months ago",
+        "text": "I've been to this clinic several times and am always satisfied. The staff is very attentive and polite: they remind me of my appointment, reschedule it if necessary, and are very understanding. Thank you to the entire team for their kind attitude and professionalism!",
+        "photo": "https://lh3.googleusercontent.com/a/ACg8ocJZtventh4AG3vumyaPwhIUQtJjotMUx-8tWy_ykOH2Wf1S65U=s128-c0x00000000-cc-rp-mo",
+        "time": 1772112041
       }
     ]
   }
